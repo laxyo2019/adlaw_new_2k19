@@ -3,17 +3,17 @@
 <div class="container py-4">
     <div class="row">
         <div class="col-sm-12 col-md-12 col-xl-12 text-center mb-2">
-            <h2 class="h1-responsive font-weight-bold text-center text-uppercase my-4">Course and Batch Management</h2>          
+            <h2 class="h1-responsive font-weight-bold text-center text-uppercase my-4">Document Management</h2>          
         </div>
         <div class="col-sm-12 col-lg-12 col-xs-12 feature-p-text">
         	{{-- <h4 class="text-uppercase font-weight-bold">CASE MANAGEMENT</h4> --}}
         	<p class="text-justify">
-        		Course and Batch Management feature offered by adlaw is designed for law colleges where they manage batch of students and courses what they provide. This includes the list of all law courses offering by the law colleges. The course name, qualification name, course duration, and syllabus can be added by law colleges. Students can find relevant course, course duration and see the syllabus offered by law colleges. 
+        		It allows law colleges to store the all the data and files education and related. With the adlaw Dropbox combination, you can exploit Dropbox's amazing highlights from directly within your adlaw account. To keep your records sorted out and in a state of sync, documents reports and envelopes added to a particular case organizer in Dropbox are promptly accessible inside the comparing case in adlaw.
         	</p>
 
              <div class="row">
                 <div class="col-sm-12 col-xs-12 col-md-5 col-lg-5 col-xl-5 mt-4">
-                    <img src="{{asset('images/dashboard/course.png')}}" class="w-100 h-100">
+                    <img src="{{asset('images/dashboard/document1.png')}}" class="w-100 h-100">
                 </div>
                 <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 col-xl-7 mt-4">
                     <ul class="feature_ul ">
@@ -26,14 +26,14 @@
                 </div>
             </div>
             <p class="text-justify mt-4">
-                 The batches can be filtered by batch name, start date, end date where the college management can manage the batches by adding new and update existing. The details can be searched by the course name and qualification name from the search box. 
+                 Each file stored is automatically numbered, versioned and archived. The software stores and maintains the copy of all the versions and allows for it to be viewed and edited at a later date. Adlaw Document Management feature maintains a copy of all previous versions in order to allow for inspection or review at a later date.
             </p>
 
 
         </div>
         <div class="col-sm-12 col-lg-12 col-xs-12 mt-4 ">
-            <a href="{{route('lawschools.agenda_management')}}" class="btn btn-md bg-info pull-left text-white"><i class="fa fa-angle-left"></i></a>
-            <a href="{{route('lawschools.profile_management')}}" class="btn btn-md bg-info pull-right text-white"><i class="fa fa-angle-right"></i></a>
+            <a href="{{route('lawschools.student_management')}}" class="btn btn-md bg-info pull-left text-white"><i class="fa fa-angle-left"></i></a>
+            <a href="{{route('lawschools.team_management')}}" class="btn btn-md bg-info pull-right text-white"><i class="fa fa-angle-right"></i></a>
         </div>
     </div>
 </div>

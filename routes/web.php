@@ -81,10 +81,15 @@ Route::group(['prefix' => 'features/lawfirms'] ,function(){
 });	
 
 
-Route::group(['prefix' => 'features/lawSchools'] ,function(){	
+Route::group(['prefix' => 'features/lawschools'] ,function(){	
 	Route::get('/','Search\SearchController@lawSchools')->name('lawschools');
 	Route::get('/search','Search\SearchController@lawschoolsSearch')->name('lawschools.search');
 	Route::view('/course_management','pages.features.subpages.lawschools.course_management')->name('lawschools.course_management');
+	Route::view('/profile_management','pages.features.subpages.lawschools.profile_management')->name('lawschools.profile_management');
+	Route::view('/student_management','pages.features.subpages.lawschools.student_management')->name('lawschools.student_management');
+	Route::view('/document_management','pages.features.subpages.lawschools.document_management')->name('lawschools.document_management');
+	Route::view('/team_management','pages.features.subpages.lawschools.team_management')->name('lawschools.team_management');
+	Route::view('/agenda_management','pages.features.subpages.lawschools.agenda_management')->name('lawschools.agenda_management');
 
 });
 
