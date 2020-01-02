@@ -71,7 +71,7 @@
 						  		<a href="javascript:void(0)" class="btn btn-md text-success border-success bookBtn text-uppercase" id="{{$lawyer->id}}"> Book an Appointment</a>
 						  	</div>
 						  	<div class="col-md-5  col-xm-12 col-sm-12 viewP text-uppercase">
-								<a href="{{ route('lawyerProfile.show',$lawyer->id)}}" class="btn btn-md text-primary border-primary">View Profile</a>	
+								<a href="{{ route('lawfirmsprofile.show',$lawyer->id)}}" class="btn btn-md text-primary border-primary">View Profile</a>	
 						   	</div>											
 						  </div>
 					</div>

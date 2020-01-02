@@ -1,4 +1,23 @@
+<style>
+    .circle-images {
+        background: white;
+        height: 80px;
+        width: 80px;
+        border-radius: 40px;
+        margin: 20px;
+        -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 1);
+        -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 1);
+        box-shadow: rgba(41, 128, 185, 0.3) 0px 5px 25px;
+        /*box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 1);*/
+    }
 
+    .images {
+        height: 40;
+        width: 40;
+        margin-top: 20px;
+
+    }
+</style>
 
 <section class="py-1 border-bottom">
     <h2 class="font-weight-bold text-center text-captialize">Guest / Users Features</h2>
@@ -9,7 +28,7 @@
     </p>
   {{--   <p class="text-muted text-center"></p> --}}
     <div class="container">
-        <div class="row">
+        <div class="row" align="center">
             {{-- <div class="col-md-3 mb-4">
                 <h4 class="font-weight-bold">Profile</h4>
                 <p class="p-text">
@@ -17,17 +36,23 @@
                 </p>                
                 <a href="{{route('guest.profile_management')}}" class="btn btn-sm btn-info">More Info</a>
             </div> --}}
-            <div class="col-md-3 mb-4">
+            <div class="col-md-4 mb-4">
+                <div class="circle-images">
+                    <img src="{{asset('images/icons/aa8.jpg')}}" class="images">
+                </div>
                 <h4 class="font-weight-bold">Search Lawyer / Law Firms </h4>
                 <p class="p-text">
-                  {{str_limit('Search and find lawyer, law school or law firm near you, No matter where you are located or what legal issue you are facing or wanting practice with a top rated law school, you will find the right attorney in this legal platform.',$limit = 206, $end = '...')}}   
+                  {{str_limit('Search and find lawyer, law school or law firm near you, No matter where you are located or what legal issue you are facing or wanting practice with a top rated law school, you will find the right attorney in this legal platform.',$limit = 80, $end = '...')}}   
                 </p>
                 <a href="{{route('guest.search_lawyer')}}" class="btn btn-sm btn-info">More Info</a>
             </div>
-            <div class="col-md-3 mb-4">
+            <div class="col-md-4 mb-4">
+                <div class="circle-images">
+                    <img src="{{asset('images/icons/aa8.jpg')}}" class="images">
+                </div>
                 <h4 class="font-weight-bold">Calendar</h4>
                 <p class="p-text">
-                {{str_limit("Adlaw helps you monitor what's going in your cases on one convenient, central calendar so nothing slips through the cracks. User can see occasions to specific cases created by lawyer or law firm. So whether it’s an upcoming court date or statement, to-dos, hearing sessions morning or evening etc. The Adlaw Calendar ensures you’re always prepared.",$limit = 224, $end = '...')}}  
+                {{str_limit("Adlaw helps you monitor what's going in your cases on one convenient, central calendar so nothing slips through the cracks. User can see occasions to specific cases created by lawyer or law firm. So whether it’s an upcoming court date or statement, to-dos, hearing sessions morning or evening etc. The Adlaw Calendar ensures you’re always prepared.",$limit = 80, $end = '...')}}  
                 </p>
               
                 <a href="" class="btn btn-sm btn-info">More Info</a>
@@ -41,10 +66,13 @@
                 <a href="" class="btn btn-sm btn-info">More Info</a>
             </div> --}}
 
-            <div class="col-md-3 mb-4">
+            <div class="col-md-4 mb-4">
+                <div class="circle-images">
+                    <img src="{{asset('images/icons/aa8.jpg')}}" class="images">
+                </div>
                 <h4 class="font-weight-bold">Book An Appointment</h4>
                 <p class="p-text">
-                {{str_limit("After finding a relevant law firm, lawyer or law school user can book appointment accordingly and see the status of appointment whether it is confirmed pending or canceled. User can Schedule appointment by date and time and edit it.",$limit = 240, $end = '...')}}
+                {{str_limit("After finding a relevant law firm, lawyer or law school user can book appointment accordingly and see the status of appointment whether it is confirmed pending or canceled. User can Schedule appointment by date and time and edit it.",$limit = 80, $end = '...')}}
                 </p>
                 <a href="" class="btn btn-sm btn-info">More Info</a>
             </div>

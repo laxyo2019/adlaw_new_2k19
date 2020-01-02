@@ -4,7 +4,7 @@
 
  <div class="footer-nav">
  <div class="container">
-   <div class="content-wrapper p-4 ">
+   <div class="content-wrapper pt-4 ">
      <div class="row">
        <div class="col-sm-9">
          <ul class="list-inline">
@@ -18,10 +18,10 @@
          </ul>
        </div>
        <div class="col-sm-3">
-         <ul class="list-inline social-links">
-           <li class="d-inline-block pl-4 "><a  href=""><span class="fa fa-facebook"></span></a></li>
-           <li class="d-inline-block pl-4"><a  href=""><span class="fa fa-twitter"></span></a></li>
-           <li class="d-inline-block pl-4"><a  href=""><span class="fa fa-linkedin"></span></a></li>
+         <ul class="list-inline social-links pl-4 ">
+           <li class="btn-facebook btn btn-sm "><a  href=""><span class="fa fa-facebook"></span></a></li>
+           <li class="btn-twitter btn btn-sm"><a  href=""><span class="fa fa-twitter"></span></a></li>
+           <li class="btn-linkedin btn btn-sm"><a  href=""><span class="fa fa-linkedin"></span></a></li>
          </ul>
        </div>
      </div>

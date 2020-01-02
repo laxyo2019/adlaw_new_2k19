@@ -53,7 +53,7 @@ class SearchController extends Controller
 		// 	return $e['state_code'] == '20';
 		// });
 
-      return  view('pages.subpages.lawfirms_features',
+      return  view('pages.subpages.guest_features',
       	compact('searchfield','specialities','courts','states','lawyers','days','slots')
       );
     }
@@ -329,27 +329,27 @@ class SearchController extends Controller
 
   }
 
-  public function lawyerProfileShow($id){
-  	$user = User::find($id);
-  	if($user->user_catg_id=='2'){
-  		$userData = $this->query->where('id',$id)
-                ->first();  
-  	}else{
-     
-  		$userData = Helpers::lawcompanyDetails()->where('id',$id)->first(); 
-  	}
+  public function lawfirmsprofileShow($id){
 
-  	// return $userData;        
-  
     $reviews = Review::with('customers')->where('user_id',$id)->where('review_status','A')->paginate(4);
     $slots =Slots::all();
-    // return $userData;
-   	return view('profiles.lawyerProfile', compact('userData','slots','reviews'));
+  	$user = User::find($id);
+  	    
+    $userData = $this->query->where('id',$id)
+                ->first();  
+   	return view('profiles.lawfirmsProfile', compact('userData','slots','reviews'));
+  	
+  }
+  public function lawschoolsprofileShow($id){
+
+    $reviews = Review::with('customers')->where('user_id',$id)->where('review_status','A')->paginate(4);
+    $slots =Slots::all();
+    $user = User::find($id);
+
+    $userData = Helpers::lawschools()->where('id',$id)->first(); 
+    return view('profiles.lawschoolsProfile', compact('userData','slots','reviews'));
   }
 
-  public function lawfirmProfileShow($id){
-   	return view('profiles.lawfirmProfile');
-  }
 
   public function writeReview(Request $request){
       
@@ -374,7 +374,7 @@ class SearchController extends Controller
   public function lawSchools(){
     $states = State::all();
     $lawschools = Helpers::lawschools()->paginate(2);
-    // return $lawschools;
+
     return view('pages.subpages.lawschools_features',compact('states','lawschools'));
   }
 

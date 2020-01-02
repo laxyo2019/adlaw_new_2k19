@@ -88,7 +88,15 @@
                 <ul class="menu">
                   @foreach(Auth::user()->unreadNotifications as $notification)
                   <li>
-                    @include('notifications.'.snake_case(class_basename($notification->type)))
+                     <a href="{{route('todos.show',$notification['data']['id'])}}">
+                        <i class="fa fa-tasks "></i> 
+
+                        <span> {{str_limit($notification['data']['title'], $limit = 50, $end = '...') }} </span>
+                        <br>
+                        <span>{{$notification['data']['message']}}</span>
+                       
+                        <br> <span>{{$notification['created_at']->diffForHumans()}}</span>
+                    </a>
                   </li>
                   @endforeach
 
@@ -259,7 +267,7 @@
             </a>
           </li>
         @endif
-          <li class="{{Request()->segment(1) == 'case_diary' ? 'active' : '' }} {{$page_name == 'case_diary' ? 'active' : '' }} nav-item">
+          <li class="{{Request()->segment(1) == 'case_mast' ? 'active' : '' }} {{$page_name == 'case_diary' ? 'active' : '' }} nav-item">
             <a class="nav-link" href="{{route('case_mast.index')}}">
               <i class="fa fa-book"></i>
               <span >Case Diary</span>             

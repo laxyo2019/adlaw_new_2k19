@@ -1,3 +1,24 @@
+<style>
+    .circle-images {
+        background: white;
+        height: 80px;
+        width: 80px;
+        border-radius: 40px;
+        margin: 20px;
+        -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 1);
+        -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 1);
+        box-shadow: rgba(41, 128, 185, 0.3) 0px 5px 25px;
+        /*box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 1);*/
+    }
+
+    .images {
+        height: 40;
+        width: 40;
+        margin-top: 20px;
+
+    }
+  </style>
+
 <section class="py-1 border-bottom">
     <h2 class="font-weight-bold text-center text-captialize">LawSchools Features</h2>
     <p class="text-muted text-center" >
@@ -8,50 +29,68 @@
     
   {{--   <p class="text-muted text-center"></p> --}}
     <div class="container">
-        <div class="row">
-            <div class="col-md-3 mb-4 feature-div">
+        <div class="row" align="center">
+            <div class="col-md-4 mb-4 feature-div">
+                <div class="circle-images">
+                    <img src="{{asset('images/icons/aa8.jpg')}}" class="images">
+                </div>
                 <h4 class="font-weight-bold">Course and Batch Management</h4>
                 <p class="p-text">
-                {{str_limit("Course and Batch Management feature offered by adlaw is designed for law colleges where they manage batch of students and courses what they provide. This includes the list of all law courses offering by the law colleges. The course name, qualification name, course duration, and syllabus can be added by law colleges. Students can find relevant course, course duration and see the syllabus offered by law colleges.",$limit = 210, $end="...")}}
+                {{str_limit("Course and Batch Management feature offered by adlaw is designed for law colleges where they manage batch of students and courses what they provide. This includes the list of all law courses offering by the law colleges. The course name, qualification name, course duration, and syllabus can be added by law colleges. Students can find relevant course, course duration and see the syllabus offered by law colleges.",$limit = 80, $end="...")}}
                 
                 </p>
                 <a href="{{route('lawschools.course_management')}}" class="btn btn-sm btn-info">More Info</a>
             </div>
-            <div class="col-md-3 mb-4 feature-div">
+            <div class="col-md-4 mb-4 feature-div">
+                <div class="circle-images">
+                    <img src="{{asset('images/icons/aa8.jpg')}}" class="images">
+                </div>
                 <h4 class="font-weight-bold">Profile Management</h4>
                 <p class="p-text">
-                    {{str_limit("Adlaw offers profile management in which law colleges can create their profile, with all the details includes college name, date of registration, contact, e-mail address and prospectus etc. The created law colleges profile will be shown in search box as a result where user search for the law colleges. User or student can find the law colleges by name anywhere and get full profile details of law colleges, courses and other information related law education.",$limit = 250, $end="...")}}
+                    {{str_limit("Adlaw offers profile management in which law colleges can create their profile, with all the details includes college name, date of registration, contact, e-mail address and prospectus etc. The created law colleges profile will be shown in search box as a result where user search for the law colleges. User or student can find the law colleges by name anywhere and get full profile details of law colleges, courses and other information related law education.",$limit = 80, $end="...")}}
                 
                 </p>
                 <a href="{{route('lawschools.profile_management')}}" class="btn btn-sm btn-info">More Info</a>
             </div>
-            <div class="col-md-3 mb-4 feature-div">
+            <div class="col-md-4 mb-4 feature-div">
+                <div class="circle-images">
+                    <img src="{{asset('images/icons/aa8.jpg')}}" class="images">
+                </div>
                 <h4 class="font-weight-bold">Student Management</h4>
                 <p class="p-text">
-                    {{str_limit("Adlaw provide student login or profile in Student Management feature where law college can create students profile to appear the law courses and syllabus on the dashboard. Student dashboard includes the list of students with status such as pursuing, pass out or dropout from the course.",$limit = 240, $end="...")}}                   
+                    {{str_limit("Adlaw provide student login or profile in Student Management feature where law college can create students profile to appear the law courses and syllabus on the dashboard. Student dashboard includes the list of students with status such as pursuing, pass out or dropout from the course.",$limit = 80, $end="...")}}                   
                 </p>
                 <a href="{{route('lawschools.student_management')}}" class="btn btn-sm btn-info">More Info</a>
             </div>
-            <div class="col-md-3 mb-4 feature-div">
+            <div class="col-md-4 mb-4 feature-div">
+                <div class="circle-images">
+                    <img src="{{asset('images/icons/aa8.jpg')}}" class="images">
+                </div>
                 <h4 class="font-weight-bold">Document Management</h4>
                 <p class="p-text">
-                    {{str_limit("It allows professionals to write the cases in word processing software and store the files with specifically labeled meta-data. With the adlaw Dropbox combination, you can exploit Dropbox's amazing highlights from directly within your adlaw account. To keep your records sorted out and in a state of sync, documents reports and envelopes added to a particular case organizer in Dropbox are promptly accessible inside the comparing case in adlaw. ",$limit = 240, $end="...")}}
+                    {{str_limit("It allows professionals to write the cases in word processing software and store the files with specifically labeled meta-data. With the adlaw Dropbox combination, you can exploit Dropbox's amazing highlights from directly within your adlaw account. To keep your records sorted out and in a state of sync, documents reports and envelopes added to a particular case organizer in Dropbox are promptly accessible inside the comparing case in adlaw. ",$limit = 80, $end="...")}}
                 </p>
                 <a href="{{route('lawschools.document_management')}}" class="btn btn-sm btn-info">More Info</a>
             </div>
 
-            <div class="col-md-3 mb-4 feature-div">
+            <div class="col-md-4 mb-4 feature-div">
+                <div class="circle-images">
+                    <img src="{{asset('images/icons/aa8.jpg')}}" class="images">
+                </div>
                 <h4 class="font-weight-bold">Team Management</h4>
                 <p class="p-text">
-                    {{str_limit("Adlaw's team members management feature used to create new user, edit and delete user. Assign or create team of lawyer organize and keep track of cases assigned to each individual lawyer. It is a critical part of organizing and keeping track of cases assigned to each individual lawyer, See which groups team members are a part of, edit and delete profiles and Search for members by name, email address or mobile number.",$limit = 240, $end="...")}}
+                    {{str_limit("Adlaw's team members management feature used to create new user, edit and delete user. Assign or create team of lawyer organize and keep track of cases assigned to each individual lawyer. It is a critical part of organizing and keeping track of cases assigned to each individual lawyer, See which groups team members are a part of, edit and delete profiles and Search for members by name, email address or mobile number.",$limit = 80, $end="...")}}
                 </p>
                 <a href="{{route('lawschools.team_management')}}" class="btn btn-sm btn-info">More Info</a>
             </div>
             
-            <div class="col-md-3 mb-4 feature-div">
+            <div class="col-md-4 mb-4 feature-div">
+                <div class="circle-images">
+                    <img src="{{asset('images/icons/aa8.jpg')}}" class="images">
+                </div>
                 <h4 class="font-weight-bold">Agenda Management</h4>
                 <p class="p-text">
-                    {{str_limit("Agenda Management allows the lawyers/law firms to assign priorities, build momentum, collaborate without confusions and ensure that action steps are taken on time, every time. They are also essential to manage work overload effectively, helping you and your team members stay focused and organized. Beyond the cases, agenda help in strengthening the efficiency of day-to-day firm operations while also positively influencing individual productivity. They play an important role in enabling lawyers and law firms to produce the results they seek.",$limit = 240, $end="...")}}
+                    {{str_limit("Agenda Management allows the lawyers/law firms to assign priorities, build momentum, collaborate without confusions and ensure that action steps are taken on time, every time. They are also essential to manage work overload effectively, helping you and your team members stay focused and organized. Beyond the cases, agenda help in strengthening the efficiency of day-to-day firm operations while also positively influencing individual productivity. They play an important role in enabling lawyers and law firms to produce the results they seek.",$limit = 80, $end="...")}}
                 </p>                
                 <a href="{{route('lawschools.agenda_management')}}" class="btn btn-sm btn-info">More Info</a>
             </div>

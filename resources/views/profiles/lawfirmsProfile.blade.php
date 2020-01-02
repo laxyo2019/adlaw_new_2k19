@@ -26,18 +26,18 @@ p.stars  i
 }
 </style>
 
-<div class="wrapper py-4">
+<div class="wrapper pt-4 ">
 
     <!-- Sidebar -->
-    <nav id="sidebar">
+    <nav id="sidebar" class="bg-light" >
       <div class="sidebar-header text-center bg-light border-bottom pb-3">
       <!--   <h4 class=" text-center font-weight-bold"><b>O</b>ther <b>D</b>etails</h4> -->
         <span class="navbar-brand font-weight-bold mt-4 text-dark ">OTHER DETAILS</span>
     </div>
     <ul class="list-unstyled components">
-       <div class="sidebar-search ml-2 mt-4 d-flex">
+       <div class="sidebar-search ml-4 mt-4 d-flex">
         <span>
-          <a href="javascript:void(0)" class="btn btn-md text-success border-success bookBtn text-uppercase" id="{{$userData->id}}"> Book an Appointment</a>
+          <a href="javascript:void(0)" class="btn btn-md text-success border-success bookBtn text-uppercase " id="{{$userData->id}}"> Book an Appointment</a>
         </span>
         {{-- <span class="ml-2">
          @if(Auth::user())
@@ -98,9 +98,9 @@ p.stars  i
     </ul>
 </nav>
 
-  <div id="content" >
+  <div id="content " >
     <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light py-4">
           <button type="button" id="sidebarCollapse" class="btn text-info border-info">
             <i class="fa fa-align-left"></i> More Info 
           </button>
@@ -512,27 +512,6 @@ p.stars  i
     }
   @endphp
 </script>
-{{-- 
-<script >
-function loginChecked($user_id){
-  var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
-  if(AuthUser){
-    var checkUser = "{{(Auth::user()) ? Auth::user()->id : null}}";
-    if(checkUser != $user_id){
-      let url = "{{ route('message.create', 'id=:id') }}";
-        url = url.replace(':id', $user_id);
-        document.location.href=url;
-    }
-    else{
-      alert("You can't send message on your own profile");
-    }
-  }
-  else{
-     $('.login_modal').modal({show: true});
-    }
-} 
-
-</script> --}}
 <script>
 
 $(document).ready(function(){

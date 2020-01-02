@@ -27,9 +27,10 @@ class CaseNotifications extends Notification
     {
         return [
             'id' => $this->case->case_id,
-            'notify_type'=> $this->case->notify_type,
-            'title' => $this->case->case_title,      
-            'date' => $this->case->date,                
+            'title' => $this->case->case_title,   
+            'message' => $this->case->notify_type == 'case_create' ? 'Case assigned to you ' : ($this->case->notify_type == 'case_hearing' ? $this->case->date.' hearing date assigned to you' : ($this->case->notify_type == 'early_hearing' ? $this->case->date.' Tommorrow your case hearing announced' : 'Today your case hearing')),  
+            //'date' => $this->case->date, 
+                           
         ];
     }
 

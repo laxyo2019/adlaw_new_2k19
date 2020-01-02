@@ -18,6 +18,7 @@
     <link rel = "stylesheet" type = "text/css" href ="{{ asset('css/lawyer_profile_backup.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{asset('css/star-rating-svg.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/dashboard/search_all.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/dashboard/btn-social.css')}}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -43,7 +44,7 @@
 }
 </style>
 <body>
-  <nav class="navbar navbar-expand-xl bg-white shadow-sm menunav p-0 fixed-top" >
+  <nav class="navbar navbar-expand-xl bg-white  menunav p-0 fixed-top" >
   <div class="container-fluid">
       <a class="navbar-header p-1" href="{{url('/')}}"><img src="{{asset('images/adlaw-logo.png')}}" alt="Adlaw" style="width: 90px;"></a>
 
@@ -69,10 +70,10 @@
                 <a class="nav-link p-4 " href="{{route('lawfirms')}}">LAWYERS/LAW FIRMS </a>
             </li>
 
-            <li class="nav-item {{Request()->segment(2) == 'guest' ? 'active_class' : '' }}">
+            <li class="nav-item {{Request()->segment(2) == 'guest' ? 'active_class' : '' }} ">
                 <a class="nav-link p-4" href="{{route('guest')}}">USERS/GUEST</a>
             </li>
-            <li class="nav-item {{Request()->segment(2) == 'lawschools' ? 'active_class' : '' }}">
+            <li class="nav-item {{Request()->segment(2) == 'lawschools' ? 'active_class' : '' }} ">
                 <a class="nav-link p-4" href="{{route('lawschools')}}">LAW SCHOOLS</a>
             </li>
             <li class="nav-item {{Request()->segment(1) == 'contact' ? 'active_class' : '' }}">

@@ -1,5 +1,13 @@
 /* Put your css in here */
+.filteBtn{
 
+	font-size: 14px;
+	background: #0077b7;
+}
+.btn-round{
+    color: white;
+	border-radius: 20px;
+}
 .left{
  float: left; 
  width: 5%;
@@ -14,10 +22,10 @@
 	height: 60px;
 }
 .internal{
- width: 16.75%;
+ width: 17.75%;
 height: 100%;
 padding: 3px 1px 0px 1px;
-
+font-size: 13px;
 
  /*height: 100%;*/
  /*border: 1px solid black;*/

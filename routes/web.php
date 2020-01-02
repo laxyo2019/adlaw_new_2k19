@@ -60,11 +60,10 @@ Route::view('/disclaimer','pages.subpages.disclaimer');
 Route::view('/privacy_policy','pages.subpages.privacy_policy');
 Route::view('/why_adlaw','pages.subpages.why_adlaw');
 
+
 Route::group(['prefix' => 'features/lawfirms'] ,function(){
-	Route::get('/','Search\SearchController@lawfirms')->name('lawfirms');
-	Route::get('/search','Search\SearchController@lawfirmsSearch')->name('lawfirms.search');
-	Route::get('/profile/{id}', 'Search\SearchController@lawyerProfileShow')->name('lawyerProfile.show');	
-	Route::post('/review','Search\SearchController@writeReview')->name('lawfirms.writeReview');
+	Route::view('/','pages.subpages.lawfirms_features')->name('lawfirms');
+
 	Route::view('/case_management','pages.features.subpages.lawfirms.case_management')->name('features.case_management');
 	Route::view('/client_management','pages.features.subpages.lawfirms.client_management')->name('features.client_management');
 	Route::view('/calendar_management','pages.features.subpages.lawfirms.calendar_management')->name('features.calendar_management');
@@ -82,8 +81,11 @@ Route::group(['prefix' => 'features/lawfirms'] ,function(){
 
 
 Route::group(['prefix' => 'features/lawschools'] ,function(){	
+
 	Route::get('/','Search\SearchController@lawSchools')->name('lawschools');
 	Route::get('/search','Search\SearchController@lawschoolsSearch')->name('lawschools.search');
+	Route::get('/profile/{id}', 'Search\SearchController@lawschoolsprofileShow')->name('lawschoolsprofile.show');
+
 	Route::view('/course_management','pages.features.subpages.lawschools.course_management')->name('lawschools.course_management');
 	Route::view('/profile_management','pages.features.subpages.lawschools.profile_management')->name('lawschools.profile_management');
 	Route::view('/student_management','pages.features.subpages.lawschools.student_management')->name('lawschools.student_management');
@@ -95,7 +97,10 @@ Route::group(['prefix' => 'features/lawschools'] ,function(){
 
 
 Route::group(['prefix' => 'features/guest'] ,function(){	
-	Route::view('/','pages.subpages.guest_features')->name('guest');
+	Route::get('/','Search\SearchController@lawfirms')->name('guest');
+	Route::get('/search','Search\SearchController@lawfirmsSearch')->name('lawfirms.search');
+	Route::post('/review','Search\SearchController@writeReview')->name('lawfirms.writeReview');
+	Route::get('/profile/{id}', 'Search\SearchController@lawfirmsprofileShow')->name('lawfirmsprofile.show');	
 	Route::view('/profile_management','pages.features.subpages.guest.profile_management')->name('guest.profile_management');
 	Route::view('/search_lawyer','pages.features.subpages.guest.search_lawyer')->name('guest.search_lawyer');
 });

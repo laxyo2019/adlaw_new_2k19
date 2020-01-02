@@ -84,7 +84,7 @@
                      </div>
                      <div class="row form-group">
                         <div class="col-md-12">
-                            <button class="btn btn-md btn-success" type="submit"> Send Details </button>
+                            <button class="btn btn-md bg-success btn-round" type="submit"> Submit</button>
                         </div>
                      </div>
                     </form>
@@ -99,11 +99,11 @@
           </li>
 
           <li><i class="fa fa-phone mt-4 fa-2x"></i>
-              <p>+ 01 234 567 89</p>
+              <p>0731 404 3798</p>
           </li>
 
           <li><i class="fa fa-envelope mt-4 fa-2x"></i>
-              <p>contact@info.adlaw.in</p>
+              <p>info@adlaw.in</p>
           </li>
       </ul>
   </div>

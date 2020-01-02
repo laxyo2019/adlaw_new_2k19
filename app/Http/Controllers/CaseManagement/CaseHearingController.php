@@ -72,7 +72,7 @@ class CaseHearingController extends Controller
 		foreach ($lawyer_names as $val) {
 			if($val != Auth::user()->id){
 				$case['notify_type'] = 'case_hearing';
-				$case['date'] = $data['hearing_date'];
+				$case["date"]= date('d-m-Y', strtotime($data['hearing_date']));
 				$user = User::find($val);
 				$user->notify(new CaseNotifications($case));
 			}
@@ -151,14 +151,15 @@ class CaseHearingController extends Controller
 				if($val != Auth::user()->id){
 
 					$case['notify_type'] = 'case_hearing';
-					$case['date'] = $data['hearing_date'];
+					$case["date"]= date('d-m-Y', strtotime($data['hearing_date']));
 					$user = User::find($val);
 					$user->notify(new CaseNotifications($case));
 				}
 			}
 			if(!(in_array($val,json_decode($case_hearing->lawyer_names)))){
 				$case['notify_type'] = 'case_hearing';
-				$case['date'] = $data['hearing_date'];
+				$case["date"]= date('d-m-Y', strtotime($data['hearing_date']));
+				
 				$user = User::find($val);
 				$user->notify(new CaseNotifications($case));
 			}
@@ -192,4 +193,26 @@ class CaseHearingController extends Controller
 		return $data;
 	}
 	
+	public function earlyHearings()
+	{
+		$today = date('Y-m-d', strtotime(' +1 day'));
+		$cases = CaseDetail::with("case")->where('hearing_date', $today)->get();
+		//return $cases;
+		if(!empty($cases))
+		{
+		  foreach ($cases as $case) 
+			{
+				$lawyer_names = json_decode($case->lawyer_names);
+				foreach ($lawyer_names as $lawyer_name) {
+					$user = User::find($lawyer_name);
+					$case["notify_type"]="early_hearing";
+					$case["case_title"]= $case->case->case_title;
+					$case["date"]= date('d-m-Y', strtotime($case->hearing_date));
+					// return $case;
+					$user->notify(new CaseNotifications($case));
+				}
+			}
+		}
+	}
+
 }

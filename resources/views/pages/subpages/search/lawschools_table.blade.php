@@ -36,7 +36,7 @@
 							<div class="col-md-12">
 								{{-- <a href="javascript:void(0)" class="btn btn-md text-success border-success bookBtn text-uppercase mt-2" id="{{$lawschool->id}}"> Book an Appointment</a> --}}
 
-								<a href="{{ route('lawyerProfile.show',$lawschool->id)}}" class="btn btn-md text-primary border-primary mt-2">View Profile
+								<a href="{{ route('lawschoolsprofile.show',$lawschool->id)}}" class="btn btn-md text-primary border-primary mt-2">View Profile
 								</a>	
 							</div>
 							<div class="col-md-12 mt-2">

@@ -1,4 +1,6 @@
-
+  .border-r{
+    border-right: 2px solid #9f9f9f;
+  }
   .feature_ul li {
     line-height: 40px;
   }
@@ -45,7 +47,7 @@ font-family: 'Open Sans',sans-serif;
     font-size: 15px;
 }
 .active_class , .active_class:hover {
-      background: #efefef;
+      background: #dfdfdf;
       
   }
  
@@ -144,9 +146,16 @@ font-family: 'Open Sans',sans-serif;
   }*/
 } 
 
-.activebtn{
-  background: #b4ddf3;
+.activebtn {
+    background: #0077b7;
+    color: white;
 }
 .profile-div{
   min-height: 210px;
+}
+.menunav{
+  box-shadow: 0 .335rem .25rem rgba(0,0,0,.075) !important;
+}
+.bg-color{
+  background: lightgray;
 }

@@ -75,7 +75,7 @@ class CaseMastController extends Controller
 
 				if($val != Auth::user()->id){
 					$case['notify_type'] = 'case_create';
-					$case['date'] = $case->case_reg_date;
+					$case['date'] = date('d-m-Y', strtotime($case->case_reg_date));
 					$user = User::find($val);
 					$user->notify(new CaseNotifications($case));
 				}

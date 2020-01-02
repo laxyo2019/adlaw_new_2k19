@@ -17,11 +17,11 @@
                 </div>
                 <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 col-xl-7 mt-4">
                     <ul class="feature_ul ">
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}"> Add any number of clients easily</li>
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}"> Easily maintain Indiviual and Corporate Client</li>
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}"> Client related cases maintain</li>
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}"> Client related cases maintain</li>
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}"> Client related cases maintain</li>
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}"> Easily create Lawshools courses.</li>
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}"> Courses duration define.</li>
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}"> Batch Management Easily Create.</li>
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}"> Easily update courses details.</li>
+
                     </ul>
                 </div>
             </div>
