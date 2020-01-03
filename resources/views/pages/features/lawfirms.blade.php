@@ -125,7 +125,7 @@
                 </p>
                 <a href="{{route('features.todo_management')}}" class="btn btn-sm btn-info">More Info</a>
             </div>
-            <div class="col-md-4 mb-4">
+      {{--       <div class="col-md-4 mb-4">
                 <div class="circle-images">
                     <img src="{{asset('images/icons/aa8.jpg')}}" class="images">
                 </div>
@@ -135,7 +135,7 @@
                 </p>
                 <a href="{{route('features.hearing_management')}}" class="btn btn-sm btn-info">More Info</a>
             </div>
-
+ --}}
             {{--   <div class="col-md-4 mb-4">
                 <div class="circle-images">
                     <img src="{{asset('images/icons/aa8.jpg')}}" class="images">

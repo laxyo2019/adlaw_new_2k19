@@ -29,8 +29,8 @@ p.stars  i
 <div class="wrapper pt-4 ">
 
     <!-- Sidebar -->
-    <nav id="sidebar" class="bg-light" >
-      <div class="sidebar-header text-center bg-light border-bottom pb-3">
+    <nav id="sidebar"  style="background-color: #d9d9d9;" >
+      <div class="sidebar-header text-center  border-bottom pb-3">
       <!--   <h4 class=" text-center font-weight-bold"><b>O</b>ther <b>D</b>etails</h4> -->
         <span class="navbar-brand font-weight-bold mt-4 text-dark ">OTHER DETAILS</span>
     </div>

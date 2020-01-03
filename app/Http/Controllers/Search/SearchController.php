@@ -379,17 +379,20 @@ class SearchController extends Controller
   }
 
   public function lawschoolsSearch(Request $request){
-    $result = Helpers::lawschools();
+
+    $lawschools = Helpers::lawschools();
+
     if($request->user_name != ''){
-      $lawschools =  $result->where('name','LIKE','%'.$request->user_name.'%');
+      $lawschools =  $lawschools->where('name','LIKE','%'.$request->user_name.'%');
     }
 
     if($request->state_code != 0){
-       $lawschools =  $result->where('state_code',$request->state_code)
+       $lawschools =  $lawschools->where('state_code',$request->state_code)
                             ->where('city_code',$request->city_code);
     }
-    
+
     $lawschools = $lawschools->paginate(2);
+
     return view('pages.subpages.search.lawschools_table',compact('lawschools'));
   }
 }

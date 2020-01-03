@@ -70,13 +70,13 @@
 			var user_name = $("input[name='user_name']").val();
 			var state_code = $('#state').val();
 			var city_code = $('#city').val();
-			console.log(user_name);
+		
 			$.ajax({
 			    type:"get",
 			    url:"{{ route('lawschools.search') }}?state_code="+state_code+'&city_code='+city_code+'&user_name='+user_name,
 		        }).done(function(data){
 		            $("#tablediv").empty().html(data);
-		            // console.log(data);
+		             console.log(data);
 		        }).fail(function(jqXHR, ajaxOptions, thrownError){
 		            alert('No response from server');
 				});
@@ -94,6 +94,8 @@
 				var user_name = $("input[name='user_name']").val();
 				var state_code = $('#state').val();
 				var city_code = $('#city').val();
+
+
 			    getData(page,user_name,state_code,city_code);
 			});
 
@@ -103,9 +105,8 @@
 			    $.ajax({
 			        url:"{{ route('lawschools.search') }}?state_code="+state_code+'&city_code='+city_code+'&user_name='+user_name+'&page='+page,
 			        type: "get",
-			        datatype: "html"
+			        datatype: "html",
 			    }).done(function(data){
-			    
 			        $("#tablediv").empty().html(data);
 			        location.hash = page;
 			    }).fail(function(jqXHR, ajaxOptions, thrownError){
