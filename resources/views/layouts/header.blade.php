@@ -44,7 +44,7 @@
 }
 </style>
 <body>
-  <nav class="navbar navbar-expand-xl bg-white  menunav p-0 fixed-top" >
+  <nav class="navbar navbar-expand-xl menunav p-0 fixed-top" >
   <div class="container-fluid">
       <a class="navbar-header p-1" href="{{url('/')}}"><img src="{{asset('images/adlaw-logo.png')}}" alt="Adlaw" style="width: 90px;"></a>
 
@@ -100,7 +100,7 @@
                 <img src="{{asset('storage/profile_photo/default.png')}}"  style="width: 33px; height: 20px;" class="rounded-circle" />
                 @endif
               </a>
-              <ul class="dropdown-menu " style="left: -40px;">
+              <ul class="dropdown-menu " style="left: -41px;background-color: aliceblue">
                 <li class="nav-item">
                   <a class="nav-link p-3"  href="{{route('login')}}">{{ __('Dashboard') }}</a>
                 </li>

@@ -37,7 +37,7 @@ Route::get('/refreshCaptcha','ContactController@refreshCaptcha')->name('contact.
 Route::get('/display_blogs/{id}', 'BlogController@show_blogs')->name('display_blogs');
 Route::get('/more_articles','BlogController@more_articles')->name('more_articles');
 Route::get('/notifications','HomeController@all_notifications')->name('all_notifications');
-
+Route::get('/notification_read/{id}','HomeController@notification_read')->name('notification_read');
 
 
 /*Start Pages View */

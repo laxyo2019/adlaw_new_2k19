@@ -1,24 +1,3 @@
-<style>
-    .circle-images {
-        background: white;
-        height: 80px;
-        width: 80px;
-        border-radius: 40px;
-        margin: 20px;
-        -webkit-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 1);
-        -moz-box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 1);
-        box-shadow: rgba(41, 128, 185, 0.3) 0px 5px 25px;
-        /*box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 1);*/
-    }
-
-    .images {
-        height: 40;
-        width: 40;
-        margin-top: 20px;
-
-    }
-</style>
-
 <section class="py-1 border-bottom">
     <h2 class="font-weight-bold text-center text-captialize">Guest / Users Features</h2>
     <p class="text-muted text-center" >
@@ -37,8 +16,8 @@
                 <a href="{{route('guest.profile_management')}}" class="btn btn-sm btn-info">More Info</a>
             </div> --}}
             <div class="col-md-4 mb-4">
-                <div class="circle-images">
-                    <img src="{{asset('images/icons/aa8.jpg')}}" class="images">
+                <div class="feature-circle-images">
+                    <img src="{{asset('images/icons/search.png')}}" class="img-feature">
                 </div>
                 <h4 class="font-weight-bold">Search Lawyer / Law Firms </h4>
                 <p class="p-text">
@@ -47,8 +26,8 @@
                 <a href="{{route('guest.search_lawyer')}}" class="btn btn-sm btn-info">More Info</a>
             </div>
             <div class="col-md-4 mb-4">
-                <div class="circle-images">
-                    <img src="{{asset('images/icons/aa8.jpg')}}" class="images">
+                <div class="feature-circle-images">
+                    <img src="{{asset('images/icons/calendar.jpg')}}" class="img-feature">
                 </div>
                 <h4 class="font-weight-bold">Calendar</h4>
                 <p class="p-text">
@@ -67,8 +46,8 @@
             </div> --}}
 
             <div class="col-md-4 mb-4">
-                <div class="circle-images">
-                    <img src="{{asset('images/icons/aa8.jpg')}}" class="images">
+                <div class="feature-circle-images">
+                    <img src="{{asset('images/icons/appointment.png')}}" class="img-feature">
                 </div>
                 <h4 class="font-weight-bold">Book An Appointment</h4>
                 <p class="p-text">

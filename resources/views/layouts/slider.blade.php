@@ -7,7 +7,7 @@
     </ol>
     <div class="carousel-inner" role="listbox">
       <!-- Slide One - Set the background image for this slide in the line below -->
-      <div class="carousel-item active" style="background-image: url('images/slider1.jpg')">
+      <div class="carousel-item active" style="background-image: url('images/banner3.png')">
         <div class="carousel-caption d-none d-md-block">
           <h2 class="display-4">Lawyer / Law Firms</h2>
           <p class="lead ">Solo Lawyer, Small Firms, Medium and Large Law Firm manage.</p>
@@ -21,7 +21,7 @@
         </div>
       </div>
       <!-- Slide Three - Set the background image for this slide in the line below -->
-      <div class="carousel-item" style="background-image: url('images/banner3.png')">
+      <div class="carousel-item" style="background-image: url('images/slider1.jpg')">
         <div class="carousel-caption d-none d-md-block">
           <h2 class="display-4">Law Schools</h2>
           <p class="lead">Everything you need to manage your Lawschools.</p>

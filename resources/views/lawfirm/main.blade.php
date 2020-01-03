@@ -88,7 +88,7 @@
                 <ul class="menu">
                   @foreach(Auth::user()->unreadNotifications as $notification)
                   <li>
-                     <a href="{{route('todos.show',$notification['data']['id'])}}">
+                     <a href="{{route('notification_read',$notification['id'])}}">
                         <i class="fa fa-tasks "></i> 
 
                         <span> {{str_limit($notification['data']['title'], $limit = 50, $end = '...') }} </span>

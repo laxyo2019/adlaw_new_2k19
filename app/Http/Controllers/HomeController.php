@@ -12,6 +12,7 @@ use App\Models\Blog;
 use App\Models\CourtType;
 use App\Models\CourtMast;
 use App\Models\SubCatgMast;
+
 class HomeController extends Search\SearchController 
 {
     public function index(){
@@ -84,5 +85,11 @@ class HomeController extends Search\SearchController
       if($user){
         echo 'duplicate';
       }
+    }
+
+    public function notification_read($id){
+      $notification = auth()->user()->unreadNotifications->where('id',$id)->first();
+       $notification->markAsRead();
+      // return redirect()->route('todos.show',$notification->data['id']);
     }
 }
