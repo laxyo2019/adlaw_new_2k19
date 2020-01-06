@@ -24,28 +24,29 @@
 							@endif
 						   
 						</h3>
-						<h6 class="text-info font-weight-bold">
-							
-							@foreach($lawyer->user_courts as $courts )
-							  
-							  {{ $courts->court_catg->court_name }}		<?php break; ?>
-							@endforeach
+						<h6 class="">	
+							@if(count($lawyer->user_courts) !=0)	
+								<i class="fa fa-university text-info"></i>
+								@foreach($lawyer->user_courts as $courts )
+									{{ $courts->court_catg->court_name }}		<?php break; ?>
+								@endforeach
+							@endif
 						</h6>
-						<h6 class="text-success font-weight-bold">
-							
-							@foreach($lawyer->specialities as $spec )
-							  
-							  {{ $spec->specialization_catgs->catg_desc }}		<?php break; ?>
-							@endforeach
+						<h6 class="">
+							@if(count($lawyer->specialities) !=0)
+							<i class="fa fa-balance-scale text-info"></i>
+								@foreach($lawyer->specialities as $spec )
+									{{ $spec->specialization_catgs->catg_desc }}		<?php break; ?>
+								@endforeach
+							@endif
 						</h6>	
 						
-						<p class="font-weight-bold text-dark">
-							@if($lawyer->state['state_name']==''|| $lawyer->city['city_name']=='')
-												{{ ' '}}
-							@else
-							<i class="fa fa-map-marker"></i> {{ $lawyer->state['state_name'] .', '. $lawyer->city['city_name'] }}
+						<h6 class="">
+							
+							@if($lawyer->state['state_name']!='')
+								<i class="fa fa-map-marker text-success" style="font-size:18px"></i> &nbsp;{{ $lawyer->state['state_name'] .', '. $lawyer->city['city_name'] }}
 							@endif
-						</p>
+						</h6>
 
 						<h1>
 							@if(Auth::user())

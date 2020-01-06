@@ -45,6 +45,21 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
   <script src="{{asset('js/jquery.star-rating-svg.js')}}"></script>
   <script src="{{asset('js/all_category.js')}}"></script>
+  <script>
+    
+$(window).on("scroll", function() {
+  if($(window).scrollTop() > 50) {
+      $(".menunav").addClass("bg-white");
+      $(".menunav").css({'box-shadow' : '0 .335rem .25rem rgba(0,0,0,.075) '});
+      $(".menunav li>a").css({ 'color': 'black', 'font-weight': 'bold' });
+  } else {
+      //remove the background property so it comes transparent again (defined in your css)
+     $(".menunav").removeClass("bg-white");
+     $(".menunav li>a").css({ 'color': 'white', 'font-weight': 'bold' });
+     $(".menunav").css({'box-shadow' : ''});
+  }
+});
+  </script>
   {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
   </main>
 </body>

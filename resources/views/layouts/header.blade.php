@@ -49,7 +49,7 @@
       <a class="navbar-header p-1" href="{{url('/')}}"><img src="{{asset('images/adlaw-logo.png')}}" alt="Adlaw" style="width: 90px;"></a>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-      <span class="navbar-toggler-icon"><i class="fa fa-bars" aria-hidden="true"></i></span>
+      <span class="navbar-toggler-icon text-white'"><i class="fa fa-bars" aria-hidden="true"></i></span>
       </button>
     <div class="collapse navbar-collapse " id="collapsibleNavbar">
         <ul class="nav navbar-nav ml-auto">
@@ -95,20 +95,21 @@
             <li class="nav-item dropdown ">
               <a class="dropdown-toggle nav-link p-4" href="{{route('register')}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @if(Auth::user()->photo !='')
-                <img src="{{ asset('storage/profile_photo/'.Auth::user()->photo)}}"  style="width: 33px; height: 20px;" class="" />
+                <img src="{{ asset('storage/profile_photo/'.Auth::user()->photo)}}"  style="width: 33px; height: 30px;" class="" />
                 @else
                 <img src="{{asset('storage/profile_photo/default.png')}}"  style="width: 33px; height: 20px;" class="rounded-circle" />
                 @endif
               </a>
-              <ul class="dropdown-menu " style="left: -41px;background-color: aliceblue">
+              <ul class="dropdown-menu " style=" left:-45px;
+">
                 <li class="nav-item">
-                  <a class="nav-link p-3"  href="{{route('login')}}">{{ __('Dashboard') }}</a>
+                  <a class="nav-link p-3 text-dark"  href="{{route('login')}}">{{ __('Dashboard') }}</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link p-3" href="#">{{ __('Messages') }}</a>
+                  <a class="nav-link p-3 text-dark" href="#">{{ __('Messages') }}</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link p-3" href="{{ route('logout') }}" onclick="event.preventDefault();
+                  <a class="nav-link p-3 text-dark" href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                 </li>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

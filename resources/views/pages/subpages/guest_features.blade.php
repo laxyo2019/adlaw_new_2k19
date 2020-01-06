@@ -25,13 +25,26 @@
 	</div>
 	<div class="row mb-1" >
 		<div class="col-md-8 col-xm-12 col-sm-12">
-			<p class="mb-1" style="font-size: 18px; font-weight: 550">Search </p>
-			<div class="row mb-4">
-					<div class="col-md-6 col-xm-12 col-sm-12" >
-					<input type="text" class="form-control" name="user_name" placeholder="serach name here">
-				</div>
-			</div>
-			<div class="row ">
+			<p class="mb-1" style="font-size: 18px; font-weight: 550">FIND LAWYER </p>
+			
+		</div>
+
+		<div class="col-md-4 col-xm-12 col-sm-12 text-right "  id="genderBox">
+			{{-- <p class="mb-1" style="font-size: 18px; font-weight: 550"></p> --}}
+			<br>
+			<label class="radio-inline mr-3"><input type="radio" name="gender" value="all" checked> Any</label>
+			<label class="radio-inline mr-3"><input type="radio" name="gender" value="m" > Male</label>
+			<label class="radio-inline mr-3"><input type="radio" name="gender" value="f"> Female</label>
+			<label class="radio-inline "><input type="radio" name="gender" value="t"> Other</label>
+		</div>
+	</div>
+	<div class="row mb-4">
+			<div class="col-md-6 col-xm-12 col-sm-12" >
+			<input type="text" class="form-control" name="user_name" placeholder="Search name here">
+		</div>
+	</div>			
+	<div class="row ">
+
 			{{-- 		<div class="col-md-1 col-sm-12 col-xm-12">
 			<a href="#" class="btn btn-md btn-light border">All</a>
 			</div> --}}
@@ -67,23 +80,13 @@
 				</div>
 				
 				
-				<div class="col-md-3 col-xs-12 col-sm-12" id="btnshowLawcompany" style="display: none;">
-					<button  class="btn btn-md btn-info filteBtn">Search</button>
-				</div>					
+			{{-- 	<div class="col-md-3 col-xs-12 col-sm-12" id="btnshowLawcompany" style="display: none;">
+					<button  class="btn btn-lg btn-info filteBtn">Search</button>
+				</div>		 --}}			
 			</div>
-		</div>
-
-		<div class="col-md-4 col-xm-12 col-sm-12 text-right "  id="genderBox">
-			<p class="mb-1" style="font-size: 18px; font-weight: 550">Lawyer Gender</p>
-			<label class="radio-inline mr-3"><input type="radio" name="gender" value="all" checked> Any</label>
-			<label class="radio-inline mr-3"><input type="radio" name="gender" value="m" > Male</label>
-			<label class="radio-inline mr-3"><input type="radio" name="gender" value="f"> Female</label>
-			<label class="radio-inline "><input type="radio" name="gender" value="t"> Other</label>
-		</div>
-	</div>
 	<div class="row mt-4" id="btnshowLawyer">
 		<div class="col-md-12 col-xm-12 col-sm-12 text-center">
-			<button class="btn btn-sm btn-round filteBtn">Search</button>
+			<button class="btn btn-lg btn-round filteBtn">Search</button>
 		</div>
 	</div>	
 	<div class="row">
