@@ -55,6 +55,7 @@ class StateController extends Controller
         
         State::create($data);
         return redirect()->route('state.index')->with('success', 'State Insterted Succesfully');
+        // return redirect()->back();
     }
 
     /**

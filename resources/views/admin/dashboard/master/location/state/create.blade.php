@@ -16,7 +16,7 @@
 									<select class="form-control" name="country_code" id="country">
 										<option value="0">Select Country Name</option>
 										@foreach($countries as $country)
-											<option value="{{$country->country_code}}" {{old('country_code') == $country->country_code ? 'selected' : ''}}>{{$country->country_name}}</option>
+											<option value="{{$country->country_code}}" {{old('country_code') == $country->country_code ? 'selected' : ''}} >{{$country->country_name}}</option>
 										@endforeach
 									</select>
 									@error('country_code')

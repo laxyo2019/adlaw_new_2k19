@@ -103,6 +103,7 @@ Route::group(['prefix' => 'features/guest'] ,function(){
 	Route::get('/profile/{id}', 'Search\SearchController@lawfirmsprofileShow')->name('lawfirmsprofile.show');	
 	Route::view('/profile_management','pages.features.subpages.guest.profile_management')->name('guest.profile_management');
 	Route::view('/search_lawyer','pages.features.subpages.guest.search_lawyer')->name('guest.search_lawyer');
+	Route::view('/calendar','pages.features.subpages.guest.calendar')->name('guest.calendar');
 });
 
 

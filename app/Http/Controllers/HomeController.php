@@ -33,7 +33,7 @@ class HomeController extends Search\SearchController
     }
     public function getStateList(Request $request)
     {
-        $states = State::where("country_code",$request->country_id)
+        $states = State::where("country_code",$request->country_id)->orderBy('state_name','ASC')
                     ->get();
         return response()->json($states);
     }
@@ -41,13 +41,13 @@ class HomeController extends Search\SearchController
     public function getCityList()
     {
       
-      $cities = City::where("state_code",request()->state_code)->get();
+      $cities = City::where("state_code",request()->state_code)->orderBy('city_name','ASC')->get();
       return response()->json($cities);
     }
 
     public function getCityListDropDown(Request $request)
     {        
-      $data['cities'] = City::where("state_code",$request->state_code)->get();
+      $data['cities'] = City::where("state_code",$request->state_code)->orderBy('city_name','ASC')->get();
 
       $data['cityCode'] = auth()->user()->city_code;
 
@@ -68,7 +68,7 @@ class HomeController extends Search\SearchController
        return response()->json($courts); 
     }
     public function court_category($court_type){
-      $courts = CourtMast::where('court_type',$court_type)->get();
+      $courts = CourtMast::where('court_type',$court_type)->orderBy('court_name','ASC')->get();
       return response()->json($courts); 
     }
 
@@ -90,6 +90,6 @@ class HomeController extends Search\SearchController
     public function notification_read($id){
       $notification = auth()->user()->unreadNotifications->where('id',$id)->first();
        $notification->markAsRead();
-      // return redirect()->route('todos.show',$notification->data['id']);
+       return redirect($notification->data['url']);
     }
 }

@@ -87,6 +87,7 @@ function state(state_code,city_code){
            success:function(res){                     
             if(res){
                 $("#city").empty();
+                $("#city").append('<option value="0">Select City</option>');
                 $.each(res,function(key,value){
                     $("#city").append('<option value="'+value.city_code+'" '+(value.city_code == city_code ? 'selected="selected"' : '' )+'>'+value.city_name+'</option>');
                 });
@@ -443,7 +444,7 @@ function user_filestackCreate(filestack_id){
 
 function unique_email_check(value){
 	// console.log(value);
-$.ajax({
+	$.ajax({
 		type:'get',
 		url : '/get_all_users',
 		data:{email:value},			

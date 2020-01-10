@@ -95,9 +95,9 @@
             <li class="nav-item dropdown ">
               <a class="dropdown-toggle nav-link p-4" href="{{route('register')}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @if(Auth::user()->photo !='')
-                <img src="{{ asset('storage/profile_photo/'.Auth::user()->photo)}}"  style="width: 33px; height: 30px;" class="" />
+                <img src="{{ asset('storage/profile_photo/'.Auth::user()->photo)}}"  style="width: 33px; height: 29px;" class="" />
                 @else
-                <img src="{{asset('storage/profile_photo/default.png')}}"  style="width: 33px; height: 20px;" class="rounded-circle" />
+                <img src="{{asset('storage/profile_photo/default.png')}}"  style="width: 33px; height: 29px;" class="rounded-circle" />
                 @endif
               </a>
               <ul class="dropdown-menu " style=" left:-45px;

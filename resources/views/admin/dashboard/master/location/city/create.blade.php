@@ -81,7 +81,7 @@
 
 		              $("#state").append('<option value="0">Select State</option>');
 		              $.each(res,function(key,value){
-		                  $("#state").append('<option value="'+value.state_code+'">'+value.state_name+'</option>');
+		                  $("#state").append('<option value="'+value.state_code+'" >'+value.state_name+'</option>');
 		              });
 		          }else{
 		              $("#state").empty();		              

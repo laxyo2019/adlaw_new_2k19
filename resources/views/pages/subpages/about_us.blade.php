@@ -1,26 +1,10 @@
 @extends("layouts.default")
 @section('content')
-<div class="hero-section inner-page" style="">
-        <div class="wave" style="">
-          
-          <svg width="1920px" height="265px" viewBox="0 0 1920 265" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 100%;">
-              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                  <g id="Apple-TV" transform="translate(0.000000, -402.000000)" fill="#FFFFFF">
-                      <path d="M0,439.134243 C175.04074,464.89273 327.944386,477.771974 458.710937,477.771974 C654.860765,477.771974 870.645295,442.632362 1205.9828,410.192501 C1429.54114,388.565926 1667.54687,411.092417 1920,477.771974 L1920,667 L1017.15166,667 L0,667 L0,439.134243 Z" id="Path"></path>
-                  </g>
-              </g>
-          </svg>
-
-        </div>
-</div>
-
-<div class="container " style="z-index: 2;
-
-position: relative;">
-
+@include('layouts.hero_section')
+<div class="container container-div">
     <div class="row">
-        <div class="col-sm-12 col-md-12 col-xl-12 text-center mb-2">
-            <h2 class="h1-responsive font-weight-bold text-center my-4 text-white" style="transform: translateY(-150px);margin-top: -120px; transition-duration: 1s;">ABOUT ADLAW</h2>          
+        <div class="col-sm-12 col-md-12 col-xl-12 text-center mb-2 h2-text">
+            <h2 class=" font-weight-bold text-center text-white">ABOUT ADLAW</h2>          
         </div>
         <div class="col-sm-12 col-lg-12 col-xs-12 ">
             <p class=" text-justify">

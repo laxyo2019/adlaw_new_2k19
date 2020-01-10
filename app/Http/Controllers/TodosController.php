@@ -47,6 +47,7 @@ class TodosController extends Controller
 
         if($todo->user_id1 != Auth::user()->id){
             $user = User::find($todo->user_id1);
+            
             $user->notify(new TodoNotifications($todo));
         }
 

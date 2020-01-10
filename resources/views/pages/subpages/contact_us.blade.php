@@ -1,13 +1,15 @@
 @extends('layouts.default')
 @section('content')
-<div class="container py-4">
+@include('layouts.hero_section')
+<div class="container container-div">
     <div class="row">
-        <div class="col-sm-12 col-md-12 col-xl-12 text-center mb-2">
-            <h2 class="h1-responsive font-weight-bold text-center my-4">CONTACT US</h2>          
+        <div class="col-sm-12 col-md-12 col-xl-12 text-center mb-2 h2-text">
+            <h2 class="font-weight-bold text-center text-white">CONTACT US</h2>          
+            <p class="text-center w-responsive mx-auto mb-5 " style="opacity: 1;
+    transform: translateZ(0);">Do you have any questions? Please do not hesitate to contact us directly. <br> Our team will come back to you within
+      a matter of hours to help you.</p>
         </div>
     <!--Section description-->
-      <p class="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
-      a matter of hours to help you.</p>
     <div class="container">
         <div class="row">
       @if (session('message'))

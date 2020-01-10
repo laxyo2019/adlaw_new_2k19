@@ -1,10 +1,11 @@
-<section class="py-1 border-bottom" style="background-color: #f0f0f0;">
+<section class="py-1 border-bottom bg-light" >
     <h2 class="font-weight-bold text-center text-captialize">Guest / Users Features</h2>
-    <p class="text-muted text-center" >
+     <span class="span-line mt-4 mb-4"></span>
+     <br>
+   {{--  <p class="text-muted text-center" >
     Everything you need to manage your account.
-{{--     <br>
-    Solo Lawyer, Small Firms, Medium and Large Law Firm manage! --}}
-    </p>
+
+    </p> --}}
   {{--   <p class="text-muted text-center"></p> --}}
     <div class="container">
         <div class="row" align="center">
@@ -16,41 +17,45 @@
                 <a href="{{route('guest.profile_management')}}" class="btn btn-sm btn-info">More Info</a>
             </div> --}}
             <div class="col-md-4 mb-4">
-                <div class="card feature-div">
-                    <div class="card-header bg-white border-0 ">
-                        <div class="feature-circle-images">
-                            <img src="{{asset('images/icons/search.png')}}" class="img-feature">
+                <a href="{{route('guest.search_lawyer')}}" class="feature-link" >
+                    <div class="card feature-div">
+                        <div class="card-header bg-white border-0 ">
+                            <div class="feature-circle-images">
+                                <img src="{{asset('images/icons/search.png')}}" class="img-feature">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="font-weight-bold">Search Lawyer / Law Firms </h4>
+                            <p class="p-text">
+                              Search and find lawyer, law school or law firm near you, No matter where you are located.
+                            </p>
+                        </div>
+                        <div class="card-footer bg-white border-0">
+                            <button class="btn btn-sm btn-info">More Info</button>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <h4 class="font-weight-bold">Search Lawyer / Law Firms </h4>
-                        <p class="p-text">
-                          Search and find lawyer, law school or law firm near you, No matter where you are located.
-                        </p>
-                    </div>
-                    <div class="card-footer bg-white border-0">
-                        <a href="{{route('guest.search_lawyer')}}" class="btn btn-sm btn-info">More Info</a>
-                    </div>
-                </div>
+                </a>
             </div>
             <div class="col-md-4 mb-4">
-                <div class="card feature-div">
-                    <div class="card-header bg-white border-0 ">
-                        <div class="feature-circle-images">
-                            <img src="{{asset('images/icons/calendar.jpg')}}" class="img-feature">
+                <a href="" class="feature-link" >
+                    <div class="card feature-div">
+                        <div class="card-header bg-white border-0 ">
+                            <div class="feature-circle-images">
+                                <img src="{{asset('images/icons/calendar.jpg')}}" class="img-feature">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="font-weight-bold">Calendar</h4>
+                            <p class="p-text">
+                            Adlaw helps you monitor what's going in your cases on one convenient, central calendar so nothing slips through the cracks.
+                            </p>
+                      
+                        </div>
+                        <div class="card-footer bg-white border-0">
+                            <button class="btn btn-sm btn-info">More Info</button>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <h4 class="font-weight-bold">Calendar</h4>
-                        <p class="p-text">
-                        Adlaw helps you monitor what's going in your cases on one convenient, central calendar so nothing slips through the cracks.
-                        </p>
-                  
-                    </div>
-                    <div class="card-footer bg-white border-0">
-                        <a href="" class="btn btn-sm btn-info">More Info</a>
-                    </div>
-                </div>
+                </a>
             </div>
             {{-- <div class="col-md-3 mb-4">
                 <h4 class="font-weight-bold">Reviews to Lawyer / Law Firms and LawSchools</h4>
@@ -62,22 +67,24 @@
             </div> --}}
 
             <div class="col-md-4 mb-4">
-                <div class="card feature-div">
-                    <div class="card-header bg-white border-0 ">
-                        <div class="feature-circle-images">
-                            <img src="{{asset('images/icons/appointment.png')}}" class="img-feature">
+                <a href="" class="feature-link" >
+                    <div class="card feature-div">
+                        <div class="card-header bg-white border-0 ">
+                            <div class="feature-circle-images">
+                                <img src="{{asset('images/icons/appointment.png')}}" class="img-feature">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="font-weight-bold">Book An Appointment</h4>
+                            <p class="p-text">
+                            After finding a relevant law firm, lawyer or law school user can book appointment accordingly and see the status of appointment whether it is confirmed pending or canceled. 
+                            </p>
+                        </div>
+                        <div class="card-footer bg-white border-0">
+                            <button class="btn btn-sm btn-info">More Info</button>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <h4 class="font-weight-bold">Book An Appointment</h4>
-                        <p class="p-text">
-                        After finding a relevant law firm, lawyer or law school user can book appointment accordingly and see the status of appointment whether it is confirmed pending or canceled. 
-                        </p>
-                    </div>
-                    <div class="card-footer bg-white border-0">
-                        <a href="" class="btn btn-sm btn-info">More Info</a>
-                    </div>
-                </div>
+                </a>
             </div>
            {{--  <div class="col-md-3 mb-4">
                 <h4 class="font-weight-bold">Case Related Information</h4>
@@ -104,4 +111,6 @@
 
         </div>
     </div>
+    <br>
+    <br>
   </section>

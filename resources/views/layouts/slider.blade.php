@@ -14,7 +14,7 @@
         </div>
       </div>
       <!-- Slide Two - Set the background image for this slide in the line below -->
-      <div class="carousel-item" style="background-image: url('images/lawyer_profile.jpg'); ">
+      <div class="carousel-item" style="background-image: url('images/ebanner.jpg'); ">
         <div class="carousel-caption d-none d-md-block">
           <h2 class="display-4">Guest / Users</h2>
           <p class="lead">Everything you need to manage your account.</p>

@@ -1,9 +1,11 @@
 @extends("layouts.default")
 @section('content')
-<div class="container py-4">
+@include('layouts.hero_section')
+<div class="container container-div">
     <div class="row ">
-    	<div class="col-sm-12 col-md-12 col-xl-12 text-center mb-2 border-bottom">
-            <h2 class="h1-responsive font-weight-bold text-center my-4 text-uppercase">GUEST / USERS</h2>          
+    	<div class="col-sm-12 col-md-12 col-xl-12 text-center mb-2 h2-text">
+            <h2 class="font-weight-bold text-center text-uppercase text-white">GUEST / USERS</h2>   
+            <p class="lead mb-0">Easily Search Lawyer and Law Firms!</p>       
         </div>
 
 		<div class="col-sm-12 col-md-12 col-xl-12 ">
@@ -58,7 +60,7 @@
 				</div>
 				<div class="col-md-3 col-xm-12 col-sm-12">
 					<select class="form-control select2" id="city" name="city_code">
-					
+						<option value="0">Select City</option>
 					</select>
 				</div>	
 				<div class="col-md-3 col-xm-12 col-sm-1" id="court1">

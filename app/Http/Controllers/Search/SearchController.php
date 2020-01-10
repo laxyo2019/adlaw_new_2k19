@@ -91,7 +91,7 @@ class SearchController extends Controller
     if($speciality_code == 0){ 
        if($court_id == '0'){     
           if($gender == 'all'){
-            if($city_code ==0){
+            if($city_code == 0){
               if($state_code == 0 ){
 
                  $lawyers = $this->query;

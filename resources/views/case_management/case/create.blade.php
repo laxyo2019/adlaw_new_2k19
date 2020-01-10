@@ -37,9 +37,9 @@
 
 					<div class="row from-group" style="display: none;" id="cnr_div">
 						<div class="col-md-6" style="margin-top:10px; ">
-							<label for="cnr">Do you have CNR #?</label>
-							<input type="radio" name="cnr" value="1" {{old('cnr') == '1' ? 'checked' : ''}}>Yes
-							<input type="radio" name="cnr" value="0" {{old('cnr') == '0' ? 'checked' : ''}} {{old('cnr') == '1' ? '' : 'checked'}}>No
+							<label for="cnr ">Do you have CNR #?</label>&nbsp;&nbsp;
+							<input type="radio" name="cnr" value="1" {{old('cnr') == '1' ? 'checked' : ''}}> &nbsp;Yes&nbsp;&nbsp;
+							<input type="radio" name="cnr" value="0" {{old('cnr') == '0' ? 'checked' : ''}} {{old('cnr') == '1' ? '' : 'checked'}}>&nbsp; No
 						</div>
 					</div>
 					<div class="row form-group" style="display: none;" id="cnr_number_div">
@@ -239,9 +239,9 @@
 					
 					<div class="row form-group">
 						<div class="col-md-6" style="margin-top: 10px;">
-							<label for="affidavit_status">Is the affidavit/vakalath filed?</label>
-							<input type="radio" name="affidavit_status" value="1" {{old('affidavit_status') == '1' ? 'checked' : ''}}> Yes
-							<input type="radio" name="affidavit_status" value="0" {{old('affidavit_status') == '0' ? 'checked' : ''}} {{old('affidavit_status') == '1' ? '' : 'checked'}}> No
+							<label for="affidavit_status">Is the affidavit/vakalath filed?</label>&nbsp;&nbsp;
+							<input type="radio" name="affidavit_status" value="1" {{old('affidavit_status') == '1' ? 'checked' : ''}}>&nbsp; Yes &nbsp;&nbsp; 
+							<input type="radio" name="affidavit_status" value="0" {{old('affidavit_status') == '0' ? 'checked' : ''}} {{old('affidavit_status') == '1' ? '' : 'checked'}}>&nbsp; No
 							
 						</div>
 					</div>

@@ -51,9 +51,10 @@ class CityController extends Controller
         else{
             $data['city_code'] = '1';
         }
-  
+        
         City::create($data);
         return redirect()->route('city.index')->with('success','City Name Inserted Succesfully');
+         //return redirect()->back();
     }
 
     /**

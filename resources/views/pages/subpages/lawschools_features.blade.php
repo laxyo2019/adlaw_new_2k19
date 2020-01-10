@@ -1,61 +1,45 @@
 @extends("layouts.default")
 @section('content')
-<div class="container-fluid pt-4">
-	
-	<div class="row">
-		<div class="col-md-3 border-r " style="background-color: #d9d9d9;">
-			<div class="slider form-group pt-4" >
-				<div class="slider-header">
-					<h3 class="font-weight-bold">Search</h3>
-				</div>
-				<div class="slider-body">
-					<div class="row">
-						<div class="col-md-12 form-group">
-							<label>Enter College Name</label>
-							<input type="text" name="user_name" class="form-control" placeholder="Search name here">
-						</div>
-						<div class="col-md-12 form-group">
-							<label>Select State</label>
-							<select class="form-control select2" name="state_code" id="state">
-								<option value="0">Select State</option>	
-								@foreach($states as $state)
-									<option value="{{$state->state_code}}">{{$state->state_name}}</option>
-								@endforeach 
-							</select>	
-						</div>						
-					</div>
-					<div class="row">
-						<div class="col-md-12 form-group ">
-							<label>Select City</label>
-							<select class="form-control select2" name="city_code" id="city">
-								
-							</select>		
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 form-group ">
-							<button class="btn btn-md btn-round filteBtn">Search</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-9">	
-			<div class="row ">
-				<div class="col-sm-12 col-md-12 col-xl-12 text-center mb-2 border-bottom">
-		            <h2 class="h1-responsive font-weight-bold text-center text-uppercase">Law Schools</h2>  
-		            <p><i>Easily Find Top Rated Law College.</i></p>        
-		        </div>
-			</div>		
-			<div class="row "  id="withoutsearchDiv">
-				<div class="col-md-12 col-sm-12 col-xm-12" id="tablediv">
-					@include('pages.subpages.search.lawschools_table')
-				</div>
-			</div>
-		</div>
-	    
+@include('layouts.hero_section')
+<div class="container container-div">
+	<div class="row ">
+		<div class="col-sm-12 col-md-12 col-xl-12 text-center mb-2 h2-text">
+	        <h2 class="h1-responsive font-weight-bold text-center text-white text-uppercase">Law Schools</h2>  
+	        <p><i>Easily Find Top Rated Law College.</i></p>        
+	    </div>
 	</div>	
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="font-weight-bold">Find Law Schools</h3>
+		</div>
+		<div class="col-md-4 form-group">
+			<label>Enter College Name</label>
+			<input type="text" name="user_name" class="form-control" placeholder="Search name here">
+		</div>
+		<div class="col-md-4 form-group">
+			<label>Select State</label>
+			<select class="form-control select2" name="state_code" id="state">
+				<option value="0">Select State</option>	
+				@foreach($states as $state)
+					<option value="{{$state->state_code}}">{{$state->state_name}}</option>
+				@endforeach 
+			</select>	
+		</div>
+		<div class="col-md-4 form-group">
+			<label>Select City</label>
+			<select class="form-control select2" name="city_code" id="city"></select>	
+		</div>
+		<div class="col-md-12 form-group">
+			<button class="btn btn-md btn-round filteBtn">Search</button>
+		</div>
+	</div>	
+	<div class="row "  id="withoutsearchDiv">
+		<div class="col-md-12 col-sm-12 col-xm-12" id="tablediv">
+			@include('pages.subpages.search.lawschools_table')
+		</div>
+	</div>
 </div>
+
 <script >
 	$(document).ready(function(){
 		$('.select2').select2();

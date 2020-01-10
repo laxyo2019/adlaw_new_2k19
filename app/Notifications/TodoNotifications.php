@@ -27,7 +27,9 @@ class TodoNotifications extends Notification
         return [
             'id' => $this->todo->id,
             'title' => $this->todo->title,
+            'url' => $this->todo->status == 'P' ? 'todos' : 'todos/'.$this->todo->id,
             'message' => $this->todo->status == 'A' ? 'Todo completed by: '.$this->todo->assigned_user->namespace : ($this->todo->status == 'C' ? 'Your awaiting todo successfully approved' : ($this->todo->status == 'P' ? $this->todo->created_user->name.'has assigned todo to you' : 'Task missed please give the reason')),
+           
            
 
         ];
