@@ -19,6 +19,11 @@
 Route::get('/','HomeController@index')->name('/');
 Auth::routes();
 
+// Route::view('/connect', 'connect')->name('connect');
+Route::get('/connect', 'HomeController@connectLogin')->name('connect');
+
+Route::view('/contact_support', 'package.contact_support')->name('contact_support');
+
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
 Route::get('/state','HomeController@getStateList')->name('state');
 Route::get('/city_fetch', 'HomeController@getCityList')->name('city');
@@ -26,6 +31,7 @@ Route::get('/cityDropDown', 'HomeController@getCityListDropDown')->name('cityDro
 Route::get('/cityDropDownClient', 'HomeController@getCityListClientDropDown')->name('cityDropDownClient');
 Route::post('/courtTypeFilter','HomeController@courtTypeFilter')->name('courtTypeFilter');
 Route::get('/court_category/{id}','HomeController@court_category');
+Route::get('/state_city_court','HomeController@state_city_court');
 
 Route::get('/case_subcategory', 'HomeController@case_subcategory');
 Route::get('/get_all_users', 'HomeController@get_all_users')->name('get_all_users');
@@ -33,6 +39,9 @@ Route::get('/get_all_users', 'HomeController@get_all_users')->name('get_all_user
 Route::post('/book_an_appointment','BookingController@book_an_appointment')->name('book_an_appointment');
 
 Route::resource('/contact','ContactController');
+Route::post('/buy_crm_dashboard','ContactController@buy_crm_dashboard')->name('buy_crm_dashboard');
+
+
 Route::get('/refreshCaptcha','ContactController@refreshCaptcha')->name('contact.refreshCaptcha');
 Route::get('/display_blogs/{id}', 'BlogController@show_blogs')->name('display_blogs');
 Route::get('/more_articles','BlogController@more_articles')->name('more_articles');
@@ -54,6 +63,8 @@ Route::get('/notification_read/{id}','HomeController@notification_read')->name('
 // Route::view('/court','pages.court');
 // Route::view('/faq','pages.faq');
 
+
+
 Route::view('/tos','pages.subpages.tos');
 Route::view('/about_us','pages.subpages.about_us');
 Route::view('/disclaimer','pages.subpages.disclaimer');
@@ -62,8 +73,8 @@ Route::view('/why_adlaw','pages.subpages.why_adlaw');
 
 
 Route::group(['prefix' => 'features/lawfirms'] ,function(){
-	Route::view('/','pages.subpages.lawfirms_features')->name('lawfirms');
 
+	Route::view('/','pages.subpages.lawfirms_features')->name('lawfirms');
 	Route::view('/case_management','pages.features.subpages.lawfirms.case_management')->name('features.case_management');
 	Route::view('/client_management','pages.features.subpages.lawfirms.client_management')->name('features.client_management');
 	Route::view('/calendar_management','pages.features.subpages.lawfirms.calendar_management')->name('features.calendar_management');
@@ -76,7 +87,6 @@ Route::group(['prefix' => 'features/lawfirms'] ,function(){
 	Route::view('/profile_management','pages.features.subpages.lawfirms.profile_management')->name('features.profile_management');
 	Route::view('/todo_management','pages.features.subpages.lawfirms.todo_management')->name('features.todo_management');
 	Route::view('/hearing_management','pages.features.subpages.lawfirms.hearing_management')->name('features.hearing_management');
-
 });	
 
 
@@ -92,7 +102,6 @@ Route::group(['prefix' => 'features/lawschools'] ,function(){
 	Route::view('/document_management','pages.features.subpages.lawschools.document_management')->name('lawschools.document_management');
 	Route::view('/team_management','pages.features.subpages.lawschools.team_management')->name('lawschools.team_management');
 	Route::view('/agenda_management','pages.features.subpages.lawschools.agenda_management')->name('lawschools.agenda_management');
-
 });
 
 
@@ -127,6 +136,11 @@ Route::group(['middleware' => ['role:admin']], function() {
 	Route::post('/blogpremission','Admin\AdminController@blogpremission')->name('admin.blogpremission');
 
 	Route::get('/contact_details','Admin\AdminController@contact_details')->name('admin.contact_details');
+	Route::get('/show_subscription','Admin\AdminController@show_subscription')->name('admin.show_subscription');
+	Route::get('/find_subscriptions','Admin\AdminController@find_subscriptions')->name('admin.find_subscriptions');
+
+	Route::post('/store_subscription','Admin\AdminController@store_subscription')->name('admin.store_subscription');
+	Route::get('/package_fetch','Admin\AdminController@package_fetch')->name('admin.package_fetch');
 
 // Start Master module
 
@@ -170,6 +184,12 @@ Route::group(['prefix' => 'master', 'namespace' => 'Admin\Master'], function () 
 // End Master
 
 	});
+	
+	Route::group(['prefix' => 'acl', 'namespace' => 'Admin\ACL'], function ()  {
+		Route::resource('/acl_package','PackageController');
+		Route::resource('/acl_module','ModuleController');
+	});
+
 });
 /* --------------------Admin---------------------------------- */
 
@@ -177,9 +197,9 @@ Route::group(['prefix' => 'master', 'namespace' => 'Admin\Master'], function () 
 Route::group(['middleware' => ['role:lawyer|lawcompany']], function() {
 	Route::resource('/lawfirm', 'LawFirm\LawFirmController');
 	Route::get('/upcoming_hearings','LawFirm\LawFirmController@upcoming_hearings')->name('upcomingHearings');
-
 	Route::get('/practicing_court', 'LawFirm\LawFirmController@practicing_court')->name('practicing_court.index');
 	Route::post('/practicing_court/store', 'LawFirm\LawFirmController@store_practicing_court')->name('practicing_court.store');
+	Route::get('/user_court_list','LawFirm\LawFirmController@user_court_list');
 
 	Route::get('/landmarkcase', 'LawFirm\LawFirmController@landmarkcase')->name('landmarkcase.index');
 	Route::post('/landmarkcase/store', 'LawFirm\LawFirmController@landmarkcase_store')->name('landmarkcase.store');
@@ -198,29 +218,11 @@ Route::group(['middleware' => ['role:lawyer|lawcompany']], function() {
 
 
 	Route::get('/fileDownload', 'CaseManagement\CaseDocController@fileDownload')->name('fileDownload');
-
-
-
 	Route::resource('/booking','BookingController');
 	Route::get('/bookingUpdate/{id}','BookingController@bookingUpdate')->name('bookingUpdate');
 	Route::get('/bookingCancelled/{id}','BookingController@bookingCancelled')->name('bookingCancelled');
 
-	Route::resource('/calendar', 'CalendarController');
-	Route::get('/case_member', 'CalendarController@case_member')->name('case_member');
-
-
-	Route::resource('/todos', 'TodosController');
-	Route::post('/todos/category_table_change', 'TodosController@category_table_change')->name('todo.category_table_change');
-	Route::post('/status_table_change', 'TodosController@status_table_change')->name('todo.status_table_change');
-	Route::post('/todo_status_update', 'TodosController@todo_status_update')->name('todos.todoUpdate');
-	Route::get('/todos/form/create', 'TodosController@create_form')->name('todos.create_form');
-	Route::get('/update_todo_missed', 'TodosController@update_todo_missed')->name('todos.update_todo_missed');
-	Route::get('/todo_closed_reason', 'TodosController@todo_closed_reason')->name('todos.todo_closed_reason');
-	Route::get('/awaiting_todo_update', 'TodosController@awaiting_todo_update')->name('todos.awaiting_todo_update');
-
-	Route::get('/mark_as_read', 'TodosController@mark_as_read')->name('mark_as_read');
-
-
+	
 });
 /* ------------------Lawyer-------------------Lawcompany------------- */
 
@@ -256,9 +258,7 @@ Route::group(['middleware' => ['role:lawcollege|teacher|student']], function() {
 
 	Route::post('/passout_student', 'Student\StudentManageController@passout_student')->name('passout_student');
 	Route::post('/dropout_student', 'Student\StudentManageController@dropout_student')->name('dropout_student');
-
-	Route::get('/student_record', 'Student\StudentManageController@student_record')->name('student_record');
-	
+	Route::get('/student_record', 'Student\StudentManageController@student_record')->name('student_record');	
 	// Route::post('/temporary_save', 'Student\StudentDetailController@temp_data');
 
 	Route::post('/student_filter', 'Student\StudentDetailController@student_filter')->name('student_filter');
@@ -270,7 +270,6 @@ Route::group(['middleware' => ['role:lawcollege|teacher|student']], function() {
 	Route::get('/s_batch_wise', 'Student\StudentDashboardController@export_batch_wise')->name('s_batch_wise');
 	Route::post('/batch_wise_export', 'Student\StudentDashboardController@batch_wise_export')->name('batch_wise_export');
 
-	
 	Route::resource('manage/batches', 'LawSchools\BatchMastController');
 
 });
@@ -285,12 +284,10 @@ Route::group(['middleware' => ['role:lawcollege']], function() {
 
 /* -----------------------Teacher------------------------------- */
 Route::group(['middleware' => ['role:teacher']], function() {
-	
 	Route::get('college/profile','LawSchools\LawSchoolsController@college_profile')->name('lawschools.college_profile');
 	Route::get('/college/courses','LawSchools\LawSchoolsController@college_courses')->name('lawschools.college_courses');
 
 	Route::get('/college/courses/{id}','LawSchools\LawSchoolsController@show_course_details')->name('lawschools.show_course_details');
-	
 });
 /* -------------------------Teacher----------------------------- */
 
@@ -304,13 +301,17 @@ Route::group(['middleware' => ['role:lawyer|teacher|lawcollege']], function() {
 /* ----------------Lawyer---------------Teacher--------------- */
 
 Route::group(['middleware' => ['role:guest']], function() {
-
 	Route::get('/customer', 'CustomerController@index')->name('customer');
 	Route::patch('/updateProfile/{id}', 'CustomerController@updateProfile')->name('customer.update');
 	Route::get('/appointmentShow', 'BookingController@appointment_show')->name('customer.appointment');
 });
 
-Route::group(['middleware' => ['role:lawyer|lawcompany|lawcollege|admin']], function() {
+
+/* -------------------------------all--------------- */
+
+Route::group(['middleware' => ['role:lawyer|lawcompany|lawcollege|admin|guest|teacher|student']], function() {
+	Route::resource('/crm_dashboard','CRM\CRMController');
+
 	Route::resource('/teams','Teams\TeamController');
 
 	Route::get('/team_users','Teams\TeamController@team_users');
@@ -319,55 +320,86 @@ Route::group(['middleware' => ['role:lawyer|lawcompany|lawcollege|admin']], func
 	Route::post('/login_history', 'Teams\UsersController@login_history')->name('login_history');
 	Route::post('/member_cases', 'Teams\UsersController@member_cases')->name('member_cases');
 
+	Route::get('/password_change', 'Teams\UsersController@password_change')->name('password_change');
+	Route::post('/user/change-password', 'Teams\UsersController@changePassword')->name('change-password');
+
+	Route::resource('/todos', 'TodosController');
+	Route::post('/todos/category_table_change', 'TodosController@category_table_change')->name('todo.category_table_change');
+	Route::post('/status_table_change', 'TodosController@status_table_change')->name('todo.status_table_change');
+	Route::post('/todo_status_update', 'TodosController@todo_status_update')->name('todos.todoUpdate');
+	Route::get('/todos/form/create', 'TodosController@create_form')->name('todos.create_form');
+	Route::get('/update_todo_missed', 'TodosController@update_todo_missed')->name('todos.update_todo_missed');
+	Route::get('/todo_closed_reason', 'TodosController@todo_closed_reason')->name('todos.todo_closed_reason');
+	Route::get('/awaiting_todo_update', 'TodosController@awaiting_todo_update')->name('todos.awaiting_todo_update');
+
+	Route::get('/mark_as_read', 'TodosController@mark_as_read')->name('mark_as_read');
+
+	Route::resource('/calendar', 'CalendarController');
+	Route::get('/case_member', 'CalendarController@case_member')->name('case_member');
+
+	Route::get('/filestack-mgmt', 'Admin\FilestackMgmtController@index')->name('admin.filestack-mgmt');
+	Route::resource('/filestacks', 'Admin\FilestackMgmtController');
+	Route::post('/filestacks/get_users', 'Admin\FilestackMgmtController@get_users');
+	Route::post('/filestacks/paginate', 'Admin\FilestackMgmtController@search');
+	Route::post('/filestacks/updateIndex', 'Admin\FilestackMgmtController@updateIndex');
+	Route::post('/filestack-mgmt/update_permissions', 'Admin\FilestackMgmtController@update_permissions');
+	Route::post('/filestack-mgmt/users', 'Admin\FilestackMgmtController@get_all_users');
+	Route::post('/filestack-mgmt/tags', 'Admin\FilestackMgmtController@get_filestack_type');
+
+
+	Route::group(['prefix' => 'docs', 'namespace' => 'Docs'], function ()  {
+		// resources
+		Route::resource('/stacks', 'FilestacksController');
+		Route::resource('/documents', 'DocsController');
+		Route::resource('/folders', 'FoldersController');
+		Route::resource('/media', 'MediaController');
+
+		// gets
+		Route::get('/', 'MainController@index')->name('docs.home');
+		Route::get('/files/download/{ids}', 'DocsController@download');
+		Route::get('/stacks/search/{keyword}', 'FilestacksController@search');
+		Route::get('/back_to_home/{stack_id}', 'FilestacksController@backToHome');
+		
+		// posts
+		Route::post('/move_folder', 'FoldersController@move_folder');
+		Route::post('/stacks/get_count', 'FilestacksController@get_count');
+		Route::post('/documents/multi_delete', 'DocsController@multi_delete');
+		Route::post('/files/download', 'DocsController@download');
+		Route::post('/documents/move_file', 'DocsController@move_file');
+		Route::post('/documents/multi_cut_paste', 'DocsController@multi_cut_paste');
+		Route::post('/documents/upload_folder', 'DocsController@uploadFolder');
+	});
+
+	Route::group(['prefix' => 'pms', 'namespace' => 'PMS'], function ()  {
+		Route::resource('agenda', 'Agenda\AgendaMastController');
+		Route::resource('agenda/response', 'Agenda\AgendaResponseController');
+		Route::post('agenda/checks/is_strict', 'Agenda\AgendaMastController@check_is_strict');
+		Route::post('/get_users','Agenda\AgendaMastController@get_users');
+		// Schedule Routes
+		Route::resource('/schedule', 'Schedule\ScheduleController');
+		Route::post('/getschedule', 'Schedule\ScheduleController@getSchdule');
+		Route::post('/updateSchedule/{id}', 'Schedule\ScheduleController@updateSchedule');
+		Route::patch('/schedule/{display_id}/take_action', 'Schedule\ScheduleController@takeAction');
+		Route::get('/display_reminder', 'Schedule\ScheduleController@display_reminder');
+	});
+
+
+	Route::group(['namespace' => 'Package'], function() {
+		Route::resource('package','PackageController');
+		
+	});
 });
 
-Route::get('/filestack-mgmt', 'Admin\FilestackMgmtController@index')->name('admin.filestack-mgmt');
-Route::resource('/filestacks', 'Admin\FilestackMgmtController');
-Route::post('/filestacks/get_users', 'Admin\FilestackMgmtController@get_users');
-Route::post('/filestacks/paginate', 'Admin\FilestackMgmtController@search');
-Route::post('/filestacks/updateIndex', 'Admin\FilestackMgmtController@updateIndex');
-Route::post('/filestack-mgmt/update_permissions', 'Admin\FilestackMgmtController@update_permissions');
-Route::post('/filestack-mgmt/users', 'Admin\FilestackMgmtController@get_all_users');
-Route::post('/filestack-mgmt/tags', 'Admin\FilestackMgmtController@get_filestack_type');
 
 
-
-Route::group(['prefix' => 'docs', 'namespace' => 'Docs'], function ()  {
-	// resources
-	Route::resource('/stacks', 'FilestacksController');
-	Route::resource('/documents', 'DocsController');
-	Route::resource('/folders', 'FoldersController');
-	Route::resource('/media', 'MediaController');
-
-	// gets
-	Route::get('/', 'MainController@index')->name('docs.home');
-	Route::get('/files/download/{ids}', 'DocsController@download');
-	Route::get('/stacks/search/{keyword}', 'FilestacksController@search');
-	Route::get('/back_to_home/{stack_id}', 'FilestacksController@backToHome');
-	
-	// posts
-	Route::post('/move_folder', 'FoldersController@move_folder');
-	Route::post('/stacks/get_count', 'FilestacksController@get_count');
-	Route::post('/documents/multi_delete', 'DocsController@multi_delete');
-	Route::post('/files/download', 'DocsController@download');
-	Route::post('/documents/move_file', 'DocsController@move_file');
-	Route::post('/documents/multi_cut_paste', 'DocsController@multi_cut_paste');
-	Route::post('/documents/upload_folder', 'DocsController@uploadFolder');
-});
 // Route::get('notifyAgendaAdded/{id}/{team_id?}','PMS\Agenda\AgendaMastController@active_agenda');
 
 // Route::get('agendaAddReminder/{id}/{team_id?}','PMS\Agenda\AgendaMastController@active_add_response');
 
 
-Route::group(['prefix' => 'pms', 'namespace' => 'PMS'], function ()  {
-	Route::resource('agenda', 'Agenda\AgendaMastController');
-	Route::resource('agenda/response', 'Agenda\AgendaResponseController');
-	Route::post('agenda/checks/is_strict', 'Agenda\AgendaMastController@check_is_strict');
-	Route::post('/get_users','Agenda\AgendaMastController@get_users');
-	// Schedule Routes
-	Route::resource('/schedule', 'Schedule\ScheduleController');
-	Route::patch('/schedule/{display_id}/take_action', 'Schedule\ScheduleController@takeAction');
-});
+
+
+
 
 
 

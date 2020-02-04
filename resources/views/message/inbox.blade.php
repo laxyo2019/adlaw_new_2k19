@@ -1,15 +1,5 @@
 @extends('message.sidebar')
 @section('inbox-body')
-<style>
-.unread_message a,.unread_message td{
-	color:#b10e0e;
-}
-
-.unread_message a:hover{
-	color:#b10e0e!important;
-}
-
-</style>
         <!-- /.col -->
 	<div class="col-md-9">
 	  <div class="box box-primary">

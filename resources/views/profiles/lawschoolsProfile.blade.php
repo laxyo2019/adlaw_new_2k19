@@ -20,7 +20,14 @@ p.stars  i
     color: chocolate;
 }
 </style>
-<div class="container py-4">
+@include('layouts.hero_section')
+<div class="container container-div">
+   <div class="row ">
+      <div class="col-sm-12 col-md-12 col-xl-12 text-center mb-2 h2-text">
+            <h2 class="font-weight-bold text-center text-uppercase text-white">Law Schools Profile</h2>   
+                
+        </div>
+      </div>
  <div class="row mt-4">
       <div class="col-sm-12 col-xs-12 col-md-3 col-xl-3 col-lg-3"> 
           @if($userData->photo !='')<img  title="{{$userData->name}}" src="{{asset('storage/profile_photo/'.$userData->photo)}}" alt="image" class="img-responsive w-100 h-100 profile-img"> 

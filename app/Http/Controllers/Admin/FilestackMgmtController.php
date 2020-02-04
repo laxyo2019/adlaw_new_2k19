@@ -8,6 +8,7 @@ use App\Models\Filestack;
 use App\User;
 use Illuminate\Http\Request;
 use Auth;
+use App\Helpers\Helpers;
 class FilestackMgmtController extends Controller
 {
     public function search(Request $request){
@@ -57,19 +58,8 @@ class FilestackMgmtController extends Controller
     }
 
     public function get_all_users(){
-    	$users = User::where('parent_id', auth()->user()->id)->get();
-        if(Auth::user()->user_catg_id == '4'){
-            $users = collect($users)->filter(function($e){
-                return $e['user_catg_id'] === '6';
-            });
-        }else{
-            $users = collect($users)->filter(function($e){
-                return $e['user_catg_id'] === '2';
-            });
-        }
-        
+        $users =  Helpers::get_all_users(auth()->user()->id)->get(); 
         $users[] = Auth::user();
-
     	return response()->json($users);
     }
 
@@ -188,9 +178,11 @@ class FilestackMgmtController extends Controller
         return 'success';
     }
     public function get_users(){
-    	$users = User::where('parent_id',Auth::user()->id)->whereNull('filestack_id')->get();
+       $users =  Helpers::get_all_users(auth()->user()->id)->whereNull('filestack_id')->get();     
+      
+    	//$users = User::where('parent_id',Auth::user()->id)->whereNull('filestack_id')->get();
         
-    	return response()->json($users);
+    	return response()->json($users->toArray());
     }
 
     public function show($id)

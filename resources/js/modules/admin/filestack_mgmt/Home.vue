@@ -154,6 +154,7 @@ export default {
 			axios.post('/filestacks/get_users').then(response => {
 				//console.log(response);
 				 this.filestackUsers = response.data;
+				 console.log(this.filestackUsers)
 				// Vue.toasted.show("Updated Successfully", {
 				// 		type : 'success',
 				// 		icon : 'check',

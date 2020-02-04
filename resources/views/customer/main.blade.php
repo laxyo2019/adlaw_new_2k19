@@ -5,6 +5,17 @@
     $msg = \App\Models\MessageTalk::where('recv_id',Auth::user()->id)->where('status',0)->get();
       
     $messages = \App\Models\MessageTalk::select('msg_talks.*','users.name','users.photo')->join('users','users.id','=','msg_talks.sender_id')->where('recv_id',Auth::user()->id)->where('msg_talks.status',0)->get();
+    $modules = \App\Models\Module::all();
+    $package_id = Auth::user()->user_package_id;
+
+    $moduleShow = false;
+    if($package_id != '' ){
+      $today = date('Y-m-d');
+      $end_date = date('Y-m-d',strtotime(Auth::user()->package_end));
+      if(strtotime($today) <= strtotime($end_date)){
+         $moduleShow = true;
+      }
+    }
 
   @endphp
 
@@ -65,13 +76,18 @@
             </ul>
              @endif
           </li>
+
+        <notification-component 
+          :notifications="{{ json_encode(auth()->user()->unreadNotifications) }}"
+          :logged_user="{{ json_encode(auth()->user()) }}">
+        </notification-component>
           <!-- Notifications: style can be found in dropdown.less -->
-          <li class="dropdown notifications-menu">
+         {{--  <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
               <span class="label label-warning"></span>
             </a>            
-          </li>
+          </li> --}}
           <!-- Tasks: style can be found in dropdown.less -->
           <!-- <li class="dropdown tasks-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -175,7 +191,7 @@
           <li class="{{Request()->segment(1) == 'message' ? 'active' : '' }} {{Request()->segment(1) == 'sent_messages' ? 'active' : '' }} {{Request()->segment(1) == 'trash_message' ? 'active' : '' }} nav-item">
             <a class="nav-link" href="{{route('message.index')}}">
               <i class="fa fa-envelope"></i>
-              <span >Mailbox </span>
+              <span >Message Box </span>
              @if(count($msg) !=0) 
                 <span class="pull-right-container">
                   <span class="label bg-red pull-right">{{count($msg)}}</span>
@@ -183,7 +199,49 @@
               @endif
 
             </a>
-          </li>         
+          </li> 
+
+          <li class="treeview {{Request()->segment(1) == 'master' ? 'active' : '' }}">
+            <a href="{{route('package.index')}}">
+              <i class="fa fa-table"></i> <span>CRM</span>
+              <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="">
+                <a href="{{route('crm_dashboard.index')}}">
+                  <i class="fa fa-tachometer"></i> <span>{{__('CRM Dashboard')}}</span>
+                </a>
+              </li>
+              @foreach($modules as $module)
+                  @if(in_array(Auth::user()->user_catg_id, json_decode($module->permissions)->can_view))
+                    @if(Auth::user()->parent_id !=null )  
+                      @if($module->show_team == '1')
+                        <li class="">
+                          <a href="{{ $module->link != null ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('package.index')}}">
+                            <i class="fa {{$module->icon}}"></i> <span>{{$module->name}}</span>
+                          </a>
+                        </li>
+                      @endif
+                    @else
+                      <li class="">
+                          <a href="{{ $module->link != null ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('package.index')}}">
+                            <i class="fa {{$module->icon}}"></i> <span>{{$module->name}}</span>
+                          </a>
+                        </li>
+                    @endif
+                  @endif
+              @endforeach  
+              </ul>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="{{route('password_change')}}">
+                <i class="fa fa-user"></i>
+                <span >Change Password </span>               
+              </a>
+          </li>
+        
              
       </ul>
     </section>

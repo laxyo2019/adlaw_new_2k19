@@ -2,78 +2,18 @@
 	<div class="card">
       <!-- <div class="avatar avatar-md mr-3" style="background-image: url(/tabler/demo/faces/male/16.jpg)"></div> -->
       <span class="m-2 row">
-      	<div class="col-8">
+      	<div class="col-md-8">
       		<a href="#" @click.prevent="takeAction('complete')" class="btn btn-success mr-2">Complete</a>
-      		<a href="#" @click.prevent="takeAction('discard')" class="btn btn-danger">Discard</a>
+      		<a href="#" @click.prevent="takeAction('discard')" class="btn btn-danger" v-if="create_schedule">Discard</a>
       	</div>
-      	<div class="col-4 text-right">
-      		<a href="#" class="btn btn-dark" title="Close" @click.prevent="$emit('unfocus')">Close</a>
+      	<div class="col-md-4 text-right">
+      		<a href="#" class="btn btn-primary mr-2" title="Close" @click.prevent="$emit('edit-schedule')" v-if="create_schedule">Edit</a>
+      		<a href="#" class="btn btn-default" title="Close" @click.prevent="$emit('unfocus')">Close</a>
       	</div>
         <!-- <a href="#" @click.prevent="toggleEditSchedule()" title="Edit">Edit</a> -->
         <!-- <a href="#" @click.prevent="deleteMasterSchedule(display.schedule_id)" title="Delete">Delete</a> -->
       </span>
-  	<!-- <div class="card-body mt-2" v-if="scheduleEdit">
-  		<div class="card-body row">
-  				<div class="form-group col-sm-6 col-xs-12">
-	  				<label for="title"><b>Title : </b></label>
-	  				<input v-model="editSchedule.title"  type="text" name="title" id="title" class="form-control">
-	  				<div class="validation-message" v-text="validation.getMessage('title')"></div>
-	  			</div>
-	  			<div class="form-group col-sm-6 col-xs-12">
-	  				<label for=""><b>Assignee : </b></label>
-						  <multiselect v-model="editSchedule.assignee" 
-						  :options="users" 
-						  :close-on-select="true" 
-						  :clear-on-select="true" 
-						  :preserve-search="true" 
-						  placeholder="Pick Assignee" 
-						  label="name" 
-						  track-by="name" >
-					  </multiselect>
-					  <div class="validation-message" v-text="validation.getMessage('assignee')"></div>
-	  			</div>
-	  			<div class="form-group col-6 col-xs-12">
-	  				<label for=""><b>Users : </b></label>
-						  <multiselect v-model="editSchedule.users" 
-						  :options="users" 
-						  :multiple="true" 
-						  :close-on-select="false" 
-						  :clear-on-select="false" 
-						  :preserve-search="true" 
-						  placeholder="Pick some Users" 
-						  label="name" 
-						  track-by="name" >
-					    <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} options selected</span></template>
-					  </multiselect>
-	  			</div>
-	  			<div class="col-sm-6 col-xs-12"></div>
-	  			<div class="form-group col-sm-6 col-xs-12" v-if="masterSchedule.repeat != 1">
-	  				<label for=""><b>This Event repeats...Do you want to change all future occurrences of this event too? </b></label>
-						  <multiselect  v-model="editSchedule.editAll"
-						  :options="editType" 
-						  :close-on-select="true" 
-						  :clear-on-select="true" 
-						  :preserve-search="true" 
-						  placeholder="Pick Assignee" 
-						  label="data" 
-						  track-by="data" >
-					  </multiselect>
-	  			</div>
-	  			<div class="form-group col-sm-6 col-xs-12" v-if="masterSchedule.repeat != 1">
-	  				<br>
-					   	<label for=""><b>Repeat Till :</b></label>
-					   	<p v-if="editSchedule.editAll.id==1">{{editSchedule.repeatTillDateNoEdit}}</p>
-					   	<flat-pickr  v-else class="form-control" v-model="editSchedule.repeatTillDate"></flat-pickr>
-			  		</div>
-	  			<div class="col-12 form-group">
-	  				<vue-editor v-model="editSchedule.description" :editor-toolbar="customToolbar" />
-	  			</div>
-					<div class="col-12">
-	  				<button class="btn btn-danger btn-pill pull-right" @click="toggleEditSchedule()">Cancel</button>
-	  				<button class="btn btn-success btn-pill pull-right mr-2" @click="updateSchedule()">Update</button>
-	  			</div>
-  			</div>
-  	</div> -->
+  
     <div class="card-body">
 			<p><b>Title: </b>{{ display.title }}</p>
 			<p><b>Assignee Name: </b>{{ fetchUser(display.assignee_id) }}</p>
@@ -108,7 +48,7 @@
 	import Validation from '../../utils/Validation.js';
 	import { VueEditor } from "vue2-editor";
 	export default {
-		props:['logged_user', 'users', 'focusedSchedule'],
+		props:['logged_user', 'users', 'focusedSchedule','create_schedule'],
 		components: {
 	    Multiselect, VueEditor, flatPickr
 	  },
@@ -118,10 +58,10 @@
 				dateConfig: {enableTime: true, dateFormat: "Y-m-d H"},
 				validation: new Validation(),
 				customToolbar: [
-        ["bold", "italic", "underline"],
-        [{ list: "ordered" }, { list: "bullet" }],
-        ["image", "code-block"]
-      ],
+			        ["bold", "italic", "underline"],
+			        [{ list: "ordered" }, { list: "bullet" }],
+			        ["image", "code-block"]
+			    ],
 				editType:[ 
 						{'id': 1, 'data':'No, Just change this event'},
 						{'id': 2, 'data':'Yes, change future occurrences too'}
@@ -135,12 +75,15 @@
 		},
 		created(){	
 			this.getFocusedSchedule();
+			console.log(this.users)
 		},
 		methods: {
 			takeAction(action) {
 				axios.patch(`/pms/schedule/${this.display.id}/take_action`, {action: action}).then(response => {
-					console.log(response.data);
+					
+					// console.log(response.data);
 					this.$emit('unfocus');
+					this.$emit('displays',response.data);
 				}).catch(error => console.log(error.response.data));
 			},
 			deleteMasterSchedule(id){
@@ -260,7 +203,7 @@
 						x = v.name;
 					}
 				});
-			return x;
+				return x;
 			},
 		
 		},

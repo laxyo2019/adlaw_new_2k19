@@ -25,7 +25,16 @@
 										</span>
 									@enderror
 								</div>
-						
+								<div class="col-md-6">
+									<label class="">State Name</label>
+									<select class="form-control" name="state_code">
+										<option value="0">Select State</option>
+										@foreach($states as $state)
+											<option value="{{$state->state_code}}">{{$state->state_name}}</option>
+										@endforeach
+									</select>
+								</div>
+
 								<div class="col-md-6">
 									<label>Court Type Name <span class="text-danger">*</span></label>
 									<select name="court_type" class="form-control" id="court_type">

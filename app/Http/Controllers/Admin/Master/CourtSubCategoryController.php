@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\CourtType;
 use App\Models\CourtGroup;
 use App\Models\CourtMast;
+use App\Models\CourtMastHeader;
+use App\Models\State;
+use App\Models\City;
 class CourtSubCategoryController extends Controller
 {
     /**
@@ -29,7 +32,8 @@ class CourtSubCategoryController extends Controller
     public function create()
     {
         $courtgrups = CourtGroup::all();
-        return view('admin.dashboard.master.court.subcategory.create',compact('courtgrups'));
+        $states = State::where('country_code',102)->get();
+        return view('admin.dashboard.master.court.subcategory.create',compact('courtgrups','states'));
     }
 
     /**
@@ -39,7 +43,32 @@ class CourtSubCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        // return $request->all();
+        // $state = State::where('state_code',$request->state_code)->first();
+        // $cities = City::where('state_code',$request->state_code)->get(); 
+
+        // foreach ($cities as $city) {
+        //      $data = [
+        //         'court_group_code' => $request->court_group_code,
+        //         'court_group_name' => 'Indian Courts',
+        //         'court_type' => $request->court_type,
+        //         'court_type_name' => 'District Court / Sessions Court - India',
+        //         'court_name' => 'District Court',
+        //         'state_code' => $state->state_code,
+        //         'state_name' => $state->state_name,
+        //         'city_code' => $city->city_code,
+        //         'city_name' => $city->city_name,
+        //         'court_shrt_name' => null,
+        //         'country_code' => '102',
+        //         'country_name' => 'India',
+        //     ];
+        //    CourtMastHeader::create($data);
+        // }
+       
+        // return "success";
+
+        // die;
         $data = $this->validation($request);
         $courts = CourtMast::all();
         if(count($courts) !=0){

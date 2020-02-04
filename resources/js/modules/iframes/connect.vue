@@ -30,7 +30,7 @@
       createIframe() {
       	//doesn't block the load event
     	  var i = document.createElement("iframe");
-    	  i.src = "https://connect.laxyo.org";
+    	  i.src = "http://127.0.0.1:8001/";
     	  i.id = "connect-window";
     	  i.scrolling = "auto";
     	  i.frameborder = "0";

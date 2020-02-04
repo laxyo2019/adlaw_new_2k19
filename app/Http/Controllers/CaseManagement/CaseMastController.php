@@ -132,7 +132,7 @@ class CaseMastController extends Controller
 		$assign_mem = CaseLawyer::where('deallocate_date',null)->where('case_id',$id)->get();
 
 		if($case->team_id == 0){
-            $members = User::where('parent_id',Auth::user()->id)->where('status','!=','S')->get();
+            $members = Helpers::get_all_users(Auth::user()->id);
         }
         else{
             $members = UserTeam::with('users')->where('team_id',$case->team_id)->get();

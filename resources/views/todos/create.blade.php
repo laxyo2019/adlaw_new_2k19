@@ -1,4 +1,4 @@
-@extends('lawfirm.main')
+@extends(Auth::user()->user_catg_id == '5' ? 'customer.main' : (Auth::user()->user_catg_id == '2' ? 'lawfirm.main' : (Auth::user()->user_catg_id == '3' ? 'lawfirm.main' : (Auth::user()->user_catg_id == '4' ? 'lawschools.main' : (Auth::user()->user_catg_id == '6' ? 'lawschools.main' : (Auth::user()->user_catg_id == '7' ? 'lawschools.main' : 'admin.main'))))))
 @section('content')
 <section class="content">
 	<div class="row">
@@ -60,15 +60,17 @@
 							</div>
 						</div>
 						<div class="row form-group">
-							<div class="col-md-6">
-								<label for="case_id1">Relate To</label>
-								<select name="case_id1" class="form-control" id="caseTodo">
-									<option value="0">Select Case</option>
-									@foreach($cases as $case)
-										<option value="{{$case->case_id}}" {{old('case_id1') ==$case->case_id ? 'selected' : '' }}>{{$case->case_title}}</option>
-									@endforeach
-								</select>
-							</div>
+							@if(Auth::user()->user_catg_id =='2' || Auth::user()->user_catg_id == '3' )
+								<div class="col-md-6">
+									<label for="case_id1">Relate To</label>
+									<select name="case_id1" class="form-control" id="caseTodo">
+										<option value="0">Select Case</option>
+										@foreach($cases as $case)
+											<option value="{{$case->case_id}}" {{old('case_id1') ==$case->case_id ? 'selected' : '' }}>{{$case->case_title}}</option>
+										@endforeach
+									</select>
+								</div>
+							@endif
 							<div class="col-md-6">
 								<label for="user_id1">Assign To Team Members</label>
 								<select name="user_id1" class="form-control members_todo" required>	

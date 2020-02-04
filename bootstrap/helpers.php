@@ -4,7 +4,7 @@ use App\Team;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
-
+use App\Helpers\Helpers;
 if (!function_exists('list_global_tags')) {
   function list_global_tags($tag)
   {
@@ -51,7 +51,7 @@ if (!function_exists('get_notify_users')) {
 
 if(!function_exists('get_user_filestack_id')){
   function get_user_filestack_id(){
-    $users = User::where('parent_id', auth()->user()->id)->get();
+    $users =  Helpers::get_all_users(auth()->user()->id)->get(); 
 
     $filestack_id =  collect($users)->map(function($e) {
       return $e['filestack_id'];

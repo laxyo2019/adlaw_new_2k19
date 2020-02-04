@@ -8,18 +8,17 @@ use Auth;
 use App\User;
 use App\Models\Team;
 use App\Models\UserTeam;
+use App\Helpers\Helpers;
 class TeamController extends Controller
 {
     public function index(){
     	$id = Auth::user()->id;
-    	$teams = Team::with(['members'=> function($query){
-            $query->with('users');
-        }])->where('user_id', $id)->get();
+    	$teams = Team::with('members.users')->where('user_id', $id)->get();
 
     	return view('teams.index',compact('teams'));
     }
     public function create(){
-        $users = User::where('parent_id',Auth::user()->id)->get();
+        $users = Helpers::get_all_users(Auth::user()->id)->get();
         return view('teams.create',compact('users'));
     }
     public function store(Request $request){
@@ -42,7 +41,7 @@ class TeamController extends Controller
     	];
     	$team = Team::create($data);
 
-        $user =Team::find($team->id);
+        $user = Team::find($team->id);
         $user->members_assign()->sync($validate['users']);
 
         return redirect()->route('teams.index')->with('success','Team name inserted successfully');
@@ -50,18 +49,14 @@ class TeamController extends Controller
     }
 
     public function show($id){
-    	$teams = Team::with(['members'=> function($query){
-            $query->with('users');
-        }])->where('user_id', $id)->get();
+    	$teams = Team::with('members.users')->where('user_id', $id)->get();
     	return view('teams.show',compact('teams'));
     }
 
     public function edit($id){
-    	$team = Team::with(['members'=> function($query){
-            $query->with('users');
-        }])->find($id);
+    	$team = Team::with('members.users')->find($id);
         // return $team;
-        $users = User::where('parent_id',Auth::user()->id)->get();
+        $users = Helpers::get_all_users(Auth::user()->id)->get();
     	return view('teams.edit',compact('team','users'));
     }
 
@@ -96,7 +91,7 @@ class TeamController extends Controller
     public function team_users(){
         $team_id = request()->team_id;
         if($team_id == 0){
-            $members = User::where('parent_id',Auth::user()->id)->where('status','!=','S')->get();
+            $members = Helpers::get_all_users(Auth::user()->id)->get();
         }
         else{
             $members = UserTeam::with('users')->where('team_id',$team_id)->get();

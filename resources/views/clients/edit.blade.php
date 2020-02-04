@@ -129,8 +129,9 @@
 					</div>
 					<div class="row form-group">
 						<div class="col-md-6" style="margin-top:10px;">
-							<label for="email">Email Address</label>
-							<input type="email" value="{{old('email') ?? $client->email}}" class="form-control " name="email" placeholder="Enter Email Address" >
+							<label for="email">Email Address <span class="text-danger">*</span></label><span class="text-muted">(This field is Client Username)</span>
+							<input type="email" value="{{old('email') ?? $client->email}}" class="form-control " name="email" placeholder="Enter Email Address" required="required">
+
 							@error('email')
 								<span class="invalid-feedback text-danger" role="alert">
 								<strong>{{ $message }}</strong>

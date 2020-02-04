@@ -28,7 +28,7 @@
 							@if(count($lawyer->user_courts) !=0)	
 								<i class="fa fa-university text-info"></i>
 								@foreach($lawyer->user_courts as $courts )
-									{{ $courts->court_catg->court_name }}		<?php break; ?>
+									{{ $courts->court_catg->court_name }} at {{ $courts->court_catg->city_name }}		<?php break; ?>
 								@endforeach
 							@endif
 						</h6>
@@ -36,7 +36,7 @@
 							@if(count($lawyer->specialities) !=0)
 							<i class="fa fa-balance-scale text-info"></i>
 								@foreach($lawyer->specialities as $spec )
-									{{ $spec->specialization_catgs->catg_desc }}		<?php break; ?>
+									{{ $spec->specialization_catgs->catg_desc }} 		<?php break; ?>
 								@endforeach
 							@endif
 						</h6>	

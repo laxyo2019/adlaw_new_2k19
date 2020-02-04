@@ -124,6 +124,7 @@ export default{
 			axios.post('/filestack-mgmt/users')
 				.then(response => {
 					this.allUsers = response.data;
+					// console.log(this.allUsers)
 				});
 		},
 	},

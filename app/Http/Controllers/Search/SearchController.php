@@ -11,6 +11,7 @@ use App\Models\CatgMast;
 use App\Models\Court;
 use App\Models\State;
 use App\Models\CourtMast;
+use App\Models\CourtMastHeader;
 use App\Helpers\Helpers;
 use App\Models\Slots;
 use App\Models\Specialization;
@@ -39,7 +40,7 @@ class SearchController extends Controller
 
 		for($i = 1; $i <= 7; $i++) {
 			$ts = strtotime($year.'W'.$week.$i);
-			$date[] =  date("d/m/Y",$ts);
+			$date[] =  date("Y-m-d",$ts);
 		}
 		//end
 
@@ -68,8 +69,9 @@ class SearchController extends Controller
 	    $court_id = $request->court_id;
       $user_name = $request->user_name;
 
-
-	    $courts_details = Court::where('court_code',$court_id)->get();
+  
+	    $courts_types = CourtMastHeader::select('court_code')->where('court_type',$court_id)->where('city_code', $city_code)->get();
+      $courts_details = Court::whereIn('court_code',$courts_types->toArray())->get();
 	    $user_ids1 =array();
 	    foreach($courts_details as $courts_detail){
 	       $user_ids1[]=$courts_detail->user_id;  
@@ -84,228 +86,264 @@ class SearchController extends Controller
 
 
   if($searchfield == 'lawyer'){
-    if($user_name != '' ){
-      $lawyers = $this->query->where('name', 'LIKE', '%' .$user_name. '%');
+    $lawyers = $this->query;
+
+    if($speciality_code !=0){
+      if($court_id !=0){
+        $lawyers = Helpers::lawyerDetails($court_id, $speciality_code,$city_code)->whereIn('id',$user_ids1)
+                        ->whereIn('id',$user_ids);
+      }else{
+        $lawyers = Helpers::lawyerDetails($court_id=0, $speciality_code)->whereIn('id',$user_ids);
+
+      }
+    }
+    else{
+      if($court_id !=0){
+          $lawyers = Helpers::lawyerDetails($court_id, $speciality_code=0,$city_code)->whereIn('id',$user_ids1);
+      }
     }
 
-    if($speciality_code == 0){ 
-       if($court_id == '0'){     
-          if($gender == 'all'){
-            if($city_code == 0){
-              if($state_code == 0 ){
+    if($user_name !=''){
+        $lawyers = $lawyers->where('name', 'LIKE', '%' .$user_name. '%');
+    }
+    if($gender != 'all'){
+      $lawyers = $lawyers->where('users.gender',$gender);
+    }
 
-                 $lawyers = $this->query;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //   if($speciality_code == 0){ 
+  //      if($court_id == '0'){     
+  //         if($gender == 'all'){
+  //           if($city_code == 0){
+  //             if($state_code == 0 ){
+
+  //                $lawyers = $this->query;
                           
-              }
-              else if($state_code !=0){
+  //             }
+  //             else if($state_code !=0){
 
-                $lawyers = $this->query->where('users.state_code',$state_code);
+  //               $lawyers = $this->query->where('users.state_code',$state_code);
 
-              }
-            }
-            else if($city_code !=0){
-              $lawyers = $this->query->where('users.state_code',$state_code)
-                                    ->where('users.city_code',$city_code);
-            }
+  //             }
+  //           }
+  //           else if($city_code !=0){
+  //             $lawyers = $this->query->where('users.state_code',$state_code)
+  //                                   ->where('users.city_code',$city_code);
+  //           }
             
-          }
-          else if($gender != 'all'){
-            if($city_code ==0){
-              if($state_code == 0 ){
-               $lawyers = $this->query->where('users.gender',$gender);
+  //         }
+  //         else if($gender != 'all'){
+  //           if($city_code ==0){
+  //             if($state_code == 0 ){
+  //              $lawyers = $this->query->where('users.gender',$gender);
                           
 
-              }
-              else if($state_code !=0){
-                $lawyers = $this->query->where('users.state_code',$state_code)
-                          ->where('users.gender',$gender);
-              }
-            }
-            else if($city_code !=0){
-              $lawyers = $this->query->where('users.state_code',$state_code)
-                          ->where('users.city_code',$city_code)
-                          ->where('users.gender',$gender);
-            }
-          }         
-        }
-        else if($court_id != '0'){
-          $this->query  = Helpers::lawyerDetails($court_id, $speciality_code=0);
-        if($gender == 'all'){
-          if($city_code ==0){
-            if($state_code == 0 ){
+  //             }
+  //             else if($state_code !=0){
+  //               $lawyers = $this->query->where('users.state_code',$state_code)
+  //                         ->where('users.gender',$gender);
+  //             }
+  //           }
+  //           else if($city_code !=0){
+  //             $lawyers = $this->query->where('users.state_code',$state_code)
+  //                         ->where('users.city_code',$city_code)
+  //                         ->where('users.gender',$gender);
+  //           }
+  //         }         
+  //       }
+  //       else if($court_id != '0'){
+  //         $this->query  = Helpers::lawyerDetails($court_id, $speciality_code=0);
+  //       if($gender == 'all'){
+  //         if($city_code ==0){
+  //           if($state_code == 0 ){
 
               
-             $lawyers = $this->query->whereIn('id',$user_ids1);
+  //            $lawyers = $this->query->whereIn('id',$user_ids1);
                     
                         
-            }
-            else if($state_code !=0){
+  //           }
+  //           else if($state_code !=0){
               
-              $lawyers =  $this->query->where('users.state_code',$state_code)
-                        ->whereIn('id',$user_ids1);
+  //             $lawyers =  $this->query->where('users.state_code',$state_code)
+  //                       ->whereIn('id',$user_ids1);
                        
 
-            }
-          }
-          else if($city_code !=0){
-            $lawyers = $this->query->where('users.state_code',$state_code)
-                        ->where('users.city_code',$city_code)
-                        ->whereIn('id',$user_ids1);
-          }
+  //           }
+  //         }
+  //         else if($city_code !=0){
+  //           $lawyers = $this->query->where('users.state_code',$state_code)
+  //                       ->where('users.city_code',$city_code)
+  //                       ->whereIn('id',$user_ids1);
+  //         }
           
-        }
-        else if($gender != 'all'){
-          if($city_code ==0){
-            if($state_code == 0 ){
-             $lawyers = $this->query->where('users.gender',$gender)
-                        ->whereIn('id',$user_ids1);
+  //       }
+  //       else if($gender != 'all'){
+  //         if($city_code ==0){
+  //           if($state_code == 0 ){
+  //            $lawyers = $this->query->where('users.gender',$gender)
+  //                       ->whereIn('id',$user_ids1);
 
-            }
-            else if($state_code !=0){
+  //           }
+  //           else if($state_code !=0){
 
-              $lawyers = $this->query->where('users.state_code',$state_code)
-                        ->where('users.gender',$gender)
-                        ->whereIn('id',$user_ids1);
-            }
-          }
-          else if($city_code !=0){
-            $lawyers =$this->query->where('users.state_code',$state_code)
-                        ->where('users.city_code',$city_code)
-                        ->where('users.gender',$gender)
-                        ->whereIn('id',$user_ids1);
-          }
-        }
+  //             $lawyers = $this->query->where('users.state_code',$state_code)
+  //                       ->where('users.gender',$gender)
+  //                       ->whereIn('id',$user_ids1);
+  //           }
+  //         }
+  //         else if($city_code !=0){
+  //           $lawyers =$this->query->where('users.state_code',$state_code)
+  //                       ->where('users.city_code',$city_code)
+  //                       ->where('users.gender',$gender)
+  //                       ->whereIn('id',$user_ids1);
+  //         }
+  //       }
 
-      }
-    }
-    else if($speciality_code != 0){
-      if($court_id == 0){
-        $this->query  = Helpers::lawyerDetails($court_id=0, $speciality_code);
-        if($gender=='all'){
-          if($city_code == 0){
-             if($state_code == 0 ){           
+  //     }
+  //   }
+  //   else if($speciality_code != 0){
+  //     if($court_id == 0){
+  //       $this->query  = Helpers::lawyerDetails($court_id=0, $speciality_code);
+  //       if($gender=='all'){
+  //         if($city_code == 0){
+  //            if($state_code == 0 ){           
 
-               $lawyers = $this->query->whereIn('id',$user_ids);
+  //              $lawyers = $this->query->whereIn('id',$user_ids);
 
-            }
-            else if($state_code !=0){
+  //           }
+  //           else if($state_code !=0){
 
-              $lawyers = $this->query->where('users.state_code',$state_code)
-                        ->whereIn('id',$user_ids);
+  //             $lawyers = $this->query->where('users.state_code',$state_code)
+  //                       ->whereIn('id',$user_ids);
 
-            }
+  //           }
 
-          }
-          else if($city_code !=0){
-            $lawyers = $this->query->where('users.state_code',$state_code)
-                        ->where('users.city_code',$city_code)
-                        ->whereIn('id',$user_ids);
-          }
-        }
-        else if($gender !='all'){
-          if($city_code ==0){
-            if($state_code == 0 ){
-                 $lawyers = $this->query->where('users.gender',$gender)
-                        ->whereIn('id',$user_ids);
+  //         }
+  //         else if($city_code !=0){
+  //           $lawyers = $this->query->where('users.state_code',$state_code)
+  //                       ->where('users.city_code',$city_code)
+  //                       ->whereIn('id',$user_ids);
+  //         }
+  //       }
+  //       else if($gender !='all'){
+  //         if($city_code ==0){
+  //           if($state_code == 0 ){
+  //                $lawyers = $this->query->where('users.gender',$gender)
+  //                       ->whereIn('id',$user_ids);
 
-            }
-            else if($state_code !=0){
+  //           }
+  //           else if($state_code !=0){
 
-              $lawyers = $this->query->where('users.state_code',$state_code)
-                        ->where('users.gender',$gender)
-                        ->whereIn('id',$user_ids);
+  //             $lawyers = $this->query->where('users.state_code',$state_code)
+  //                       ->where('users.gender',$gender)
+  //                       ->whereIn('id',$user_ids);
 
-            }
-          }
-          else if($city_code !=0){
-            $lawyers = $this->query->where('users.state_code',$state_code)
-                        ->where('users.city_code',$city_code)
-                        ->where('users.gender',$gender)
-                        ->whereIn('id',$user_ids);
-          }
-        }
-      }
-      else if($court_id !=0 ){
-        $this->query  = Helpers::lawyerDetails($court_id, $speciality_code);
-          if($gender=='all'){
-          if($city_code == 0){
-             if($state_code == 0 ){           
+  //           }
+  //         }
+  //         else if($city_code !=0){
+  //           $lawyers = $this->query->where('users.state_code',$state_code)
+  //                       ->where('users.city_code',$city_code)
+  //                       ->where('users.gender',$gender)
+  //                       ->whereIn('id',$user_ids);
+  //         }
+  //       }
+  //     }
+  //     else if($court_id !=0 ){
+  //       $this->query  = Helpers::lawyerDetails($court_id, $speciality_code);
+  //         if($gender=='all'){
+  //         if($city_code == 0){
+  //            if($state_code == 0 ){           
 
-               $lawyers = $this->query->whereIn('id',$user_ids1)
-                        ->whereIn('id',$user_ids);
+  //              $lawyers = $this->query->whereIn('id',$user_ids1)
+  //                       ->whereIn('id',$user_ids);
 
-            }
-            else if($state_code !=0){
+  //           }
+  //           else if($state_code !=0){
 
-              $lawyers = $this->query->where('users.state_code',$state_code)
-                        ->whereIn('id',$user_ids1)
-                        ->whereIn('id',$user_ids);
+  //             $lawyers = $this->query->where('users.state_code',$state_code)
+  //                       ->whereIn('id',$user_ids1)
+  //                       ->whereIn('id',$user_ids);
 
-            }
+  //           }
 
-          }
-          else if($city_code !=0){
-            $lawyers = $this->query->where('users.state_code',$state_code)
-                        ->where('users.city_code',$city_code)
-                        ->whereIn('id',$user_ids1)
-                        ->whereIn('id',$user_ids);
-          }
-        }
-        else if($gender !='all'){
-          if($city_code ==0){
-            if($state_code == 0 ){
-                 $lawyers = $this->query->where('users.gender',$gender)
-                        ->whereIn('id',$user_ids1)
-                        ->whereIn('id',$user_ids);
+  //         }
+  //         else if($city_code !=0){
+  //           $lawyers = $this->query->where('users.state_code',$state_code)
+  //                       ->where('users.city_code',$city_code)
+  //                       ->whereIn('id',$user_ids1)
+  //                       ->whereIn('id',$user_ids);
+  //         }
+  //       }
+  //       else if($gender !='all'){
+  //         if($city_code ==0){
+  //           if($state_code == 0 ){
+  //                $lawyers = $this->query->where('users.gender',$gender)
+  //                       ->whereIn('id',$user_ids1)
+  //                       ->whereIn('id',$user_ids);
 
-            }
-            else if($state_code !=0){
+  //           }
+  //           else if($state_code !=0){
 
-              $lawyers = $this->query->where('users.state_code',$state_code)
-                        ->where('users.gender',$gender)
-                        ->whereIn('id',$user_ids1)
-                        ->whereIn('id',$user_ids);
+  //             $lawyers = $this->query->where('users.state_code',$state_code)
+  //                       ->where('users.gender',$gender)
+  //                       ->whereIn('id',$user_ids1)
+  //                       ->whereIn('id',$user_ids);
 
-            }
-          }
-          else if($city_code !=0){
-            $lawyers = $this->query->where('users.state_code',$state_code)
-                        ->where('users.city_code',$city_code)
-                        ->where('users.gender',$gender)
-                        ->whereIn('id',$user_ids1)
-                        ->whereIn('id',$user_ids);
-          }
-        }
-      }      
-    }
+  //           }
+  //         }
+  //         else if($city_code !=0){
+  //           $lawyers = $this->query->where('users.state_code',$state_code)
+  //                       ->where('users.city_code',$city_code)
+  //                       ->where('users.gender',$gender)
+  //                       ->whereIn('id',$user_ids1)
+  //                       ->whereIn('id',$user_ids);
+  //         }
+  //       }
+  //     }      
+  //   }
 
-    $lawyers = $lawyers->paginate(5);
-  }
+     $lawyers = $lawyers->paginate(5);
+   }
   else if($searchfield == 'lawcompany'){
-  	$result = Helpers::lawcompanyDetails();
+  	$lawyers = Helpers::lawcompanyDetails();
 
-    if($user_name != '' ){
-      $lawyers = $result->where('name', 'LIKE', '%' .$user_name. '%');
-    }
+  	if($court_id != '0'){     
 
-  	if($court_id == '0'){
-  		if($state_code == '0'){
-  			 $lawyers = $result;
-  		}else{
-  			$lawyers = $result->where('users.state_code',$request->state_code)
-							->where('users.city_code',$request->city_code); 
-  		}
-  	}else{
-
-  		if($state_code == '0'){
-  			$lawyers = Helpers::lawcompanyDetails($court_id)->whereIn('id',$user_ids1);
-  		}else{
-  			$lawyers = Helpers::lawcompanyDetails($court_id)
-  							->where('users.state_code',$request->state_code)
-							->where('users.city_code',$request->city_code)
-							->whereIn('id',$user_ids1); 
-  		}
+  		// if($state_code == '0'){
+  		// 	$lawyers = Helpers::lawcompanyDetails($court_id)->whereIn('id',$user_ids1);
+  		// }else{
+  			//$lawyers = Helpers::lawcompanyDetails($court_id)
+  					// 		->where('users.state_code',$request->state_code)
+							// ->where('users.city_code',$request->city_code)
+						//	->whereIn('id',$user_ids1); 
+  		// }
+        $lawyers = Helpers::lawcompanyDetails($court_id,$city_code)->whereIn('id',$user_ids1); 
   	}
+    if($user_name != ''){
+        $lawyers = $lawyers->where('name', 'LIKE', '%' .$user_name. '%');
+    }
     $lawyers = $lawyers->paginate(5);
        
   }
@@ -334,9 +372,14 @@ class SearchController extends Controller
     $reviews = Review::with('customers')->where('user_id',$id)->where('review_status','A')->paginate(4);
     $slots =Slots::all();
   	$user = User::find($id);
-  	    
-    $userData = $this->query->where('id',$id)
+    if($user->user_catg_id == '2'){
+        $userData = $this->query->where('id',$id)
                 ->first();  
+    }   
+    else{
+      $userData = Helpers::lawcompanyDetails()->where('id',$id)->first();
+    }
+    // return $userData;
    	return view('profiles.lawfirmsProfile', compact('userData','slots','reviews'));
   	
   }
@@ -387,8 +430,14 @@ class SearchController extends Controller
     }
 
     if($request->state_code != 0){
-       $lawschools =  $lawschools->where('state_code',$request->state_code)
+      if($request->city_code !=0){
+        $lawschools =  $lawschools->where('state_code',$request->state_code)
                             ->where('city_code',$request->city_code);
+      }  
+      else{
+        $lawschools =  $lawschools->where('state_code',$request->state_code);
+      }
+
     }
 
     $lawschools = $lawschools->paginate(2);

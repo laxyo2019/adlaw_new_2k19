@@ -11,6 +11,7 @@ use App\Models\State;
 use App\Models\Blog;
 use App\Models\CourtType;
 use App\Models\CourtMast;
+use App\Models\CourtMastHeader;
 use App\Models\SubCatgMast;
 
 class HomeController extends Search\SearchController 
@@ -92,4 +93,29 @@ class HomeController extends Search\SearchController
        $notification->markAsRead();
        return redirect($notification->data['url']);
     }
+    public function state_city_court(){
+
+      if(request()->state_code ==''){
+        $courts = CourtMastHeader::where('city_code',request()->city_code)->get();
+      }else{
+        $courts = CourtMastHeader::where('state_code',request()->state_code)->get();        
+      }
+      $court_type = array();
+      foreach ($courts as $court) {
+        $court_type [] = $court->court_type;
+
+      }
+      $court_types = array();
+
+      if(!empty($court_type)){
+        $court_types =   CourtType::whereIn('court_type',$court_type)->get();
+      }
+
+      return response()->json($court_types);
+    }
+
+
+     public function connectLogin(){
+      return Redirect("http://127.0.0.1:8001");
+     }  
 }

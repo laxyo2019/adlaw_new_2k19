@@ -5,6 +5,7 @@ use Auth;
 use App\Models\Customer;
 use App\User;
 use App\Models\CaseMast;
+use App\Models\CourtMastHeader;
 use App\Models\Todo;
 class Helpers 
 {
@@ -28,7 +29,7 @@ class Helpers
 
 	    return round($bytes, 2) ;
 	}
-	public static function lawyerDetails($court_id, $speciality_code){
+	public static function lawyerDetails($court_id , $speciality_code, $city_code = null){
 		$query = User::with(['reviews'=>function ($query) {
 			           $query->where('review_status','A');
 			        }])->with('city', 'state','slots')			        
@@ -36,19 +37,23 @@ class Helpers
 			        ->where('user_catg_id',2)
 			        ->whereNull('parent_id');
 
-
+		if($court_id !=null){
+			$courts_code = CourtMastHeader::select('court_code')->where('court_type',$court_id)->where('city_code',$city_code)->get();
+		}
+			        
 		if($court_id != 0 && $speciality_code !=0){
+			
 			$result = $query->with(['specialities'=>function($query) use($speciality_code){
                           $query->with('specialization_catgs')->where('user_specialization.catg_code',$speciality_code);
-                        }])->with(['user_courts'=>function($query) use($court_id){
-                          $query->with('court_catg')->where('user_courts.court_code',$court_id);
+                        }])->with(['user_courts'=>function($query) use($courts_code){
+                          $query->with('court_catg')->whereIn('user_courts.court_code',$courts_code->toArray());
                         }]);
 		}
 		else if ($court_id !=0) {
 			$result = $query->with(['specialities'=>function($query){
 			          		$query->with('specialization_catgs');
-			       		}])->with(['user_courts'=>function($query) use($court_id){
-                          $query->with('court_catg')->where('user_courts.court_code',$court_id);
+			       		}])->with(['user_courts'=>function($query) use($courts_code){
+                          $query->with('court_catg')->whereIn('user_courts.court_code',$courts_code->toArray());
                         }]);
 		}
 		else if($speciality_code !=0){
@@ -70,20 +75,25 @@ class Helpers
         return $result;
 	}
 	
-	public static function lawcompanyDetails($court_id = null){
+	public static function lawcompanyDetails($court_id = null,$city_code = null){
 		$query = User::with(['reviews'=>function ($query) {
 			           $query->where('review_status','A');
-			        }])->with('city', 'state')			        
+			        }])
+					->with('city', 'state')			        
 			        ->where('status','A')
 			        ->where('user_catg_id',3);
 
+		if($court_id !=null){
+			$courts_code = CourtMastHeader::select('court_code')->where('court_type',$court_id)->where('city_code',$city_code)->get();
+		}	        
+
 		if($court_id == null){
 			$result = $query->with(['user_courts'=>function($query){
-			          			$query->with('court_catg');
+			          	 $query->with('court_catg');
 			        }]);
 		}else{
-			$result = $query->with(['user_courts'=>function($query) use($court_id){
-                          $query->with('court_catg')->where('user_courts.court_code',$court_id);
+			$result = $query->with(['user_courts'=>function($query) use($courts_code){
+                          $query->with('court_catg')->whereIn('user_courts.court_code',$courts_code->toArray());
                         }]);
 		}
 			      
@@ -128,4 +138,18 @@ class Helpers
     			return $e['status'] == $status;
     	});
     }
+    public static function get_all_users($id){ //parent_id_null
+    	$user = User::find($id);
+		$users = User::where('parent_id',$id)->orderBy('name', 'asc');
+		if($user->user_catg_id == '4'){
+			$users = $users->where('user_catg_id','6');
+		}
+        else if($user->user_catg_id == '3' || $user->user_catg_id == '2'){
+			$users = $users->where('user_catg_id','2');
+     
+        }else{
+			$users = $users->where('user_catg_id','5');
+        }
+        return $users;
+    } 
 }

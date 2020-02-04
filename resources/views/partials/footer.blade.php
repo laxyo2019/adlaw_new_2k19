@@ -70,11 +70,22 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.js'></script>
 
     <script src="{{asset('plugins/iCheck/icheck.min.js')}}"></script>
-
-
-
+    
     <script src="{{asset('js/all_category.js')}}"></script>
     <script type="text/javascript">
+
+
+        //var channel = Echo.channel('my-channel');
+        //    channel.listen('.my-event', function(data) {
+       //     alert(JSON.stringify(data));
+       // });
+       Echo.private('App.User.' + userId)
+        .notification((notification) => {
+            console.log(notification.type);
+            console.log("hello");
+        });
+
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -94,5 +105,6 @@
             height: 300,
         });
     </script>
+</div>
 </body>
 </html>

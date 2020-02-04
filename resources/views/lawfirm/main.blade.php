@@ -15,7 +15,19 @@
     $messages = \App\Models\MessageTalk::select('msg_talks.*','users.name','users.photo')->join('users','users.id','=','msg_talks.sender_id')->where('recv_id',Auth::user()->id)->where('msg_talks.status',0)->get();
 
     $lawyer_pen = \App\User::with('state','city')->where('parent_id',Auth::user()->id)->where('user_flag','=','P')->get();
+    
+    $modules = \App\Models\Module::all();
 
+    $package_id = Auth::user()->user_package_id;
+
+    $moduleShow = false;
+    if($package_id != '' ){
+    $today = date('Y-m-d');
+    $end_date = date('Y-m-d',strtotime(Auth::user()->package_end));
+    if(strtotime($today) <= strtotime($end_date)){
+       $moduleShow = true;
+    }
+    }
   @endphp
 
   <header class="main-header">
@@ -34,9 +46,12 @@
         <span class="sr-only">Toggle navigation</span>
       </a>
       <!-- Navbar Right Menu -->
-      <div class="navbar-custom-menu">
+      <div class="navbar-custom-menu" >
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
+            <li class="nav-item">
+              <a href="http://127.0.0.1:8001/" target="_blank"><i class="fa fa-comments-o"></i></a>
+            </li>
             <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
@@ -75,8 +90,12 @@
             </ul>
              @endif
           </li>
+        <notification-component 
+          :notifications="{{ json_encode(auth()->user()->unreadNotifications) }}"
+          :logged_user="{{ json_encode(auth()->user()) }}">
+        </notification-component>
           <!-- Notifications: style can be found in dropdown.less -->
-          <li class="dropdown notifications-menu">
+         {{--  <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
               <span class="label label-danger">{{count(Auth::user()->unreadNotifications)}}</span>
@@ -109,7 +128,7 @@
             </li>
           </ul>
 
-          </li>
+          </li> --}}
           <!-- Tasks: style can be found in dropdown.less -->
           <!-- <li class="dropdown tasks-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -237,7 +256,7 @@
             <li class="{{Request()->segment(1) == 'practicing_court' ? 'active' : '' }} nav-item">
             <a class="nav-link" href="{{route('practicing_court.index')}}">
               <i class="fa fa-university"></i>
-              <span >Practicing in courts</span>
+              <span >Working Courts</span>
             </a>
           </li>  
 
@@ -260,6 +279,93 @@
             }           
 
           @endphp
+        @if(Auth::user()->parent_id ==null) <li class="{{Request()->segment(1) == 'appointment' ? 'active' : '' }} nav-item">
+            <a class="nav-link" href="{{route('appointment.index')}}">
+              <i class="fa fa-calendar"></i>
+              <span >Appointment Availability</span>
+            </a>
+          </li>          
+    
+           <li class="{{Request()->segment(1) == 'booking' ? 'active' : '' }} nav-item">
+            <a class="nav-link" href="{{route('booking.index')}}">
+              <i class="fa fa-handshake-o"></i>
+              <span >Appointments</span>
+                @if(count($unbookings) !=0) 
+                  <span class="pull-right-container">
+                    <span class="label bg-orange pull-right">{{count($unbookings)}}</span>
+                 </span>
+                @endif
+            </a>
+          </li> 
+        @endif
+
+
+           <li class="{{Request()->segment(1) == 'message' ? 'active' : '' }} {{Request()->segment(1) == 'sent_messages' ? 'active' : '' }} {{Request()->segment(1) == 'trash_message' ? 'active' : '' }} nav-item">
+            <a class="nav-link" href="{{route('message.index')}}">
+              <i class="fa fa-envelope"></i>
+              <span >Message Box </span>
+             @if(count($msg) !=0) 
+                <span class="pull-right-container">
+                  <span class="label bg-red pull-right">{{count($msg)}}</span>
+                </span>
+              @endif
+
+            </a>
+          </li>
+
+           <li class="treeview {{Request()->segment(1) == 'master' ? 'active' : '' }}">
+            <a href="#">
+              <i class="fa fa-table"></i> <span>CRM</span>
+              <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="">
+                <a href="{{route('crm_dashboard.index')}}">
+                  <i class="fa fa-tachometer"></i> <span>{{__('CRM Dashboard')}}</span>
+                </a>
+              </li>
+
+              @foreach($modules as $module)
+                  @if(in_array(Auth::user()->user_catg_id, json_decode($module->permissions)->can_view))
+                    @if(Auth::user()->parent_id !=null )  
+                      @if($module->show_team == '1')
+                        <li class="">
+                          <a href="{{ $module->link != null ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('package.index')}}">
+                            <i class="fa {{$module->icon}}"></i> <span>{{$module->name}}</span>
+                          </a>
+                        </li>
+                      @endif
+                    @else
+                      <li class="">
+                          <a href="{{ $module->link != null ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('package.index')}}">
+                            <i class="fa {{$module->icon}}"></i> <span>{{$module->name}}</span>
+                          </a>
+                        </li>
+                    @endif
+                  @endif
+              @endforeach  
+              </ul>
+            </li>
+
+
+          <li class="nav-item">
+              <a class="nav-link" href="{{route('password_change')}}">
+                <i class="fa fa-user"></i>
+                <span >Change Password </span>               
+              </a>
+          </li>
+
+
+
+
+
+
+
+
+{{-- 
+
          @if(Auth::user()->parent_id ==null) <li class="{{Request()->segment(1) == 'clients' ? 'active' : '' }} {{$page_name == 'clients' ? 'active' : '' }} nav-item">
             <a class="nav-link" href="{{route('clients.index')}}">
               <i class="fa fa-users"></i>
@@ -273,39 +379,7 @@
               <span >Case Diary</span>             
             </a>
           </li>
-         @if(Auth::user()->parent_id ==null) <li class="{{Request()->segment(1) == 'appointment' ? 'active' : '' }} nav-item">
-            <a class="nav-link" href="{{route('appointment.index')}}">
-              <i class="fa fa-calendar"></i>
-              <span >Schedule Appointment</span>
-            </a>
-          </li>
-           
-    
-           <li class="{{Request()->segment(1) == 'booking' ? 'active' : '' }} nav-item">
-            <a class="nav-link" href="{{route('booking.index')}}">
-              <i class="fa fa-briefcase"></i>
-              <span >Appointments</span>
-                @if(count($unbookings) !=0) 
-                  <span class="pull-right-container">
-                    <span class="label bg-orange pull-right">{{count($unbookings)}}</span>
-                 </span>
-                @endif
-            </a>
-          </li> 
-          @endif
-           <li class="{{Request()->segment(1) == 'message' ? 'active' : '' }} {{Request()->segment(1) == 'sent_messages' ? 'active' : '' }} {{Request()->segment(1) == 'trash_message' ? 'active' : '' }} nav-item">
-            <a class="nav-link" href="{{route('message.index')}}">
-              <i class="fa fa-envelope"></i>
-              <span >Mailbox </span>
-             @if(count($msg) !=0) 
-                <span class="pull-right-container">
-                  <span class="label bg-red pull-right">{{count($msg)}}</span>
-                </span>
-              @endif
-
-            </a>
-          </li>
-
+      
 
         <li class="{{Request()->segment(2) == 'agenda' ? 'active' : ''}}   nav-item">
             <a class="nav-link" href="{{route('agenda.index')}}">
@@ -319,7 +393,7 @@
             <span>Schedules</span>
             </a>
         </li> --}}
-        <li class="{{Request()->segment(1) == 'docs' ? 'active' : ''}} {{Request()->segment(1) == 'filestack-mgmt' ? 'active' : ''}}  nav-item">
+       {{--  <li class="{{Request()->segment(1) == 'docs' ? 'active' : ''}} {{Request()->segment(1) == 'filestack-mgmt' ? 'active' : ''}}  nav-item">
             <a class="nav-link" href="{{route('docs.home')}}">
             <i class="fa fa-file"></i>
             <span>Documents</span>
@@ -355,16 +429,8 @@
               @endif
           </a>
         </li>
-       {{--   <li class="nav-item">
-          <a class="nav-link" href="">
-            <i class="fa fa-gears"></i>
-            <span>Admin Control</span>             
-          </a>
-        </li>
- --}}
 
-
-        @endif
+        @endif --}} 
 
       
         {{-- @endif --}}
@@ -419,7 +485,7 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" id="app">
+  <div class="content-wrapper" >
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 class="text-capitalize">{{__('Dashboard')}}</h1>

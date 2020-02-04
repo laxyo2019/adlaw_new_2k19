@@ -16,6 +16,6 @@ class Court extends Model
  		return $this->belongsToMany('App\User','user_courts','court_code','user_id');
  	}
  	public function court_catg(){
- 		return $this->belongsTo('App\Models\CourtMast','court_code');
+ 		return $this->belongsTo('App\Models\CourtMastHeader','court_code');
  	}
 }

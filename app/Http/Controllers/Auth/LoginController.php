@@ -67,7 +67,10 @@ class LoginController extends Controller
                 break;  
             case '7':
                 return $login = '/lawschools';
-                break;   
+                break;  
+            case '8':
+                return $login = '/customer';
+                break; 
             default:
                 return $login='/';
         }
@@ -100,5 +103,7 @@ class LoginController extends Controller
             auth()->logout();
             return back()->with('warning',$result[1]['status_text']); 
         }
-     }  
+     }
+
+    
 }

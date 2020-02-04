@@ -2,6 +2,7 @@
 <div class="wrapper">
 @php 
     $review = \App\Models\Review::where('review_status', 'C')->get();
+    $subscriptions =   \App\Models\SubcriptionContact::with('user.role')->where('active','0')->get();
 @endphp
 
 
@@ -30,13 +31,45 @@
               <span class="label label-success"></span>
             </a>           
           </li>
+          <notification-component 
+            :notifications="{{ json_encode(auth()->user()->unreadNotifications) }}"
+            :logged_user="{{ json_encode(auth()->user()) }}">
+          </notification-component>
           <!-- Notifications: style can be found in dropdown.less -->
-          <li class="dropdown notifications-menu">
+         {{--  <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning"></span>
-            </a>            
-          </li>
+              <span class="label label-danger">{{count(Auth::user()->unreadNotifications)}}</span>
+            </a>  
+            <ul class="dropdown-menu">
+              <li class="header">You have {{count(Auth::user()->unreadNotifications)}} notifications </li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  @foreach(Auth::user()->unreadNotifications as $notification)
+                  <li>
+                     <a href="{{route('notification_read',$notification['id'])}}">
+                        <i class="fa fa-tasks "></i> 
+
+                        <span> {{str_limit($notification['data']['title'], $limit = 50, $end = '...') }} </span>
+                        <br>
+                        <span>{{$notification['data']['message']}}</span>
+                       
+                        <br> <span>{{$notification['created_at']->diffForHumans()}}</span>
+                    </a>
+                  </li>
+                  @endforeach
+
+                  <li>
+                </li>
+              </ul>
+            </li>
+            <li class="footer">
+              <a href="{{route('all_notifications')}}">All Notifications</a>
+            </li>
+          </ul>
+
+          </li> --}}
           <!-- Tasks: style can be found in dropdown.less -->
           <!-- <li class="dropdown tasks-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -275,8 +308,38 @@
             </ul>
           </li>
 
+         <li class="treeview ">
+            <a href="">
+              <i class="fa fa-table"></i> <span>ACL</span>
+              <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">  
+                <li><a href="{{route('acl_package.index')}}"><i class="fa fa-book"></i> <span>Package</span></a></li>
+                <li><a href="{{route('acl_module.index')}}"><i class="fa fa-book"></i> <span>Module</span></a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('admin.show_subscription')}}">
+              <i class="fa fa-phone"></i>
+              <span >Subscription Contact</span>  
+              @if(count($subscriptions) !=0)
+              <span class="pull-right-container">
+                <span class="label bg-red pull-right">{{count($subscriptions)}}</span>
+              </span>
+              @endif             
+            </a>
+        </li>
 
-        {{-- <li><a href=""><i class="fa fa-book"></i> <span>Documentation</span></a></li> --}}
+
+
+         <li class="nav-item">
+              <a class="nav-link" href="{{route('password_change')}}">
+                <i class="fa fa-user"></i>
+                <span >Change Password </span>               
+              </a>
+          </li>
         
       </ul>
     </section>
@@ -284,7 +347,7 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" id="app">
+  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>Dashboard</h1>

@@ -10,7 +10,7 @@ use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Helpers\Helpers;
 class FilestacksController extends Controller
 {
   public function __construct()
@@ -33,7 +33,7 @@ class FilestacksController extends Controller
   }
   public function index()
   {
-    $filestacks = Filestack::where('type', 14)->orderBy('title', 'asc')->get(); // user filestacks
+    $filestacks = Filestack::where('type', 1)->orderBy('title', 'asc')->get(); // user filestacks
     return response()->json($filestacks, 200);
   }
 
@@ -50,7 +50,7 @@ class FilestacksController extends Controller
 
   public function show($id)
   {
-    $users = User::where('parent_id', auth()->user()->id)->get();
+    $users =  Helpers::get_all_users(auth()->user()->id)->get(); 
     $users[] =Auth::user();
     $stack = Filestack::find($id);
 

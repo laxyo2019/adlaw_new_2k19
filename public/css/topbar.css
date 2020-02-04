@@ -1,3 +1,4 @@
+
   .feature-link:hover{
     text-decoration: none;
     border:none
@@ -289,3 +290,10 @@ font-family: 'Open Sans',sans-serif;
   background: #1b75bb;
   bottom: 0;
 }
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
+
+/*Student and CRM Dashboard*/

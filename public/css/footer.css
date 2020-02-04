@@ -6,17 +6,6 @@
     margin-left: 3px;
   }
 } 	 
-/*hr.fancy {
-	border-top: 5px solid #2196f3;
-    margin-left: 390px;
-    margin-right: 390px;
-}
-@media(max-width: 360px){
- hr.fancy{
- 	border:1px solid;
- }
-}*/
-
 #footer .footer-menu span:after {
 	content: '';
 	display: table;
@@ -33,7 +22,7 @@
 }	
 
 #footer .footer-nav ul li a{
-	color: #959595;
+	color: #fff;
 	text-decoration: none;
 }
 #footer .footer-copyright .content-wrapper {

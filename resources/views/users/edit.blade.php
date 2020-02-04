@@ -1,4 +1,4 @@
-@extends(Auth::user()->user_catg_id == 2 ? 'lawfirm.main' : (Auth::user()->user_catg_id == 3 ? 'lawfirm.main' : 'admin.main'))
+@extends(Auth::user()->user_catg_id == '5' ? 'customer.main' : (Auth::user()->user_catg_id == '2' ? 'lawfirm.main' : (Auth::user()->user_catg_id == '3' ? 'lawfirm.main' : (Auth::user()->user_catg_id == '4' ? 'lawschools.main' : (Auth::user()->user_catg_id == '6' ? 'lawschools.main' : (Auth::user()->user_catg_id == '7' ? 'lawschools.main' : 'admin.main'))))))
 @section('content')
 	<section class="content">
 		<div class="row">
@@ -6,7 +6,7 @@
 				<div class="box box-primary">
 					<div class="box-header with-border">
 						<h3 class="">Edit Team Member 
-						@role(['lawyer','lawcompany'])
+						@role(['lawyer','lawcompany','lawcollege'])
 							<a href="{{route('teams.index')}}" class="btn btn-sm btn-primary pull-right">Back</a>
 						@endrole
 						@role('admin')

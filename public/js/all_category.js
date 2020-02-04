@@ -1,3 +1,26 @@
+function state_city_court(city_code,state_code,court_id,court_type = ''){
+	$.ajax({
+		type: 'GET',
+		url:'/state_city_court?city_code='+city_code+'&state_code='+state_code,
+		success:function(res){
+			if(res.length !=0){
+				$(court_id).empty();
+
+				$(court_id).append('<option value="0">Select Practicing Courts</option>');
+				$.each(res,function(key,value){
+					$(court_id).append('<option value="'+value.court_type+'" '+(court_type == value.court_type ? 'selected' : '')+'>'+value.court_type_desc+'</option>');
+				});
+			}
+			else{
+				$(court_id).empty();	
+				$("#city").append('<option value="0">Select City</option>');
+				$(court_id).append('<option value="0">Select Practicing Courts</option>');	              
+			}
+		}
+	})
+}
+
+
 
 function court(court_type,court_code){
 	if(court_type != 0){
@@ -454,3 +477,14 @@ function unique_email_check(value){
 		}
 	});
 }
+
+
+// function package_fetch($id){
+// 	$.ajax({
+// 		type:'GET',
+// 		url:"/package_fetch/"+id,
+// 		success:function(res){
+// 			console.log(res);
+// 		}
+// 	});
+// }

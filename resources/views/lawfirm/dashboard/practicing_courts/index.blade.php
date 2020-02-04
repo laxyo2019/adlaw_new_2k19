@@ -5,19 +5,42 @@
     <div class="col-md-7">
         <div class="box box-primary ">
           <div class="box-header with-border"> 
-          <h3 class="box-title">Select which practicing courts you have work</h3>
+          <h3 class="box-title">
+            {{-- Select which practicing courts you have work --}}
+            Select Working Courts
+          </h3>
           </div>
           <div class="box-body">
+            <div class="row form-group" style="margin-top: 10px;">
+              <div class="col-md-6">
+                <label>State Name</label>
+                <select class="form-control" name="state_code" id="state">
+                    <option value="0">Select State</option>
+                    @foreach($states as $state)
+                      <option value="{{$state->state_code}}" {{$state->state_code == 10 ? 'selected' : ''}}>{{$state->state_name}}</option>
+                    @endforeach
+                  
+                </select>
+              </div>
+            <div class="col-md-6" style="margin-top: 10px;">
+                <label>Court Type Name</label>
+                <select class="form-control" name="court_type" id="courtType">
+                    <option value="0">Select Court Type</option>
+                    
+                </select>
+              </div>
+            </div>
+
+
               <div class="parts-selector" id="parts-selector-1">
                   <div class="parts list h-40vh">
                     <h3 class="list-heading top-fixed">All Practicing Courts</h3>
-                    <ul>
-                      @foreach($mast_courts as $court)
-                      <li >
-                        <input type="hidden" name="valuCourt[]" value="{{$court->court_code}}" id="valuCourt">
-                        {{ $court->court_name}}
-                        </li>
-                      @endforeach
+                    <ul id="practice_court">
+                    
+                      <li>
+                          <input type="hidden" name="valuCourt[]" value="" id="valuCourt">Select working Courts
+                      </li>
+                    
                     </ul>
                   </div>
                   <div class="controls">
@@ -29,7 +52,7 @@
                       
                         <ul id="lcourt">
                           @foreach($lawyerCourt as $courts)
-                            <li ><input type="hidden" name="valuCourt[]" value="{{$courts->court_catg->court_code}}" id="valuCourt">{{$courts->court_catg->court_name}}
+                            <li ><input type="hidden" name="valuCourt[]" value="{{$courts->court_catg->court_code}}" id="valuCourt">{{$courts->court_catg->court_name}} at {{$courts->court_catg->city_name}}
                             </li>
                           @endforeach
                         </ul>
@@ -43,11 +66,11 @@
     <div class="col-md-5">
         <div class="box box-primary">
             <div class="box-header with-border ">
-              <h3 class=" box-title">Your Practicing Courts</h3>
+              <h3 class=" box-title">Working Courts</h3>
             </div>
-            <div class="box-body">
+            <div class="box-body" style="height: 450px; overflow-y: scroll;">
               @foreach($lawyerCourt as $courts)
-              <p class="m-1"><i class="fa fa-gavel" aria-hidden="true"></i>&nbsp; {{$courts->court_catg->court_name}}                
+              <p class="m-1"><i class="fa fa-gavel" aria-hidden="true"></i>&nbsp; {{$courts->court_catg->court_name}} at {{$courts->court_catg->city_name}}                
               </p>
               @endforeach
             </div>
@@ -64,11 +87,54 @@
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
         });
-
-       $(function() {
+         $(function() {
         $( "#parts-selector-1" ).partsSelector();
 
       });
+      
+      var city_code = '';
+      var court_id = '#courtType';
+      var state_code = $('#state').val();
+      var court_type = '1';
+      state_city_court(city_code,state_code,court_id,court_type);
+      court_fetch(court_type);
+
+      $('#state').on('change',function(){
+          var state_code = $(this).val();
+          state_city_court(city_code,state_code,court_id);
+      });
+
+       $('#courtType').on('change',function(){
+          var court_type = $(this).val();
+          court_fetch(court_type);
+
+       })
+
+      function court_fetch(court_type){
+        var state_code = $('#state').val();
+          
+            $.ajax({
+              type:'GET',
+              url:"/user_court_list?court_type="+court_type+'&state_code='+state_code,
+              success:function(res){
+                if(res){
+                  $('#practice_court').empty();
+                  $.each(res, function(i,v){
+                    // console.log(v)
+                    $('#practice_court').append('<li><input type="hidden" name="valuCourt[]" value="'+v.court_code+'" id="valuCourt">'+v.court_name+' at '+v.city_name+'</li>');
+                  });
+
+                }else{
+                  $('#practice_court').empty();
+                }
+              }
+            });
+      }
+
+
+
+
+
 
        $('#submit').on('click',function(e){
           e.preventDefault();

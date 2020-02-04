@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Auth;
 use Mail;
-use DB;
+use App\Role;
+use App\User;
 use App\Mail\Contact;
+use App\Mail\SubscriptionContact;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
 use App\Models\ContactUs;
+use App\Models\SubcriptionContact;
+use App\Notifications\SubscriptionReminder;
 
 class ContactController extends Controller
 {
@@ -50,4 +55,32 @@ class ContactController extends Controller
         return captcha_img('flat');
     }
     
+    public function buy_crm_dashboard(Request $request){
+
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'mobile'=> $request->mobile,
+            'message' => $request->message,
+            'no_of_members' => $request->members,
+            'no_of_clients' => Auth::user()->user_catg_id !='5' ? $request->clients : '0',
+            'user_id' => Auth::user()->id,
+            'status' => $request->user_status
+        ];
+
+        $data =  SubcriptionContact::create($data);
+        $role = Role::find(Auth::user()->user_catg_id);
+        $data['user_catg_name'] = $role->display_name;
+        //Mail
+        // Mail::to('salonij245@gmail.com')->send(new SubscriptionContact($data));
+        
+        //Notification
+        $user = User::find('14');
+        $user->notify(new SubscriptionReminder($data));
+
+        return redirect()->back()->with('success','Your contact request send to our team. We will be contact you soon...');
+    }
+
+  
+
  }

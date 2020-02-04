@@ -14,6 +14,7 @@ use App\Mail\UserMail;
 use App\Models\Status;
 use App\Models\RoleUser;
 use App\Models\CaseLawyer;
+use App\Helpers\Helpers;
 class UsersController extends Controller
 {
 	public function index(){
@@ -25,6 +26,8 @@ class UsersController extends Controller
 		return view('users.create',compact('roles'));
 	}
 	public function store(Request $request){
+
+		//return $request->all();
 		if(Auth::user()->user_catg_id == '1'){
 			$data =  $request->validate([
 	            'name'          => 'required|string|max:255|min:3',
@@ -45,8 +48,10 @@ class UsersController extends Controller
 	        if(Auth::user()->user_catg_id == '4'){
 	            $data['user_catg_id'] =  '6';
 	        }
-	        else{
+	        else if(Auth::user()->user_catg_id == '3' || Auth::user()->user_catg_id == '2'){
 	            $data['user_catg_id'] = '2';   
+	        }else{
+	        	$data['user_catg_id'] = '5';   
 	        }
 	        $data['parent_id'] = Auth::user()->id;
 
@@ -65,7 +70,7 @@ class UsersController extends Controller
 	}
 
     public function show($id){
-    	$users = User::where('parent_id',$id)->get();
+    	$users = Helpers::get_all_users($id)->get();    		
     	return view('users.show',compact('users'));
     }
     public function edit($id){
@@ -96,18 +101,17 @@ class UsersController extends Controller
 	        if(Auth::user()->user_catg_id == '4'){
 	            $data['user_catg_id'] =  '6';
 	        }
-	        else{
+	        else if(Auth::user()->user_catg_id == '3' || Auth::user()->user_catg_id == '2'){
 	            $data['user_catg_id'] = '2';   
+	        }else{
+	        	$data['user_catg_id'] = '5';   
 	        }
 	        $data['parent_id'] = Auth::user()->id;
 
 		}
 
-		if($olduser->email != $data['email']){
-            VerifyUser::where('user_id',$id)->delete();
-            RoleUser::where('user_id',$id)->delete();
-            User::find($id)->delete();
-            $this->create_user($data);
+		if($olduser->email != $data['email']){         
+            $this->create_user($data,$olduser->email);
         }
         else{
             $olduser->update($data);
@@ -127,16 +131,20 @@ class UsersController extends Controller
 		User::find($id)->delete();
 		return redirect()->back()->with('success','User deleted successfully');
     }
-    public function create_user($data){
+    public function create_user($data,$oldEmail =null){
         $status = Status::all();
         $status_id = $status[2]->status_id;
 
         $password  = str_limit($data['name'],3,'@845');
         $data['password'] = Hash::Make($password);
         $data['status']    = $status_id;
-
-        $user = User::create($data);
-        $user->attachRole($user->user_catg_id);
+        if($oldEmail !=null){
+		  $user = User::where('email',$oldEmail)->first();
+          $user->update($data); 
+        }else{
+        	$user = User::create($data);
+        	$user->attachRole($user->user_catg_id);
+        }
         
         $verifyUser = VerifyUser::create([
             'user_id' => $user->id,
@@ -163,4 +171,29 @@ class UsersController extends Controller
 
        return response()->json($case);
     }
+    public function password_change(){
+    	return view('auth.passwords.change_password');
+    }
+   public function changePassword(Request $request)
+	{
+		$request->validate([
+			'new_password' => 'min:8|required_with:confirm_password|same:confirm_password',
+			'confirm_password' => 'min:8'
+		]);
+
+		$user = User::find(auth()->user()->id);
+
+		if(Hash::check($request->old_password, $user->password)) {
+			$user->password = bcrypt($request->new_password);
+			$user->save();
+
+			$status = 'Password Updated!';
+			return redirect()->back()->with('success',$status);
+		} else {
+			$class = 'alert alert-danger';
+			$status = 'Old password incorrect!';
+			return redirect()->back()->with('warning',$status);
+		}
+	
+	}
 }

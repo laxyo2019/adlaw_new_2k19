@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use DB;
 use Auth;
+use Mail;
 use App\User;
+use App\VerifyUser;
+use App\Mail\UserMail;
 use App\Models\Status;
 use App\Models\State;
 use App\Models\City;
@@ -36,8 +41,6 @@ class ClientsController extends Controller
                           ->paginate(10);
 
       return  view('clients.index',compact('clients'));
-      
-      
     }
 
     /**
@@ -66,21 +69,24 @@ class ClientsController extends Controller
     {
 
         $data = $this->client_validation($request);
+        // return $request->all();
         // return $data;
 
 
         if($request->cust_type_id==1){
           $validate = $request->validate(['gender'=>'required|not_in:0']);
           $data['gender'] = $request->gender;
-          Customer::insert($data);
-            return redirect()->route('clients.index')->with('success','Client Added Successfully');
+          Customer::create($data);
+          $this->create_account($data);
+          return redirect()->route('clients.index')->with('success','Client Added and Account Created Successfully');
         
         }
         else{
           $validate = $request->validate(['company_name'=>'required|max:255|string']);
           $data['company_name'] = $validate['company_name'];
-             Customer::insert($data);
-            return redirect()->route('clients.index')->with('success','Client Added Successfully');  
+          Customer::create($data);
+          $this->create_account($data);
+          return redirect()->route('clients.index')->with('success','Client Added and Account Created Successfully');  
         }        
     }
 
@@ -99,12 +105,7 @@ class ClientsController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
 
@@ -117,19 +118,10 @@ class ClientsController extends Controller
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-
-      
-
-      $data = $this->client_validation($request);
+      $customer = Customer::find($id);     
+      $data = $this->client_validation($request,$id);
 
        if(Request()->cust_type_id==1)
         {
@@ -137,7 +129,11 @@ class ClientsController extends Controller
           $validate = $request->validate(['gender'=>'required|not_in:0']);
           $data['gender'] = $request->gender;
           $data['company_name'] = null;
+
           Customer::where('cust_id',$id)->update($data);
+          if($customer->email != $request->email){
+            return $this->create_account($data,$customer->email);
+          }
           return redirect()->route('clients.index')->with('success','Client Updated Successfully');  
         }
         else{
@@ -146,17 +142,16 @@ class ClientsController extends Controller
           $data['gender'] = null;
           $data['dob'] = null;
           Customer::where('cust_id',$id)->update($data);
+          if($customer->email != $request->email){     
+            return $this->create_account($data,$customer->email);
+          }
+
           return redirect()->route('clients.index')->with('success','Client Updated Successfully');
         }
      
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function destroy($id)
     {
      
@@ -164,7 +159,7 @@ class ClientsController extends Controller
        Customer::where('cust_id',$id)->delete();
        return redirect()->route('clients.index')->with('success','Client Data Deleted Successfully');
     }
-     public function client_validation($request){
+     public function client_validation($request,$id=null){
 
        $data = $request->validate([
             'cust_name'   => 'required|string|max:255',
@@ -172,7 +167,7 @@ class ClientsController extends Controller
             'status_id'   => 'required|not_in:0',
             'regsdate'    => 'required|date_format:Y-m-d',
             'mobile1'     => 'required|string|max:10|min:10',
-            'email'       => 'nullable|email',
+            'email'       => 'required|email|unique:cust_mast'. ',email, '.$id.',cust_id',
             'dob'         => 'nullable|before:5 years ago|date_format:Y-m-d',
             'mobile2'     => 'nullable|string|max:11|min:10',
             'country_code'=> 'required',
@@ -212,6 +207,39 @@ class ClientsController extends Controller
 
 
     }
+     public function create_account($data,$oldEmail = null){
+
+        $password = str_limit($data['cust_name'],3,'@845');
+        $clientData = [
+            'name' => $data['cust_name'],
+            'email' => $data['email'],
+            'password'=> Hash::Make($password),
+            'status' => 'C',
+            'user_catg_id' => '5',
+            'parent_id' => Auth::user()->id,
+            'mobile' => $data['mobile1']
+        ]; 
+
+     
+        if($oldEmail !=null){
+          $user = User::where('email',$oldEmail)->first();
+          $user->update($clientData); 
+
+        }else{
+          $user = User::create($clientData);
+          $user->attachRole($user->user_catg_id);
+        }
+        // return $clientData;
+        $verifyUser = VerifyUser::create([
+          'user_id' => $user->id,
+          'token' => str_random(40)
+        ]);
+        $user['password'] = $password;
+
+       Mail::to($user->email)->send(new UserMail($user));
+        
+    }
+
 
   // public function view_return($lawyer_view, $lawcompany_view){
   //   $catgId = Auth::user()->user_catg_id;

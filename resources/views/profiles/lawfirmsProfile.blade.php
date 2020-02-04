@@ -1,5 +1,13 @@
 @extends('layouts.default')
 @section('content')
+{{-- Start Login  Modal --}}
+  @include('models.login_model')
+{{-- End login  Modal --}}
+
+{{-- Start Booking Btn Modal --}}
+  @include('models.booking_model')
+{{-- End Booking Btn Modal --}}
+
 <style type="text/css">
 .profile-img{
   width:100%;
@@ -26,10 +34,23 @@ p.stars  i
 }
 </style>
 
-<div class="wrapper pt-4 ">
+@include('layouts.hero_section')
+<div class="container-fluid container-div">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-xl-12 text-center h2-text">
+            <h2 class=" font-weight-bold text-center text-white">
+              @if($userData->user_catg_id == '2')
+                LAWAYER  
+              @else
+                LAW FIRM 
+              @endif PROFILE
+            </h2>          
+        </div>
 
+
+<div class="wrapper">
     <!-- Sidebar -->
-    <nav id="sidebar"  style="background-color: #d9d9d9;" >
+    <nav id="sidebar"  style="background-color: #f4f4f4;" >
       <div class="sidebar-header text-center  border-bottom pb-3">
       <!--   <h4 class=" text-center font-weight-bold"><b>O</b>ther <b>D</b>etails</h4> -->
         <span class="navbar-brand font-weight-bold mt-4 text-dark ">OTHER DETAILS</span>
@@ -88,8 +109,8 @@ p.stars  i
               </a>
               <ul class="collapse list-unstyled ml-4" id="Practicing">
                   @foreach($userData->user_courts as $courts )
-                <li>
-                  <i class="fa fa-circle-o text-dark" style="font-size: 15px;"></i><a href="#" class="text-dark" style="text-decoration:none;font-size: 16px;">{{ $courts->court_catg->court_name }}</a>
+                <li class="mb-2">
+                  <i class="fa fa-circle-o text-dark" style="font-size: 15px;"></i><a href="#" class="text-dark" style="text-decoration:none;font-size: 16px;">{{ $courts->court_catg->court_name }} at {{$courts->court_catg->city_name}}</a>
                 </li>
                 @endforeach
               </ul>
@@ -218,7 +239,8 @@ p.stars  i
                     
                     @foreach($userData->specialities as $spec)
 
-                    <span class="value">{{$spec->specialization_catgs->catg_desc.','}}</span>
+                    <span class="value">{{$spec->specialization_catgs->catg_desc.','}}
+                     </span>
                     @endforeach
                   </div>
                   @endif
@@ -235,7 +257,7 @@ p.stars  i
           <div class="col-md-12 text-justify mt-2" style=" line-height: 30px;">
             <hr class="m-0">
             <h6>Practicing In Courts :  @foreach($userData->user_courts as $courts)
-                 <span class="value" style="font-size: 15px;">{{$courts->court_catg->court_name.','}}</span>
+                 <span class="value" style="font-size: 15px;">{{$courts->court_catg->court_name.' at '. $courts->court_catg->city_name.','}}</span>
               @endforeach</h6>
           
 
@@ -344,14 +366,6 @@ p.stars  i
                 </div>
             
 
-
-{{-- Start Login  Modal --}}
-  @include('models.login_model')
-{{-- End login  Modal --}}
-
-{{-- Start Booking Btn Modal --}}
-  @include('models.booking_model')
-{{-- End Booking Btn Modal --}}
 
 
 
@@ -488,6 +502,10 @@ p.stars  i
   </div> <!-- content -->
 
 </div> <!-- wrapper -->
+
+</div>
+
+
 <script type="text/javascript">
   @php
     if(Session::has('errors')){

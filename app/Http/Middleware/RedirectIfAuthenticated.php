@@ -39,6 +39,9 @@ class RedirectIfAuthenticated
             else if(Auth::user()->user_catg_id ==1){
              return redirect('/admin');
             }
+            else if(Auth::user()->user_catg_id ==8){
+                return redirect('/customer');
+            }
                
         }
 

@@ -30,7 +30,7 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 
 Vue.component('card-component', require('./components/re-usable/Card.vue').default)
 Vue.component('countdown-timer', require('./components/re-usable/Timer.vue').default)
-//Vue.component('notification-component', require('./components/re-usable/NotificationComponent.vue').default)
+Vue.component('notification-component', require('./components/re-usable/NotificationComponent.vue').default)
 Vue.component('users-online', require('./components/re-usable/UsersOnline.vue').default)
 Vue.component('media-component', require('./components/re-usable/MediaComponent.vue').default)
 Vue.component('comments-component', require('./components/re-usable/CommentsComponent.vue').default)
@@ -39,13 +39,14 @@ Vue.component('user-selector', require('./components/re-usable/UserSelector.vue'
 
 Vue.component('agenda', require('./modules/agenda/Index.vue').default)
 Vue.component('schedules', require('./modules/schedules/Index.vue').default)
+Vue.component('schedules-example', require('./modules/schedules/Index1.vue').default)
 
 // Docs
 Vue.component('docs-home', require('./modules/docs/Home.vue').default)
 Vue.component('stack-component', require('./modules/docs/Stack.vue').default)
 //Admin
 Vue.component('filestack-mgmt', require('./modules/admin/filestack_mgmt/Home.vue').default)
-
+Vue.component('connect-home', require('./modules/iframes/connect.vue').default)
 const app = new Vue({
     el: '#app',
     

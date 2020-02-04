@@ -41,6 +41,7 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css' />
 
   <link rel="stylesheet" href="{{asset('plugins/iCheck/all.css')}}">
+  <script src="{{ asset('js/app.js') }}" defer></script>
   <style type="text/css">
    .select2-container--default .select2-selection--multiple .select2-selection__choice {
       background-color: #247ae4;
@@ -54,6 +55,10 @@
   }
 /*    .select2-selection__choice__remove,.select2-selection__clear{display:none !important;} */
 </style>
+
+
+
  @stack('links')
 </head>
 <body class="hold-transition skin-blue sidebar-mini fixed">
+  <div class="" id="app">

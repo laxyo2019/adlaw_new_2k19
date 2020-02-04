@@ -6,12 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Agenda\AgendaMast;
 use App\Notifications\SendAgendaMessage;
 use App\User;
-
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
-
+use App\Helpers\Helpers;
 class AgendaMastController extends Controller
 {
 	  public function index()
@@ -23,37 +22,26 @@ class AgendaMastController extends Controller
 			    	->orderBy('ordering', 'asc')
 			    	->get();
 
-			if(empty($agenda)){
-				$user = User::find($id);				
-				$permission = DB::table('permission_user')->where('user_id',$id)->where('permission_id',4)->get();
-				if(count($permission) ==0){
-					$user->attachPermission(4);	
-				} 		
-			}
+			if($agendas->isEmpty()){  //Given Permission create Agenda
+			
+				$user = User::find($id);	 			
+				$permission = DB::table('permission_user')->where('user_id',$id)->where('permission_id',4)->get(); 
+				
 
+				if($permission->isEmpty()){ // check permission  
+					$user->attachPermission(4);	 // 4 =  can_create_agenda
+				} 	 	 
+			}
 			//fetch all users for stand alone agenda
-	   
-			$users = User::where('parent_id', Auth::user()->id)->get();
-		 
+			$users = Helpers::get_all_users($id)->get(); 
+		 	$users[] =Auth::user();
 		}else{
 			$agendas = AgendaMast::where('creator_id',Auth::user()->parent_id)
 			    	->orderBy('ordering', 'asc')
 			    	->get();
 		
-			$users = User::where('parent_id', Auth::user()->parent_id)->get();
+			$users = User::where('parent_id', Auth::user()->parent_id)->where('user_catg_id',Auth::user()->user_catg_id)->get();
 		}
-
-		if(Auth::user()->user_catg_id == '4'){
-			$users = collect($users)->filter(function($e){
-				return $e['user_catg_id'] === '6';
-			});
-		}else{
-			$users = collect($users)->filter(function($e){
-				return $e['user_catg_id'] === '2';
-			});
-		}
-		   $users[] =Auth::user();
-
 
 	  	//fetch users having permission of can_create_agenda
 	  	$users_list = User::wherePermissionIs('can_create_agenda')->get();
@@ -66,7 +54,7 @@ class AgendaMastController extends Controller
 	  	// return $agendas;
 	   	$team = null;
 	   	$focusAgenda = 0;
-	   	
+	   	// die;
 	    return view('pms.agenda.index', compact('focusAgenda', 'agendas', 'team', 'can_create_agenda', 'users'));
 	  }
 

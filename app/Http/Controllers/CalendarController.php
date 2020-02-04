@@ -45,7 +45,7 @@ class CalendarController extends Controller
     }
     public function case_member(){
         if(request()->case_id == '0'){
-            $members = User::where('parent_id',Auth::user()->id)->where('status','!=','S')->get();
+            $members = Helpers::get_all_users(Auth::user()->id)->get();
         }else{
             $members = CaseLawyer::with('member')->where('deallocate_date',null)->where('case_id',request()->case_id)->get();
         }  	

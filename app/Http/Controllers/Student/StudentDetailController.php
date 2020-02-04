@@ -406,6 +406,7 @@ class StudentDetailController extends Controller
     }
 
     public function create_account($data){
+
         $password = str_limit($data['f_name'],3,'@845');
         $student_data = [
             'name' => $data['f_name'] .' '. $data['l_name'],
@@ -424,5 +425,6 @@ class StudentDetailController extends Controller
         ]);
         $user['password'] = $password;
         Mail::to($user->email)->send(new UserMail($user));
+        
     }
 }

@@ -7,7 +7,7 @@
             <h2 class="font-weight-bold text-center text-uppercase text-white">GUEST / USERS</h2>   
             <p class="lead mb-0">Easily Search Lawyer and Law Firms!</p>       
         </div>
-
+        
 		<div class="col-sm-12 col-md-12 col-xl-12 ">
 		   <h3 class="text-center font-weight-bold">Book an Appointment Now With Lawyer / LawFirms Here !</h3>
 		   <p class="p-text text-center"><i>Easily Find Top Rated Lawyer / Law Firms ! </i></p>
@@ -41,51 +41,52 @@
 		</div>
 	</div>
 	<div class="row mb-4">
-			<div class="col-md-6 col-xm-12 col-sm-12" >
+		<div class="col-md-6 col-xm-12 col-sm-12" >
 			<input type="text" class="form-control" name="user_name" placeholder="Search name here">
 		</div>
+		<div class="col-md-6 col-xm-12 col-sm-12" id="spect1" >
+			
+			<select class="form-control select2" id='specialist_lawyer' >
+			<option value="0">Select Specialization</option>
+				@foreach($specialities as $speciality)
+					<option value="{{ $speciality->catg_code }}">{{$speciality->catg_desc}}</option>
+				@endforeach
+			</select>
+		
+		</div>
 	</div>			
-	<div class="row ">
-
-			{{-- 		<div class="col-md-1 col-sm-12 col-xm-12">
-			<a href="#" class="btn btn-md btn-light border">All</a>
-			</div> --}}
-				<div class="col-md-3 col-xm-12 col-sm-12">
-					<select class="form-control select2" id="state" name="state_code">
-					<option value="0">Choose a state</option>
-						@foreach($states as $state)
-							<option value="{{ $state->state_code }}" >{{$state->state_name}}</option>
-						@endforeach
-					</select>
-				</div>
-				<div class="col-md-3 col-xm-12 col-sm-12">
-					<select class="form-control select2" id="city" name="city_code">
-						<option value="0">Select City</option>
-					</select>
-				</div>	
-				<div class="col-md-3 col-xm-12 col-sm-1" id="court1">
-					<select class="form-control select2" id='court_id' >
-					<option value="0">Select Courts</option>
-						@foreach($courts as $court)
-							<option value="{{ $court->court_code }}" >{{$court->court_name}} 
-							</option>
-						@endforeach
-					</select>
-				</div>
-				<div class="col-md-3 col-xm-12 col-sm-12"  id="spect1">
-					<select class="form-control select2" id='specialist_lawyer' >
-					<option value="0">Select Specialization</option>
-						@foreach($specialities as $speciality)
-							<option value="{{ $speciality->catg_code }}">{{$speciality->catg_desc}}</option>
-						@endforeach
-					</select>
-				</div>
+	<div class="row">
+		{{-- <div class="col-md-12"> 
+			<h5 class="font-weight-bold">Search By Practicing Courts</h5>
+		</div> --}}
+		<div class="col-md-3 col-xm-12 col-sm-12">
+			<select class="form-control select2" id="state" name="state_code">
+			<option value="0">Choose a state</option>
+				@foreach($states as $state)
+					<option value="{{ $state->state_code }}" >{{$state->state_name}}</option>
+				@endforeach
+			</select>
+		</div>
+		<div class="col-md-3 col-xm-12 col-sm-12">
+			<select class="form-control select2" id="city" name="city_code">
+				<option value="0">Select City</option>
+			</select>
+		</div>	
+		<div class="col-md-3 col-xm-12 col-sm-1" id="court1">
+			<select class="form-control select2" id='court_id' >
+			<option value="0">Select Practicing Courts</option>
 				
-				
-			{{-- 	<div class="col-md-3 col-xs-12 col-sm-12" id="btnshowLawcompany" style="display: none;">
-					<button  class="btn btn-lg btn-info filteBtn">Search</button>
-				</div>		 --}}			
-			</div>
+			</select>
+		</div>
+		{{-- <div class="col-md-3 col-xm-12 col-sm-12"  id="spect1">
+			<select class="form-control select2" id='specialist_lawyer' >
+			<option value="0">Select Specialization</option>
+				@foreach($specialities as $speciality)
+					<option value="{{ $speciality->catg_code }}">{{$speciality->catg_desc}}</option>
+				@endforeach
+			</select>
+		</div>		 --}}
+	</div>
 	<div class="row mt-4" id="btnshowLawyer">
 		<div class="col-md-12 col-xm-12 col-sm-12 text-center">
 			<button class="btn btn-lg btn-round filteBtn">Search</button>
@@ -96,17 +97,15 @@
 	</div>
 
 	<div class="row mt-2"  id="withoutsearchDiv">
-	
 		<div class="col-md-12 col-sm-12 col-xm-12" id="tablediv">
-
 			@include('pages.subpages.search.lawfirms_table')
-
 		</div>
 	</div>
-@include('models.login_model')
-@include('models.booking_model')
+
 
 </div>
+@include('models.login_model')
+@include('models.booking_model')
 
 <script type="text/javascript">
 	@php
@@ -187,7 +186,18 @@ $(document).ready(function(){
 		var state_code = $(this).val();	
 		var city_code = "";
 		state(state_code,city_code);
+	
 	});
+
+	$('#city').on('change',function(){
+		var city_code = $(this).val();
+		var state_code = '';
+		var court_id = '#court_id';
+		state_city_court(city_code,state_code,court_id);
+	});
+
+
+
 
 	$('.right-button').click(function() {
 		event.preventDefault();
@@ -220,16 +230,18 @@ $(document).ready(function(){
 
 	$('body').on('click','.bookingBtn' ,function(){
 		var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
+		var today = new Date(); 
+		today.setDate(today.getDate() - 1);
+
 		var b_date = $(this).find("input[name='b_date']").val();
-		
-		if(new Date() <= new Date(b_date)){
+		if(today < new Date(b_date)){
 			if(AuthUser){
 				$client_id = "{{(Auth::user()) ? Auth::user()->id : null }}";
 				$slot_id = $(this).attr('id');
 				$slot_time = $(this).text();
 				$user_id = $(this).find("input[name='user_id']").val();
 				$b_date = $(this).find("input[name='b_date']").val();
-				console.log($b_date);
+				// console.log($b_date);
 				$('#BtnViewModal .modal-body ').find("input[name='b_date']").val($b_date);
 				$('#BtnViewModal .modal-body ').find("input[name='plan_id']").val($slot_id);
 				$('#BtnViewModal .modal-body ').find("input[name='slot_time']").val($slot_time);
@@ -288,7 +300,7 @@ $(".filteBtn").on('click',function(e){
 		   // }
         }).done(function(data){
             $("#tablediv").empty().html(data);
-            console.log(data);
+            // console.log(data);
           
         }).fail(function(jqXHR, ajaxOptions, thrownError){
             alert('No response from server');

@@ -1,10 +1,38 @@
 <template>
-  <div class="dropdown d-flex">
-    <a href="/notifications" class="nav-link icon" title="Notifications">
-      <i class="fa fa-bell-o fa-lg"></i>
-      <span class="badge badge-pill badge-danger" v-if="pings.length > 0" v-text="pings.length"></span>
-    </a>
-	</div>
+  <li class="dropdown notifications-menu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-bell-o"></i>
+
+        <span class="label label-danger" v-if="pings.length !=0">{{ pings.length}}</span>
+      </a>  
+      <ul class="dropdown-menu" v-if="pings.length !=0">
+        <li class="header">You have {{ pings.length}} notifications </li>
+        <li>
+          <!-- inner menu: contains the actual data -->
+          <ul class="menu">
+           
+            <li v-for="notification in pings">
+               <a :href="`/notification_read/${notification.id}`" >
+                  <i class="fa fa-tasks "></i> 
+
+                  <span> {{notification.data.title}}</span>
+                  <br>
+                  <span>{{notification.data.message}}</span>
+                 
+                  <br><span></span>
+              </a>
+            </li>
+
+            <li>
+          </li>
+        </ul>
+      </li>
+      <li class="footer">
+        <a href="">All Notifications</a>
+      </li>
+    </ul>
+
+    </li>
 </template>
 <style scoped>
 	.dropdown-item.active, .dropdown-item:active{
@@ -55,23 +83,3 @@
     top: 10px;
 	}
 </style>
-
-<!-- <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-  <div class='o-auto' style='max-height: 350px'>
-  	<a href="#" class="dropdown-item d-flex" v-for="ping in pings" :key="ping.id">
-    <span style='border:solid 1px' class="border-primary bg-white avatar avatar-md d-block mr-3 align-self-center">
-    	<i :class='ping.data.class' class="text-primary"></i>
-    	<i class="text-primary avatar-icon"></i>
-    </span>
-    <div>
-      <strong>Nathan</strong> pushed new commit: Fix page load performance issue.
-     <a class="text-decoration-none" v-bind:href="ping.data.link" :title="ping.data.message" style="color:#3e3737"> 
-    {{sliceStr(ping.data.message)}}
-     </a>
-      <div class="small text-muted">{{ ping.data.created_at | moment("from")}}</div>
-    </div>
-  </a>
-  </div>
-  <div class="dropdown-divider"></div>
-  <a href="#" v-if="pings.length > 0" @click.prevent="markAllAsRead" class="dropdown-item text-center text-muted-dark">Mark all as read</a>
-</div> -->

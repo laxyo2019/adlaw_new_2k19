@@ -11,7 +11,7 @@
 						<button class="btn bg-blue" @click="createFolder">
 							<i class="fe fe-folder-plus"></i> New folder
 						</button>
-						<button  class="btn bg-orange ml-2" v-if="(stack.id === logged_user.filestack_id) || (!isEmpty(location.folder) && !env.fileEditMode && (JSON.parse(stack.permissions)).file.upload.indexOf(this.logged_user.id) > -1)"	
+						<button  class="btn bg-orange ml-2" v-if="(stack.id === logged_user.filestack_id) && (!isEmpty(location.folder) && !env.fileEditMode && (JSON.parse(stack.permissions)).file.upload.indexOf(this.logged_user.id) > -1)"	
 							@click="triggerCreateFile">
 						<i class="fe fe-file-plus"></i> Upload File
 						</button>
@@ -240,7 +240,7 @@
 				      	<a :href="`/docs/media/${doc.file[0].id}`" class="text-decoration-none d-none" :ref="('link-' + doc.file[0].id)" >link</a>
 				        <div class="panel" v-if="checkPermission(doc)" @dblclick="downloadDoc(doc)" :class="`${doc.file[0].id}`" @contextmenu.prevent="$refs.docMenu.open($event, doc)" :style="[doc.id==meta.active_file.file_id ? {'border':'solid 3px #3490dcc7'} : '']">
 				        <!-- <div class="card" v-if="checkPermission(doc)" @dblclick="$refs[`${doc.file[0].id}`].click()" :class="`${doc.file[0].id}`" @contextmenu.prevent="$refs.docMenu.open($event, doc)"> -->
-				          <div class="panel-body p-3 text-center" :class="[selectedDoc.indexOf(doc.id) > -1 ? 'selected_doc' : '']">
+				          <div class="panel-body p-3 text-center" :class="[selectedDoc.indexOf(doc.id) > -1 ? 'selected_doc' : '']" style="height:140px">
 			          		<div class="text-right">
 				            	<span style="cursor: pointer;" title="Edit"
 				            		v-if="doc.owner_id == logged_user.id || doc.owner.parent_id == logged_user.id" @click="editFile(doc.id)">
@@ -250,7 +250,7 @@
 				            <span v-if="checkDownloadAbility()">
 					            <a href="#" @click.prevent="selectDoc(doc.id)"  class="text-decoration-none d-block">
 						            <div class="h1 m-0"><i :class="getFileIcon(doc.file[0].mime_type)"></i></div>
-						            <div class="mt-1 mb-1">
+						            <div class="mt-1 mb-1" style="overflow:hidden">
 													{{ doc.title }} <br>
 						            	<span style="font-size: 0.8em;" class="text-muted" v-text="getFileSize(doc.file[0].size)"></span>
 						            </div>

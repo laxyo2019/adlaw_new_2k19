@@ -19,6 +19,7 @@ use App\Models\Customer;
 use App\Models\CaseMast;
 use App\Models\CaseType;
 use App\Models\CourtMast;
+use App\Models\CourtMastHeader;
 use App\Models\CaseLawyer;
 use App\Models\CourtType;
 use App\Models\CatgMast;
@@ -30,8 +31,6 @@ use App\Helpers\Helpers;
 class LawFirmController extends Controller
 {
 	public function index(){
-	
-
 
 		$id = Auth::user()->id;
 		$del_client = Helpers::deletedClients();
@@ -42,8 +41,6 @@ class LawFirmController extends Controller
 		},'members' => function($query){
 			$query->where('status','!=','S');
 		}])->with('teams')->find($id);
-
-
 
 
 		$case_assign = CaseLawyer::where('user_id1',$id)->where('deallocate_date',null)->get();
@@ -70,24 +67,17 @@ class LawFirmController extends Controller
         	$todos = Helpers::user_all_todos()->where('user_id1',$id)->orderBy('id','DESC')->get();
         }
 
-		$pen_todos 	= collect($todos)->where('status','P');
-		$com_todos 	= collect($todos)->where('status','C');
-		$mis_todos 	= collect($todos)->where('status','M');
-		$clos_todos = collect($todos)->where('status','O');
-		$awt_todos 	= collect($todos)->where('status','A');
+		$pen_todos 	= collect($todos)->where('status','P'); //Pending
+		$com_todos 	= collect($todos)->where('status','C'); //complete
+		$mis_todos 	= collect($todos)->where('status','M'); //missed
+		$clos_todos = collect($todos)->where('status','O'); //closed
+		$awt_todos 	= collect($todos)->where('status','A'); //awaiting
 	
 		$appointments = Booking::where('user_id',$id)->get();
 		$unbookings = collect($appointments)->where('client_status', '1')->where('user_status','0');
 		$booked = collect($appointments)->where('client_status', '1')->where('user_status','1');
 		$cancelled = collect($appointments)->where('client_status', '0')->where('user_status','0');
 		
-
-		// return $cancelled;
-		// $hearings = CaseDetail::with(['case','client'])->where('hearing_date','>=', date('Y-m-d') )->where('user_id',$id)->get();
-		
-		// $todos = Todo::where('status','P')->where('user_id',$id)->get();
-		// return $todos;
-		// return view('lawfirm.dashboard.index',compact('user','allcases','onCases','message','unbookings','booked','cancelled','hearings','todos','cases'));
 
 		return view('lawfirm.dashboard.index',compact('user','cases','running_cases','closed_cases','order_cases','direction_cases','transferred_cases','appointments','unbookings','booked','cancelled','todos','pen_todos','com_todos','mis_todos','clos_todos','awt_todos','hearings'));
 
@@ -237,10 +227,20 @@ class LawFirmController extends Controller
 
 // Start show and store Practing Court
 	public function practicing_court(){
+		$court_types = CourtType::all();
+		$states = State::where('country_code',102)->get();
+
 		$courts_code = Court::select('court_code')->where('user_id', Auth::user()->id)->get();
-		$mast_courts = CourtMast::whereNotIn('court_code', $courts_code->toArray())->get();
+		$mast_courts = CourtMastHeader::whereNotIn('court_code', $courts_code->toArray())->get();
 		$lawyerCourt = Court::with('court_catg')->where('user_id',Auth::user()->id)->get();
-		return view('lawfirm.dashboard.practicing_courts.index',compact('mast_courts', 'lawyerCourt'));
+		// return $mast_courts;
+		return view('lawfirm.dashboard.practicing_courts.index',compact('mast_courts', 'lawyerCourt','court_types','states'));
+	}
+	public function user_court_list(){
+		$courts_code = Court::select('court_code')->where('user_id', Auth::user()->id)->get();
+		$mast_courts = CourtMastHeader::whereNotIn('court_code', $courts_code->toArray())->where('court_type',request()->court_type)->where('state_code',request()->state_code)->get();
+
+		return response()->json($mast_courts);
 	}
 	public function store_practicing_court(){
 		$user_id 	= Auth::user()->id;
