@@ -74,34 +74,37 @@ class ScheduleController extends Controller
 		    'endTime' => $endTime,
 		    'remind_startTime' => $remind_start
 		]);
-		$asc_dates_array = array((new Carbon($endTime))->isoFormat('YYYY-MM-DD'));
+
+
+
+		//$asc_dates_array = array((new Carbon($endTime))->isoFormat('YYYY-MM-DD'));
 
 		
-		$notifiers = array(); 
+		//$notifiers = array(); 
 		//dd($request->notifiers);
-		if(!empty($request->notifiers)) {
-	  		foreach($request->notifiers as $key=>$notifier) {
-	  			$asc_dates_array[] = $notifier['date'];
-	  		}
-		}
+		//if(!empty($request->notifiers)) {
+	  	//	foreach($request->notifiers as $key=>$notifier) {
+	  	//		$asc_dates_array[] = $notifier['date'];
+	  	//	}
+		//}
 
 
 		// sort array with given user-defined function 
 		
-		$pre_asc_dates_array = $asc_dates_array;
+	//	$pre_asc_dates_array = $asc_dates_array;
 		
 		//syntax of usort('array_name','func_name'); but we are in controller we can not create function in functions we call function as $this->name; so for this syntax of usort is given below: 
 			// compareByTimeStamp: this () sort array in ascending order and store in same
-			usort($asc_dates_array, array($this, 'compareByTimeStamp')); 			
+			//usort($asc_dates_array, array($this, 'compareByTimeStamp')); 			
 			
 		// return (json_encode($pre_asc_dates_array));
 
 		// date match both dates array matched 
-		if($pre_asc_dates_array != $asc_dates_array)
-		{
+		//if($pre_asc_dates_array != $asc_dates_array)
+		//{
 		//	return $asc_dates_array;
-			return "Notifier's end date must be after end date and also in ascending order";
-		}
+		//	return "Notifier's end date must be after end date and also in ascending order";
+		//}
 
 		$validate = $request->validate([
 			'title' => 'required',
@@ -111,7 +114,8 @@ class ScheduleController extends Controller
 			'remind_startTime' => 'required|before:startTime',
 			'repeat' => 'required',
 			//repeat till date (expiry date) is only required if repeat_type is 2,3,4 (1 for don't repeat)
-			'repeatTillDate' => 'required_if:repeat.value,2,3,4,5|nullable|after:startTime'
+			// 'repeatTillDate' => 'required_if:repeat.value,2,3,4,5|nullable|after:startTime'
+			'repeatTillDate' => 'nullable'
 		]);
 
 
@@ -119,10 +123,19 @@ class ScheduleController extends Controller
 		// 	return "The duration of Schedule must be within 90 days.";
 		// }
 
+		if($request->repeat['value'] == 3){	
+			if((new Carbon($startTime))->diffInDays(new Carbon($endTime)) % 7 !== 0 ){
+				$totalDays = (new Carbon($startTime))->diffInDays(new Carbon($endTime));
+				// return response()->json($totalDays,201);
+				$addDays   =  7 - intval($totalDays % 7);
+				return response()->json("Please add ".$addDays." day more in end date for complete your weekly schedule" , 201);
+			}
+		}
 	
 		// Disable 29 feb for repeat schedule on yearly basis
 		if($request->repeat['value'] == 5 && (new Carbon($request->startTime))->isoFormat('MM-DD') == '02-29'){
-			return "You can not create repeat schedule on yearly basis with 29 Feb as start date.";
+			// return "You can not create repeat schedule on yearly basis with 29 Feb as start date.";
+			return response()->json("You can not create repeat schedule on yearly basis with 29 Feb as start date.",201);
 		}
 		// If schedule are repeating then start and end must be on same day---
 		if($request->repeat['value'] != 1)
@@ -131,13 +144,20 @@ class ScheduleController extends Controller
 		
 			$startDate = (new Carbon($startTime))->isoFormat('YYYY-MM-DD');
 			$endDate = (new Carbon($endTime))->isoFormat('YYYY-MM-DD');
-			
-			if(strtotime($startDate) == strtotime($endDate)){							
-				return "Start and end date not be same for repeating schedule";
-			}else{
-				$repeat_time_exceed = $this->check_repeat_period($request->repeat['value'],new Carbon($request->startTime),$request->repeatTillDate);//$request->repeatTillDate);
-				if($repeat_time_exceed){
-					return $repeat_time_exceed;
+				
+			if((new Carbon(date('Y-m-d')))->greaterThan(new Carbon($startDate))){		
+				return response()->json("Start date should be greater than and equal to today's date",201);
+			}	
+
+			if($request->repeat['value'] != 2){
+				if(strtotime($startDate) == strtotime($endDate)){							
+					return "Start and end date not be same for repeating schedule";
+				}
+				else{
+					$repeat_time_exceed = $this->check_repeat_period($request->repeat['value'],new Carbon($request->startTime),$request->repeatTillDate);//$request->repeatTillDate);
+					if($repeat_time_exceed){
+						return $repeat_time_exceed;
+					}
 				}
 			}
 		}
@@ -158,7 +178,7 @@ class ScheduleController extends Controller
 				if(!empty($request->notifiers)) {
 	    		foreach($request->notifiers as $key=>$notifier) {
 	    			$notifiers[] = array(
-	    				'date' => $notifier['date'],
+	    				// 'date' => $notifier['date'],
 	    				'user' => $notifier['user']['id']
 	    			);
 	    		}
@@ -181,16 +201,20 @@ class ScheduleController extends Controller
 	  // 		// Update the schedule ID value if the DB transaction is completed
 			$schedule_id = $schedule->id;
 
-	  	 $this->insert_schedules_displays($request->startTime,$request->repeat['value'],$request->repeatTillDate,$schedule,$validate['startTime'],$validate['endTime']);
-	  	});
+	  	//  $this->insert_schedules_displays($request->startTime,$request->repeat['value'],$request->repeatTillDate,$schedule,$validate['startTime'],$validate['endTime']);
+	  	// });
 	  	
+		$this->insert_schedules_displays($request->startTime,$request->repeat['value'],$request->repeatTillDate,$schedule,$validate['startTime'],$validate['endTime'],$validate['remind_startTime'],$request->notifiers);
+		});	
+
+
 	  	if($schedule_id != 0){
 	  		if(Auth::user()->parent_id == null){
 				$schedules = SchedulesDisplay::where('creator_id' , Auth::user()->id)->orderBy('start')->get();		  
 			}else{
 				$schedules = SchedulesDisplay::where('creator_id' , Auth::user()->parent_id)->orderBy('start')->get();
 			}
-	  		return response()->json($schedules,201);
+	  		return response()->json($schedules,200);
 		}
 	  	
 
@@ -203,8 +227,12 @@ class ScheduleController extends Controller
   }
 
 	// Entries in schedules_displays based upon start end & repeat type
-  public function insert_schedules_displays($start_time, $repeat_type, $repeat_till_date, $schedule, $validate_start, $validate_end) {
+  // public function insert_schedules_displays($start_time, $repeat_type, $repeat_till_date, $schedule, $validate_start, $validate_end) {
+    public function insert_schedules_displays($start_time, $repeat_type, $repeat_till_date, $schedule, 					$validate_start, $validate_end,$remind_start,$notifierArray) {
 		$startTimeCarbon = new Carbon((new Carbon($start_time))->isoFormat('YYYY-MM-DD'));
+		$remindTimeCarbon = new Carbon((new Carbon($remind_start))->isoFormat('YYYY-MM-DD'));
+		$reminder_data = '';
+
 
 		if($repeat_type == 2 || $repeat_type == 3 || $repeat_type == 5){
 			$add_time=$add_days='';
@@ -224,39 +252,105 @@ class ScheduleController extends Controller
 			}                                                                //$repeat_till_date 
 			for ($i=$startTimeCarbon; strtotime($startTimeCarbon)<=strtotime($validate_end ); $i=$i->$add_time($add_days))
 			{
+
+
+				if($repeat_type === 3 || $repeat_type === 5){ //Increase Reminder date every week, year, month wise 
+					for ($j=$remindTimeCarbon; strtotime($remindTimeCarbon)<=strtotime($validate_end); $j=$j->$add_time($add_days))
+					{
+						if(strtotime($startTimeCarbon) > strtotime($remindTimeCarbon)){
+							$reminder_data = date('Y-m-d',strtotime($remindTimeCarbon))." ".(explode(' ',$validate_end))[1];			
+						}
+						else{
+							break;
+						}
+					}	
+				}
+				else{
+					$reminder_data = $remind_start;
+				}
+
+				$notifiers = array();				
+				if($repeat_type){
+					if(!empty($notifierArray)) {
+						$count = 1;
+						foreach($notifierArray as $key=>$notifier) {					
+							$mydate =  new Carbon((new Carbon($startTimeCarbon))->isoFormat('YYYY-MM-DD'));
+							$mydate = $mydate->addDay($count);
+							$notifiers[] = array(
+								'date' => date('Y-m-d',strtotime($mydate)).' 10:00:00',
+								'user' => !empty($notifier['user']['id'])? $notifier['user']['id'] :$notifier['user'][0]['id']
+							);
+							$count +=1;
+						}
+					}
+					$count = 1;
+				}
+
+
+
 				$scheduleDisplay = new SchedulesDisplay();
 				$scheduleDisplay->schedule_id = $schedule->id;
 				$scheduleDisplay->title = $schedule->title;
-				$scheduleDisplay->start = date('Y-m-d',strtotime($startTimeCarbon))." ".(explode(' ',$validate_start))[1];
-		  		$scheduleDisplay->end = date('Y-m-d',strtotime($startTimeCarbon))." ".(explode(' ',$validate_end))[1];
+				$scheduleDisplay->start = date('Y-m-d',strtotime($startTimeCarbon)).' 10:00:00';
+				//(explode(' ',$validate_start))[1];
+		  		$scheduleDisplay->end = date('Y-m-d',strtotime($startTimeCarbon)).' 23:55:00';
+		  		//(explode(' ',$validate_end))[1];
+		  		$scheduleDisplay->notifiers = json_encode($notifiers);
+
 				$scheduleDisplay->date = $startTimeCarbon;
 				$scheduleDisplay->assignee_id = $schedule->assignee_id;
 				$scheduleDisplay->users = $schedule->users;
 				$scheduleDisplay->description = $schedule->description;
-				$scheduleDisplay->reminder_start = $schedule->reminder_start;
+				// $scheduleDisplay->reminder_start = $schedule->reminder_start;
+				$scheduleDisplay->reminder_start = $reminder_data;
 				// $scheduleDisplay->workspace_id = $schedule->workspace_id;
 				$scheduleDisplay->creator_id = $schedule->creator_id;
+
+				$scheduleDisplay->next_notify = date('Y-m-d',strtotime($startTimeCarbon));
 				$scheduleDisplay->save();
 			}
 		} else {
 				if($repeat_type==4) { //2 for Every month Repeat
 					while(strtotime($startTimeCarbon)<=strtotime($validate_end)){
 							$tempDateArray = explode('-',(explode(' ',$startTimeCarbon))[0]);
+
+							$notifiers = array();				
+							if($repeat_type != 2){
+								if(!empty($notifierArray)) {
+									$count = 1;
+									foreach($notifierArray as $key=>$notifier) {					
+										$mydate =  new Carbon((new Carbon($startTimeCarbon))->isoFormat('YYYY-MM-DD'));
+										$mydate = $mydate->addDay($count);
+										$notifiers[] = array(
+											'date' => date('Y-m-d',strtotime($mydate)).' 10:00:00',
+											'user' => !empty($notifier['user']['id'])? $notifier['user']['id'] :$notifier['user'][0]['id']
+										);
+										$count +=1;
+									}
+								}
+								$count = 1;
+							}
+
+
 							//1 - month, 0-year, 2- day
 							if(checkdate($tempDateArray[1],$tempDateArray[2],$tempDateArray[0])){
 								$insertDate = date('Y-m-d',strtotime(implode('-',$tempDateArray)));
 								$scheduleDisplay = new SchedulesDisplay();
 			  				$scheduleDisplay->schedule_id = $schedule->id;
 			  				$scheduleDisplay->title = $schedule->title;
-			  				$scheduleDisplay->start = $insertDate." ".(explode(' ',$validate_start))[1];
-			  				$scheduleDisplay->end = $insertDate." ".(explode(' ',$validate_end))[1];
+			  				$scheduleDisplay->start = $insertDate." 10:00:00";//(explode(' ',$validate_start))[1];
+			  				$scheduleDisplay->end = $insertDate." 23:55:00";//.(explode(' ',$validate_end))[1];
 			  				$scheduleDisplay->date = $insertDate; 
-								$scheduleDisplay->assignee_id = $schedule->assignee_id;
+
+								$scheduleDisplay->notifiers = json_encode($notifiers);
+
+								$scheduleDisplay->assignee_id = $schedule->assignee_id;							
 								$scheduleDisplay->users = $schedule->users;
 								$scheduleDisplay->description = $schedule->description;
 			  				$scheduleDisplay->reminder_start = $schedule->reminder_start;
 								// $scheduleDisplay->workspace_id = $schedule->workspace_id;
 								$scheduleDisplay->creator_id = $schedule->creator_id;
+								$scheduleDisplay->next_notify = $insertDate;
 								$scheduleDisplay->save();
 							}
 							if($tempDateArray[1]==12){
@@ -271,8 +365,31 @@ class ScheduleController extends Controller
 						$startTimeCarbon= implode('-',$tempDateArray);
 					}
 				}else if($repeat_type==1) { //1 don't repeat
+
+						$notifiers = array();				
+						if($repeat_type != 2){
+							if(!empty($notifierArray)) {
+								$count = 1;
+								foreach($notifierArray as $key=>$notifier) {					
+									$mydate =  new Carbon((new Carbon($startTimeCarbon))->isoFormat('YYYY-MM-DD'));
+									$mydate = $mydate->addDay($count);
+									$notifiers[] = array(
+										'date' => date('Y-m-d',strtotime($mydate)).' 10:00:00',
+										'user' => !empty($notifier['user']['id'])? $notifier['user']['id'] :$notifier['user'][0]['id']
+									);
+									$count +=1;
+								}
+							}
+							$count = 1;
+						}
+
+
 						$scheduleDisplay = new SchedulesDisplay();
 						$scheduleDisplay->schedule_id = $schedule->id;
+
+						$scheduleDisplay->notifiers = json_encode($notifiers);
+						$scheduleDisplay->next_notify = $validate_start;
+
 						$scheduleDisplay->title = $schedule->title;
 						$scheduleDisplay->start = $validate_start;
 						$scheduleDisplay->end = $validate_end;
@@ -358,34 +475,36 @@ class ScheduleController extends Controller
 		    'endTime' => $endTime,
 		    'remind_startTime' => $remind_start
 		]);
-		$asc_dates_array = array((new Carbon($endTime))->isoFormat('YYYY-MM-DD'));
+
+
+		//$asc_dates_array = array((new Carbon($endTime))->isoFormat('YYYY-MM-DD'));
 
 		
-		$notifiers = array(); 
+		//$notifiers = array(); 
 		//dd($request->notifiers);
-		if(!empty($request->notifiers)) {
-	  		foreach($request->notifiers as $key=>$notifier) {
-	  			$asc_dates_array[] = $notifier['date'];
-	  		}
-		}
+		//if(!empty($request->notifiers)) {
+	  //		foreach($request->notifiers as $key=>$notifier) {
+	  	//		$asc_dates_array[] = $notifier['date'];
+	  	//	}
+		//}
 
 
 		// sort array with given user-defined function 
 		
-		$pre_asc_dates_array = $asc_dates_array;
+		//$pre_asc_dates_array = $asc_dates_array;
 		
 		//syntax of usort('array_name','func_name'); but we are in controller we can not create function in functions we call function as $this->name; so for this syntax of usort is given below: 
 			// compareByTimeStamp: this () sort array in ascending order and store in same
-			usort($asc_dates_array, array($this, 'compareByTimeStamp')); 			
+			//usort($asc_dates_array, array($this, 'compareByTimeStamp')); 			
 			
 		// return (json_encode($pre_asc_dates_array));
 
 		// date match both dates array matched 
-		if($pre_asc_dates_array != $asc_dates_array)
-		{
+	//	if($pre_asc_dates_array != $asc_dates_array)
+	//	{
 		//	return $asc_dates_array;
-			return "Notifier's end date must be after end date and also in ascending order";
-		}
+	//		return "Notifier's end date must be after end date and also in ascending order";
+	//	}
 
 		$validate = $request->validate([
 			'title' => 'required',
@@ -395,7 +514,8 @@ class ScheduleController extends Controller
 			'remind_startTime' => 'required|before:startTime',
 			'repeat' => 'required',
 			//repeat till date (expiry date) is only required if repeat_type is 2,3,4 (1 for don't repeat)
-			'repeatTillDate' => 'required_if:repeat.value,2,3,4,5|nullable|after:startTime'
+			// 'repeatTillDate' => 'required_if:repeat.value,2,3,4,5|nullable|after:startTime'
+			'repeatTillDate' => 'nullable'
 		]);
 
 
@@ -404,11 +524,14 @@ class ScheduleController extends Controller
 		// }
 	
 		// Disable 29 feb for repeat schedule on yearly basis
-		if($request->repeat['value'] == 5 && (new Carbon($request->startTime))->isoFormat('MM-DD') == '02-29'){
+		$repeatValue = !empty($request->repeat[0]['value']) ? $request->repeat[0]['value'] : $request->repeat['value'];
+
+
+		if($repeatValue == 5 && (new Carbon($request->startTime))->isoFormat('MM-DD') == '02-29'){
 			return "You can not create repeat schedule on yearly basis with 29 Feb as start date.";
 		}
 		// If schedule are repeating then start and end must be on same day---
-		if($request->repeat['value'] != 1)
+		if($repeatValue != 1)
 		{ 
 			//1 don't repeat
 		
@@ -442,7 +565,7 @@ class ScheduleController extends Controller
 	    		foreach($request->notifiers as $key=>$notifier) {
 						$userId = !empty($notifier['user'][0]['id']) ? $notifier['user'][0]['id']:$notifier['user']['id'];
 	    			$notifiers[] = array(
-	    				'date' => $notifier['date'],
+	    				// 'date' => $notifier['date'],
 	    				'user' => $userId
 	    			);
 	    		}
@@ -461,7 +584,7 @@ class ScheduleController extends Controller
   		$schedule->reminder_start = $validate['remind_startTime'];
   		$schedule->end = $validate['endTime'];
   		// $schedule->workspace_id = auth()->user()->workspace_id;
-  		$schedule->expiry_date = $validate['endTime'];$validate['repeatValue'] != 1 ? $validate['repeatTillDate'] : null;
+  		$schedule->expiry_date = $validate['endTime']; $validate['repeatValue'] != 1 ? $validate['repeatTillDate'] : null;
   		$schedule->save();
 
   		// Update the schedule ID value if the DB transaction is completed
@@ -469,8 +592,11 @@ class ScheduleController extends Controller
 
 		SchedulesDisplay::where('schedule_id',$schedule_id)->delete();
 
-  		$this->insert_schedules_displays($request->startTime,$validate['repeatValue'],$request->repeatTillDate,$schedule,$validate['startTime'],$validate['endTime']);
-  	});
+  		// $this->insert_schedules_displays($request->startTime,$validate['repeatValue'],$request->repeatTillDate,$schedule,$validate['startTime'],$validate['endTime']);
+
+		$this->insert_schedules_displays($request->startTime,$validate['repeatValue'],$request->repeatTillDate,$schedule,$validate['startTime'],$validate['endTime'],$validate['remind_startTime'],$request->notifiers);
+				
+	  	});
   		if($schedule_id != 0){
 	  		if(Auth::user()->parent_id == null){
 				$schedules = SchedulesDisplay::where('creator_id' , Auth::user()->id)->orderBy('start')->get();		  
@@ -486,18 +612,104 @@ class ScheduleController extends Controller
   	// 	return response()->json($schedule,201);
   	// }
 	}
+	// public function display_reminder(){
+	// //	$users = User::find(Auth::user()->id);
+
+	// 	$schedules = Schedule::all();
+	// 	return $schedules;
+
+	// 	// return $users;
+	// 	$data['link'] = 'www.google.com';
+	// 	$data['message'] = 'testing';
+	// 	$data['class'] = 'alert-warning';
+	// 	// Notification::send($users, new ScheduleReminder($data));
+
+	// //	$users->notify(new ScheduleReminder($data));
+	// }
+
 	public function display_reminder(){
-	//	$users = User::find(Auth::user()->id);
+		
+		$scheduleData      = SchedulesDisplay::where('reminder_start',date('Y-m-d'))->get();
+		$scheduleStartData = SchedulesDisplay::where('start',date('Y-m-d'))->get();
+	  $date              = new Carbon(date('Y-m-d'));
+		$newDate           = date('Y-m-d',strtotime($date->addDay(1)));	 
+		$subDay            = date('Y-m-d',strtotime($date->subDays(2)));
+		$scheduleNotifie   = SchedulesDisplay::where('next_notify',$subDay.' 10:00:00')->get();	
 
-		$schedules = Schedule::all();
-		return $schedules;
+		// return $scheduleNotifie;
+	// this loop for reminder day notification
+		foreach($scheduleData as $schedule){			
+			if(strtotime(date('Y-m-d')) < strtotime($schedule->start)){
+				  $users = User::whereIn('id', json_decode($schedule->users))->get();
+					$data['link'] = url('/').'/pms/schedule/';
+					$data['message'] = 'Your Upcoming Event on '.$schedule->start;
+					$data['class'] = 'alert-warning';
+					Notification::send($users, new ScheduleReminder($data));
+					SchedulesDisplay::where('id',$schedule->id)->update(['reminder_start'=>$newDate]);
+			}
+		}
+// this loop for schedule day notification
+		foreach($scheduleStartData as $startDate){
+			if(strtotime(date('Y-m-d')) == strtotime($startSate->start)){
+				$users = User::whereIn('id', json_decode($startSate->users))->get();
+				$data['link'] = url('/').'/pms/schedule/';
+				$data['message'] = 'Your Upcoming Event id Today';
+				$data['class'] = 'alert-warning';
+				Notification::send($users, new ScheduleReminder($data));
+			}
+		}			
 
-		// return $users;
-		$data['link'] = 'www.google.com';
-		$data['message'] = 'testing';
-		$data['class'] = 'alert-warning';
-		// Notification::send($users, new ScheduleReminder($data));
-
-	//	$users->notify(new ScheduleReminder($data));
+		foreach($scheduleNotifie as $notifie){
+			$datas[] =  json_decode($notifie->notifiers);			
+			$ids   = [];
+			$dates = [];
+			$user  = json_decode($notifie->users);
+			$allUsers = '';
+			
+			// foreach($user as $users){
+			// 	$singleUser = User::find($users);
+			//   $allUsers .=$singleUser->name.',' ;	
+			// }		
+			foreach($datas as $Data){
+				foreach($Data as $allData){
+				if(date('Y-m-d').' 10:00:00' == $allData->date){
+						$ids[]= $allData->user;
+						$dates[] = $allData->date;
+					}
+				}				
+			}
+			// return $dates;
+			if(in_array(date('Y-m-d').' 10:00:00',$dates) && $notifie->action_type !='complete'){			
+				// return $notifie;
+				$data['info'] = $notifie;
+				$data['message'] = "Schedule '".$notifie->title."' missed of date ".$subDay." please check." ;
+				$data['link'] = url('/').'/pms/schedule/';
+				$data['class'] =  'fe fe-calendar';
+				$data['creator'] = User::find($notifie->creator_id);				
+				$userData = User::whereIn('id',$ids)->get();			
+				Notification::send($userData, new ScheduleReminder($data));
+				Mail::to($userData)->send(new ScheduleReminderMail($data));
+				SchedulesDisplay::where('id',$notifie->id)->update(['next_notify'=>$newDate.' 10:00:00']);
+				$datas = [];
+			
+			}
+			
+		}
 	}
+
+
+	public function destroy($id){
+		$Schedules = SchedulesDisplay::find($id);
+		$schedule_id = $Schedules->schedule_id;
+		$scheduleCount = SchedulesDisplay::where('schedule_id',$schedule_id)->where('deleted_at',NULL)->get()->count();
+		
+		SchedulesDisplay::where('id',$id)->update(['deleted_at'=>date('Y-m-d H:i:s')]);
+		if($scheduleCount == 1){
+			Schedule::where('id',$schedule_id)->update(['deleted_at'=>date('Y-m-d H:i:s')]);
+		};
+		$schedulesc = SchedulesDisplay::where('deleted_at',NULL)->orderBy('start')->get();
+		return response()->json($schedulesc, 200);
+	}
+
+
 }

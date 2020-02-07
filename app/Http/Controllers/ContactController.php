@@ -76,9 +76,16 @@ class ContactController extends Controller
         
         //Notification
         $user = User::find('14');
+
+
+        $data['title'] = "Subscription Contact";
+        $data['url'] = "show_subscription";
+        $data['message'] = $data->user_catg_name." want to subscription";
+
+
         $user->notify(new SubscriptionReminder($data));
 
-        return redirect()->back()->with('success','Your contact request send to our team. We will be contact you soon...');
+        return redirect()->back()->with('success','Your request send to our team. We will be contact you soon...');
     }
 
   

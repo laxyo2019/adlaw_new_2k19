@@ -20,8 +20,6 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('.myTable').DataTable();
-
-	});
 	$('#teamBtn').on('click',function(e){
 		e.preventDefault();
 
@@ -49,6 +47,8 @@
 		$('#membBtn').removeClass('btn-default');
 		$('#membBtn').addClass('btn-primary');
 		$('#teamBtn').removeClass('btn-primary');
+	});
+
 	});
 
 

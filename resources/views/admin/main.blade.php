@@ -174,9 +174,16 @@
         <li class="{{Request()->segment(1) == 'admin' ? 'active' : ''}} nav-item">
             <a class="nav-link" href="{{route('admin.index')}}">
              <i class="fa fa-tachometer"></i>
-              <span  > Dashboard</span>
+              <span> Dashboard</span>
             </a>
-          </li>   
+          </li> 
+
+        <li class="{{Request()->segment(1) == 'users' ? 'active' : ''}} nav-item">
+            <a href="{{route('users.index')}}" class="nav-link">
+              <i class="fa fa-users"></i>
+               <span> Users</span>
+            </a>
+        </li>   
 
            <li class="{{Request()->segment(1) == 'reviews' ? 'active' : ''}} nav-item">
             <a class="nav-link" href="{{route('admin.pending_reviews')}}">
@@ -304,7 +311,7 @@
                     <li class="{{Request()->segment(3) == 'court_subcategory' ? 'active' : '' }}"><a href="{{route('court_subcategory.index')}}"><i class="fa fa-circle-o"></i> Subcategory</a></li>
                   </ul>
                 </li>
-                <li ><a href="{{route('users.index')}}"><i class="fa fa-user"></i> User</a></li>               
+                             
             </ul>
           </li>
 

@@ -112,6 +112,19 @@
 		</div>
 	</div>
 	@include('models.buy_renewal')
+	<div class="modal fade" id="oldSubsModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Old Subscription Package Details</h4>
+				</div>
+				<div class="modal-body" id="oldSubsBody"  style="overflow-y: scroll; height: 300px;">
+					
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 </section>
@@ -132,6 +145,26 @@ $(document).ready(function(){
 		}
 		$('#contactModal').modal('show');
 	});
+	$('#oldPackageBtn').on('click',function(e){
+		// e.preventDefault();
+		var id = "{{Auth::user()->id}}";
+			$.ajax({
+				type:'GET',
+				url:"{{route('old_subscription_package')}}?id="+id,
+				success:function(res){
+				if(res.length != '0'){
+					$('#oldSubsBody').empty();
+					$.each(res,function(i,v){
+						$('#oldSubsBody').append('<a href=""><div class="panel panel-default"><div class="panel-body " style="padding: 8px;"><h4 class="text-primary">'+v.package.name+' <span class="pull-right"> '+(v.discount_perc != "" ? '<span class="text-primary mr-4"><i class="fa fa-rupee"></i> '+(v.net_amount.substring(0,(v.net_amount.indexOf("."))))+' </span> <span class="text-primary mr-5">'+v.discount_perc +'%</span><span class="" style="color:black; font-size:17px;"><del><i class="fa fa-rupee"></i> '+v.package.price+'</del> </span>' : '<span class="text-primary" ><i class="fa fa-rupee"></i> '+v.package.price+'  </span>')+'  </span> </h4><span>Start Date: '+ (moment(new Date(v.package_start)).format('DD-MM-YYYY'))+' </span><span class="pull-right">End Date: '+ (moment(new Date(v.package_end)).format('DD-MM-YYYY'))+' </span></div></div></a>');
+					});
+				}else{
+					$('#oldSubsBody').empty();
+					$('#oldSubsBody').html('<h4 class="text-center">No Records Found</h4>')		
+				}
+			}
+			});
+		$('#oldSubsModal').modal('show');
+		});
 
 });
 

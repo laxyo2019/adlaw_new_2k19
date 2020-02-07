@@ -18,11 +18,12 @@ use App\Helpers\Helpers;
 class UsersController extends Controller
 {
 	public function index(){
-		$users = User::with(['state','city','country','role'])->get();
-        return view('users.index',compact('users'));	
+		$users = User::with(['state','city','country','role'])->whereNull('parent_id')->get();
+		$roles = Role::whereNotIn('id',['1','6','7','8'])->get();
+        return view('users.index',compact('users','roles'));	
 	}
 	public function create(){
-		$roles = Role::where('id','>', 1)->get();
+		$roles = Role::whereNotIn('id',['1','6','7','8'])->get();
 		return view('users.create',compact('roles'));
 	}
 	public function store(Request $request){
@@ -53,6 +54,10 @@ class UsersController extends Controller
 	        }else{
 	        	$data['user_catg_id'] = '5';   
 	        }
+
+
+	        $data['parent_id'] = Auth::user()->id;
+	        $data['user_package_id'] = Auth::user()->id;
 	        $data['parent_id'] = Auth::user()->id;
 
 		}

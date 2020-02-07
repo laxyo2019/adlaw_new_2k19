@@ -107,7 +107,7 @@ class AdminController extends Controller
 		$package = Package::find(request()->id);
     	return response()->json($package);
     }
-    public function store_subscription(Request $request){
+    public function store_subscription(Request $request){  //active subscription
 		$subscription =  SubcriptionContact::find($request->subscription_id);
     	$user = User::find($subscription->user_id);
 

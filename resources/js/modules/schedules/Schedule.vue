@@ -8,6 +8,7 @@
       	</div>
       	<div class="col-md-4 text-right">
       		<a href="#" class="btn btn-primary mr-2" title="Close" @click.prevent="$emit('edit-schedule')" v-if="create_schedule">Edit</a>
+      		<a href="#" class="btn btn-sm btn-danger mr-2" title="Close" @click.prevent="deleteMasterSchedule(display.id)">Delete</a>
       		<a href="#" class="btn btn-default" title="Close" @click.prevent="$emit('unfocus')">Close</a>
       	</div>
         <!-- <a href="#" @click.prevent="toggleEditSchedule()" title="Edit">Edit</a> -->
@@ -97,10 +98,10 @@
 					  confirmButtonText: 'Yes, delete!'
 					}).then((result) => {
 						if (result.value) {
-						 window.axios.delete(`/pms/schedule/${id}`).then(response=>{
-						 	console.log(response.data);
+						 window.axios.get(`/pms/deleteSchedule/${id}`).then(response=>{
+							 this.$emit('deleteStatus');				 	
 								Vue.toasted.success('Deleted successfully', {duration:2000});
-								location.reload();
+								//location.reload();
 							}).catch(error=>{
 								console.log(error);
 							});
@@ -122,28 +123,30 @@
 					postData.displayId = this.display.id;
 					postData.master_id = this.masterSchedule.id;
 				window.axios.patch(`/pms/schedule/${id}`,postData).then(response=>{
-					// console.log(response);
-					// this.display = response.data;
-					// this.getMasterSchedule();
-					// this.editSchedule = this.emptyEditSchedule();
-					// this.scheduleEdit=false;
-					if(response.status == 201){
-						Vue.toasted.success('Updated successfully', {duration:2000});
-						location.reload();
-					}else{
+					console.log(response);
+					if(response.status == 201) {
 						Vue.swal({
-						  type: 'error',
-						  title: 'Error !',
-						  text: response.data
-						})
+							  type: 'error',
+							  title: 'Error!',
+							  text: response.data
+							})
+					} else {
+							Vue.swal({
+							  type: 'success',
+							  title: 'Success!',
+
+							  text: ''								
+							})
+						this.env.createSchedule = false
+  						this.displayLoop = response.data
 					}
 					
 				}).catch(error=>{
- 					if (error.response.status == 422) {
-	          this.validation.setMessages(error.response.data.errors);
-	        }else{
-	        	 console.log(error.response.data)
-	        }
+					if (error.response.status == 422) {
+						this.validation.setMessages(error.response.data.errors);
+					}else{
+						console.log(error.response.data)
+					}
 				});
 			},
 			getFocusedSchedule(){

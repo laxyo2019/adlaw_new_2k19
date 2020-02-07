@@ -64,12 +64,12 @@
 							  	></multiselect>
 								<div class="validation-message" v-text="validation.getMessage('repeat')"></div>	
 							</div>
-							<div class="col-sm-6 col-xs-12 form-group" v-if="createSchedule.repeat.value!=1 && Object.keys(createSchedule.repeat).length != 0">
+							<!-- <div class="col-sm-6 col-xs-12 form-group" v-if="createSchedule.repeat.value!=1 && Object.keys(createSchedule.repeat).length != 0">
 								<label for=""><b>Repeat Till :</b></label>
 								   	 <flat-pickr  class="form-control" v-model="createSchedule.repeatTillDate"></flat-pickr>
 								   	 <div class="validation-message" v-text="validation.getMessage('repeatTillDate')"></div>
 						  		
-							</div>
+							</div> -->
 					  	</div>
 					  	<div class="row">					  		
 							<div class="form-group col-sm-6 col-xs-12">
@@ -121,7 +121,7 @@
 											<tr>
 												<th>Level</th>
 												<th>Notifier</th>
-												<th>End Date</th>
+												<!-- <th>End Date</th> -->
 											</tr>
 										</thead>
 										<tbody>
@@ -140,7 +140,7 @@
 												  </multiselect>
 												</td>
 												<td>
-													<flat-pickr  v-model="notify.date" class="form-control" :config="dateConfig4"></flat-pickr>
+													<!-- <flat-pickr  v-model="notify.date" class="form-control" :config="dateConfig4"></flat-pickr> -->
 												</td>
 											</tr>
 										</tbody>
@@ -245,15 +245,15 @@ export default{
 			focusedSchedule:{},
 			validation: new Validation(),
 			dateConfig1:{enableTime: true,
-							 dateFormat: "Y-m-d H:i",
-							 defaultDate: (moment().format("YYYY-MM-DD"))+" 01:00",
+							 dateFormat: "Y-m-d H:i:ss",
+							 defaultDate: (moment().format("YYYY-MM-DD"))+" 11:00:00",
 							},
 			dateConfig2:{enableTime: true,
-							 dateFormat: "Y-m-d H:i",
-							 defaultDate: (moment().format("YYYY-MM-DD"))+" 23:00",
+							 dateFormat: "Y-m-d H:i:ss",
+							 defaultDate: (moment().format("YYYY-MM-DD"))+" 23:55:00",
 							},
 			dateConfig3:{enableTime: false,
-							 dateFormat: "Y-m-d H:i",
+							 dateFormat: "Y-m-d H:i:ss",
 							},
 			dateConfig4:{enableTime: false,
 							 dateFormat: "Y-m-d",
@@ -314,7 +314,7 @@ export default{
 			if (action=="push") {
 				let x = {
 						'user':null,
-						'date':null
+						// 'date':null
 					};
 					this.createSchedule.notifiers.push(x);
 			} else {
@@ -335,7 +335,7 @@ export default{
 				notifiers:[
 					{
 						'user': null,
-						'date': null
+						// 'date': null
 					}
 				]
 			}
@@ -384,13 +384,13 @@ export default{
 			let error = false;
 			//check if date or name is empty in a notifiers
 			this.createSchedule.notifiers.forEach(function(v,k){
-	  		if(v.date == null || v.user == null)
+	  		if(/*v.date == null ||*/ v.user == null)
 	  		{	
 	  			error = true;
 	  		}
 		  });
 			if(error){
-	  		Vue.toasted.error('** Please fill all notifiers and respective end date.', {
+	  		Vue.toasted.error('Please fill all notifiers.', {
 	  			action : {
 	  				text : 'Okay',
 	  				onClick : (e, toastObject) => {
@@ -405,14 +405,14 @@ export default{
 						this.displayLoop = response.data;	
 						this.createSchedule = this.emptyForm();
 						this.env.createSchedule = false;
-						console.log(this.displayLoop)
+						// console.log(this.displayLoop)
 						Vue.swal({
 						  type: 'success',
 						  title: 'Sucesss!',
 						  text: "Schedule Create Successfully",
 						})
 					} else {
-						console.log(response.data)
+						// console.log(response.data)
 						Vue.swal({
 						  type: 'error',
 						  title: 'Error!',
@@ -432,13 +432,13 @@ export default{
 			let error = false;
 			//check if date or name is empty in a notifiers
 			this.createSchedule.notifiers.forEach(function(v,k){
-	  		if(v.date == null || v.user == null)
+	  		if(/*v.date == null ||*/ v.user == null)
 	  		{	
 	  			error = true;
 	  		}
 		  });
 			if(error){
-	  		Vue.toasted.error('** Please fill all notifiers and respective end date.', {
+	  		Vue.toasted.error('Please fill all notifiers', {
 	  			action : {
 	  				text : 'Okay',
 	  				onClick : (e, toastObject) => {
@@ -453,7 +453,7 @@ export default{
 						this.displayLoop = response.data;	
 						this.createSchedule = this.emptyForm();
 						this.env.createSchedule = false;
-						console.log('201',response.data);
+						// console.log('201',response.data);
 					} else {
 							Vue.swal({
 							  type: 'error',
@@ -488,8 +488,8 @@ export default{
 
 			window.axios.post(`/pms/getschedule`,{id:this.focusedSchedule.schedule_id}).then(response => {		
 			console.log(response.data);		
-				this.createSchedule.endDate = response.data.expiry_date;
-				this.createSchedule.startDate = response.data.start  ;
+				this.createSchedule.endDate = response.data.end;
+				this.createSchedule.startDate = response.data.start;
 				this.createSchedule.remind_start = response.data.reminder_start;
 				this.createSchedule.repeatTillDate = response.data.expiry_date;
 				this.createSchedule.description = response.data.description;
@@ -516,7 +516,7 @@ export default{
 							return a.id === e.user;
 					})
 					return {
-						'date' : e.date,
+						// 'date' : e.date,
 						'user' : user
 					}
 			})

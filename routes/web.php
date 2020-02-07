@@ -311,7 +311,9 @@ Route::group(['middleware' => ['role:guest']], function() {
 
 Route::group(['middleware' => ['role:lawyer|lawcompany|lawcollege|admin|guest|teacher|student']], function() {
 	Route::resource('/crm_dashboard','CRM\CRMController');
-
+	Route::get('/old_subscription_package','CRM\CRMController@old_subscription_package')->name('old_subscription_package');
+	// Route::get('/expired_subscription','CRM\CRMController@expired_subscription')->name('expired_subscription');
+	
 	Route::resource('/teams','Teams\TeamController');
 
 	Route::get('/team_users','Teams\TeamController@team_users');

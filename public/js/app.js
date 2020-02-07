@@ -5233,17 +5233,17 @@ __webpack_require__.r(__webpack_exports__);
       validation: new _utils_Validation_js__WEBPACK_IMPORTED_MODULE_4__["default"](),
       dateConfig1: {
         enableTime: true,
-        dateFormat: "Y-m-d H:i",
-        defaultDate: moment__WEBPACK_IMPORTED_MODULE_0___default()().format("YYYY-MM-DD") + " 01:00"
+        dateFormat: "Y-m-d H:i:ss",
+        defaultDate: moment__WEBPACK_IMPORTED_MODULE_0___default()().format("YYYY-MM-DD") + " 11:00:00"
       },
       dateConfig2: {
         enableTime: true,
-        dateFormat: "Y-m-d H:i",
-        defaultDate: moment__WEBPACK_IMPORTED_MODULE_0___default()().format("YYYY-MM-DD") + " 23:00"
+        dateFormat: "Y-m-d H:i:ss",
+        defaultDate: moment__WEBPACK_IMPORTED_MODULE_0___default()().format("YYYY-MM-DD") + " 23:55:00"
       },
       dateConfig3: {
         enableTime: false,
-        dateFormat: "Y-m-d H:i"
+        dateFormat: "Y-m-d H:i:ss"
       },
       dateConfig4: {
         enableTime: false,
@@ -5314,8 +5314,8 @@ __webpack_require__.r(__webpack_exports__);
 
       if (action == "push") {
         var x = {
-          'user': null,
-          'date': null
+          'user': null // 'date':null
+
         };
         this.createSchedule.notifiers.push(x);
       } else {
@@ -5334,8 +5334,8 @@ __webpack_require__.r(__webpack_exports__);
         startDate: moment__WEBPACK_IMPORTED_MODULE_0___default()().format("YYYY-MM-DD") + " 01",
         endDate: moment__WEBPACK_IMPORTED_MODULE_0___default()().format("YYYY-MM-DD") + " 23",
         notifiers: [{
-          'user': null,
-          'date': null
+          'user': null // 'date': null
+
         }]
       };
     },
@@ -5390,13 +5390,15 @@ __webpack_require__.r(__webpack_exports__);
       var error = false; //check if date or name is empty in a notifiers
 
       this.createSchedule.notifiers.forEach(function (v, k) {
-        if (v.date == null || v.user == null) {
+        if (
+        /*v.date == null ||*/
+        v.user == null) {
           error = true;
         }
       });
 
       if (error) {
-        Vue.toasted.error('** Please fill all notifiers and respective end date.', {
+        Vue.toasted.error('Please fill all notifiers.', {
           action: {
             text: 'Okay',
             onClick: function onClick(e, toastObject) {
@@ -5409,15 +5411,15 @@ __webpack_require__.r(__webpack_exports__);
           if (response.status == 201) {
             _this2.displayLoop = response.data;
             _this2.createSchedule = _this2.emptyForm();
-            _this2.env.createSchedule = false;
-            console.log(_this2.displayLoop);
+            _this2.env.createSchedule = false; // console.log(this.displayLoop)
+
             Vue.swal({
               type: 'success',
               title: 'Sucesss!',
               text: "Schedule Create Successfully"
             });
           } else {
-            console.log(response.data);
+            // console.log(response.data)
             Vue.swal({
               type: 'error',
               title: 'Error!',
@@ -5439,13 +5441,15 @@ __webpack_require__.r(__webpack_exports__);
       var error = false; //check if date or name is empty in a notifiers
 
       this.createSchedule.notifiers.forEach(function (v, k) {
-        if (v.date == null || v.user == null) {
+        if (
+        /*v.date == null ||*/
+        v.user == null) {
           error = true;
         }
       });
 
       if (error) {
-        Vue.toasted.error('** Please fill all notifiers and respective end date.', {
+        Vue.toasted.error('Please fill all notifiers', {
           action: {
             text: 'Okay',
             onClick: function onClick(e, toastObject) {
@@ -5458,8 +5462,7 @@ __webpack_require__.r(__webpack_exports__);
           if (response.status == 201) {
             _this3.displayLoop = response.data;
             _this3.createSchedule = _this3.emptyForm();
-            _this3.env.createSchedule = false;
-            console.log('201', response.data);
+            _this3.env.createSchedule = false; // console.log('201',response.data);
           } else {
             Vue.swal({
               type: 'error',
@@ -5492,7 +5495,7 @@ __webpack_require__.r(__webpack_exports__);
         id: this.focusedSchedule.schedule_id
       }).then(function (response) {
         console.log(response.data);
-        _this4.createSchedule.endDate = response.data.expiry_date;
+        _this4.createSchedule.endDate = response.data.end;
         _this4.createSchedule.startDate = response.data.start;
         _this4.createSchedule.remind_start = response.data.reminder_start;
         _this4.createSchedule.repeatTillDate = response.data.expiry_date;
@@ -5521,7 +5524,7 @@ __webpack_require__.r(__webpack_exports__);
           });
 
           return {
-            'date': e.date,
+            // 'date' : e.date,
             'user': user
           };
         });
@@ -6137,6 +6140,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -6197,6 +6201,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     deleteMasterSchedule: function deleteMasterSchedule(id) {
+      var _this2 = this;
+
       Vue.swal({
         title: 'Are you sure to delete the Master Schedule?',
         text: "All Schedules and their data will also get deleted and You won't be able to revert this!!",
@@ -6207,12 +6213,12 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes, delete!'
       }).then(function (result) {
         if (result.value) {
-          window.axios["delete"]("/pms/schedule/".concat(id)).then(function (response) {
-            console.log(response.data);
+          window.axios.get("/pms/deleteSchedule/".concat(id)).then(function (response) {
+            _this2.$emit('deleteStatus');
+
             Vue.toasted.success('Deleted successfully', {
               duration: 2000
-            });
-            location.reload();
+            }); //location.reload();
           })["catch"](function (error) {
             console.log(error);
           });
@@ -6220,7 +6226,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     updateSchedule: function updateSchedule() {
-      var _this2 = this;
+      var _this3 = this;
 
       var id = this.masterSchedule.id;
       var postData = {};
@@ -6236,37 +6242,37 @@ __webpack_require__.r(__webpack_exports__);
       postData.displayId = this.display.id;
       postData.master_id = this.masterSchedule.id;
       window.axios.patch("/pms/schedule/".concat(id), postData).then(function (response) {
-        // console.log(response);
-        // this.display = response.data;
-        // this.getMasterSchedule();
-        // this.editSchedule = this.emptyEditSchedule();
-        // this.scheduleEdit=false;
+        console.log(response);
+
         if (response.status == 201) {
-          Vue.toasted.success('Updated successfully', {
-            duration: 2000
-          });
-          location.reload();
-        } else {
           Vue.swal({
             type: 'error',
-            title: 'Error !',
+            title: 'Error!',
             text: response.data
           });
+        } else {
+          Vue.swal({
+            type: 'success',
+            title: 'Success!',
+            text: ''
+          });
+          _this3.env.createSchedule = false;
+          _this3.displayLoop = response.data;
         }
       })["catch"](function (error) {
         if (error.response.status == 422) {
-          _this2.validation.setMessages(error.response.data.errors);
+          _this3.validation.setMessages(error.response.data.errors);
         } else {
           console.log(error.response.data);
         }
       });
     },
     getFocusedSchedule: function getFocusedSchedule() {
-      var _this3 = this;
+      var _this4 = this;
 
       window.axios.get("/pms/schedule/".concat(this.focusedSchedule.id)).then(function (response) {
         console.log(response.data);
-        _this3.masterSchedule = response.data;
+        _this4.masterSchedule = response.data;
       })["catch"](function (error) {
         return console.log(error.response.data);
       });
@@ -66910,49 +66916,7 @@ var render = function() {
                                 })
                               ],
                               1
-                            ),
-                            _vm._v(" "),
-                            _vm.createSchedule.repeat.value != 1 &&
-                            Object.keys(_vm.createSchedule.repeat).length != 0
-                              ? _c(
-                                  "div",
-                                  {
-                                    staticClass: "col-sm-6 col-xs-12 form-group"
-                                  },
-                                  [
-                                    _vm._m(4),
-                                    _vm._v(" "),
-                                    _c("flat-pickr", {
-                                      staticClass: "form-control",
-                                      model: {
-                                        value:
-                                          _vm.createSchedule.repeatTillDate,
-                                        callback: function($$v) {
-                                          _vm.$set(
-                                            _vm.createSchedule,
-                                            "repeatTillDate",
-                                            $$v
-                                          )
-                                        },
-                                        expression:
-                                          "createSchedule.repeatTillDate"
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("div", {
-                                      staticClass: "validation-message",
-                                      domProps: {
-                                        textContent: _vm._s(
-                                          _vm.validation.getMessage(
-                                            "repeatTillDate"
-                                          )
-                                        )
-                                      }
-                                    })
-                                  ],
-                                  1
-                                )
-                              : _vm._e()
+                            )
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "row" }, [
@@ -66960,7 +66924,7 @@ var render = function() {
                               "div",
                               { staticClass: "form-group col-sm-6 col-xs-12" },
                               [
-                                _vm._m(5),
+                                _vm._m(4),
                                 _vm._v(" "),
                                 _c("flat-pickr", {
                                   staticClass: "form-control",
@@ -66994,7 +66958,7 @@ var render = function() {
                               "div",
                               { staticClass: "form-group col-sm-6 col-xs-12" },
                               [
-                                _vm._m(6),
+                                _vm._m(5),
                                 _vm._v(" "),
                                 _c("flat-pickr", {
                                   staticClass: "form-control",
@@ -67030,7 +66994,7 @@ var render = function() {
                               "div",
                               { staticClass: "form-group col-sm-6 col-xs-12" },
                               [
-                                _vm._m(7),
+                                _vm._m(6),
                                 _vm._v(" "),
                                 _c("flat-pickr", {
                                   staticClass: "form-control",
@@ -67073,7 +67037,7 @@ var render = function() {
                               [
                                 _c("br"),
                                 _vm._v(" "),
-                                _vm._m(8),
+                                _vm._m(7),
                                 _vm._v(" "),
                                 _c(
                                   "button",
@@ -67112,7 +67076,7 @@ var render = function() {
                                   "col-md-12 table table-striped table-bordered"
                               },
                               [
-                                _vm._m(9),
+                                _vm._m(8),
                                 _vm._v(" "),
                                 _c(
                                   "tbody",
@@ -67148,23 +67112,7 @@ var render = function() {
                                         1
                                       ),
                                       _vm._v(" "),
-                                      _c(
-                                        "td",
-                                        [
-                                          _c("flat-pickr", {
-                                            staticClass: "form-control",
-                                            attrs: { config: _vm.dateConfig4 },
-                                            model: {
-                                              value: notify.date,
-                                              callback: function($$v) {
-                                                _vm.$set(notify, "date", $$v)
-                                              },
-                                              expression: "notify.date"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      )
+                                      _c("td")
                                     ])
                                   }),
                                   0
@@ -67435,14 +67383,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "" } }, [
-      _c("b", [_vm._v("Repeat Till :")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "" } }, [
       _c("b", [_vm._v("Set a start date :")])
     ])
   },
@@ -67478,9 +67418,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("Level")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Notifier")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("End Date")])
+        _c("th", [_vm._v("Notifier")])
       ])
     ])
   }
@@ -68368,6 +68306,21 @@ var render = function() {
               [_vm._v("Edit")]
             )
           : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "a",
+          {
+            staticClass: "btn btn-sm btn-danger mr-2",
+            attrs: { href: "#", title: "Close" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.deleteMasterSchedule(_vm.display.id)
+              }
+            }
+          },
+          [_vm._v("Delete")]
+        ),
         _vm._v(" "),
         _c(
           "a",

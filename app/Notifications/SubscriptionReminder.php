@@ -26,19 +26,19 @@ class SubscriptionReminder extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => $this->data->id,
-            'title' => "Subscription Contact",
-            'url' => "show_subscription",
-            'message' => $this->data->user_catg_name." want to subscription",
+            'id' => $this->data['id'],
+            'title' => $this->data['title'],
+            'url' => $this->data['url'],
+            'message' => $this->data['message'],
         ];
     }
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'id' => $this->data->id,
-            'title' => "Subscription Contact",
-            'url' => "show_subscription",
-            'message' => $this->data->user_catg_name." want to subscription",
+            'id' => $this->data['id'],
+            'title' => $this->data['title'],
+            'url' => $this->data['url'],
+            'message' => $this->data['message'],
         ]);
     }
 }
