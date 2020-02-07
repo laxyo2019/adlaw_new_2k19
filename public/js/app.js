@@ -5233,17 +5233,17 @@ __webpack_require__.r(__webpack_exports__);
       validation: new _utils_Validation_js__WEBPACK_IMPORTED_MODULE_4__["default"](),
       dateConfig1: {
         enableTime: true,
-        dateFormat: "Y-m-d H:i:ss",
-        defaultDate: moment__WEBPACK_IMPORTED_MODULE_0___default()().format("YYYY-MM-DD") + " 11:00:00"
+        dateFormat: "Y-m-d H:i",
+        defaultDate: moment__WEBPACK_IMPORTED_MODULE_0___default()().format("YYYY-MM-DD") + " 01:00"
       },
       dateConfig2: {
         enableTime: true,
-        dateFormat: "Y-m-d H:i:ss",
-        defaultDate: moment__WEBPACK_IMPORTED_MODULE_0___default()().format("YYYY-MM-DD") + " 23:55:00"
+        dateFormat: "Y-m-d H:i",
+        defaultDate: moment__WEBPACK_IMPORTED_MODULE_0___default()().format("YYYY-MM-DD") + " 23:00"
       },
       dateConfig3: {
         enableTime: false,
-        dateFormat: "Y-m-d H:i:ss"
+        dateFormat: "Y-m-d H:i"
       },
       dateConfig4: {
         enableTime: false,
