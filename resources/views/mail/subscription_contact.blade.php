@@ -11,7 +11,7 @@
 				<div class="card shadow-lg">
 					<div class="card-header bg-white">
 						<h5 class="text-center">
-							<a class="navbar-brand p-2" href="{{url('/')}}"><img src="{{asset('images/adlaw-logo.png')}}" alt="Adlaw" style="width: 120px;"></a>
+								<a class="navbar-brand p-2" href="http://adlaw.laxyo.org/login"><img src="http://adlaw.laxyo.org/images/adlaw-logo.png" alt="Adlaw" style="width: 120px;"></a>
 						</h5>
 					</div>
 					<div class="card-body">	

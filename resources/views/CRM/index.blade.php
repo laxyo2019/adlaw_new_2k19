@@ -117,7 +117,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Old Subscription Package Details</h4>
+					<h4 class="modal-titles">Old Subscription Package Details</h4>
 				</div>
 				<div class="modal-body" id="oldSubsBody"  style="overflow-y: scroll; height: 300px;">
 					
@@ -134,12 +134,12 @@ $(document).ready(function(){
 		e.preventDefault();
 		var btnName = $(this).attr('id');
 		if(btnName == 'buyBtn'){
-				var title = "Buy Crm Dashboard Contact Our Team";
+				var title = "Buy CRM Dashboard - Contact Our Team";
 				$('#user_status').val('new');
 				$('.modal-title').empty().html(title);
 		}
 		else{
-			var title = "Renewal Crm Dashboard Contact Our Team";
+			var title = "Renewal CRM Dashboard - Contact Our Team";
 			$('#user_status').val('renew');
 			$('.modal-title').empty().html(title);
 		}

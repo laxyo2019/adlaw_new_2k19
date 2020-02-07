@@ -116,6 +116,6 @@ class HomeController extends Search\SearchController
 
 
      public function connectLogin(){
-      return Redirect("http://127.0.0.1:8001");
+      return Redirect("http://connect-adlaw.laxyo.org");
      }  
 }
