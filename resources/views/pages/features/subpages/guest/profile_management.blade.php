@@ -13,7 +13,7 @@
 
         	</p>
         </div>
-        <div class="col-sm-12 col-lg-12 col-xs-12 mt-4 ">
+     <div class="col-sm-12 col-lg-12 col-xs-12 mt-4 mb-5">
             <a href="{{url('/')}}" class="btn btn-md bg-info pull-left text-white"><i class="fa fa-angle-left"></i></a>
             <a href="{{route('guest.search_lawyer')}}" class="btn btn-md bg-info pull-right text-white"><i class="fa fa-angle-right"></i></a>
         </div>
