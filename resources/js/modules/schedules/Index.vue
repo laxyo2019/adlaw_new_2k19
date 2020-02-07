@@ -194,16 +194,16 @@
 					</div>
 					</span>
 					
-					
+					<!-- @displays="displayscomplete" -->
 					<span v-else>
 						<schedule-component
-							@unfocus="focusedSchedule={}"
-							@displays="displayscomplete"
+							@unfocus="focusedSchedule={}"							
+							@deleteStatus=" allSchdule"
+							@updateStatus=" allSchdule"
 							:focusedSchedule="focusedSchedule"
-				    	:logged_user="logged_user"
-				    	:create_schedule="create_schedule"
-				  
-				    	:users="users"
+				    		:logged_user="logged_user"
+				    		:create_schedule="create_schedule"				  
+				    		:users="users"
 							@edit-schedule='editSchedule'
 						>
 						</schedule-component>
@@ -487,7 +487,7 @@ export default{
 			
 
 			window.axios.post(`/pms/getschedule`,{id:this.focusedSchedule.schedule_id}).then(response => {		
-			console.log(response.data);		
+			// console.log(response.data);		
 				this.createSchedule.endDate = response.data.end;
 				this.createSchedule.startDate = response.data.start;
 				this.createSchedule.remind_start = response.data.reminder_start;
@@ -528,7 +528,16 @@ export default{
 		},
 		displayscomplete(value){
 			this.displayLoop = value;
-			console.log(value);
+			// console.log(value);
+		},
+		allSchdule(value){
+			this.focusedSchedule = {};	
+			window.axios.get('/pms/allSchdule').then(response=>{
+					this.displayLoop = response.data
+			}).catch(error=>{
+
+			})
+
 		}
 	}
 }

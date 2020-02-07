@@ -5494,7 +5494,7 @@ __webpack_require__.r(__webpack_exports__);
       window.axios.post("/pms/getschedule", {
         id: this.focusedSchedule.schedule_id
       }).then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);		
         _this4.createSchedule.endDate = response.data.end;
         _this4.createSchedule.startDate = response.data.start;
         _this4.createSchedule.remind_start = response.data.reminder_start;
@@ -5533,8 +5533,15 @@ __webpack_require__.r(__webpack_exports__);
       this.focusedSchedule = {};
     },
     displayscomplete: function displayscomplete(value) {
-      this.displayLoop = value;
-      console.log(value);
+      this.displayLoop = value; // console.log(value);
+    },
+    allSchdule: function allSchdule(value) {
+      var _this5 = this;
+
+      this.focusedSchedule = {};
+      window.axios.get('/pms/allSchdule').then(function (response) {
+        _this5.displayLoop = response.data;
+      })["catch"](function (error) {});
     }
   }
 });
@@ -6182,8 +6189,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.getFocusedSchedule();
-    console.log(this.users);
+    this.getFocusedSchedule(); // console.log(this.users)
   },
   methods: {
     takeAction: function takeAction(action) {
@@ -6195,7 +6201,8 @@ __webpack_require__.r(__webpack_exports__);
         // console.log(response.data);
         _this.$emit('unfocus');
 
-        _this.$emit('displays', response.data);
+        _this.$emit('updateStatus'); // this.$emit('displays',response.data);
+
       })["catch"](function (error) {
         return console.log(error.response.data);
       });
@@ -6214,13 +6221,29 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         if (result.value) {
           window.axios.get("/pms/deleteSchedule/".concat(id)).then(function (response) {
-            _this2.$emit('deleteStatus');
+            _this2.$emit('deleteStatus', response.data);
 
             Vue.toasted.success('Deleted successfully', {
               duration: 2000
-            }); //location.reload();
+            }); // //location.reload();
+            // if(response.status == 201){
+            // 	Vue.toasted.success('Deleted successfully', {duration:2000});
+            // 	// location.reload();
+            // }else{
+            // 	Vue.swal({
+            // 	  type: 'error',
+            // 	  title: 'Error !',
+            // 	  text: response.data
+            // 	})
+            // }
+
+            console.log(response.data);
           })["catch"](function (error) {
-            console.log(error);
+            if (error.response.status == 422) {
+              _this2.validation.setMessages(error.response.data.errors);
+            } else {
+              console.log(error.response.data);
+            }
           });
         }
       });
@@ -8780,7 +8803,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*edit count of events on particular date*/\n.vuecal__cell-events-count {\n  width: 4px;\n  min-width: 0;\n  height: 4px;\n  padding: 0;\n  color: transparent !important;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*edit count of events on particular date*/\n.vuecal__cell-events-count {\n  width: 4px;\n  min-width: 0;\n  height: 4px;\n  padding: 0;\n  color: transparent !important;\n}\n", ""]);
 
 // exports
 
@@ -67324,7 +67347,8 @@ var render = function() {
                         unfocus: function($event) {
                           _vm.focusedSchedule = {}
                         },
-                        displays: _vm.displayscomplete,
+                        deleteStatus: _vm.allSchdule,
+                        updateStatus: _vm.allSchdule,
                         "edit-schedule": _vm.editSchedule
                       }
                     })

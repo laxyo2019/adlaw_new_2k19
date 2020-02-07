@@ -76,7 +76,7 @@
 		},
 		created(){	
 			this.getFocusedSchedule();
-			console.log(this.users)
+			// console.log(this.users)
 		},
 		methods: {
 			takeAction(action) {
@@ -84,7 +84,8 @@
 					
 					// console.log(response.data);
 					this.$emit('unfocus');
-					this.$emit('displays',response.data);
+					this.$emit('updateStatus');
+					// this.$emit('displays',response.data);
 				}).catch(error => console.log(error.response.data));
 			},
 			deleteMasterSchedule(id){
@@ -99,11 +100,29 @@
 					}).then((result) => {
 						if (result.value) {
 						 window.axios.get(`/pms/deleteSchedule/${id}`).then(response=>{
-							 this.$emit('deleteStatus');				 	
-								Vue.toasted.success('Deleted successfully', {duration:2000});
-								//location.reload();
+							 this.$emit('deleteStatus',response.data);				 	
+							Vue.toasted.success('Deleted successfully', {duration:2000});
+								// //location.reload();
+								// if(response.status == 201){
+								// 	Vue.toasted.success('Deleted successfully', {duration:2000});
+								// 	// location.reload();
+								// }else{
+								// 	Vue.swal({
+								// 	  type: 'error',
+								// 	  title: 'Error !',
+								// 	  text: response.data
+								// 	})
+								// }
+
+
+								console.log(response.data);
+
 							}).catch(error=>{
-								console.log(error);
+								if (error.response.status == 422) {
+									this.validation.setMessages(error.response.data.errors);
+								}else{
+									console.log(error.response.data)
+								}
 							});
 						}
 					})
@@ -122,6 +141,7 @@
 					postData.description = this.editSchedule.description;
 					postData.displayId = this.display.id;
 					postData.master_id = this.masterSchedule.id;
+
 				window.axios.patch(`/pms/schedule/${id}`,postData).then(response=>{
 					console.log(response);
 					if(response.status == 201) {

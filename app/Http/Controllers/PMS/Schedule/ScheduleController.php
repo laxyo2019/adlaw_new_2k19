@@ -214,7 +214,7 @@ class ScheduleController extends Controller
 			}else{
 				$schedules = SchedulesDisplay::where('creator_id' , Auth::user()->parent_id)->orderBy('start')->get();
 			}
-	  		return response()->json($schedules,200);
+	  		return response()->json($schedules,201);
 		}
 	  	
 
@@ -699,17 +699,30 @@ class ScheduleController extends Controller
 
 
 	public function destroy($id){
+
 		$Schedules = SchedulesDisplay::find($id);
 		$schedule_id = $Schedules->schedule_id;
 		$scheduleCount = SchedulesDisplay::where('schedule_id',$schedule_id)->where('deleted_at',NULL)->get()->count();
 		
-		SchedulesDisplay::where('id',$id)->update(['deleted_at'=>date('Y-m-d H:i:s')]);
+		// return $scheduleCount;
+		SchedulesDisplay::where('id',$id)->delete();
 		if($scheduleCount == 1){
-			Schedule::where('id',$schedule_id)->update(['deleted_at'=>date('Y-m-d H:i:s')]);
+			Schedule::where('id',$schedule_id)->delete();
 		};
-		$schedulesc = SchedulesDisplay::where('deleted_at',NULL)->orderBy('start')->get();
-		return response()->json($schedulesc, 200);
-	}
 
+		if(Auth::user()->parent_id == null){
+			$schedules = SchedulesDisplay::where('creator_id' , Auth::user()->id)->orderBy('start')->get();		  
+		}else{
+			$schedules = SchedulesDisplay::where('creator_id' , Auth::user()->parent_id)->orderBy('start')->get();
+		}
+	  	return response()->json($schedules,201);
+
+	// 	$schedulesc = SchedulesDisplay::where('deleted_at',NULL)->orderBy('start')->get();
+	// 	return response()->json($schedulesc, 201);
+	 }
+	public function allSchedule(){
+		$schedulesc = SchedulesDisplay::where('deleted_at',NULL)->orderBy('start')->get();
+			return response()->json($schedulesc, 200);
+	}
 
 }

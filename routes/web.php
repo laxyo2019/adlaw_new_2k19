@@ -383,6 +383,8 @@ Route::group(['middleware' => ['role:lawyer|lawcompany|lawcollege|admin|guest|te
 		Route::post('/updateSchedule/{id}', 'Schedule\ScheduleController@updateSchedule');
 		Route::patch('/schedule/{display_id}/take_action', 'Schedule\ScheduleController@takeAction');
 		Route::get('/display_reminder', 'Schedule\ScheduleController@display_reminder');
+		Route::get('/allSchdule', 'Schedule\ScheduleController@allSchedule');
+		Route::get('/deleteSchedule/{id}', 'Schedule\ScheduleController@destroy');
 	});
 
 
