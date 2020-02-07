@@ -6,16 +6,9 @@
       
     $messages = \App\Models\MessageTalk::select('msg_talks.*','users.name','users.photo')->join('users','users.id','=','msg_talks.sender_id')->where('recv_id',Auth::user()->id)->where('msg_talks.status',0)->get();
     $modules = \App\Models\Module::all();
-    $package_id = Auth::user()->user_package_id;
 
-    $moduleShow = false;
-    if($package_id != '' ){
-      $today = date('Y-m-d');
-      $end_date = date('Y-m-d',strtotime(Auth::user()->package_end));
-      if(strtotime($today) <= strtotime($end_date)){
-         $moduleShow = true;
-      }
-    }
+    $packageCheck =  \App\Helpers\Helpers::user_package_check();
+    $moduleShow = $packageCheck['moduleShow'];
 
   @endphp
 

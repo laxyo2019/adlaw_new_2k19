@@ -13,7 +13,7 @@
             <div class="icon">
               <i class="fa fa-briefcase"></i>
             </div>
-            <a href="{{route('case_mast.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+             <a @if($moduleShow) href="{{route('case_mast.index')}}" @endif class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         @if(Auth::user()->parent_id ==null)
@@ -30,7 +30,7 @@
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
-            <a href="{{route('clients.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a  @if($moduleShow) href="{{route('clients.index')}}" @endif class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         @endif
@@ -46,7 +46,7 @@
             <div class="icon">
               <i class="fa fa-envelope"></i>
             </div>
-            <a href="" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a  @if($moduleShow) href="{{route('message.index')}}" @endif class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
   
         </div>
@@ -83,27 +83,14 @@
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
-            <a href="{{route('teams.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a  @if($moduleShow) href="{{route('teams.index')}}" @endif class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
 
 
 @endif
-       {{--  <div class="col-md-4 ">
-          <!-- small box -->
-          <div class="small-box " style="color:white; background-color: #5c6a77">
-            <div class="inner">
-              <h3>0</h3>
-              <h4>Document</h4>
-            </br></br>
-            </div>
-            <div class="icon">
-              <i class="fa fa-file"></i>
-            </div>
-            <a href="" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div> --}}
-         <div class="col-md-4 ">
+      
+      <div class="col-md-4 ">
       <!-- small box -->
         <div class="small-box" style="background-color: #23bab5; color: white">
           <div class="inner">
@@ -114,7 +101,7 @@
           <div class="icon">
             <i class="fa fa-list-alt"></i>
           </div>
-          <a href="{{route('todos.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a  @if($moduleShow) href="{{route('todos.index')}}" @endif class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
         
@@ -134,9 +121,25 @@
             <div class="icon">
               <i class="fa fa-user"></i>
             </div>
-            <a href="{{route('teams.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a @if($moduleShow) href="{{route('teams.index')}}" @endif class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
       </div>
+        <div class="col-md-4 ">
+          <!-- small box -->
+          <div class="small-box " style="color:white; background-color: #5c6a77">
+            <div class="inner">
+              <h3>0</h3>
+              <h4>Document</h4>
+            </br></br>
+            </div>
+            <div class="icon">
+              <i class="fa fa-file"></i>
+            </div>
+            <a @if($moduleShow) href="{{route('docs.home')}}" @endif class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+
+
     {{--   <div class="col-md-4 ">  
           <div class="small-box" style="background-color: #3f315ade; color:white;">
             <div class="inner">
@@ -202,9 +205,13 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix no-border">
+            @if($moduleShow)
               <a href="{{route('todos.index')}}" class="btn btn-default pull-right">More info <i class="fa fa-arrow-circle-right"></i></a>
-              @if(Auth::user()->parent_id == null )<a href="{{route('todos.create')}}" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add Todo</a> @endif
-            </div>
+                @if(Auth::user()->parent_id == null )
+                    <a href="{{route('todos.create')}}" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add Todo</a>
+                @endif
+               @endif
+              </div>
           </div>
         </div>
 
@@ -235,9 +242,10 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix no-border">
+              @if($moduleShow)
               <a href="{{route('upcomingHearings')}}" class="btn btn-default pull-right">More info <i class="fa fa-arrow-circle-right"></i></a>
              {{-- @if(Auth::user()->parent_id == null ) <a href="" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add Hearing</a>@endif --}}
-
+             @endif
             </div>
           </div>
         </div>

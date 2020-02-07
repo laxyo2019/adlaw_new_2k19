@@ -152,4 +152,22 @@ class Helpers
         }
         return $users;
     } 
+
+    public static function user_package_check(){
+    	$moduleShow = false;
+		$package_id = Auth::user()->user_package_id;
+		$beforeDate = '';
+
+		if($package_id != '' ){
+	        $today = date('Y-m-d');
+	    	$package_end = Auth::user()->package_end;
+	 		$beforeDate = date('Y-m-d', strtotime(Auth::user()->package_end.'-7 days'));
+	        $end_date = date('Y-m-d',strtotime(Auth::user()->package_end));
+	        if(strtotime($today) <= strtotime($end_date)){
+	           $moduleShow = true;
+	        }
+	    }
+
+	    return ['moduleShow' => $moduleShow, 'beforeDate' => $beforeDate];
+    }
 }

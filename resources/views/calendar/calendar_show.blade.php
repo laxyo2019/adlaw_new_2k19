@@ -99,21 +99,27 @@
 
 		select: function(start, end, jsEvent, view) {
 			var show = "{{Auth::user()->parent_id}}" ;
-	         if(show == ''){
+			var moduleShow = "{{$moduleShow}}";
+			if(moduleShow){
+				if(show == ''){
 					var start_date = moment(start).format('YYYY-MM-DD');
 
 					var end_date =  moment(end).subtract(1, 'days').format('YYYY-MM-DD');
 					// alert(end_date);
-			        $('.start_date').val(start_date);
+					$('.start_date').val(start_date);
 					$('.end_date').val(end_date);
 					$('.h_date').val(start_date);
 					$('#calendar_modal').modal({"backdrop": "static"});
-		      }
+				}	
+			}else{
+				alert('You are not subscription user');
+			}
+	         
 	    }
 
 	
 		});
-
+			
 	
 	});
   </script>

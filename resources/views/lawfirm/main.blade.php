@@ -18,16 +18,8 @@
     
     $modules = \App\Models\Module::all();
 
-    $package_id = Auth::user()->user_package_id;
-
-    $moduleShow = false;
-    if($package_id != '' ){
-    $today = date('Y-m-d');
-    $end_date = date('Y-m-d',strtotime(Auth::user()->package_end));
-    if(strtotime($today) <= strtotime($end_date)){
-       $moduleShow = true;
-    }
-    }
+    $packageCheck =  \App\Helpers\Helpers::user_package_check();
+    $moduleShow = $packageCheck['moduleShow'];
   @endphp
 
   <header class="main-header">
@@ -50,7 +42,7 @@
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
             <li class="nav-item">
-              <a href="http://127.0.0.1:8001/" target="_blank"><i class="fa fa-comments-o"></i></a>
+              <a href="http://connect-adlaw.laxyo.org/" target="_blank"><i class="fa fa-comments-o"></i></a>
             </li>
             <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -313,7 +305,7 @@
             </a>
           </li>
 
-           <li class="treeview {{Request()->segment(1) == 'master' ? 'active' : '' }}">
+           <li class="treeview {{Request()->segment(1) == 'crm_dashboard' ? 'active' : '' }}">
             <a href="#">
               <i class="fa fa-table"></i> <span>CRM</span>
               <span class="pull-right-container">
@@ -321,7 +313,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li class="">
+              <li class=" {{Request()->segment(1) == 'crm_dashboard' ? 'active' : '' }}">
                 <a href="{{route('crm_dashboard.index')}}">
                   <i class="fa fa-tachometer"></i> <span>{{__('CRM Dashboard')}}</span>
                 </a>

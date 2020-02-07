@@ -112,7 +112,8 @@ class UsersController extends Controller
 	        	$data['user_catg_id'] = '5';   
 	        }
 	        $data['parent_id'] = Auth::user()->id;
-
+	        $data['user_package_id'] = Auth::user()->id;
+	        $data['parent_id'] = Auth::user()->id;
 		}
 
 		if($olduser->email != $data['email']){         

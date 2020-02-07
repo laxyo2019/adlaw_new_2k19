@@ -7,18 +7,9 @@
  $pending_teacher = \App\User::where('parent_id',Auth::user()->id)->where('user_flag','=','P')->get();
    $users = \App\User::join('college_mast_view', 'users.parent_id', '=','college_mast_view.parent_id')->where('users.id',Auth::user()->id)->where('user_flag','ct')->first();
     $modules = \App\Models\Module::all();
-
-    $package_id = Auth::user()->user_package_id;
-
-    $moduleShow = false;
-    if($package_id != '' ){
-      $today = date('Y-m-d');
-      $end_date = date('Y-m-d',strtotime(Auth::user()->package_end));
-      if(strtotime($today) <= strtotime($end_date)){
-        $moduleShow = true;
-      }
-    }
-
+    
+    $packageCheck =  \App\Helpers\Helpers::user_package_check();
+    $moduleShow = $packageCheck['moduleShow'];
 
 @endphp
 

@@ -40,8 +40,11 @@ class CalendarController extends Controller
         $hearings = collect($hearings)->filter(function($e) use($id){
             return in_array($id, json_decode($e->lawyer_names));
         });
+
+        $packageCheck =  Helpers::user_package_check();
+        $moduleShow = $packageCheck['moduleShow'];
        
-    	return view('calendar.index', compact('todos','cases','hearings'));
+    	return view('calendar.index', compact('todos','cases','hearings','moduleShow'));
     }
     public function case_member(){
         if(request()->case_id == '0'){

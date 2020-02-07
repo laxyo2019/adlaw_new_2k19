@@ -77,9 +77,12 @@ class LawFirmController extends Controller
 		$unbookings = collect($appointments)->where('client_status', '1')->where('user_status','0');
 		$booked = collect($appointments)->where('client_status', '1')->where('user_status','1');
 		$cancelled = collect($appointments)->where('client_status', '0')->where('user_status','0');
-		
 
-		return view('lawfirm.dashboard.index',compact('user','cases','running_cases','closed_cases','order_cases','direction_cases','transferred_cases','appointments','unbookings','booked','cancelled','todos','pen_todos','com_todos','mis_todos','clos_todos','awt_todos','hearings'));
+		$packageCheck =  Helpers::user_package_check();
+		$moduleShow = $packageCheck['moduleShow'];
+		$beforeDate = $packageCheck['beforeDate'];
+
+		return view('lawfirm.dashboard.index',compact('user','cases','running_cases','closed_cases','order_cases','direction_cases','transferred_cases','appointments','unbookings','booked','cancelled','todos','pen_todos','com_todos','mis_todos','clos_todos','awt_todos','hearings','moduleShow'));
 
 
 	}
