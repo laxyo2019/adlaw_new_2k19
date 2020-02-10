@@ -38,8 +38,7 @@ class ClientsController extends Controller
       $clients = Customer::where('user_id',Auth::user()->id)
                           ->whereNotIn('cust_id',$client_ids)
                           ->where('status_id','A')
-                          ->paginate(10);
-
+                          ->paginate(10);             
       return  view('clients.index',compact('clients'));
     }
 

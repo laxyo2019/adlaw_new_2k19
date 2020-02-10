@@ -79,14 +79,15 @@
 										</div>
 										@if(strtotime($beforeDate) <= strtotime(date('Y-m-d')))
 											<div class="card-footer "  style="background-color: rgb(255, 236, 207); ">
-											
-												@if(date('d',strtotime(Auth::user()->package_end)) - date('d') > 0 )
-													<h4>After {{date('d',strtotime(Auth::user()->package_end)) - date('d')}} days your subscription package expire </h4>
-												@elseif(date('d',strtotime(Auth::user()->package_end)) - date('d') == 0)
-													<h4>Today your subscription package expire </h4>
-												@else
-													<h4>Your subscription package expired</h4>
-												@endif	
+												@php  
+													$date_diff =  \App\Helpers\Helpers::date_diff(Auth::user()->package_end); 
+
+												@endphp
+												<h4>
+													@php
+														echo $date_diff['difference']. " your subscription package ". ($date_diff['difference'] != 'Today' ? ($date_diff['str_arr'][2] == 'after' ? 'expire' : 'expired' )  : 'expire')
+													@endphp
+												</h4>
 												
 											</div>
 										@endif		

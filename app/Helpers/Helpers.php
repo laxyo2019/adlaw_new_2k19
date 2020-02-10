@@ -7,6 +7,7 @@ use App\User;
 use App\Models\CaseMast;
 use App\Models\CourtMastHeader;
 use App\Models\Todo;
+use Carbon\Carbon;
 class Helpers 
 {
 	public static function deletedClients(){
@@ -161,7 +162,7 @@ class Helpers
 		if($package_id != '' ){
 	        $today = date('Y-m-d');
 	    	$package_end = Auth::user()->package_end;
-	 		$beforeDate = date('Y-m-d', strtotime(Auth::user()->package_end.'-15 days'));
+	 		$beforeDate = date('Y-m-d', strtotime(Auth::user()->package_end.'-16 days'));
 	        $end_date = date('Y-m-d',strtotime(Auth::user()->package_end));
 	        if(strtotime($today) <= strtotime($end_date)){
 	           $moduleShow = true;
@@ -169,5 +170,23 @@ class Helpers
 	    }
 
 	    return ['moduleShow' => $moduleShow, 'beforeDate' => $beforeDate];
+    }
+
+    public static function date_diff($package_end){
+
+    	$package_end = new Carbon($package_end);
+		$now = Carbon::now();
+
+		$difference = ($package_end->diff($now)->days <= 0)
+			    ? 'Today'
+			    : $package_end->diffForHumans($now);
+
+			$str_arr =array();
+		if($difference != 'Today'){
+		   $str_arr = explode(" ",$difference);
+		}   
+
+		return ['difference' => $difference, 'str_arr' => $str_arr];
+
     }
 }

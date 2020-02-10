@@ -303,7 +303,7 @@
          @endrole
 
          <li class="treeview {{Request()->segment(1) == 'master' ? 'active' : '' }}">
-            <a href="{{route('package.index')}}">
+            <a href="#">
               <i class="fa fa-table"></i> <span>CRM</span>
               <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>

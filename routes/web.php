@@ -102,6 +102,7 @@ Route::group(['prefix' => 'features/lawschools'] ,function(){
 	Route::view('/document_management','pages.features.subpages.lawschools.document_management')->name('lawschools.document_management');
 	Route::view('/team_management','pages.features.subpages.lawschools.team_management')->name('lawschools.team_management');
 	Route::view('/agenda_management','pages.features.subpages.lawschools.agenda_management')->name('lawschools.agenda_management');
+	Route::view('/todo_management','pages.features.subpages.lawschools.todo_management')->name('features.todo_management');
 });
 
 
@@ -204,7 +205,10 @@ Route::group(['middleware' => ['role:lawyer|lawcompany']], function() {
 	Route::get('/landmarkcase', 'LawFirm\LawFirmController@landmarkcase')->name('landmarkcase.index');
 	Route::post('/landmarkcase/store', 'LawFirm\LawFirmController@landmarkcase_store')->name('landmarkcase.store');
 
-	Route::resource('/clients', 'ClientsController');
+	Route::group(['middleware' => ['permission:subscription_package']], function () {
+		Route::resource('/clients', 'ClientsController');
+	});
+	
 	Route::resource('/appointment', 'AppointmentController');	
 	Route::resource('/case_mast', 'CaseManagement\CaseMastController');
 	Route::get('case_details/{id}','CaseManagement\CaseMastController@case_details')->name('case_details');
@@ -312,7 +316,9 @@ Route::group(['middleware' => ['role:guest']], function() {
 Route::group(['middleware' => ['role:lawyer|lawcompany|lawcollege|admin|guest|teacher|student']], function() {
 	Route::resource('/crm_dashboard','CRM\CRMController');
 	Route::get('/old_subscription_package','CRM\CRMController@old_subscription_package')->name('old_subscription_package');
-	// Route::get('/expired_subscription','CRM\CRMController@expired_subscription')->name('expired_subscription');
+	
+	Route::get('/expired_subscription','CRM\CRMController@expired_subscription')->name('expired_subscription');
+	// Route::get('/expired_package','CRM\CRMController@expired_package')->name('expired_package');
 	
 	Route::resource('/teams','Teams\TeamController');
 

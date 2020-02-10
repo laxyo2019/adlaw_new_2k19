@@ -34,8 +34,8 @@
 
         </div>
        <div class="col-sm-12 col-lg-12 col-xs-12 mt-4 mb-5">
-            <a href="{{route('features.appointment_schedule')}}" class="btn btn-md bg-info pull-left text-white"><i class="fa fa-angle-left"></i></a>
-            <a href="{{route('features.agenda_management')}}" class="btn btn-md bg-info pull-right text-white"><i class="fa fa-angle-right"></i></a>
+            <a href="{{route('features.hearing_management')}}" class="btn btn-md bg-info pull-left text-white"><i class="fa fa-angle-left"></i></a>
+            <a href="{{route('features.chat_or_messanger')}}" class="btn btn-md bg-info pull-right text-white"><i class="fa fa-angle-right"></i></a>
         </div>
     </div>
 </div>

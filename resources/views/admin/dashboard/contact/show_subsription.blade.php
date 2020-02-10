@@ -163,6 +163,9 @@
 					}else{
 						alert('All field are mendatory')
 					}
+				}else{
+					submitForm();
+					return false;
 				}
 				
 			}else{
@@ -179,6 +182,7 @@
 					$("#activeModal").modal('hide');
 					alert("User Plan Active Successfully");
 					location.reload();
+					//console.log(response);
 				},
 				error: function(){
 					alert("Error");

@@ -192,13 +192,13 @@
                     </div>
                 </a>
             </div>
-{{-- 
+
             <div class="col-md-4 mb-4 ">
                 <a href="{{route('features.hearing_management')}}" class="feature-link">
                     <div class="card feature-div">
                         <div class="card-header bg-white border-0 ">
                             <div class="feature-circle-images">
-                                <img src="{{asset('images/icons/aa8.jpg')}}" class="img-feature">
+                                <img src="{{asset('images/icons/course.png')}}" class="img-feature">
                             </div>
                         </div>
                         <div class="card-body">
@@ -219,7 +219,7 @@
                     <div class="card feature-div">
                         <div class="card-header bg-white border-0 ">
                             <div class="feature-circle-images">
-                                <img src="{{asset('images/icons/aa8.jpg')}}" class="img-feature">
+                                <img src="{{asset('images/icons/appointment.png')}}" class="img-feature">
                             </div>
                         </div>
                         <div class="card-body">
@@ -240,14 +240,14 @@
                     <div class="card feature-div">
                         <div class="card-header bg-white border-0 ">
                             <div class="feature-circle-images">
-                                <img src="{{asset('images/icons/aa8.jpg')}}" class="img-feature">
+                                <img src="{{asset('images/icons/chat1.jpg')}}" class="img-feature">
                             </div>
                         </div>
                         <div class="card-body">
                        
-                        <h4 class="font-weight-bold">Mailbox</h4>
+                        <h4 class="font-weight-bold">Messaging</h4>
                         <p class="p-text">
-                            Adlaw offer to mailbox. you easily reply your client message.           
+                            Adlaw offer to Messaging System. You easily reply your lawyer and client message.           
                         </p>
                         </div>
                         <div class="card-footer bg-white border-0">
@@ -255,7 +255,7 @@
                         </div>
                     </div>
                 </a>
-            </div> --}}
+            </div>
         </div>
     </div>
      <br>

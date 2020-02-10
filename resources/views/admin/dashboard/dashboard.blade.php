@@ -2,7 +2,7 @@
 @section('content')
 	<section class="content">
 		<div class="row">
-			<div class="col-md-3 col-sm-6 col-xs-12">
+			{{-- <div class="col-md-3 col-sm-6 col-xs-12">
 				<div class="info-box">
 					<span class="info-box-icon bg-aqua"><i class="fa fa-envelope-o"></i></span>
 					<div class="info-box-content">
@@ -10,14 +10,14 @@
 						<span class="info-box-number">1,410</span>
 					</div>
 				</div>
-			</div>		
+			</div>		 --}}
 			
 			<div class="col-md-3 col-sm-6 col-xs-12">
 				<div class="info-box">
 					<span class="info-box-icon bg-green"><i class="fa fa-users"></i></span>
 					<div class="info-box-content">
 						<span class="info-box-text">Total User</span>
-						<span class="info-box-number">1,410</span>
+						<span class="info-box-number">{{count($users)}}</span>
 					</div>
 				</div>
 			</div>		
@@ -31,7 +31,7 @@
 					</div>
 				</div>
 			</div>		 --}}
-		
+		{{-- 
 			<div class="col-md-3 col-sm-6 col-xs-12">
 				<div class="info-box">
 					<span class="info-box-icon bg-red"><i class="fa fa-envelope-o"></i></span>
@@ -40,10 +40,10 @@
 						<span class="info-box-number">1,410</span>
 					</div>
 				</div>
-			</div>
+			</div> --}}
 		</div>	
 		<div class="row">
-	      <div class="col-md-4 col-sm-6 col-xs-12">
+	     {{--  <div class="col-md-4 col-sm-6 col-xs-12">
 				<div class="info-box">
 					<span class="info-box-icon bg-orange"><i class="fa fa-money"></i></span>
 					<div class="info-box-content">
@@ -71,7 +71,7 @@
 					</div>
 				</div>
 			</div>		
-
+ --}}
 	    </div>	
 	</section>
 @endsection

@@ -28,11 +28,13 @@ use App\Models\Todo;
 use App\Models\CaseDetail;
 use App\Models\MessageTalk;
 use App\Helpers\Helpers;
+
 class LawFirmController extends Controller
 {
 	public function index(){
 
 		$id = Auth::user()->id;
+	
 		$del_client = Helpers::deletedClients();
 		$user = User::with(['clients' => function($query)use($del_client){
 				$query->whereNotIn('cust_id',$del_client);

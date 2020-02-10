@@ -138,31 +138,72 @@
                     </div>
                 </a>
             </div>
-           {{--  <div class="col-md-3 mb-4 ">
-            <a href="{{route('lawschools.course_management')}}" class="feature-link" >
-             <div class="card feature-div">
-                    <div class="card-header bg-white border-0 ">
-                <h4 class="font-weight-bold">Chat Or Messanger</h4>
-                <p class="p-text">
-                    {{str_limit("Course and Batch Management feature offered by adlaw is designed for law colleges where they manage batch of students and courses what they provide. This includes the list of all law courses offering by the law colleges. The course name, qualification name, course duration, and syllabus can be added by law colleges. Students can find relevant course, course duration and see the syllabus offered by law colleges.",$limit = 240, $end="...")}}
-            
-                </p>
-                
-                <a href="{{route('lawschools.profile_management')}}" class="btn btn-sm btn-info">More Info</a>
+
+            <div class="col-md-4 mb-4 ">
+                <a href="" class="feature-link" >
+                    <div class="card feature-div">
+                        <div class="card-header bg-white border-0">
+                            <div class="feature-circle-images">
+                                <img src="{{asset('images/icons/appointment.png')}}" class="img-feature">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="font-weight-bold">Todos Management</h4>
+                             <p class="p-text">
+                                To-dos are a viable way to assign priorities, gather speed, work together that move steps are made on schedule, every time.    
+                            </p>  
+                        </div>
+                        <div class="card-footer bg-white border-0">
+                            <button class="btn btn-sm btn-info">More Info</button>
+                        </div>
+                    </div>
+                </a>
             </div>
-            <div class="col-md-3 mb-4 ">
-                <a href="{{route('lawschools.course_management')}}" class="feature-link" >
-                 <div class="card feature-div">
-                    <div class="card-header bg-white border-0 ">
-                <h4 class="font-weight-bold">Schedule Management</h4>
-                <p class="p-text">
-                    {{str_limit("Course and Batch Management feature offered by adlaw is designed for law colleges where they manage batch of students and courses what they provide. This includes the list of all law courses offering by the law colleges. The course name, qualification name, course duration, and syllabus can be added by law colleges. Students can find relevant course, course duration and see the syllabus offered by law colleges.",$limit = 240, $end="...")}}
-                </p>
-               
-                <a href="{{route('lawschools.profile_management')}}" class="btn btn-sm btn-info">More Info</a>
-            </div> --}}
-        </div>
-    </div>
-     <br>
-    <br>
+
+
+            <div class="col-md-4 mb-4 ">
+                <a href="" class="feature-link" >
+                    <div class="card feature-div">
+                        <div class="card-header bg-white border-0">
+                            <div class="feature-circle-images">
+                                <img src="{{asset('images/icons/appointment.png')}}" class="img-feature">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="font-weight-bold">Schedule Management</h4>
+                             <p class="p-text">
+                                 Adlaw allows law firms to create the schedule for a particular events. 
+                            </p>  
+                        </div>
+                        <div class="card-footer bg-white border-0">
+                            <button class="btn btn-sm btn-info">More Info</button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 mb-4 ">
+                <a href="" class="feature-link" >
+                    <div class="card feature-div">
+                        <div class="card-header bg-white border-0">
+                            <div class="feature-circle-images">
+                                <img src="{{asset('images/icons/chat1.jpg')}}" class="img-feature">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="font-weight-bold">Messaging</h4>
+                            <p class="p-text">
+                                College teacher and students can chat together. College can create a group on messaging system and add student.
+                            </p> 
+                        </div>
+                        <div class="card-footer bg-white border-0">
+                            <button class="btn btn-sm btn-info">More Info</button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+              
+        <br>
+        <br>
   </section>

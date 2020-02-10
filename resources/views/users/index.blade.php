@@ -48,7 +48,7 @@
 									<th>User Type</th>
 									<th>Registration Date</th>
 									<th>Status</th>
-									<th>Action</th>
+									<th style="width: 20%">Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -68,6 +68,8 @@
 											@method('DELETE')
 
 										 	<a href="{{route('users.edit',$user->id)}}"><i class="fa fa-edit text-green btn btn-sm"></i></a>
+
+										 	<a href="#"><i class="fa fa-gear btn btn-sm"></i></a>
 
 										 	<a href="javascript:void(0)" onclick="loginhistory('{{ $user->id }}')" title="user login history" data-id="modal" id="loginbtn"><i class="fa fa-clock-o btn btn-sm" style="font-size: 16px"></i></a>
 

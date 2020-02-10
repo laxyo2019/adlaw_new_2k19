@@ -61,10 +61,11 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'dashboard' => \App\Http\Middleware\Dashboard::class,
-        'lawcompany' => \App\Http\Middleware\Lawcompany::class,
-        'customer' => \App\Http\Middleware\Customer::class,
+        // 'dashboard' => \App\Http\Middleware\Dashboard::class,
+        // 'lawcompany' => \App\Http\Middleware\Lawcompany::class,
+        // 'customer' => \App\Http\Middleware\Customer::class,
         'role' => \Laratrust\Middleware\LaratrustRole::class,
+        'permission' => \Laratrust\Middleware\LaratrustPermission::class,
     ];
 
     /**

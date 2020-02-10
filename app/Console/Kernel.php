@@ -31,6 +31,7 @@ class Kernel extends ConsoleKernel
         // $schedule->call('App\Http\Controllers\PMS\Agenda\AgendaResponseController@enter_agenda_missed')->dailyAt('19:30');
 
         $schedule->call('App\Http\Controllers\CRM\CRMController@expired_subscription')->dailyAt('10:00');
+        $schedule->call('App\Http\Controllers\CRM\CRMController@expired_package')->dailyAt('23:55');
 
         $schedule->call('App\Http\Controllers\PMS\Schedule\ScheduleController@display_reminder')->dailyAt('10:00');
     }
