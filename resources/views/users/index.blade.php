@@ -69,7 +69,19 @@
 
 										 	<a href="{{route('users.edit',$user->id)}}"><i class="fa fa-edit text-green btn btn-sm"></i></a>
 
-										 	<a href="#"><i class="fa fa-gear btn btn-sm"></i></a>
+										 	<ul class="dropdown" style="float: right;">
+										 		<a class="btn bg-info dropdown-toggle" data-toggle="dropdown">
+										 			<i class="fa fa-gear" ></i>
+										 		</a>
+										 		<div class="dropdown-menu" style="left: -90px;color:black">
+										 			<li class=dropdown-item>
+										 				<a href="{{route('assign_role',$user->id)}}" style="">Assign Role</a>
+										 			</li>
+										 			<li class=dropdown-item>
+										 				<a href="{{route('assign_permission',$user->id)}}"  style="">Assign Permission</a>
+										 			</li>
+										 		</div>
+										 	</ul>
 
 										 	<a href="javascript:void(0)" onclick="loginhistory('{{ $user->id }}')" title="user login history" data-id="modal" id="loginbtn"><i class="fa fa-clock-o btn btn-sm" style="font-size: 16px"></i></a>
 

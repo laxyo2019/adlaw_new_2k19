@@ -80,6 +80,7 @@ class User extends Authenticatable
     public function role(){
         return $this->belongsTo('App\Role','user_catg_id');
     }
+
     public function appointments(){  //For lawyer
         return $this->hasMany('App\Models\Booking','user_id');
     }
@@ -120,5 +121,13 @@ class User extends Authenticatable
     }
     public function slots(){
         return $this->hasMany('App\Models\Plans','user_id');;
+    }
+    public function roles()
+    {
+      return $this->belongsToMany('App\Role');
+    }
+    public function permissions()
+    {
+      return $this->belongsToMany('App\Permission');
     }
 }

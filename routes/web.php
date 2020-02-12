@@ -189,12 +189,16 @@ Route::group(['prefix' => 'master', 'namespace' => 'Admin\Master'], function () 
 	Route::group(['prefix' => 'acl', 'namespace' => 'Admin\ACL'], function ()  {
 		Route::resource('/acl_package','PackageController');
 		Route::resource('/acl_module','ModuleController');
+		Route::resource('role','RoleController');
+		Route::resource('permission','PermissionController');
 	});
 
 });
 /* --------------------Admin---------------------------------- */
 
 /* ------------------Lawyer-------------------Lawcompany------------- */
+
+
 Route::group(['middleware' => ['role:lawyer|lawcompany']], function() {
 	Route::resource('/lawfirm', 'LawFirm\LawFirmController');
 	Route::get('/upcoming_hearings','LawFirm\LawFirmController@upcoming_hearings')->name('upcomingHearings');
@@ -204,22 +208,22 @@ Route::group(['middleware' => ['role:lawyer|lawcompany']], function() {
 
 	Route::get('/landmarkcase', 'LawFirm\LawFirmController@landmarkcase')->name('landmarkcase.index');
 	Route::post('/landmarkcase/store', 'LawFirm\LawFirmController@landmarkcase_store')->name('landmarkcase.store');
+	Route::resource('/appointment', 'AppointmentController');	
+
 
 	Route::group(['middleware' => ['permission:subscription_package']], function () {
 		Route::resource('/clients', 'ClientsController');
+	
+		Route::resource('/case_mast', 'CaseManagement\CaseMastController');
+		Route::get('case_details/{id}','CaseManagement\CaseMastController@case_details')->name('case_details');
+		Route::get('/cases_table','CaseManagement\CaseMastController@cases_table');
+		
+		Route::resource('/case_hearing', 'CaseManagement\CaseHearingController');
+		Route::resource('/case_doc', 'CaseManagement\CaseDocController');
+		Route::resource('/case_notes', 'CaseManagement\CaseNotesController');
+		Route::resource('/case_diary', 'CaseManagement\CaseDiaryController');
+		Route::post('/case_diary/filter','CaseManagement\CaseDiaryController@filter')->name('case_diary.filter');
 	});
-	
-	Route::resource('/appointment', 'AppointmentController');	
-	Route::resource('/case_mast', 'CaseManagement\CaseMastController');
-	Route::get('case_details/{id}','CaseManagement\CaseMastController@case_details')->name('case_details');
-	Route::get('/cases_table','CaseManagement\CaseMastController@cases_table');
-	
-	Route::resource('/case_hearing', 'CaseManagement\CaseHearingController');
-	Route::resource('/case_doc', 'CaseManagement\CaseDocController');
-	Route::resource('/case_notes', 'CaseManagement\CaseNotesController');
-	Route::resource('/case_diary', 'CaseManagement\CaseDiaryController');
-	Route::post('/case_diary/filter','CaseManagement\CaseDiaryController@filter')->name('case_diary.filter');
-
 
 	Route::get('/fileDownload', 'CaseManagement\CaseDocController@fileDownload')->name('fileDownload');
 	Route::resource('/booking','BookingController');
@@ -302,6 +306,7 @@ Route::group(['middleware' => ['role:lawyer|teacher|lawcollege']], function() {
 	Route::get('/qual_docs','QualificationController@qual_docs');
 
 });
+
 /* ----------------Lawyer---------------Teacher--------------- */
 
 Route::group(['middleware' => ['role:guest']], function() {
@@ -314,45 +319,54 @@ Route::group(['middleware' => ['role:guest']], function() {
 /* -------------------------------all--------------- */
 
 Route::group(['middleware' => ['role:lawyer|lawcompany|lawcollege|admin|guest|teacher|student']], function() {
+
+	Route::get('/password_change', 'HomeController@password_change')->name('password_change');
+		Route::post('/user/change-password', 'HomeController@changePassword')->name('change-password');
+
 	Route::resource('/crm_dashboard','CRM\CRMController');
 	Route::get('/old_subscription_package','CRM\CRMController@old_subscription_package')->name('old_subscription_package');
-	
 	Route::get('/expired_subscription','CRM\CRMController@expired_subscription')->name('expired_subscription');
 	// Route::get('/expired_package','CRM\CRMController@expired_package')->name('expired_package');
 	
-	Route::resource('/teams','Teams\TeamController');
+	Route::group(['middleware' => ['permission:subscription_package']], function () {
 
-	Route::get('/team_users','Teams\TeamController@team_users');
+		Route::resource('/teams','Teams\TeamController');
 
-	Route::resource('/users','Teams\UsersController');
-	Route::post('/login_history', 'Teams\UsersController@login_history')->name('login_history');
-	Route::post('/member_cases', 'Teams\UsersController@member_cases')->name('member_cases');
+		Route::get('/team_users','Teams\TeamController@team_users');
 
-	Route::get('/password_change', 'Teams\UsersController@password_change')->name('password_change');
-	Route::post('/user/change-password', 'Teams\UsersController@changePassword')->name('change-password');
+		Route::resource('/users','Teams\UsersController');
+		Route::post('/login_history', 'Teams\UsersController@login_history')->name('login_history');
+		Route::post('/member_cases', 'Teams\UsersController@member_cases')->name('member_cases');
 
-	Route::resource('/todos', 'TodosController');
-	Route::post('/todos/category_table_change', 'TodosController@category_table_change')->name('todo.category_table_change');
-	Route::post('/status_table_change', 'TodosController@status_table_change')->name('todo.status_table_change');
-	Route::post('/todo_status_update', 'TodosController@todo_status_update')->name('todos.todoUpdate');
-	Route::get('/todos/form/create', 'TodosController@create_form')->name('todos.create_form');
-	Route::get('/update_todo_missed', 'TodosController@update_todo_missed')->name('todos.update_todo_missed');
-	Route::get('/todo_closed_reason', 'TodosController@todo_closed_reason')->name('todos.todo_closed_reason');
-	Route::get('/awaiting_todo_update', 'TodosController@awaiting_todo_update')->name('todos.awaiting_todo_update');
+		Route::get('/assign_role/{id}', 'Teams\UsersController@assign_role')->name('assign_role');
+		Route::post('/user_role_assign', 'Teams\UsersController@user_role_assign')->name('user_role_assign');
 
-	Route::get('/mark_as_read', 'TodosController@mark_as_read')->name('mark_as_read');
+		Route::get('/assign_permission/{id}', 'Teams\UsersController@assign_permission')->name('assign_permission');
 
-	Route::resource('/calendar', 'CalendarController');
-	Route::get('/case_member', 'CalendarController@case_member')->name('case_member');
+		Route::post('/user_permission_assign', 'Teams\UsersController@user_permission_assign')->name('user_permission_assign');
 
-	Route::get('/filestack-mgmt', 'Admin\FilestackMgmtController@index')->name('admin.filestack-mgmt');
-	Route::resource('/filestacks', 'Admin\FilestackMgmtController');
-	Route::post('/filestacks/get_users', 'Admin\FilestackMgmtController@get_users');
-	Route::post('/filestacks/paginate', 'Admin\FilestackMgmtController@search');
-	Route::post('/filestacks/updateIndex', 'Admin\FilestackMgmtController@updateIndex');
-	Route::post('/filestack-mgmt/update_permissions', 'Admin\FilestackMgmtController@update_permissions');
-	Route::post('/filestack-mgmt/users', 'Admin\FilestackMgmtController@get_all_users');
-	Route::post('/filestack-mgmt/tags', 'Admin\FilestackMgmtController@get_filestack_type');
+		Route::resource('/todos', 'TodosController');
+		Route::post('/todos/category_table_change', 'TodosController@category_table_change')->name('todo.category_table_change');
+		Route::post('/status_table_change', 'TodosController@status_table_change')->name('todo.status_table_change');
+		Route::post('/todo_status_update', 'TodosController@todo_status_update')->name('todos.todoUpdate');
+		Route::get('/todos/form/create', 'TodosController@create_form')->name('todos.create_form');
+		Route::get('/update_todo_missed', 'TodosController@update_todo_missed')->name('todos.update_todo_missed');
+		Route::get('/todo_closed_reason', 'TodosController@todo_closed_reason')->name('todos.todo_closed_reason');
+		Route::get('/awaiting_todo_update', 'TodosController@awaiting_todo_update')->name('todos.awaiting_todo_update');
+
+		Route::get('/mark_as_read', 'TodosController@mark_as_read')->name('mark_as_read');
+
+		Route::resource('/calendar', 'CalendarController');
+		Route::get('/case_member', 'CalendarController@case_member')->name('case_member');
+
+		Route::get('/filestack-mgmt', 'Admin\FilestackMgmtController@index')->name('admin.filestack-mgmt');
+		Route::resource('/filestacks', 'Admin\FilestackMgmtController');
+		Route::post('/filestacks/get_users', 'Admin\FilestackMgmtController@get_users');
+		Route::post('/filestacks/paginate', 'Admin\FilestackMgmtController@search');
+		Route::post('/filestacks/updateIndex', 'Admin\FilestackMgmtController@updateIndex');
+		Route::post('/filestack-mgmt/update_permissions', 'Admin\FilestackMgmtController@update_permissions');
+		Route::post('/filestack-mgmt/users', 'Admin\FilestackMgmtController@get_all_users');
+		Route::post('/filestack-mgmt/tags', 'Admin\FilestackMgmtController@get_filestack_type');
 
 
 	Route::group(['prefix' => 'docs', 'namespace' => 'Docs'], function ()  {
@@ -392,7 +406,7 @@ Route::group(['middleware' => ['role:lawyer|lawcompany|lawcollege|admin|guest|te
 		Route::get('/allSchdule', 'Schedule\ScheduleController@allSchedule');
 		Route::get('/deleteSchedule/{id}', 'Schedule\ScheduleController@destroy');
 	});
-
+});
 
 	Route::group(['namespace' => 'Package'], function() {
 		Route::resource('package','PackageController');

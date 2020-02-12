@@ -115,7 +115,36 @@ class HomeController extends Search\SearchController
     }
 
 
-     public function connectLogin(){
-      return Redirect("http://connect-adlaw.laxyo.org");
-     }  
+   public function connectLogin(){
+        return Redirect("http://connect-adlaw.laxyo.org");
+   } 
+
+  public function password_change(){
+    return view('auth.passwords.change_password');
+  }
+  public function changePassword(Request $request)
+  {
+    $request->validate([
+      'new_password' => 'min:8|required_with:confirm_password|same:confirm_password',
+      'confirm_password' => 'min:8'
+    ]);
+
+    $user = User::find(auth()->user()->id);
+
+    if(Hash::check($request->old_password, $user->password)) {
+      $user->password = bcrypt($request->new_password);
+      $user->save();
+
+      $status = 'Password Updated!';
+      return redirect()->back()->with('success',$status);
+    } else {
+      $class = 'alert alert-danger';
+      $status = 'Old password incorrect!';
+      return redirect()->back()->with('warning',$status);
+    }
+
+  }
+
+
+
 }

@@ -493,6 +493,6 @@
     </section>
 
 
-@yield('content')
 
+@yield('content')
 @include('partials.footer')

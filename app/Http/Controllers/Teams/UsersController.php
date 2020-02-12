@@ -7,8 +7,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Mail;
 use Auth;
+use DB;
 use App\User;
 use App\Role;
+use App\Permission;
 use App\VerifyUser;
 use App\Mail\UserMail;
 use App\Models\Status;
@@ -19,11 +21,11 @@ class UsersController extends Controller
 {
 	public function index(){
 		$users = User::with(['state','city','country','role'])->whereNull('parent_id')->get();
-		$roles = Role::whereNotIn('id',['1','6','7','8'])->get();
+		$roles = Role::whereNotIn('id',['6','7','8'])->get();
         return view('users.index',compact('users','roles'));	
 	}
 	public function create(){
-		$roles = Role::whereNotIn('id',['1','6','7','8'])->get();
+		$roles = Role::whereNotIn('id',['6','7','8'])->get();
 		return view('users.create',compact('roles'));
 	}
 	public function store(Request $request){
@@ -143,6 +145,7 @@ class UsersController extends Controller
 
         $password  = str_limit($data['name'],3,'@845');
         $data['password'] = Hash::Make($password);
+        
         $data['status']    = $status_id;
         if($oldEmail !=null){
 		  $user = User::where('email',$oldEmail)->first();
@@ -177,29 +180,35 @@ class UsersController extends Controller
 
        return response()->json($case);
     }
-    public function password_change(){
-    	return view('auth.passwords.change_password');
-    }
-   public function changePassword(Request $request)
-	{
-		$request->validate([
-			'new_password' => 'min:8|required_with:confirm_password|same:confirm_password',
-			'confirm_password' => 'min:8'
-		]);
 
-		$user = User::find(auth()->user()->id);
+	public function assign_role($id){
+		$user = User::with('roles')->where('id',$id)->first();
+		// return $user;
+		$roles = Role::all();
+		return view('users.assign_role',compact('user','roles'));
+	}
 
-		if(Hash::check($request->old_password, $user->password)) {
-			$user->password = bcrypt($request->new_password);
-			$user->save();
+	public function user_role_assign(Request $request){
 
-			$status = 'Password Updated!';
-			return redirect()->back()->with('success',$status);
-		} else {
-			$class = 'alert alert-danger';
-			$status = 'Old password incorrect!';
-			return redirect()->back()->with('warning',$status);
-		}
+		$user = User::find($request->user_id);
+		$user->syncRoles([$request->role_id]);
+		$user->update(['user_catg_id' => $request->role_id]);
+
+		return redirect()->back()->with('success');
+
+	}
+	public function user_permission_assign(Request $request){
+		// return $request->all();
+		$user = User::find($request->user_id);
+		$user->syncPermissions($request->permission_id);
+		return redirect()->back()->with('success');
+
+	}
+	public function assign_permission($id){
+		$user = $user = User::with('permissions')->where('id',$id)->first();
+		$permissions = Permission::all();
+
+		return view('users.assign_permission',compact('user','permissions'));
 	
 	}
 }

@@ -116,14 +116,6 @@
 </div>
 </br></br>
 </section>
-<script>
-
-
-   
-
-
-</script>
-
 
 <script>
  $(document).ready(function(){
@@ -140,21 +132,6 @@
     Text = Text.replace(/[^a-zA-Z0-9]+/g,'-');
     $("#slug-target").val(Text); 
   });
-tinymce.init({
-  /* replace textarea having class .tinymce with tinymce editor */
-    selector: "textarea.tinymce",
-    // theme: "modern",
-    // skin: "lightgray",
-    plugins: [
-      "advlist autolink link image lists charmap print preview hr anchor pagebreak",
-      "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-      "save table contextmenu directionality emoticons template paste textcolor"
-    ],
-    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |  preview fullpage | forecolor backcolor emoticons",
-
-    height: 300,
-  });
- 
 
    });
 </script>

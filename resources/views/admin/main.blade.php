@@ -35,41 +35,7 @@
             :notifications="{{ json_encode(auth()->user()->unreadNotifications) }}"
             :logged_user="{{ json_encode(auth()->user()) }}">
           </notification-component>
-          <!-- Notifications: style can be found in dropdown.less -->
-         {{--  <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-danger">{{count(Auth::user()->unreadNotifications)}}</span>
-            </a>  
-            <ul class="dropdown-menu">
-              <li class="header">You have {{count(Auth::user()->unreadNotifications)}} notifications </li>
-              <li>
-                <!-- inner menu: contains the actual data -->
-                <ul class="menu">
-                  @foreach(Auth::user()->unreadNotifications as $notification)
-                  <li>
-                     <a href="{{route('notification_read',$notification['id'])}}">
-                        <i class="fa fa-tasks "></i> 
-
-                        <span> {{str_limit($notification['data']['title'], $limit = 50, $end = '...') }} </span>
-                        <br>
-                        <span>{{$notification['data']['message']}}</span>
-                       
-                        <br> <span>{{$notification['created_at']->diffForHumans()}}</span>
-                    </a>
-                  </li>
-                  @endforeach
-
-                  <li>
-                </li>
-              </ul>
-            </li>
-            <li class="footer">
-              <a href="{{route('all_notifications')}}">All Notifications</a>
-            </li>
-          </ul>
-
-          </li> --}}
+         
           <!-- Tasks: style can be found in dropdown.less -->
           <!-- <li class="dropdown tasks-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -177,14 +143,14 @@
               <span> Dashboard</span>
             </a>
           </li> 
-
+        @permission('users_manage')  
         <li class="{{Request()->segment(1) == 'users' ? 'active' : ''}} nav-item">
             <a href="{{route('users.index')}}" class="nav-link">
               <i class="fa fa-users"></i>
                <span> Users</span>
             </a>
         </li>   
-
+         @endpermission
            <li class="{{Request()->segment(1) == 'reviews' ? 'active' : ''}} nav-item">
             <a class="nav-link" href="{{route('admin.pending_reviews')}}">
               <i class="fa fa-comment"></i>
@@ -239,6 +205,7 @@
               <span class="menu-title"> Contact Us</span>
             </a>
           </li>
+          @permission('master_manage')
           <li class="treeview {{Request()->segment(1) == 'master' ? 'active' : '' }}">
             <a href="">
               <i class="fa fa-table"></i> <span>Master</span>
@@ -314,8 +281,9 @@
                              
             </ul>
           </li>
-
-         <li class="treeview ">
+          @endpermission
+        @permission('acl_manage')
+         <li class="treeview {{Request()->segment(1) == 'acl' ? 'active' : ''}}">
             <a href="">
               <i class="fa fa-table"></i> <span>ACL</span>
               <span class="pull-right-container">
@@ -323,10 +291,13 @@
               </span>
             </a>
             <ul class="treeview-menu">  
-                <li><a href="{{route('acl_package.index')}}"><i class="fa fa-book"></i> <span>Package</span></a></li>
-                <li><a href="{{route('acl_module.index')}}"><i class="fa fa-book"></i> <span>Module</span></a></li>
+                <li class="{{Request()->segment(2) == 'acl_package' ? 'active' : ''}}"><a href="{{route('acl_package.index')}}"><i class="fa fa-book"></i> <span>Package</span></a></li>
+                <li class="{{Request()->segment(2) == 'acl_module' ? 'active' : ''}}"><a href="{{route('acl_module.index')}}"><i class="fa fa-book"></i> <span>Module</span></a></li>
+                <li class="{{Request()->segment(2) == 'role' ? 'active' : ''}}"><a href="{{route('role.index')}}"><i class="fa fa-book"></i> <span>Roles </span></a></li>
+                <li class="{{Request()->segment(2) == 'permission' ? 'active' : ''}}"><a href="{{route('permission.index')}}"><i class="fa fa-book"></i> <span>Permissions</span></a></li>
           </ul>
         </li>
+        @endpermission
         <li class="nav-item">
             <a class="nav-link" href="{{route('admin.show_subscription')}}">
               <i class="fa fa-phone"></i>
@@ -364,5 +335,7 @@
       </ol>
     </section>
 
+
 @yield('content')
+
 @include('partials.footer')

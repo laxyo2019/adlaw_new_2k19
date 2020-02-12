@@ -20,9 +20,9 @@
   <div class="control-sidebar-bg"></div>
 
 </div>
-<!-- ./wrapper -->
 
 
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
     <script src="{{asset('adlaw_files/js/bootstrap.min.js')}}"></script>
 
     <script src="{{asset('adlaw_files/js/fastclick.js')}}"></script>
@@ -40,9 +40,9 @@
     {{-- <script src="bower_components/jquery-slimscroll/s"></script> --}}
     <!-- ChartJS -->
     {{-- <script src="bower_components/chart.js/Chart.js"></script> --}}
-    {{-- AdminLTE dashboard demo (This is only for demo purposes) --}}
+
     {{-- <script src="{{asset('adlaw/js/dashboard2.js')}}"></script> --}}
-    <!-- AdminLTE for demo purposes -->
+
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
@@ -72,20 +72,8 @@
     <script src="{{asset('plugins/iCheck/icheck.min.js')}}"></script>
     
     <script src="{{asset('js/all_category.js')}}"></script>
+
     <script type="text/javascript">
-
-
-        //var channel = Echo.channel('my-channel');
-        //    channel.listen('.my-event', function(data) {
-       //     alert(JSON.stringify(data));
-       // });
-       Echo.private('App.User.' + userId)
-        .notification((notification) => {
-            console.log(notification.type);
-            console.log("hello");
-        });
-
-
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

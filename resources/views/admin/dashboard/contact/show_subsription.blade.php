@@ -150,7 +150,7 @@
 		})
 
 		$("#activeForm").submit(function(e){
-				e.preventDefault();
+			e.preventDefault();
 			var package_id = $('select[name="package_id"] option:selected' ).val();	
 			var discount_status = $('select[name="discount_status"] option:selected' ).val();	
 			var discount_perc = $('input[name="discount_perc"]').val();	

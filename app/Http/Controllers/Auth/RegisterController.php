@@ -76,42 +76,7 @@ class RegisterController extends Controller
 
          $status = DB::table('status_mast')->select('*')->get();
          $status_id = $status[2]->status_id;
-        
-
-        // if(request()->user_category == 5){
-
-        //     $validateData = request()->validate([
-        //             'name' => ['required', 'string', 'max:255'],
-        //             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        //             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        //             'user_category' => 'required|not_in:0', 
-        //             'mobile' => 'required|min:10',
-        //             'gender' => 'required|not_in:0',
-        //             'dob' => 'required|before:5 years ago',
-        //             'country_code' => 'required',
-        //             'state_code' => 'required|not_in:0',
-        //             'city_code' => 'required|not_in:0'
-
-
-        //     ]);
-                
-        //     $user = User::create([
-        //         'name' => $validateData['name'],
-        //         'email' => $validateData['email'],
-        //         'password' => Hash::make($validateData['password']),
-        //         'user_catg_id'=>$validateData['user_category'],
-        //         'mobile' => $validateData['mobile'],
-        //         'gender' => $validateData['gender'],
-        //         'dob' => $validateData['dob'],
-        //         'country_code' => $validateData['country_code'],
-        //         'state_code'=> $validateData['state_code'],
-        //         'city_code' => $validateData['city_code'],
-        //         'status'=>$status_id,
-        //     ]);
-        //     $user->attachRole(request()->user_category);
-        // }
-        
-        // else{
+      
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
@@ -120,7 +85,6 @@ class RegisterController extends Controller
                 'status'=>$status_id,
             ]);
             $user->attachRole(request()->user_category);
-        // }
 
       
 
@@ -182,12 +146,6 @@ class RegisterController extends Controller
         return redirect('/login')->with('success',$status_text);
     }
     
-    // public function getCityList(Request $request)
-    // {
-        
-    //     $cities = DB::table("city_mast")
-    //                 ->where("state_code",$request->state_code)->get();
-    //     return response()->json($cities);
-    // }
+   
     
 }   
