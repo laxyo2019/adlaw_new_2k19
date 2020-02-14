@@ -61,6 +61,29 @@
                                 </div>
                             </div>
                         </div>
+                       {{--  <div class="form-group">
+                            <div class="col-md-6 offset-md-4">  
+                         
+                                  {!! NoCaptcha::renderJs() !!}
+                                  {!! NoCaptcha::display() !!}
+                                <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
+                            </div>
+                        </div> --}}
+                        <div class="form-group row {{ $errors->has('captcha') ? ' has-error' : '' }}">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="captcha mb-2">
+                                    <span>{!! captcha_img('flat') !!}</span>
+
+                                    <button type="button" class="btn btn-success btn-refresh ml-4"><i class="fa fa-refresh text-white"></i></button>
+                                </div>
+                                <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha">
+                                @error('captcha')
+                                  <span class="help-block text-danger">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                                @enderror
+                          </div>
+                      </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
@@ -81,4 +104,22 @@
         </div>
     </div>
 </div>
+<script >
+   $(document).ready(function(){
+        $(".btn-refresh").click(function(){
+
+            $.ajax({
+             type:'GET',
+
+             url:'/refresh_captcha',
+
+             success:function(data){
+                $(".captcha span").html(data.captcha);
+             }
+            });
+
+        });
+   });
+
+</script>
 @endsection

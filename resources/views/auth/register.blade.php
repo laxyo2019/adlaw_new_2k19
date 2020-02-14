@@ -82,6 +82,21 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+                        <div class="form-group row {{ $errors->has('captcha') ? ' has-error' : '' }}">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="captcha mb-2">
+                                    <span>{!! captcha_img('flat') !!}</span>
+
+                                    <button type="button" class="btn btn-success btn-refresh ml-4"><i class="fa fa-refresh text-white"></i></button>
+                                </div>
+                                <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha">
+                                @error('captcha')
+                                  <span class="help-block text-danger">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                                @enderror
+                          </div>
+                        </div>
                        {{--  <div class="form-group row" style="display: none;" id="mobileDiv">
                             <label for="mobile" class="col-md-4 col-form-label text-md-right">{{ __('Mobile Number')}}</label>
                             <div class="col-md-6"> 
@@ -171,57 +186,22 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function(){
-      $('#user_category').on('change',function(){
-           var user_category = $(this).val();
-           console.log(user_category);
-           if(user_category == 5){
-                $('#mobileDiv').show();
-                $('#genderDiv').show();
-                $('#dateDiv').show();
-                $('#stateDiv').show();
-                $('#cityDiv').show();
-           }  
-           if(user_category==0 || user_category == 2 || user_category==3 || user_category == 4)    {
-              $('#mobileDiv').hide();
-                $('#genderDiv').hide();
-                $('#dateDiv').hide();
-                $('#stateDiv').hide();
-                $('#cityDiv').hide();
-           }
+<script >
+   $(document).ready(function(){
+        $(".btn-refresh").click(function(){
+
+            $.ajax({
+             type:'GET',
+
+             url:'/refresh_captcha',
+
+             success:function(data){
+                $(".captcha span").html(data.captcha);
+             }
+            });
+
         });
+   });
 
-
-      $('#state').on('change',function(){
-                    var state_code = $(this).val(); 
-                   
-                    if(state_code){
-                        $.ajax({
-                            type:"GET",
-                            url:"{{ route('city') }}?state_code="+state_code,
-                            success:function(res){               
-                                if(res){
-                                $("#city").empty();
-                                $("#city").append('<option value="0">Select City</option>');
-                                $.each(res,function(index, cityObj){
-                                $("#city").append('<option value="'+cityObj.city_code+'">'+cityObj.city_name+'</option>');
-                        });
-
-                                }
-                                else{
-                                $("#city").empty();
-                                }
-                            }
-                        });
-                    }
-                    else{
-                    $("#city").empty();
-                    }
-
-                });
-
-
-    });
 </script>
 @endsection

@@ -175,8 +175,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Askedio\Laravel5ProfanityFilter\Providers\ProfanityFilterServiceProvider::class,
-        // Mews\Captcha\CaptchaServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class
     ],
 
     /*
@@ -228,9 +229,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Input' => Illuminate\Support\Facades\Input::class,
-        // 'Captcha' => Mews\Captcha\Facades\Captcha::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Laratrust'   => Laratrust\LaratrustFacade::class,
+        'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
     ],
 
 ];

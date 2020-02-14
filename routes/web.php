@@ -48,7 +48,7 @@ Route::get('/more_articles','BlogController@more_articles')->name('more_articles
 Route::get('/notifications','HomeController@all_notifications')->name('all_notifications');
 Route::get('/notification_read/{id}','HomeController@notification_read')->name('notification_read');
 
-
+Route::get('refresh_captcha', 'HomeController@refreshCaptcha')->name('refresh_captcha');
 /*Start Pages View */
 
 // Route::view('/law_data_mining','pages.law_data_mining');

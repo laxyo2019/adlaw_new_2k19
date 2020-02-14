@@ -145,6 +145,10 @@ class HomeController extends Search\SearchController
 
   }
 
+  public function refreshCaptcha()
+  {
+      return response()->json(['captcha'=> captcha_img('flat')]);
+  }
 
 
 }
