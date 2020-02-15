@@ -61,7 +61,7 @@
 										<td>{{$user->mobile}} {{$user->mobile_no1 == '' ? '' : '|'}} {{$user->mobile_no1}}</td>
 										<td>{{$user->role != null ? $user->role['display_name']  : '-'}}</td>
 										<td>{{date('d-m-y', strtotime($user->created_at))}}</td>
-										<td>{{$user->status == 'A' ? 'Active' : ($user->status == 'P' ? 'Pending For Email Verified' : 'Suspended') }}</td>
+										<td>{{$user->status == 'A' ? 'Active' : ($user->status == 'C' ? 'Pending For Email Verified' : 'Suspended') }}</td>
 										 <td>
 
 										 	<form action="{{route('users.destroy', ['id' =>  $user->id ])}}" method="POST" id="delform_{{ $user->id }}">
