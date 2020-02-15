@@ -141,6 +141,8 @@ Route::group(['middleware' => ['role:admin']], function() {
 	Route::get('/find_subscriptions','Admin\AdminController@find_subscriptions')->name('admin.find_subscriptions');
 
 	Route::post('/store_subscription','Admin\AdminController@store_subscription')->name('admin.store_subscription');
+	
+	Route::post('/subscription_package_active','Admin\AdminController@subscription_package_active')->name('admin.subscription_package_active');
 	Route::get('/package_fetch','Admin\AdminController@package_fetch')->name('admin.package_fetch');
 
 // Start Master module

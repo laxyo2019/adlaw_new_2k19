@@ -112,12 +112,79 @@ class AdminController extends Controller
     	return response()->json($package);
     }
 
-    public function store_subscription(Request $request){  //active subscription
-		$subscription =  SubcriptionContact::find($request->subscription_id);
-    	$user = User::find($subscription->user_id);
+  //   public function store_subscription(Request $request){  //active subscription
+
+		// $subscription =  SubcriptionContact::find($request->subscription_id);
+  //   	$user = User::find($subscription->user_id);
+
+  //   	$data = [
+  //   		'user_id' => $subscription->user_id,
+  //   		'package_id' => $request->package_id,
+  //   		'discount_perc' => $request->discount_perc,
+  //   		'dicount_amount' => $request->dicount_amount,
+  //   		'net_amount' => $request->net_amount,
+  //   		'reference_by' => $request->reference_by,
+  //   		'package_start' => $request->start_date,
+  //   		'package_end' => $request->end_date,
+  //   	];
+
+    	
+  //   	if($subscription->status == 'renew'){
+  //   		$old_user_package = UserPackage::find($user->user_package_id);
+  //   		$old_user_package->update(['status' => '0']);
+  //   		$old_pack_end = date('Y-m-d',strtotime($old_user_package->package_end));  
+
+  //   		//This code is used for old package date and now date diff. 
+
+  //   		$created = new Carbon($old_pack_end);
+		// 	$now = Carbon::now();
+		// 	$difference = ($now->diff($created)->days < 1)
+		// 	    ? 'today'
+		// 	    : $now->diffForHumans($created);
+
+		//     if($difference != 'today'){
+		//    		$str_arr = explode(" ",$difference);
+		//    		$day = $str_arr[0] + 1;
+		//    		if($str_arr[2] == 'after'){
+		// 			$data['package_end'] = date('Y-m-d', strtotime($data['package_end']. ' + '.$day. ' days'));
+		//    		}
+		//     }
+
+  //   	}
+
+  //   	$user_package = UserPackage::create($data);	  	
+	 //  	$permission_user = User::wherePermissionIs('subscription_package')->where('id',$subscription->user_id)->first();
+
+		// if(!empty($permission_user)){
+		// 	DB::table('permission_user')->where('user_id', $permission_user->id)->where('permission_id','6')->delete();
+		// }
+
+
+		// $user->attachPermission('6');
+
+  //   	$subscription->update(['active' => '1']);
+  //   	$user->update(['user_package_id' => $user_package->id , 'package_start' => $data['package_start'], 'package_end' => $data['package_end']]);
+  //   	// Mail::to($subscription->email)->send(new )
+  //   	return "success";
+
+
+  //   }
+
+
+    public function subscription_package_active(Request $request){
+    	// return $request->btn_id;
+    	if($request->btn_id ==''){
+    		$subscription =  SubcriptionContact::find($request->subscription_id);
+    		$user = User::find($subscription->user_id);
+    		$subscription_status = $subscription->status;
+
+    	}else{
+    		$user = User::find($request->subscription_id);
+    		$subscription_status = $request->btn_id;
+    	}
 
     	$data = [
-    		'user_id' => $subscription->user_id,
+    		'user_id' => $user->id,
     		'package_id' => $request->package_id,
     		'discount_perc' => $request->discount_perc,
     		'dicount_amount' => $request->dicount_amount,
@@ -127,8 +194,7 @@ class AdminController extends Controller
     		'package_end' => $request->end_date,
     	];
 
-    	
-    	if($subscription->status == 'renew'){
+    	if($subscription_status == 'renew'){
     		$old_user_package = UserPackage::find($user->user_package_id);
     		$old_user_package->update(['status' => '0']);
     		$old_pack_end = date('Y-m-d',strtotime($old_user_package->package_end));  
@@ -152,7 +218,7 @@ class AdminController extends Controller
     	}
 
     	$user_package = UserPackage::create($data);	  	
-	  	$permission_user = User::wherePermissionIs('subscription_package')->where('id',$subscription->user_id)->first();
+	  	$permission_user = User::wherePermissionIs('subscription_package')->where('id',$user->id)->first();
 
 		if(!empty($permission_user)){
 			DB::table('permission_user')->where('user_id', $permission_user->id)->where('permission_id','6')->delete();
@@ -160,8 +226,9 @@ class AdminController extends Controller
 
 
 		$user->attachPermission('6');
-
-    	$subscription->update(['active' => '1']);
+		if($request->btn_id ==''){
+    		$subscription->update(['active' => '1']);
+    	}
     	$user->update(['user_package_id' => $user_package->id , 'package_start' => $data['package_start'], 'package_end' => $data['package_end']]);
     	// Mail::to($subscription->email)->send(new )
     	return "success";

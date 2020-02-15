@@ -75,6 +75,9 @@
 													<h4 class="">Start Date: {{date('Y-m-d',strtotime(Auth::user()->package_start))}}</h4>
 													<h4 class="">End Date: {{date('Y-m-d',strtotime(Auth::user()->package_end))}}</h4>
 												</div>
+												<div class="col-md-12">
+													@php echo $user_package->package->description; @endphp
+												</div>
 											</div>
 										</div>
 										@if(strtotime($beforeDate) <= strtotime(date('Y-m-d')))

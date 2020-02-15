@@ -16,13 +16,16 @@ use App\Mail\UserMail;
 use App\Models\Status;
 use App\Models\RoleUser;
 use App\Models\CaseLawyer;
+use App\Models\Package;
 use App\Helpers\Helpers;
 class UsersController extends Controller
 {
 	public function index(){
 		$users = User::with(['state','city','country','role'])->whereNull('parent_id')->get();
 		$roles = Role::whereNotIn('id',['6','7','8'])->get();
-        return view('users.index',compact('users','roles'));	
+		$packages = Package::with('modules.module')->get();
+
+        return view('users.index',compact('users','roles','packages'));	
 	}
 	public function create(){
 		$roles = Role::whereNotIn('id',['6','7','8'])->get();
