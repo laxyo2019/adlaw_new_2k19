@@ -13,6 +13,7 @@ use App\Models\CourtType;
 use App\Models\CourtMast;
 use App\Models\CourtMastHeader;
 use App\Models\SubCatgMast;
+use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Search\SearchController 
 {

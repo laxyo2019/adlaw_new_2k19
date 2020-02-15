@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use App\User;
 use DB;
-use Auth;
+
 class LoginController extends Controller
 {
     /*
@@ -76,6 +78,20 @@ class LoginController extends Controller
         }
         return property_exists($this, 'redirectTo') ? $this->redirectTo : $login;
     }
+
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            $this->username() => 'required|string',
+            'password' => 'required|string',
+            'captcha' => 'required|captcha'
+
+        ],
+        [
+            'captcha.captcha' => 'Invalid captcha code.'
+        ]);
+    }
+
     
     protected function authenticated(Request $request, $user)
     {
