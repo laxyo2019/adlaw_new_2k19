@@ -4,11 +4,14 @@
 	
 <div class="row">
 	<div class="col-md-12">
-		<div class="box box-primary">
-			<div class="box-header">
-				<button class="btn btn-sm btn-info pull-right">Back</button>					
+		<div class="card card-primary">
+			<div class="card-header">
+				<a href="{{route('package.index')}}" class="btn btn-sm btn-info pull-right">Back</a>					
 			</div>
-			<div class="box-body">
+			<div class="card-body">
+				<div class="row">
+
+					<div class="col-md-5">
 				<h2 style="font-weight: bold;">{{$package->name}}</h2>
 				<h4><i class="fa fa-rupee"></i> {{$package->price}}</h4>
 				<h4>{{$package->duration}} - {{$package->duration_type}}</h4>
@@ -18,8 +21,7 @@
 						echo $package->description;
 					@endphp
 				</h4>
-				<div class="row">
-					<div class="col-md-5">
+			
 						<h4 style="font-weight: bold;">Modules </h4>
 						<ul>							
 							@foreach($package->modules as $pmodule)
@@ -28,11 +30,11 @@
 						</ul>
 					</div>
 					<div class="col-md-7">
-						<div class="box">
-							<div class="box-header">
-								<h4 class="box-title">Package Payment</h4>
+						<div class="card">
+							<div class="card-header">
+								<h4 class="card-title">Package Payment</h4>
 							</div>
-							<div class="box-body">
+							<div class="card-body">
 								<form action="{{route("package.store")}}" method="post">
 									@csrf
 								<div class="row">	
@@ -41,15 +43,6 @@
 										<label>Package Plan Amount</label>
 										<input type="text" name="amount" class="form-control" value="{{$package->price}}" readonly="readonly">
 									</div>
-									<div class="col-md-3 form-group">
-										<label></label>
-										<input type="text" name="quantity" class="form-control" value="1" readonly="readonly">  
-									</div>
-									{{-- <div class="col-md-3 form-group">
-										<br>
-										<button class="btn btn-sm btn-success"><i class="fa fa-plus"></i></button>
-										<button class="btn btn-sm btn-danger"><i class="fa fa-minus"></i></button>
-									</div> --}}
 								</div>
 									
 								<div class="row">
@@ -59,7 +52,7 @@
 									</div>
 									<div class="col-md-12 form-group">
 										<input type="hidden" name="package_id" value="{{$package->id}}">
-										<button class="btn btn-sm btn-success btnSubmit" type="submit">Confirm Package</button>
+										<button class="btn btn-sm btn-success btnSubmit" type="submit">Confirm Package Payment</button>
 									</div>
 								</div>
 							</form>
