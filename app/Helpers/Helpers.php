@@ -189,4 +189,16 @@ class Helpers
 		return ['difference' => $difference, 'str_arr' => $str_arr];
 
     }
+    public static function package_end_date($package){
+    	$start_date = Carbon::now();
+        if($package->duration_type == 'day'){
+            $end_date = $start_date->addDays($package->duration);
+        }elseif($package->duration_type == 'month'){
+            $end_date = $start_date->addMonths($package->duration);
+
+        }elseif($package->duration_type == 'year'){
+            $end_date = $start_date->addYears($package->duration);
+        }
+        return $end_date->format('Y-m-d');
+    }
 }

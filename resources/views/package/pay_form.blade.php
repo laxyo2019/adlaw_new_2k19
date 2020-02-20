@@ -5,7 +5,7 @@ $SALT = "HxWgYD3fv9";
 $PAYU_BASE_URL = "https://sandboxsecure.payu.in";       // For Sandbox Mode
 //$PAYU_BASE_URL = "https://secure.payu.in";            // For Production Mode
 $action = '';
-$posted = array();
+
 
 if(!empty($_POST)) {
     //print_r($_POST);
@@ -21,40 +21,36 @@ if(empty($posted['txnid'])) {
   // Generate random transaction id
   $txnid = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
 } else {
+ 
   $txnid = $posted['txnid'];
 }
 $hash = '';
 // Hash Sequence
 $hashSequence = "key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5|udf6|udf7|udf8|udf9|udf10";
+
 $posted = array(
     'key' => $MERCHANT_KEY,
     'txnid' => $txnid,
-    'amount' => 10,
-    'firstname' => "Ritesh",
+    'amount' => $posted['amount'],
+    'firstname' => $posted['firstname'],
     'email' => Auth::user()->email,
     'phone' => '7828773421',
-    'productinfo' => 'PHP Project Subscribe',
-    'surl' => 'http://127.0.0.1:8001/subscribe-response',
-    'furl' => 'http://127.0.0.1:8001/subscribe-cancel',
+    'productinfo' => $posted['package_id'],
+    'surl' => route('payment_success'),
+    'furl' => route('payment_cancel'),
     'service_provider' => 'payu_paisa',
 );
+
+
 if(empty($posted['hash']) && sizeof($posted) > 0) {
 
-  if(
-          empty($posted['key'])
-          || empty($posted['txnid'])
-          || empty($posted['amount'])
-          || empty($posted['firstname'])
-          || empty($posted['email'])
-          || empty($posted['phone'])
-          || empty($posted['productinfo'])
-          || empty($posted['surl'])
-          || empty($posted['furl'])
-          || empty($posted['service_provider'])
-  ) {
+  if(empty($posted['key']) || empty($posted['txnid']) || empty($posted['amount']) || empty($posted['firstname']) || empty($posted['email']) || empty($posted['phone']) || empty($posted['productinfo']) || empty($posted['surl']) || empty($posted['furl']) || empty($posted['service_provider'])) {
+
     $formError = 1;
-  } else {
-    //$posted['productinfo'] = json_encode(json_decode('[{"name":"tutionfee","description":"","value":"500","isRequired":"false"},{"name":"developmentfee","description":"monthly tution fee","value":"1500","isRequired":"false"}]'));
+
+  }
+  else {
+
     $hashVarsSeq = explode('|', $hashSequence);
     $hash_string = '';  
     foreach($hashVarsSeq as $hash_var) {
@@ -68,6 +64,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
     $hash = strtolower(hash('sha512', $hash_string));
     $action = $PAYU_BASE_URL . '/_payment';
   }
+  //print_r($hash);
 } elseif(!empty($posted['hash'])) {
   $hash = $posted['hash'];
   $action = $PAYU_BASE_URL . '/_payment';
@@ -76,7 +73,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
 ?>
 <html>
   <head>
- {{--  <script>
+      <script>
     var hash = '<?php echo $hash ?>';
     function submitPayuForm() {
       if(hash == '') {
@@ -85,9 +82,9 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
       var payuForm = document.forms.payuForm;
       payuForm.submit();
     }
-  </script> --}}
+  </script>
   </head>
-  <body >
+  <body onload="submitPayuForm()">
     <h2>PayU Form</h2>
     <br/>
     <?php if($formError) { ?>
@@ -133,7 +130,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
 
        
         <tr>
-          <?php if(!$hash) { ?>
+          <?php if($hash) { ?>
             <td colspan="4"><input type="submit" value="Submit" /></td>
           <?php } ?>
         </tr>

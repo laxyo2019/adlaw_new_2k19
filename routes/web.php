@@ -20,7 +20,7 @@ Route::get('/','HomeController@index')->name('/');
 Auth::routes();
 
 // Route::view('/connect', 'connect')->name('connect');
-Route::get('/connect', 'HomeController@connectLogin')->name('connect');
+Route::get('/connect', 'HomeController@connectLogin')->name('connect.home');
 
 Route::view('/contact_support', 'package.contact_support')->name('contact_support');
 
@@ -139,8 +139,6 @@ Route::group(['middleware' => ['role:admin']], function() {
 	Route::get('/contact_details','Admin\AdminController@contact_details')->name('admin.contact_details');
 	Route::get('/show_subscription','Admin\AdminController@show_subscription')->name('admin.show_subscription');
 	Route::get('/find_subscriptions','Admin\AdminController@find_subscriptions')->name('admin.find_subscriptions');
-
-	Route::post('/store_subscription','Admin\AdminController@store_subscription')->name('admin.store_subscription');
 	
 	Route::post('/subscription_package_active','Admin\AdminController@subscription_package_active')->name('admin.subscription_package_active');
 	Route::get('/package_fetch','Admin\AdminController@package_fetch')->name('admin.package_fetch');
@@ -412,6 +410,9 @@ Route::group(['middleware' => ['role:lawyer|lawcompany|lawcollege|admin|guest|te
 
 	Route::group(['namespace' => 'Package'], function() {
 		Route::resource('package','PackageController');
+		Route::post('payment_success','PackageController@payment_success')->name('payment_success');
+		Route::post('payment_cancel','PackageController@payment_cancel')->name('payment_cancel');
+
 		
 	});
 });

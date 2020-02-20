@@ -207,6 +207,7 @@
     				
     			}else{
 		    		$('input[name="dicount_amount"]').val(''); 
+		    		$('input[name="net_amount"]').val('');
     				$('.percent_error').hide();
     			}
     			

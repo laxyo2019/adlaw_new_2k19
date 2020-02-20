@@ -260,7 +260,12 @@
 						}
 						var end_date = dateFormat(e_date);
 						$('input[name="end_date"]').val(end_date);
+						var percent = $.trim($('.discount_perc').val());
+						discount_percent(percent);
+						console.log(percent);
 					}
+
+
 				});
 			}else{
 				$('input[name="package_amount"]').val('');
@@ -275,10 +280,15 @@
 
 		$(document).on('keyup', '.discount_perc', function(e){
 			e.preventDefault();
+			var percent = $.trim($(this).val());
+			discount_percent(percent);
+
+		});
+
+		function discount_percent(percent){
 			var package_id = $('select[name="package_id"] option:selected' ).val();	
 			var package_amount = $('input[name="package_amount"]' ).val();	
-			var percent = $.trim($(this).val());
-
+			
 			var re = /^([0-9]+[\.]?[0-9]?[0-9]?|[0-9]+)$/g;
     		var re1 = /^([0-9]+[\.]?[0-9]?[0-9]?|[0-9]+)/g;
     		if(package_id !=0){  
@@ -306,13 +316,15 @@
     				
     			}else{
 		    		$('input[name="dicount_amount"]').val(''); 
+		    		$('input[name="net_amount"]').val('');
     				$('.percent_error').hide();
     			}
     			
     		}else{
     			alert('First select package');
     		}
-		});
+		}
+
 
 		function dateFormat(date) {
 			var day = date.getDate();
