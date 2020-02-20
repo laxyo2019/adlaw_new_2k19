@@ -63,7 +63,7 @@
 										<td>{{$user->role != null ? $user->role['display_name']  : '-'}}</td>
 										<td>{{date('d-m-y', strtotime($user->created_at))}}</td>
 
-										<td>{{$user->status == 'A' ? 'Active' : ($user->status == 'P' ? 'Pending For Email Verified' : 'Suspended') }}</td>
+										<td>{{$user->status == 'A' ? 'Active' : ($user->status == 'C' ? 'Pending For Email Verified' : 'Suspended') }}</td>
 
 										<td>
 											@if($user->user_package_id !='')
