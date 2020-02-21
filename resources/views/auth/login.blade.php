@@ -70,7 +70,7 @@
                                 <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
                             </div>
                         </div> --}}
-                        <div class="form-group row {{ $errors->has('captcha') ? ' has-error' : '' }}">
+                      {{--   <div class="form-group row {{ $errors->has('captcha') ? ' has-error' : '' }}">
                             <div class="col-md-6 offset-md-4">
                                 <div class="captcha mb-2">
                                     <span>{!! captcha_img('flat') !!}</span>
@@ -84,7 +84,7 @@
                                   </span>
                                 @enderror
                           </div>
-                      </div>
+                      </div> --}}
 
 
                         <div class="form-group row mb-0">
