@@ -10,6 +10,5 @@ class QualMast extends Model
     public $timestamps = false;
 	protected $guarded = [] ;
 	protected $primaryKey = 'qual_code';
-
  	public $incrementing =false;
 }

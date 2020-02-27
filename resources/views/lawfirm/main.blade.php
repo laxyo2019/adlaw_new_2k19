@@ -82,12 +82,9 @@
             </ul>
              @endif
           </li>
-        <notification-component 
-          :notifications="{{ json_encode(auth()->user()->unreadNotifications) }}"
-          :logged_user="{{ json_encode(auth()->user()) }}">
-        </notification-component>
+        {{-- @include('notifications.notification') --}}
           <!-- Notifications: style can be found in dropdown.less -->
-         {{--  <li class="dropdown notifications-menu">
+          <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
               <span class="label label-danger">{{count(Auth::user()->unreadNotifications)}}</span>
@@ -120,7 +117,7 @@
             </li>
           </ul>
 
-          </li> --}}
+          </li>
           <!-- Tasks: style can be found in dropdown.less -->
           <!-- <li class="dropdown tasks-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

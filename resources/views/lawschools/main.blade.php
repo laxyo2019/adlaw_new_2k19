@@ -70,10 +70,39 @@
             </ul>
              @endif
           </li> --}}
-        <notification-component 
+           <li class="dropdown notifications-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell-o"></i>
+              <span class="label label-danger">{{count(Auth::user()->unreadNotifications)}}</span>
+            </a>  
+            <ul class="dropdown-menu">
+              <li class="header">You have {{count(Auth::user()->unreadNotifications)}} notifications </li>
+              <li>
+                <!-- inner menu: contains the actual data -->
+                <ul class="menu">
+                  @foreach(Auth::user()->unreadNotifications as $notification)
+                  <li>
+                     <a href="{{route('notification_read',$notification['id'])}}">
+                        <i class="fa fa-tasks "></i> 
+
+                        <span> {{str_limit($notification['data']['title'], $limit = 50, $end = '...') }} </span>
+                        <br>
+                        <span>{{$notification['data']['message']}}</span>
+                       
+                        <br> <span>{{$notification['created_at']->diffForHumans()}}</span>
+                    </a>
+                  </li>
+                  @endforeach
+
+                  <li>
+                </li>
+              </ul>
+            </li>
+          </ul></li>
+   {{--      <notification-component 
           :notifications="{{ json_encode(auth()->user()->unreadNotifications) }}"
           :logged_user="{{ json_encode(auth()->user()) }}">
-        </notification-component>
+        </notification-component> --}}
           <!-- Notifications: style can be found in dropdown.less -->
          {{--  <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
