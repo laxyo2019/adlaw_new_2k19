@@ -13,7 +13,7 @@
             <div class="icon">
               <i class="fa fa-briefcase"></i>
             </div>
-             <a @if($moduleShow) href="{{route('case_mast.index')}}" @endif class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+             <a  href="{{ $moduleShow == true ? route('case_mast.index') : route('crm_dashboard.index')}}"  class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         @if(Auth::user()->parent_id ==null)
@@ -30,7 +30,7 @@
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
-            <a  @if($moduleShow) href="{{route('clients.index')}}" @endif class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ $moduleShow == true ? route('clients.index') : route('crm_dashboard.index')}}"  class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         @endif
@@ -46,7 +46,7 @@
             <div class="icon">
               <i class="fa fa-envelope"></i>
             </div>
-            <a  @if($moduleShow) href="{{route('message.index')}}" @endif class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ $moduleShow == true ? route('message.index') : route('crm_dashboard.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
   
         </div>
@@ -83,7 +83,7 @@
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
-            <a  @if($moduleShow) href="{{route('teams.index')}}" @endif class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ $moduleShow == true ? route('teams.index') : route('crm_dashboard.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
 
@@ -101,7 +101,7 @@
           <div class="icon">
             <i class="fa fa-list-alt"></i>
           </div>
-          <a  @if($moduleShow) href="{{route('todos.index')}}" @endif class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="{{ $moduleShow == true ? route('todos.index') : route('crm_dashboard.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
         
@@ -121,7 +121,7 @@
             <div class="icon">
               <i class="fa fa-user"></i>
             </div>
-            <a @if($moduleShow) href="{{route('teams.index')}}" @endif class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ $moduleShow == true ? route('teams.index') : route('crm_dashboard.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
       </div>
         <div class="col-md-4 ">
@@ -135,7 +135,7 @@
             <div class="icon">
               <i class="fa fa-file"></i>
             </div>
-            <a @if($moduleShow) href="{{route('docs.home')}}" @endif class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ $moduleShow == true ? route('docs.home') : route('crm_dashboard.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
 
@@ -205,12 +205,12 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix no-border">
-            @if($moduleShow)
-              <a href="{{route('todos.index')}}" class="btn btn-default pull-right">More info <i class="fa fa-arrow-circle-right"></i></a>
+            
+              <a href="{{ $moduleShow == true ? route('todos.index') : route('crm_dashboard.index')}}" class="btn btn-default pull-right">More info <i class="fa fa-arrow-circle-right"></i></a>
                 @if(Auth::user()->parent_id == null )
-                    <a href="{{route('todos.create')}}" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add Todo</a>
+                    <a href="{{ $moduleShow == true ? route('todos.create') : route('crm_dashboard.index')}}" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add Todo</a>
                 @endif
-               @endif
+               
               </div>
           </div>
         </div>
@@ -243,7 +243,7 @@
             <!-- /.box-body -->
             <div class="box-footer clearfix no-border">
               @if($moduleShow)
-              <a href="{{route('upcomingHearings')}}" class="btn btn-default pull-right">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="{{ $moduleShow == true ? route('upcomingHearings') : route('crm_dashboard.index')}}" class="btn btn-default pull-right">More info <i class="fa fa-arrow-circle-right"></i></a>
              {{-- @if(Auth::user()->parent_id == null ) <a href="" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add Hearing</a>@endif --}}
              @endif
             </div>

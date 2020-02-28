@@ -54,7 +54,7 @@ class AgendaMastController extends Controller
 	  	// return $agendas;
 	   	$team = null;
 	   	$focusAgenda = 0;
-	   	// die;
+	
 	    return view('pms.agenda.index', compact('focusAgenda', 'agendas', 'team', 'can_create_agenda', 'users'));
 	  }
 

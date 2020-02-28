@@ -17,7 +17,18 @@
 
 
 Route::get('/','HomeController@index')->name('/');
+// Route::get('/home','HomeController@home')->name('home');
 Auth::routes();
+
+
+Route::get('/verify', 'VerifyController@getVerify')->name('getverify');
+Route::get('/resendVerifyCode', 'VerifyController@resendVerifyCode')->name('resendVerifyCode');
+Route::post('/verify', 'VerifyController@postVerfiy')->name('verify');
+Route::get('/verify/{token}', 'VerifyController@verifyUser')->name('verifyUser');
+
+
+
+Route::get('/testphone','HomeController@testphone');
 
 
 // Route::view('/connect', 'connect')->name('connect');

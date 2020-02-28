@@ -116,7 +116,7 @@
                             <div class="text-center mb-4">
                                 <img src="{{asset('images/icons/agenda2.png')}}" class="" style="width:80px;">
                             </div>
-                            <h4 class="font-weight-bold text-center mt-4">Agenda Management</h4>
+                            <h4 class="font-weight-bold text-center mt-4">DSR Management</h4>
                         </div>
                     </div>
                 </a>

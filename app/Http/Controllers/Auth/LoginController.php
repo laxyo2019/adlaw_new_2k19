@@ -30,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-   // protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -88,33 +88,84 @@ class LoginController extends Controller
     }
 
     
-    protected function authenticated(Request $request, $user)
+    public function login(Request $request)
     {
-       $status = DB::table('status_mast')->select('*')->get();
+        $this->validateLogin($request);
+        if (method_exists($this, 'hasTooManyLoginAttempts') &&
+          $this->hasTooManyLoginAttempts($request)) {
+          $this->fireLockoutEvent($request);
+
+          return $this->sendLockoutResponse($request);
+        }
+        if($this->guard()->validate($this->credentials($request))){
+
+          $user = $this->guard()->getLastAttempted();
+
+          if(is_numeric($request->get('email'))){
+              if($user->mobile_verified_at !=null && $this->attemptLogin($request)) {
+                  return $this->sendLoginResponse($request);
+              }else{
+                 $user->code = SendCode::sendCode($user->mobile); 
+              
+                 if($user->save()){
+                      return redirect('/verify?phone='.$user->mobile)->with('success','We sent activation code, Check your mobile number');
+                 }
+              }
+          }elseif (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) {
+              if($user->email_verified_at !=null && $this->attemptLogin($request)) {
+                  return $this->sendLoginResponse($request);                
+              }else{
+
+                  $this->incrementLoginAttempts($request);
+                  //$user->code = SendCode::sendCode($user->phone);
+                  if($user->save()){
+                     return redirect()->route('login')->with('warning','We already sent activation link, Check your email and click on the link to verify your email');
+                  }
+              }
+          }
+
+        }
+      }
+      protected function credentials(Request $request)
+      {
+        if(is_numeric($request->get('email'))){
+          return ['mobile'=>$request->get('email'),'password'=>$request->get('password')];
+        }
+        elseif (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) {
+          return ['email' => $request->get('email'), 'password'=>$request->get('password')];
+        }
+        return ['email' => $request->get('email'), 'password'=>$request->get('password')];
+      }
+
+
+
+    // protected function authenticated(Request $request, $user)
+    // {
+    //    $status = DB::table('status_mast')->select('*')->get();
        
-       $result = json_decode(json_encode($status, true));
-       foreach($result as $key => $value)
-            {
-                $result[$key] = (array) $value;
-            }  
+    //    $result = json_decode(json_encode($status, true));
+    //    foreach($result as $key => $value)
+    //         {
+    //             $result[$key] = (array) $value;
+    //         }  
 
-         if ($user->status == $result[0]['status_id']) {
-          $url =  $this->redirectTo = url()->previous();
-          $homeUrl =url('/').'/';      
-          if($url == $homeUrl){
+    //      if ($user->status == $result[0]['status_id']) {
+    //       $url =  $this->redirectTo = url()->previous();
+    //       $homeUrl =url('/').'/';      
+    //       if($url == $homeUrl){
 
-             return redirect()->intended($this->redirectPath());
-          }
-          else{
-            return redirect()->intended($url);
-          }
+    //          return redirect()->intended($this->redirectPath());
+    //       }
+    //       else{
+    //         return redirect()->intended($url);
+    //       }
     
-        }
-        else{
-            auth()->logout();
-            return back()->with('warning',$result[1]['status_text']); 
-        }
-     }
+    //     }
+    //     else{
+    //         auth()->logout();
+    //         return back()->with('warning',$result[1]['status_text']); 
+    //     }
+    //  }
 
     
 }
