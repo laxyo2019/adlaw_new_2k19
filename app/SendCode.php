@@ -21,9 +21,9 @@ class SendCode
         $sender = "TESTID";
         $message = 'Verify Code: '.$code;
 
-        $url="login.bulksmsgateway.in/sendmessage.php?user=".urlencode($username)."&password=".urlencode($password)."&mobile=".urlencode($number)."&sender=".urlencode($sender)."&message=".urlencode($message)."&type=".urlencode('3'); 
+        //$url="login.bulksmsgateway.in/sendmessage.php?user=".urlencode($username)."&password=".urlencode($password)."&mobile=".urlencode($number)."&sender=".urlencode($sender)."&message=".urlencode($message)."&type=".urlencode('3'); 
 
-        // $url = "http://login.yourbulksms.com/api/sendhttp.php?authkey=15447AYBoMgJJTLKf5e58a419P15&mobiles=".$number."&message=".$message." & new&mobile&sender=ADLAWS&route=4"
+        $url = "http://login.yourbulksms.com/api/sendhttp.php?authkey=11456AxEiTIeN5ca87c66&mobiles=".$number."&message=".$message." & new&mobile&sender=ADLAWS&route=4";
 
         $ch = curl_init($url);
 
