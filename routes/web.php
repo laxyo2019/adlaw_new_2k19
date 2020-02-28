@@ -19,8 +19,9 @@
 Route::get('/','HomeController@index')->name('/');
 Auth::routes();
 
+
 // Route::view('/connect', 'connect')->name('connect');
-Route::get('/connect', 'HomeController@connectLogin')->name('connect.home');
+Route::get('/connect', 'HomeController@connectLogin')->name('connect');
 
 Route::view('/contact_support', 'package.contact_support')->name('contact_support');
 

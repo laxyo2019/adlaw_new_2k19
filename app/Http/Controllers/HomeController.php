@@ -150,6 +150,4 @@ class HomeController extends Search\SearchController
   {
       return response()->json(['captcha'=> captcha_img('flat')]);
   }
-
-
 }
