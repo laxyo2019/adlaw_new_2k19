@@ -2007,7 +2007,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['notifications', 'logged_user'],
@@ -3106,6 +3105,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-flatpickr-component */ "./node_modules/vue-flatpickr-component/dist/vue-flatpickr.min.js");
 /* harmony import */ var vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_flatpickr_component__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Agenda_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Agenda.vue */ "./resources/js/modules/agenda/Agenda.vue");
+//
 //
 //
 //
@@ -62846,7 +62846,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("li", { staticClass: "dropdown notifications-menu" }, [
+  return _c("div", [
     _c(
       "a",
       {
@@ -64375,7 +64375,7 @@ var render = function() {
                           },
                           [
                             _c("i", { staticClass: "fe fe-plus" }),
-                            _vm._v(" New Agenda\n\t\t\t\t\t  \t")
+                            _vm._v(" New DSR\n\t\t\t\t\t  \t")
                           ]
                         )
                       : _vm._e()
@@ -64403,7 +64403,7 @@ var render = function() {
                             attrs: {
                               type: "text",
                               name: "title",
-                              placeholder: "Agenda Title",
+                              placeholder: "DSR Title",
                               required: "",
                               autofocus: ""
                             },
@@ -64449,7 +64449,7 @@ var render = function() {
                               name: "description",
                               cols: "30",
                               rows: "5",
-                              placeholder: "Agenda Description"
+                              placeholder: "DSR Description"
                             },
                             domProps: { value: _vm.agenda.description },
                             on: {
@@ -64554,7 +64554,7 @@ var render = function() {
                               }),
                               _vm._v(" "),
                               _c("p", { staticClass: "text-warning" }, [
-                                _vm._v("**fill if the agenda is for day end.")
+                                _vm._v("**fill if the DSR is for day end.")
                               ])
                             ],
                             1
@@ -64986,7 +64986,7 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("span", { staticClass: "card-title ml-2" }, [
-              _c("b", [_vm._v(" Daily Agenda")])
+              _c("b", [_vm._v(" Daily Service Report (DSR)")])
             ])
           ])
         ])
@@ -65030,7 +65030,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "state p-success" }, [
       _c("i", { staticClass: "icon typcn typcn-tick" }),
       _vm._v(" "),
-      _c("label", [_vm._v("Restrict time for agenda responses.")])
+      _c("label", [_vm._v("Restrict time for DSR responses.")])
     ])
   },
   function() {

@@ -121,9 +121,9 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h4 class="font-weight-bold">Agenda Management</h4>
+                            <h4 class="font-weight-bold">DSR Management</h4>
                             <p class="p-text">
-                            Agenda Management allows the lawyers/law firms to assign priorities and ensure that action steps are taken on every time. 
+                            Daily Service Report Management allows the lawyers/law firms to assign priorities and ensure that action steps are taken on every time. 
                             </p>
                         </div>
                          <div class="card-footer bg-white border-0">

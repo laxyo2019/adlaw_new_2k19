@@ -4,12 +4,12 @@
 <div class="container container-div">
     <div class="row ">
         <div class="col-sm-12 col-md-12 col-xl-12 text-center mb-2 h2-text">
-            <h2 class="h1-responsive font-weight-bold text-center text-uppercase text-white">Agenda Management</h2>          
+            <h2 class="h1-responsive font-weight-bold text-center text-uppercase text-white">Daily Service Report Management</h2>          
         </div>
         <div class="col-sm-12 col-lg-12 col-xs-12 feature-p-text">
         	{{-- <h4 class="text-uppercase font-weight-bold">CASE MANAGEMENT</h4> --}}
         	<p class="text-justify">
-        		Agenda Management allows the law colleges to assign priorities, build momentum, collaborate without confusions and ensure that action steps are taken on time, every time. They are also essential to manage work overload effectively, helping you and your team members stay focused and organized. Agenda help in strengthening the efficiency of day-to-day college activities. Agenda help in strengthening the efficiency of day-to-day firm operations while also positively influencing individual productivity.
+        		Daily Service Report Management allows the law colleges to assign priorities, build momentum, collaborate without confusions and ensure that action steps are taken on time, every time. They are also essential to manage work overload effectively, helping you and your team members stay focused and organized. Daily Service Report help in strengthening the efficiency of day-to-day college activities. Daily Service Report help in strengthening the efficiency of day-to-day firm operations while also positively influencing individual productivity.
         	</p>
 
              <div class="row">
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <p class="text-justify mt-4">
-                 It plays an important role in enabling law colleges to produce the results they seek. In this feature you can Create any number of agendas, Link tasks to cases, Set calendar deadlines, Assign tasks to team members, View pending, upcoming and completed tasks, Set email and/or SMS reminders to your own frequencies for the exact alerts you want and Edit or delete tasks as needed.
+                 It plays an important role in enabling law colleges to produce the results they seek. In this feature you can Create any number of Daily Service Report, Link tasks to cases, Set calendar deadlines, Assign tasks to team members, View pending, upcoming and completed tasks, Set email and/or SMS reminders to your own frequencies for the exact alerts you want and Edit or delete tasks as needed.
             </p>
 
 

@@ -214,7 +214,7 @@ class ClientsController extends Controller
             'email' => $data['email'],
             'password'=> Hash::Make($password),
             'status' => 'C',
-            'user_catg_id' => '5',
+            'user_catg_id' => '8',
             'parent_id' => Auth::user()->id,
             'mobile' => $data['mobile1']
         ]; 

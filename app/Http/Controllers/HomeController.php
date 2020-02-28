@@ -33,6 +33,9 @@ class HomeController extends Search\SearchController
 
         return view('layouts.home');
     }
+    // public function home(){
+    //     return view('home');
+    // }
     public function getStateList(Request $request)
     {
         $states = State::where("country_code",$request->country_id)->orderBy('state_name','ASC')
@@ -150,6 +153,30 @@ class HomeController extends Search\SearchController
   {
       return response()->json(['captcha'=> captcha_img('flat')]);
   }
+  public function testphone(){
 
+        // $username="ritesh845";
+        // $password ="ritesh@100";
+        // $number = '7828773421';
+        // $sender = "TESTID";
+        // $message = rand(1111,9999);
+     
+        // $url="login.bulksmsgateway.in/sendmessage.php?user=".urlencode($username)."&password=".urlencode($password)."&mobile=".urlencode($number)."&sender=".urlencode($sender)."&message=".urlencode($message)."&type=".urlencode('3'); 
+
+
+
+    //   $url =  "http://login.yourbulksms.com/api/sendhttp.php?authkey=11456AxEiTIeN5ca87c66&mobiles=7828773421&message=test & new&mobile&sender=ADLAWR&route=4";
+    // // $url = "http://login.yourbulksms.com/api/balance.php?authkey=11456AxEiTIeN5ca87c66&type=1";
+
+    //     $ch = curl_init($url);
+
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    //     echo $curl_scraped_page = curl_exec($ch);
+
+    //     curl_close($ch); 
+    //   return $url;
+    //     return rand(1111,9999);
+  }
 
 }

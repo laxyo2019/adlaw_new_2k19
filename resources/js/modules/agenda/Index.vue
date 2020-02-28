@@ -6,7 +6,7 @@
 					<div class="card-header">
 						<a href="/crm_dashboard" title="Back"><i class="fa fa-arrow-left fa-lg"></i></a>
 						<span class="card-title ml-2" >
-						<b> Daily Agenda</b>
+						<b> Daily Service Report (DSR)</b>
 						</span>				
 					</div>
 				</div>
@@ -21,7 +21,7 @@
 							<span class='pb-5'>
 						  	<button type="button" v-if="creators.indexOf(logged_user.id) > -1"
 						  		class="btn btn-pill btn-primary" href="#" @click="toggleCreateAgendaForm">
-						  		<i class="fe fe-plus"></i> New Agenda
+						  		<i class="fe fe-plus"></i> New DSR
 						  	</button>
 						  	</span>							
 						</div>
@@ -32,13 +32,13 @@
 									<div class="mb-5 form-group">
 										<label><b>What question do you want to ask?</b></label>
 					  				<input type="text" name="title" class="form-control" v-model="agenda.title"
-						  				placeholder="Agenda Title" required autofocus>
+						  				placeholder="DSR Title" required autofocus>
 						  			<div class="validation-message" v-text="validation.getMessage('title')"></div>
 									</div>
 									<div class="mb-5 form-group">
 										<label><b>Textarea</b></label>
 						  			<textarea name="description" cols="30" rows="5" class="form-control" v-model="agenda.description"
-						  			placeholder="Agenda Description"></textarea>
+						  			placeholder="DSR Description"></textarea>
 						  			<div class="validation-message" v-text="validation.getMessage('description')"></div>
 									</div>
 									<div class="row">
@@ -59,9 +59,10 @@
 											<multiselect v-model="agenda.hours" 
 												:options="maxHours" 
 												:multiple="false" 
-												:preselect-first="true">
+												:preselect-first="true"
+												>
 											</multiselect>
-							  			<p class="text-warning">**fill if the agenda is for day end.</p>
+							  			<p class="text-warning">**fill if the DSR is for day end.</p>
 										</div>
 									</div>
 									<div class="form-group">
@@ -69,7 +70,7 @@
 								      		<input type="checkbox" v-model="agenda.restrictTime" />
 								        	<div class="state p-success">
 							            		<i class="icon typcn typcn-tick"></i>
-							            		<label>Restrict time for agenda responses.</label>
+							            		<label>Restrict time for DSR responses.</label>
 								        	</div>
 								    	</div>
 									</div>

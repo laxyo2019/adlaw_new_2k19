@@ -63,7 +63,6 @@
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
@@ -82,6 +81,18 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="mobile" class="col-md-4 col-form-label text-md-right">{{ __('Mobile Number')}}</label>
+                            <div class="col-md-6"> 
+                                <input type="text" name="mobile" class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" value="{{old('mobile')}}">
+                            </div>
+
+                            @error('mobile')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                         <div class="form-group row {{ $errors->has('captcha') ? ' has-error' : '' }}">
                             <div class="col-md-6 offset-md-4">
                                 <div class="captcha mb-2">
@@ -97,19 +108,8 @@
                                 @enderror
                           </div>
                         </div>
-                       {{--  <div class="form-group row" style="display: none;" id="mobileDiv">
-                            <label for="mobile" class="col-md-4 col-form-label text-md-right">{{ __('Mobile Number')}}</label>
-                            <div class="col-md-6"> 
-                                <input type="text" name="mobile" class="form-control" value="{{old('mobile')}}">
-                            </div>
-
-                            @error('mobile')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <div class="form-group row" style="display: none" id="genderDiv">
+                        
+                        {{-- <div class="form-group row" style="display: none" id="genderDiv">
                              <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender')}}</label>
                              <div class="col-md-6">
                                   <select name="gender" class="form-control">

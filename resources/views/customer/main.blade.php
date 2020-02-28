@@ -193,7 +193,7 @@
 
             </a>
           </li> 
-
+            @if(Auth::user()->user_catg_id == 5)
           <li class="treeview {{Request()->segment(1) == 'master' ? 'active' : '' }}">
             <a href="{{route('package.index')}}">
               <i class="fa fa-table"></i> <span>CRM</span>
@@ -201,6 +201,7 @@
                   <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
+          
             <ul class="treeview-menu">
               <li class="">
                 <a href="{{route('crm_dashboard.index')}}">
@@ -228,6 +229,7 @@
               @endforeach  
               </ul>
             </li>
+            @endif
              <li class="nav-item">
               <a class="nav-link" href="{{route('password_change')}}">
                 <i class="fa fa-user"></i>

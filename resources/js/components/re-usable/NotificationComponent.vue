@@ -1,5 +1,5 @@
 <template>
-
+<div>
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
         <i class="fa fa-bell-o"></i>
 
@@ -31,6 +31,7 @@
         <a href="">All Notifications</a>
       </li>
     </ul>
+  </div>
 </template>
 <style scoped>
 	.dropdown-item.active, .dropdown-item:active{
