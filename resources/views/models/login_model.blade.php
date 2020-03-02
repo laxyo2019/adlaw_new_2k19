@@ -10,8 +10,8 @@
          <form method="POST" action="{{ route('login') }}" id="formLogin">
               @csrf
           <div class="form-group">
-            <label for="email" class="col-form-label">Email address</label>
-            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email address" autofocus>
+            <label for="email" class="col-form-label">Email address or Mobile Number</label>
+            <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email address or Mobile number" autofocus>
 
             @error('email')
                 <span class="invalid-feedback" role="alert">
@@ -43,6 +43,7 @@
         <button type="submit" class="btn btn-primary">Login</button>
         </form>
         <a href="{{url('/register')}}"  class="btn  btn-info" >Signup</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

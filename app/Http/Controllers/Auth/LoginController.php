@@ -8,35 +8,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use App\User;
+use App\SendCode;
 use DB;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
+    
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    // protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
 
@@ -105,7 +84,7 @@ class LoginController extends Controller
               if($user->mobile_verified_at !=null && $this->attemptLogin($request)) {
                   return $this->sendLoginResponse($request);
               }else{
-                 $user->code = SendCode::sendCode($user->mobile); 
+                 $user->otp = SendCode::sendCode($user->mobile); 
               
                  if($user->save()){
                       return redirect('/verify?phone='.$user->mobile)->with('success','We sent activation code, Check your mobile number');
@@ -119,15 +98,13 @@ class LoginController extends Controller
                   $this->incrementLoginAttempts($request);
                   //$user->code = SendCode::sendCode($user->phone);
                   if($user->save()){
-                     return redirect()->route('login')->with('warning','We already sent activation link, Check your email and click on the link to verify your email');
+                     return redirect()->back()->with('warning','Your account is not active. We already sent activation link, Check your email and click on the link to verify your email');
                   }
               }
           }
 
         }
-        // If the login attempt was unsuccessful we will increment the number of attempts
-        // to login and redirect the user back to the login form. Of course, when this
-        // user surpasses their maximum number of attempts they will get locked out.
+      
         $this->incrementLoginAttempts($request);
 
         return $this->sendFailedLoginResponse($request);
@@ -143,35 +120,20 @@ class LoginController extends Controller
         return ['email' => $request->get('email'), 'password'=>$request->get('password')];
       }
 
+//After login redirect
 
+    protected function authenticated(Request $request, $user)
+    {
+        $url =  $this->redirectTo = url()->previous();
+        $homeUrl =url('/').'/';   
 
-    // protected function authenticated(Request $request, $user)
-    // {
-    //    $status = DB::table('status_mast')->select('*')->get();
-       
-    //    $result = json_decode(json_encode($status, true));
-    //    foreach($result as $key => $value)
-    //         {
-    //             $result[$key] = (array) $value;
-    //         }  
-
-    //      if ($user->status == $result[0]['status_id']) {
-    //       $url =  $this->redirectTo = url()->previous();
-    //       $homeUrl =url('/').'/';      
-    //       if($url == $homeUrl){
-
-    //          return redirect()->intended($this->redirectPath());
-    //       }
-    //       else{
-    //         return redirect()->intended($url);
-    //       }
-    
-    //     }
-    //     else{
-    //         auth()->logout();
-    //         return back()->with('warning',$result[1]['status_text']); 
-    //     }
-    //  }
+        if($url == $homeUrl){
+          return redirect()->intended($this->redirectPath());
+        }
+        else{
+          return redirect()->intended($url);
+        }
+     }
 
     
 }
