@@ -31,7 +31,7 @@
 
 							</div>
 							<div class="col-md-12 text-center mt-2 mb-2">
-								<a href="{{url('user/verify', $user->verifyUser->token)}}" class="btn btn-md btn-success">Verify Email</a>
+								<a href="{{url('/verify/'. $user['remember_token'])}}" class="btn btn-md btn-success">Verify Email</a>
 							</div>
 							<div class="col-md-12 mt-2">
 								<table class="table table-bordered">

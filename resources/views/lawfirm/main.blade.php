@@ -42,7 +42,7 @@
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
             <li class="nav-item">
-              <a href="http://connect-adlaw.laxyo.org/" target="_blank"><i class="fa fa-comments-o"></i></a>
+              <a href="{{route('connect')}}"><i class="fa fa-comments-o"></i></a>
             </li>
             <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

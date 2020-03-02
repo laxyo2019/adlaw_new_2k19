@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\SendCode;
 use DB;
-
+use Crypt;
 class LoginController extends Controller
 {
     
@@ -82,6 +82,10 @@ class LoginController extends Controller
 
           if(is_numeric($request->get('email'))){
               if($user->mobile_verified_at !=null && $this->attemptLogin($request)) {
+                  if($user->pwd == null){
+                    $user->pwd = Crypt::encrypt($request->get('password'));
+                    $user->save();
+                  }
                   return $this->sendLoginResponse($request);
               }else{
                  $user->otp = SendCode::sendCode($user->mobile); 
@@ -92,6 +96,11 @@ class LoginController extends Controller
               }
           }elseif (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) {
               if($user->email_verified_at !=null && $this->attemptLogin($request)) {
+
+                  if($user->pwd == null){
+                     $user->pwd = Crypt::encrypt($request->get('password'));
+                    $user->save();
+                  }
                   return $this->sendLoginResponse($request);                
               }else{
 

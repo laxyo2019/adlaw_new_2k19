@@ -15,7 +15,7 @@ use DB;
 use Mail;
 use App\Role;
 use Illuminate\Http\Request;
-
+use Crypt;
 class RegisterController extends Controller
 {
     use RegistersUsers;
@@ -66,6 +66,7 @@ class RegisterController extends Controller
             'mobile'        => $data['mobile'],
             'user_catg_id'  => $data['user_category'],
             'status'        => $status_id,
+            'pwd'           => Crypt::encrypt($data['password'])
         ]);
 
         if($user){

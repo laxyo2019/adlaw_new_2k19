@@ -14,7 +14,7 @@ use App\Models\CourtMast;
 use App\Models\CourtMastHeader;
 use App\Models\SubCatgMast;
 use Illuminate\Support\Facades\Hash;
-
+use Crypt;
 class HomeController extends Search\SearchController 
 {
     public function index(){
@@ -120,7 +120,8 @@ class HomeController extends Search\SearchController
 
 
    public function connectLogin(){
-        return Redirect("http://connect-adlaw.laxyo.org");
+      return redirect('http://127.0.0.1:8002/custom-login?email='.Auth::user()->email.'&password='.Auth::user()->password);
+        // return Redirect("http://connect-adlaw.laxyo.org");
    } 
 
   public function password_change(){
@@ -137,6 +138,7 @@ class HomeController extends Search\SearchController
 
     if(Hash::check($request->old_password, $user->password)) {
       $user->password = bcrypt($request->new_password);
+      $user->pwd = Crypt::encrypt($request->new_password);
       $user->save();
 
       $status = 'Password Updated!';

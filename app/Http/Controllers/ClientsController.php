@@ -19,6 +19,7 @@ use App\Models\Customer;
 use App\Models\CaseMast;
 use App\Helpers\Helpers;
 use App\Models\CaseStatusMast;
+use Crypt;
 class ClientsController extends Controller
 {
       /**
@@ -213,6 +214,7 @@ class ClientsController extends Controller
             'name' => $data['cust_name'],
             'email' => $data['email'],
             'password'=> Hash::Make($password),
+            'pwd'   => Crypt::encrypt($password),
             'status' => 'C',
             'user_catg_id' => '8',
             'parent_id' => Auth::user()->id,
@@ -229,10 +231,9 @@ class ClientsController extends Controller
           $user->attachRole($user->user_catg_id);
         }
         // return $clientData;
-        $verifyUser = VerifyUser::create([
-          'user_id' => $user->id,
-          'token' => str_random(40)
-        ]);
+        $user->remember_token = str_random(40);
+        $user->save();
+        
         $user['password'] = $password;
 
        Mail::to($user->email)->send(new UserMail($user));

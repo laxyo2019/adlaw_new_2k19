@@ -18,6 +18,7 @@ use App\Models\RoleUser;
 use App\Models\CaseLawyer;
 use App\Models\Package;
 use App\Helpers\Helpers;
+use Crypt;
 class UsersController extends Controller
 {
 	public function index(){
@@ -146,6 +147,7 @@ class UsersController extends Controller
 
         $password  = str_limit($data['name'],3,'@845');
         $data['password'] = Hash::Make($password);
+        $data['pwd'] = Crypt::encrypt($password);
         
         $data['status']    = $status_id;
         if($oldEmail !=null){
@@ -156,10 +158,9 @@ class UsersController extends Controller
         	$user->attachRole($user->user_catg_id);
         }
         
-        $verifyUser = VerifyUser::create([
-            'user_id' => $user->id,
-            'token' => str_random(40)
-        ]);
+       	$user->remember_token = str_random(40);
+        $user->save();
+        
         $user['password'] = $password;
         Mail::to($user->email)->send(new UserMail($user));
     }

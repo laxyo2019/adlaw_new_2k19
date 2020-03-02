@@ -29,6 +29,7 @@ use Auth;
 use App\Mail\UserMail;
 use App\Imports\StudentsImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Crypt;
 class StudentDetailController extends Controller
 {
     public function index(){
@@ -412,6 +413,7 @@ class StudentDetailController extends Controller
             'name' => $data['f_name'] .' '. $data['l_name'],
             'email' => $data['email'],
             'password'=> Hash::Make($password),
+            'pwd'   => Crypt::encrypt($password),
             'status' => 'A',
             'user_catg_id' => '7',
             'parent_id' => Auth::user()->id,
@@ -419,10 +421,10 @@ class StudentDetailController extends Controller
         ]; 
         $user = User::create($student_data);
         $user->attachRole($user->user_catg_id);
-        $verifyUser = VerifyUser::create([
-            'user_id' => $user->id,
-            'token' => str_random(40)
-        ]);
+
+        $user->remember_token = str_random(40);
+        $user->save();
+        
         $user['password'] = $password;
         Mail::to($user->email)->send(new UserMail($user));
         
