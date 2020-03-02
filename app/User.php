@@ -10,10 +10,11 @@ use Laratrust\Traits\LaratrustUserTrait;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\Models\Media;
+use Illuminate\Database\Eloquent\SoftDeletes;
 class User extends Authenticatable
 {
     use Notifiable;
-    use LaratrustUserTrait, HasMediaTrait; // add this trait to your user model
+    use LaratrustUserTrait, HasMediaTrait,SoftDeletes; // add this trait to your user model
     /**
      * The attributes that are mass assignable.
      *

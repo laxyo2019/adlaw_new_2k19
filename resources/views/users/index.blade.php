@@ -49,7 +49,7 @@
 									<th>Registration Date</th>
 									<th>Status</th>
 									<th>Package Active</th>
-									<th style="width: 20%">Action</th>
+									<th style="width: 30%">Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -63,7 +63,12 @@
 										<td>{{$user->role != null ? $user->role['display_name']  : '-'}}</td>
 										<td>{{date('d-m-y', strtotime($user->created_at))}}</td>
 
-										<td>{{$user->status == 'A' ? 'Active' : ($user->status == 'C' ? 'Pending For Email Verified' : 'Suspended') }}</td>
+										<td>{{$user->email_verified_at != null ? 'Email Verified' : 'Pending For Email Verifying'}}
+											<br>
+											<br>
+											{{$user->mobile_verified_at != null ? 'Mobile Verified' : 'Pending For Mobile Verifying'}}
+
+										</td>
 
 										<td>
 											@if($user->user_package_id !='')

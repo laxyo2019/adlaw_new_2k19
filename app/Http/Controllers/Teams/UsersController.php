@@ -137,9 +137,7 @@ class UsersController extends Controller
 
     }
     public function destroy($id){
-		VerifyUser::where('user_id',$id)->delete();
-		RoleUser::where('user_id',$id)->delete();
-		User::find($id)->delete();
+		User::where('id',$id)->update(['deleted_at'=>date('Y-m-d H:i:s')]);
 		return redirect()->back()->with('success','User deleted successfully');
     }
     public function create_user($data,$oldEmail =null){
