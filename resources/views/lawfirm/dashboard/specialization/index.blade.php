@@ -61,11 +61,11 @@
           $( "#parts-selector-1" ).partsSelector();
 
         });
-      $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-          });
+    $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
 
           $('#submit').on('click',function(e){
             e.preventDefault();
