@@ -4,7 +4,7 @@
 <div class="container container-div">
     <div class="row ">
     	<div class="col-sm-12 col-md-12 col-xl-12 text-center mb-2 h2-text">
-            <h2 class="font-weight-bold text-center text-uppercase text-white">GUEST / USERS</h2>   
+            <h2 class="font-weight-bold text-center text-uppercase text-white">COMPANY / OTHER LAW USERS</h2>   
             <p class="lead mb-0">Easily Search Lawyer and Law Firms!</p>       
         </div>
         

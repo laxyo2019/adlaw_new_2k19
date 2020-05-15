@@ -4,7 +4,7 @@
 <div class="container container-div">
 	<div class="row ">
 		<div class="col-sm-12 col-md-12 col-xl-12 text-center mb-2 h2-text">
-	        <h2 class="h1-responsive font-weight-bold text-center text-white text-uppercase">Law Schools</h2>  
+	        <h2 class="h1-responsive font-weight-bold text-center text-white text-uppercase">Law Schools/ Students</h2>  
 	        <p><i>Easily Find Top Rated Law College.</i></p>        
 	    </div>
 	</div>	

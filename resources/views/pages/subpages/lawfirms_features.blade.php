@@ -16,7 +16,7 @@
         	{{-- content div --}}
         	<div class="col-sm-7 col-lg-7 col-md-7" >
         		
-        			<h1 class="font-weight-bold text-captialize mb-5">Consult Best Lawyer / Law Firms in India</h1>
+        			{{-- <h1 class="font-weight-bold text-captialize mb-5">Consult Best Lawyer / Law Firms in India</h1>
         			<p class="p-text">
                             Seeing the demand of various Legal problems we allow you to hire the professional experts having good experience in Civil Law, Corporate Law, Start-up Solutions, Criminal Law, Consumer Law, Family Law and much more in all over India.
                     <br><br>
@@ -24,15 +24,18 @@
                     <br><br>
                      
                     </p>
-
+ --}}
+                 <p class="p-text">
+                     When it comes to businesses, a legal consultant is responsible for providing legal advice and assistance in handling disputes, analyzing and identifying the legal issues, drafting the legal documents, maintaining legal correspondence, etc. If any client is looking for legal advice or legal documentation, Adlaw has the lists of advisors from various states who can help you with just one click. Even our website is meant for those young and energized lawyers who are looking for cases. They have to register them-self on our website providing all documents so that if any clients want to hire you, you will get a notification. Adlaw offers free legal help and advice online for almost any legal matters by our top and best Lawyers in different verticals of Industry.       
+                </p>
         	
         	</div>
         </div>
         <div class="row">
             <div class="col-md-10 m-auto">
-                <p class="p-text">
+               {{--  <p class="p-text">
                      When it comes to businesses, a legal consultant is responsible for providing legal advice and assistance in handling disputes, analyzing and identifying the legal issues, drafting the legal documents, maintaining legal correspondence, etc. If any client is looking for legal advice or legal documentation, Adlaw has the lists of advisors from various states who can help you with just one click. Even our website is meant for those young and energized lawyers who are looking for cases. They have to register them-self on our website providing all documents so that if any clients want to hire you, you will get a notification. Adlaw offers free legal help and advice online for almost any legal matters by our top and best Lawyers in different verticals of Industry.       
-                </p>
+                </p> --}}
             </div>
         </div>
 </div>

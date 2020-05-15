@@ -74,10 +74,10 @@
             </li>
 
             <li class="nav-item {{Request()->segment(2) == 'guest' ? 'active_class' : '' }} ">
-                <a class="nav-link ped-4" href="{{route('guest')}}">COMPANY</a>
+                <a class="nav-link ped-4" href="{{route('guest')}}">COMPANY/OTHER LAW USERS</a>
             </li>
             <li class="nav-item {{Request()->segment(2) == 'lawschools' ? 'active_class' : '' }} ">
-                <a class="nav-link ped-4" href="{{route('lawschools')}}">LAW SCHOOLS</a>
+                <a class="nav-link ped-4" href="{{route('lawschools')}}">LAW SCHOOLS/STUDENTS</a>
             </li>
             <li class="nav-item {{Request()->segment(1) == 'contact' ? 'active_class' : '' }}">
                 <a href="{{route('contact.index')}}" class="nav-link ped-4">CONTACT</a>
