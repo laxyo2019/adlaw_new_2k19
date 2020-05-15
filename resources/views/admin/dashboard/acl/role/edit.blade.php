@@ -35,7 +35,7 @@
 							</div>
 							<div class="col-md-12 form-group">
 								<label class="required">Description</label>
-								<textarea class="form-control" name="description" rows="5" cols="5">{{old('description') ?? $Role->description}}
+								<textarea class="form-control" name="description" rows="5" cols="5">{{old('description') ?? $role->description}}
 								</textarea>
 								@error('description')
 									<span class="invalid-feedback text-danger" role="alert">

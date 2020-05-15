@@ -62,8 +62,8 @@
             <div class="inner">
               <h3>{{count($appointments)}}</h3>
               <h4>Appointment</h4>
-              <span>Unconfirmed : {{count($unbookings)}} | Confirmed : {{count($booked)}} | Cancelled Request : {{count($cancelled)}} </span>
-            </br><br>
+              <span>Unconfirmed : {{count($unbookings)}} | Confirmed : {{count($booked)}} | Cancelled : {{count($cancelled)}} </span>
+            </br></br>
             </div>
             <div class="icon">
               <i class="fa fa-calendar"></i>

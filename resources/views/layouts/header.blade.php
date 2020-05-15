@@ -42,10 +42,18 @@
   -o-background-size: cover;
   background-size: cover;
 }
+<<<<<<< HEAD
+.customNav li a {
+	font-size: 14px;
+}
+
+=======
 .ped-4{
     padding: 1.3rem !important;
 }
+>>>>>>> a2ebdfbc76bc503002cea4bfcd5c934f9255b54d
 </style>
+
 <body>
   <nav class="navbar navbar-expand-xl menunav p-0 fixed-top" >
   <div class="container-fluid">
@@ -55,7 +63,7 @@
       <span class="navbar-toggler-icon text-white'"><i class="fa fa-bars" aria-hidden="true"></i></span>
       </button>
     <div class="collapse navbar-collapse " id="collapsibleNavbar">
-        <ul class="nav navbar-nav ml-auto">
+        <ul class="nav navbar-nav ml-auto customNav">
             <li class="nav-item {{Request()->segment(1) == '' ? 'active_class' : '' }}">
                 <a href="{{route('/')}}"  class="nav-link ped-4">HOME</a>
             </li> 
