@@ -42,6 +42,9 @@
   -o-background-size: cover;
   background-size: cover;
 }
+.ped-4{
+    padding: 1.3rem !important;
+}
 </style>
 <body>
   <nav class="navbar navbar-expand-xl menunav p-0 fixed-top" >
@@ -54,46 +57,46 @@
     <div class="collapse navbar-collapse " id="collapsibleNavbar">
         <ul class="nav navbar-nav ml-auto">
             <li class="nav-item {{Request()->segment(1) == '' ? 'active_class' : '' }}">
-                <a href="{{route('/')}}"  class="nav-link p-4">HOME</a>
+                <a href="{{route('/')}}"  class="nav-link ped-4">HOME</a>
             </li> 
             <li class="nav-item {{Request()->segment(1) == 'about_us' ? 'active_class' : '' }}">
-                <a href="{{url('/about_us')}}"  class="p-4 nav-link" >ABOUT</a>
+                <a href="{{url('/about_us')}}"  class="ped-4 nav-link" >ABOUT</a>
                 {{-- <ul class="dropdown-menu">
                     <li class="nav-item"><a href="#" class="nav-link p-3">Why ADLAW?</a></li>
                     <li class="nav-item"><a href="#" class="nav-link p-3">More</a></li>
                 </ul> --}}
             </li>
             <li class="nav-item {{Request()->segment(1) == 'why_adlaw' ? 'active_class' : '' }}">
-                <a href="{{url('/why_adlaw')}}"  class="nav-link p-4">WHY ADLAW</a>
+                <a href="{{url('/why_adlaw')}}"  class="nav-link ped-4">WHY ADLAW</a>
             </li>
             <li class="nav-item {{Request()->segment(2) == 'lawfirms' ? 'active_class' : '' }}">
-                <a class="nav-link p-4 " href="{{route('lawfirms')}}">LAWYERS/LAW FIRMS </a>
+                <a class="nav-link ped-4 " href="{{route('lawfirms')}}">LAWYERS/LAW FIRMS </a>
             </li>
 
             <li class="nav-item {{Request()->segment(2) == 'guest' ? 'active_class' : '' }} ">
-                <a class="nav-link p-4" href="{{route('guest')}}">USERS/GUEST</a>
+                <a class="nav-link ped-4" href="{{route('guest')}}">COMPANY</a>
             </li>
             <li class="nav-item {{Request()->segment(2) == 'lawschools' ? 'active_class' : '' }} ">
-                <a class="nav-link p-4" href="{{route('lawschools')}}">LAW SCHOOLS</a>
+                <a class="nav-link ped-4" href="{{route('lawschools')}}">LAW SCHOOLS</a>
             </li>
             <li class="nav-item {{Request()->segment(1) == 'contact' ? 'active_class' : '' }}">
-                <a href="{{route('contact.index')}}" class="nav-link p-4">CONTACT</a>
+                <a href="{{route('contact.index')}}" class="nav-link ped-4">CONTACT</a>
             </li> 
             @guest
             <li class="nav-item">
-                <a href="{{route('login')}}" class="nav-link p-4">LOGIN</a>
+                <a href="{{route('login')}}" class="nav-link ped-4">LOGIN</a>
             </li>
             @endguest
 
             @guest
             <li class="nav-item">
-                <a href="{{route('register')}}" class="nav-link p-4">REGISTER</a>
+                <a href="{{route('register')}}" class="nav-link ped-4">REGISTER</a>
             </li>
             @endguest
 
             @if(Auth::user())
             <li class="nav-item dropdown ">
-              <a class="dropdown-toggle nav-link p-4" href="{{route('register')}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="dropdown-toggle nav-link ped-4" href="{{route('register')}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @if(Auth::user()->photo !='')
                 <img src="{{ asset('storage/profile_photo/'.Auth::user()->photo)}}"  style="width: 33px; height: 29px;" class="" />
                 @else
