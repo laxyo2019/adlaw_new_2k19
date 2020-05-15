@@ -42,7 +42,12 @@
   -o-background-size: cover;
   background-size: cover;
 }
+.customNav li a {
+	font-size: 14px;
+}
+
 </style>
+
 <body>
   <nav class="navbar navbar-expand-xl menunav p-0 fixed-top" >
   <div class="container-fluid">
@@ -52,7 +57,7 @@
       <span class="navbar-toggler-icon text-white'"><i class="fa fa-bars" aria-hidden="true"></i></span>
       </button>
     <div class="collapse navbar-collapse " id="collapsibleNavbar">
-        <ul class="nav navbar-nav ml-auto">
+        <ul class="nav navbar-nav ml-auto customNav">
             <li class="nav-item {{Request()->segment(1) == '' ? 'active_class' : '' }}">
                 <a href="{{route('/')}}"  class="nav-link p-4">HOME</a>
             </li> 
