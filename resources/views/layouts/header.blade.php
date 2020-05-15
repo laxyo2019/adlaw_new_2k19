@@ -42,22 +42,19 @@
   -o-background-size: cover;
   background-size: cover;
 }
-<<<<<<< HEAD
 .customNav li a {
-	font-size: 14px;
+    font-size: 14px;
+}
+.ped-4{
+    padding: 0.92rem !important;
 }
 
-=======
-.ped-4{
-    padding: 1.3rem !important;
-}
->>>>>>> a2ebdfbc76bc503002cea4bfcd5c934f9255b54d
 </style>
 
 <body>
   <nav class="navbar navbar-expand-xl menunav p-0 fixed-top" >
   <div class="container-fluid">
-      <a class="navbar-header p-1" href="{{url('/')}}"><img src="{{asset('images/adlaw-logo.png')}}" alt="Adlaw" style="width: 90px;"></a>
+      <a class="navbar-header" href="{{url('/')}}" style="padding:10px 0px 10px 0px !important"><img src="{{asset('images/adlaw-logo.png')}}" alt="Adlaw" style="width: 90px;"></a>
 
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon text-white'"><i class="fa fa-bars" aria-hidden="true"></i></span>

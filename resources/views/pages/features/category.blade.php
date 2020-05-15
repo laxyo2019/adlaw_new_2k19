@@ -9,7 +9,7 @@
               <i class="m-auto text-primary">  <img class="media-object" src="images/lawyers-law firm1.png" alt="Image"></i>
             </div>
             <h3 class="font-weight-bold">Lawyer / Law Firms</h3>
-            <p class="lead mb-0">Perfect CRM Solutions For Lawyer / Law Firms !</p>
+            <p class="lead mb-0">Feature Rich CRM Solution</p>
           </div>
           </a>
         </div>
