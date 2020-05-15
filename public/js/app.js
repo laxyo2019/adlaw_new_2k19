@@ -88719,8 +88719,13 @@ var Validation = /*#__PURE__*/function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! /home/ritesh/code/adlaw/resources/js/app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! /home/ritesh/code/adlaw/resources/sass/app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! /home/ritesh/code/adlaw/adlaw2k19/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/ritesh/code/adlaw/adlaw2k19/resources/sass/app.scss */"./resources/sass/app.scss");
+>>>>>>> 08fb8b9afd8eab1afc6b669a21e290032d7cf70d
 
 
 /***/ })
