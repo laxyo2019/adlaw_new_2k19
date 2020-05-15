@@ -26,6 +26,7 @@ class LawSchoolsController extends Controller
     	$passout_student = Helpers::filter_student($user->students,$status ='P');
     	$dropout_student = Helpers::filter_student($user->students,$status ='D');
 
+    		
     	$todays_birthday = collect($running_student)->filter(function($e){
     		return date('m-d',strtotime($e['dob'])) == date('m-d');
     	});
