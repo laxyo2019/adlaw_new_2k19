@@ -62,7 +62,7 @@
                     <div class="card feature-div">
                         <div class="card-header bg-white border-0 ">
                             <div class="feature-circle-images">
-                                <img src="{{asset('images/icons/calendar.jpg')}}" class="img-feature">
+                                <img src="{{asset('images/icons/case-rel.jpg')}}" class="img-feature">
                             </div>
                         </div>
                         <div class="card-body">
