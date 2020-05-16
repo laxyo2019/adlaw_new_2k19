@@ -114,7 +114,7 @@ Route::group(['prefix' => 'features/lawschools'] ,function(){
 	Route::view('/document_management','pages.features.subpages.lawschools.document_management')->name('lawschools.document_management');
 	Route::view('/team_management','pages.features.subpages.lawschools.team_management')->name('lawschools.team_management');
 	Route::view('/agenda_management','pages.features.subpages.lawschools.agenda_management')->name('lawschools.agenda_management');
-	Route::view('/todo_management','pages.features.subpages.lawschools.todo_management')->name('features.todo_management');
+	// Route::view('/todo_management','pages.features.subpages.lawschools.todos_management')->name('features.todo_management');
 });
 
 

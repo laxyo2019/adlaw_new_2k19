@@ -17,7 +17,7 @@
                 <a href="{{route('guest.profile_management')}}" class="btn btn-sm btn-info">More Info</a>
             </div> --}}
             <div class="col-md-4 mb-4">
-                <a href="{{route('guest.search_lawyer')}}" class="feature-link" >
+                <a href="{{route('guest')}}" class="feature-link" >
                     <div class="card feature-div">
                         <div class="card-header bg-white border-0 ">
                             <div class="feature-circle-images">

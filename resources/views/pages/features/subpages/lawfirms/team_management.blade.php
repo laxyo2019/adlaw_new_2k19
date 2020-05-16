@@ -8,7 +8,7 @@
         </div>
         <div class="col-sm-12 col-lg-12 col-xs-12 feature-p-text">
         	{{-- <h4 class="text-uppercase font-weight-bold">CASE MANAGEMENT</h4> --}}
-        	<p class="text-justify">
+        	<p class="p-text">
         		Adlaw's team members management feature used to create new user, edit and delete user. Assign or create team of lawyer organize and keep track of cases assigned to each individual lawyer. It is a critical part of organizing and keeping track of cases assigned to each individual lawyer, See which groups team members are a part of, edit and delete profiles and Search for members by name, email address or mobile number. 
 
         	</p>

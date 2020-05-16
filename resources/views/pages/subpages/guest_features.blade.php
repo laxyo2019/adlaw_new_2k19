@@ -7,7 +7,17 @@
             <h2 class="font-weight-bold text-center text-uppercase text-white">COMPANY / OTHER LAW USERS</h2>   
             <p class="lead mb-0">Easily Search Lawyer and Law Firms!</p>       
         </div>
-        
+         <div class="col-md-12 col-sm-12 col-xl-12">
+        	<h3 class="font-weight-bold text-captialize mb-3">Consult Best Lawyer / Law Firms in India</h3>
+			<p class="p-text">
+			    Seeing the demand of various Legal problems we allow you to hire the professional experts having good experience in Civil Law, Corporate Law, Start-up Solutions, Criminal Law, Consumer Law, Family Law and much more in all over India.
+			<br><br>
+			We help you to consult with the well experienced team of lawyers, researchers & experts carry daily research on all latest current & new law, judgments & Court decisions and allows to hire the best lawyers in India for District Courts, High Court & Supreme Court matters. Our services includes to provide the best legal advisor for legal consultancy services, taxation services, corporate legal services, recovery solutions, financial legal services, bad debt recovery solutions, back office operation services, data entry service, documentation services, passport related services, fiscal documentation etc. 
+			<br><br>
+
+			</p>
+
+        </div>
 		<div class="col-sm-12 col-md-12 col-xl-12 ">
 		   <h3 class="text-center font-weight-bold">Book an Appointment Now With Lawyer / LawFirms Here !</h3>
 		   <p class="p-text text-center"><i>Easily Find Top Rated Lawyer / Law Firms ! </i></p>
@@ -98,7 +108,7 @@
 
 	<div class="row mt-2"  id="withoutsearchDiv">
 		<div class="col-md-12 col-sm-12 col-xm-12" id="tablediv">
-			@include('pages.subpages.search.lawfirms_table')
+			{{-- @include('pages.subpages.search.lawfirms_table') --}}
 		</div>
 	</div>
 
@@ -281,6 +291,9 @@ $(document).ready(function(){
 	});
 
 $(".filteBtn").on('click',function(e){
+	@if(!Auth::user())
+		$('.login_modal').modal({"backdrop": "static"});
+	@else
 	e.preventDefault();
 	var specialist =  $('#specialist_lawyer').val();
 	var state_code = $('#state').val();
@@ -299,12 +312,14 @@ $(".filteBtn").on('click',function(e){
 		   // 		$("#tablediv").empty().html(data);
 		   // }
         }).done(function(data){
+
             $("#tablediv").empty().html(data);
             // console.log(data);
           
         }).fail(function(jqXHR, ajaxOptions, thrownError){
             alert('No response from server');
 		});
+	@endif
 });
 
 $(document).on('click', '.pagination a',function(event)

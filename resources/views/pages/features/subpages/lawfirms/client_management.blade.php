@@ -8,7 +8,7 @@
         </div>
         <div class="col-sm-12 col-lg-12 col-xs-12 feature-p-text">
         	{{-- <h4 class="text-uppercase font-weight-bold">CASE MANAGEMENT</h4> --}}
-        	<p class="text-justify">
+        	<p class="p-text">
         		Any number of clients and their identifiable data can be added. Organize client information in a structured way. Effectively and precisely coordinate each legitimate case with a customer. Send emails and invoices to clients, add updates, make changes as and when needed to maintain the exactness of client data with Manage Adlaw. This feature is designed to make the process easier for clients and for user. Potential clients can complete the questionnaire before they arrive for their consultation.
         	</p>
 
@@ -26,7 +26,7 @@
                     </ul>
                 </div>
             </div>
-            <p class="text-justify mt-4">
+            <p class="p-text mt-4">
                  The data is moved onto your customer consumption form(s) and can be surveyed by you or an individual from your staff before the appointment. If there are questions or more information is needed, someone can call and collect it. It tends to be gathered when the potential customer lands for their discussion.
             </p>
 
