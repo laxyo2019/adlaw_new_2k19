@@ -58,7 +58,7 @@
 						</select>
 					</div>
 					<div class="col-md-2">
-						<button class="btn btn-sm btn-primary" id="btnFilter">Filter</button>
+						<button class="btn btn-sm btn-primary" id="btnFilter">Search</button>
 						<a href="{{route('student_detail.create')}}" class="btn btn-sm btn-success pull-right">Add Student</a>
 					</div>
 

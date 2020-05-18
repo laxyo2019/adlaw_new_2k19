@@ -9,7 +9,7 @@
         <div class="col-sm-12 col-lg-12 col-xs-12 feature-p-text">
         	{{-- <h4 class="text-uppercase font-weight-bold">CASE MANAGEMENT</h4> --}}
         	<p class="text-justify">
-        		Adlaw offers profile management in which lawyers can create their profile, update and delete the profile. The created lawyers profile will be shown in search box. With the help of this user can search the lawyer by name anywhere and get full profile details of lawyers. 
+        		To-dos are effective way to assign priorities, build momentum, collaborate without confusions and ensure that action steps are taken on time, every time. They are fundamental to oversee work over-burden adequately, helping you and your colleagues remain engaged and composed.  
         	</p>
 
              <div class="row">
@@ -18,16 +18,16 @@
                 </div>
 
                 <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 col-xl-7 mt-4">
-                 Clients can form perceptions about your firm from various things, from how you handle your case to how you deal with your association with them just as littler subtleties, for example, the look and feel of your solicitations.
-                    <ul class="feature_ul mt-4">
+                Beyond your cases, to-dos help in strengthening the efficiency of day-to-day firm operations while also positively influencing individual productivity. They play an important role in enabling lawyers and law firms to produce the results they seek. In this you can Create any number of to-do tasks, Link tasks to cases, Assign tasks to team members, Set calendar deadlines, view pending, upcoming and completed tasks and Edit or delete tasks as needed.
+                   {{--  <ul class="feature_ul mt-4">
                         <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">Easily team create.</li> 
                          <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">Assign user in team.</li> 
-                    </ul>
+                    </ul> --}}
 
                 </div>
             </div>
 
-            <div class="row">                
+          {{--   <div class="row">                
                 <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 col-xl-7 mt-4">
                      In this feature you can create user.
                     <ul class="feature_ul mt-4">
@@ -39,7 +39,7 @@
                 <div class="col-sm-12 col-xs-12 col-md-5 col-lg-5 col-xl-5 mt-4">
                     <img src="{{asset('images/dashboard/profile1.png')}}" class="w-100 h-100">
                 </div>
-            </div>
+            </div> --}}
 
         </div>
         <div class="col-sm-12 col-lg-12 col-xs-12 mt-4 mb-5">

@@ -264,20 +264,20 @@
         <li class="treeview {{Request()->segment(1) == 'student' ? 'active' : '' }} {{Request()->segment(1) == 'student_detail' ? 'active' : '' }} {{Request()->segment(1) == 'upload_student' ? 'active' : '' }} ">
           <a class="nav-link" href="">
             <i class="fa fa-graduation-cap"></i>
-            <span>Student</span> <span class="pull-right-container">
+            <span>Manage Student</span> <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
 
             <ul class="treeview-menu">
               <li class="nav-item {{Request()->segment(1) == 'student' ? 'active' : ''}}">
-                <a href="{{route('student.index')}}" ><i class="fa fa-circle-o"></i>Student Dashboard</a>
+                <a href="{{route('student.index')}}" ><i class="fa fa-circle-o"></i> Dashboard</a>
               </li>
               <li class="nav-item {{Request()->segment(1) == 'student_detail' ? 'active' : ''}}">
                 <a href="{{route('student_detail.index')}}" ><i class="fa fa-circle-o"></i>Student Details</a>
               </li>
               <li class="nav-item {{Request()->segment(1) == 'manage_student' ? 'active' : ''}}">
-                <a href="{{route('student_manage.index')}}" ><i class="fa fa-circle-o"></i>Manage Student</a>
+                <a href="{{route('student_manage.index')}}" ><i class="fa fa-circle-o"></i>Arrange Student</a>
               </li>
               <li class="nav-item {{Request()->segment(1) == 'upload_student' ? 'active' : ''}}">
                 <a href="{{route('upload_student')}}" ><i class="fa fa-circle-o"></i>Upload Student</a>
