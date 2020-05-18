@@ -3076,7 +3076,7 @@ Vue.use(vue_js_modal__WEBPACK_IMPORTED_MODULE_0___default.a);
         var u_id = this.selectedUsersIds[0];
         return this.agenda.response_grps.map(function (e) {
           var response_check = e.resp_users.filter(function (x) {
-            return x.responder_id == u_id;
+            return x.responder_id == u_id && x.response_missed == 0;
           });
           return {
             'start': response_check.length != 0 ? response_check[0].created_at : '',
@@ -87271,8 +87271,8 @@ if (token) {
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   broadcaster: 'pusher',
-  key: "",
-  cluster: "mt1",
+  key: "86c62ac46167203cdfed",
+  cluster: "ap2",
   encrypted: true
 }); // import Echo from 'laravel-echo'
 // window.Pusher = require('pusher-js');
@@ -88719,13 +88719,8 @@ var Validation = /*#__PURE__*/function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! /home/ritesh/code/adlaw/resources/js/app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! /home/ritesh/code/adlaw/resources/sass/app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! /home/ritesh/code/adlaw/adlaw2k19/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/ritesh/code/adlaw/adlaw2k19/resources/sass/app.scss */"./resources/sass/app.scss");
->>>>>>> 08fb8b9afd8eab1afc6b669a21e290032d7cf70d
 
 
 /***/ })

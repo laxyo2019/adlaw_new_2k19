@@ -212,7 +212,7 @@
 					</div>
 					<div class="row form-group">
 						<div class="col-md-12" style="margin-top:10px;">
-							<label for="client_name">Client Name <span class="text-danger">*</span></label>
+							<label for="client_name">Client Name <span class="text-danger">*</span> <a href="{{route('clients.create')}}" target="_blank">(<i class="fa fa-plus"></i> Add Client)</a></label>
 							@if($cust_id == '')
 								<select class="form-control" name="cust_id">
 									<option value="0"> Select Client Name</option>
