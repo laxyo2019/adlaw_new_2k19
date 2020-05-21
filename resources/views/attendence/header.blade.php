@@ -1,0 +1,22 @@
+<div class="row">
+	<div class="col-md-12 m-auto " >
+		<div class="card card-primary">
+			<div class="card-header with-border">
+				<div class="text-center ">
+					<a href="{{route('attendence.student')}}">
+						<div class="col-md-2 col-sm-6 col-xs-11  col-div-mar col-div-nav {{Request()->segment(2) == 'student' ? 'active-li' : ''}}" >
+							<i class="fa fa-cubes"></i>
+							<h5>Student Attendence</h5>
+						</div>
+					</a>
+					<a href="" >
+						<div class="col-md-2 col-sm-6 col-xs-11  col-div-mar col-div-nav {{Request()->segment(2) == 'staff' ? 'active-li' : ''}}" >
+						<i class="fa fa-graduation-cap"></i>
+						<h5>Staff Attendence</h5>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

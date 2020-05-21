@@ -9,13 +9,26 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Auth;
 use App\Models\StudentMast;
-class StudentDetailExport implements FromQuery, WithMapping, WithHeadings, ShouldAutoSize
+
+class StudentBatchWiseExport implements FromQuery, WithMapping, WithHeadings, ShouldAutoSize
 {
 	use Exportable;
-
+	public $request;
+	public function __construct($request){
+		$this->request = $request;
+	}
     public function query()
     {
-        $data = StudentMast::with('qual_catg','qual_course','batch','reservation','country','language')->where('user_id',Auth::user()->id);
+    	$data = StudentMast::with('qual_catg','qual_course','batch','reservation','country','language')->where('batch_id',$this->request->batch_id)->where('user_id',Auth::user()->id);
+
+    	if($this->request->batch_id !='' && $this->request->qual_year !=''  && $this->request->semester !=''){
+    		$data = $data->where('qual_year',$this->request->qual_year)
+    					->where('semester',$this->request->semester);	
+    	}
+    	elseif ($this->request->batch_id !='' && $this->request->qual_year) {
+    		$data = $data->where('qual_year',$this->request->qual_year);
+    	}
+        
         return $data;
     }
     public function map($data) : array

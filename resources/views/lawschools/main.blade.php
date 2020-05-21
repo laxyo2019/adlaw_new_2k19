@@ -249,6 +249,7 @@
           </a>
         </li>   
 
+
         {{-- 
          <li class="{{Request()->segment(1) == 'teams' ? 'active' : '' }} nav-item">
           <a class="nav-link" href="{{route('teams.index')}}">
@@ -288,6 +289,27 @@
             </ul>
           </li>
 
+          <li class="treeview">
+            <a class="nav-link" href="">
+              <i class="fa fa-graduation-cap"></i>
+                <span>Manage Attendence</span> <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+
+            <ul class="treeview-menu">
+              <li class="nav-item">
+                <a href="{{route('attendence.index')}}" ><i class="fa fa-circle-o"></i>Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('attendence.student')}}" ><i class="fa fa-circle-o"></i>Student Attendence</a>
+              </li>
+              <li class="nav-item">
+                <a href="" ><i class="fa fa-circle-o"></i>Staff Attendence</a>
+              </li>
+            </ul>
+          </li>
+
           <li class="treeview {{Request()->segment(1) == 'class' ? 'active' : '' }} {{Request()->segment(1) == 'class' ? 'active' : '' }} ">
             <a class="nav-link" href="">
               <i class="fa fa-graduation-cap"></i>
@@ -301,8 +323,7 @@
                 <a href="{{route('batches.index')}}" ><i class="fa fa-circle-o"></i>Manage Batches</a>
               </li>
             </ul>
-          </li>
-
+          </li>    
 
         @endrole
 

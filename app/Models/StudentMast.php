@@ -15,6 +15,9 @@ class StudentMast extends Model
     public function qual_course(){
     	return $this->belongsTo('App\Models\QualMast','qual_code');
     }
+    public function qual_catg(){
+        return $this->belongsTo('App\Models\QualCatg','qual_catg_code');
+    }
     public function batch(){
     	return $this->belongsTo('App\Models\BatchMast','batch_id');
     }

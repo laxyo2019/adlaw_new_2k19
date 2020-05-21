@@ -24,6 +24,7 @@ use App\Models\LanguageMast;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use App\Helpers\Helpers;
 use App\User;
+use App\Exports\StudentBatchWiseExport;
 class StudentDashboardController extends StudentDetailController
 {
     public function index(){
@@ -42,6 +43,7 @@ class StudentDashboardController extends StudentDetailController
     	return Storage::download('/public/document/excel_format/student_sample_export.xlsx');;
     }
     public function all_students_export(){
+    	
     	return Excel::download(new StudentDetailExport, 'student_details.xlsx');
     	
     }
@@ -50,19 +52,27 @@ class StudentDashboardController extends StudentDetailController
 
     	return view('student.upload_student.batch_wise_export',compact('batches'));
     }
-    public function batch_wise_export(){
-    	return request()->all();
+    public function batch_wise_export(Request $request){
+    	// return $request->all();	
+    	$request->validate([
+    		'batch_id' => 'required|not_in:""',
+	    	],
+	    	[
+	    		'batch_id.*' => 'The batch field is required'
+	    	]
+    	);
+    	return Excel::download(new StudentBatchWiseExport($request), 'student.xlsx');
     }
     public function importStudent(Request $request){
-    	 $this->validate($request,[
-                'file' => 'required|mimes:xls,xlsx',
+    	
+    	$this->validate($request,[
+            'file' => 'required|mimes:xls,xlsx',
         ]);
 
     	$status = true;
     	$errors = array();
-
         $datas = Excel::toCollection(new StudentsImport,$request->file('file'));
-
+		 // return $datas;
         foreach ($datas as $value) {
         	foreach ($value as $data) {			
 				if($data['qualification_name'] !=''){			//required field
@@ -98,7 +108,6 @@ class StudentDashboardController extends StudentDetailController
 						$status = false;
 					}
 				}
-
 				if($status){				//required field
 					if($data['admission_batch'] !=''){
 						$batch = BatchMast::where('name',$data['admission_batch'])->where('user_id',Auth::user()->id)->first();
@@ -119,13 +128,14 @@ class StudentDashboardController extends StudentDetailController
 
 				if($status){
 					if($data['admission_date'] !=''){		//required field
-						$addm_date = Date::excelToDateTimeObject($data['admission_date']);
-                    	$addm_date = $addm_date->format('Y-m-d');                      	
+						// $addm_date = Date::excelToDateTimeObject($data['admission_date']);
+                    	$addm_date = date('Y-m-d',strtotime($data['admission_date']));   
 					}else{
 						$status = false;
 					}
 				}
 
+				
 				if($status){			//not required field
 					if($data['enrollment_no'] !=''){
 						$enroll_no = strlen($data['enrollment_no']);
@@ -160,8 +170,9 @@ class StudentDashboardController extends StudentDetailController
 				if($status){
 					if($data['passout_date'] !=''){
 						if($data['student_status'] == 'P' || $data['student_status'] == 'p'){
-							$passout_date = Date::excelToDateTimeObject($data['passout_date']);
-                    		$passout_date = $passout_date->format('Y-m-d');
+							// $passout_date = Date::excelToDateTimeObject($data['passout_date']);
+                    		$passout_date = date('Y-m-d',strtotime($data['passout_date']));
+                    		// $passout_date = $passout_date->format('Y-m-d');
 						}else{
 							$passout_date = null;
 						}
@@ -214,11 +225,13 @@ class StudentDashboardController extends StudentDetailController
 
 				if($status){
 					if($data['date_of_birth'] !=''){
-						$s_dob = Date::excelToDateTimeObject($data['date_of_birth']);
-                    	$dob = $s_dob->format('Y-m-d');
+						// $s_dob = Date::excelToDateTimeObject($data['date_of_birth']);
+                    	
+                    	// $dob = $s_dob->format('Y-m-d');
+                    	$dob = date('Y-m-d',strtotime($data['date_of_birth']));
                     	$cur_year = date('Y') - 10;
                     	// return $s_dob->format('Y');
-                    	if($s_dob->format('Y') < $cur_year){
+                    	if(date('Y',strtotime($dob)) < $cur_year){
                     		$status = true;
                     		$age = floor((time() - strtotime($dob)) / 31556926);
 
@@ -273,6 +286,7 @@ class StudentDashboardController extends StudentDetailController
 
 				if($status){
 					if($data['religion'] !=''){
+						
 						$religion = Religion::where('name',$data['religion'])->first();
 						$status = !empty($religion) ? true : false;
 					}else{
@@ -433,13 +447,13 @@ class StudentDashboardController extends StudentDetailController
 						'mobile'  		=> $data['mobile_no'],
 						'dob'	  		=> $dob,
 						'email'	  		=> $data['email'],
-						'gender'  		=> $data['gender'] !='' ? lcfirst($data['gender']) : '',
-						'reservation_class_id' => $reservation->id,
-						'religion_id'	=> $religion->id,
+						'gender'  		=> $data['gender'] !='' ? lcfirst($data['gender']) : null,
+						'reservation_class_id' => $data['cast_category'] !='' ? $reservation->id : null,
+						'religion_id'	=> $data['religion'] !='' ? $religion->id : null,
 						'blood_group'	=> $data['blood_group'] != '' ? $blood_group : null ,
 						'spec_ailment'	=> $data['year_of_admission'],
 						'age'			=> $age,
-						'nationality_id'=> $data['nationality'] != '' ? $country->country_code : '',
+						'nationality_id'=> $data['nationality'] != '' ? $country->country_code : null,
 						'taluka'		=> $data['taluka'],
 						'language_id'	=> $data['mother_tongue'] !='' ? $language->id : null,
 						's_ssmid'		=> $data['student_ssmid'],
@@ -459,7 +473,7 @@ class StudentDashboardController extends StudentDetailController
 						'account_name'	=> $data['account_name'],
 						'account_no'	=> $data['account_no'],
 						'ifsc_code'		=> $data['ifsc_code'],
-						'status'		=> $data['student_status'] != '' ? ucfirst($data['student_status'])	: '',
+						'status'		=> $data['student_status'] != '' ? ucfirst($data['student_status'])	: null,
 
 					]; 
 					
@@ -482,16 +496,16 @@ class StudentDashboardController extends StudentDetailController
 						'year_of_admission'	=> $data['year_of_admission'],
 						'admission_batch'	=> $data['admission_batch'],
 						'semester'			=> $data['semester'],
-						'admission_date'	=> $data['admission_date'] !='' ? Date::excelToDateTimeObject($data['admission_date'])->format('Y-m-d') : '',
+						'admission_date'	=> $data['admission_date'] !='' ? date('Y-m-d',strtotime($data['admission_date'])) : '',
 						'enrollment_no'		=> $data['enrollment_no'],
 						'roll_no'			=> $data['roll_no'],
 						'student_status'	=> $data['student_status'],
-						'passout_date'		=> $data['passout_date'] !='' ? Date::excelToDateTimeObject($data['passout_date'])->format('Y-m-d') : null ,
+						'passout_date'		=> $data['passout_date'] !='' ? date('Y-m-d',strtotime($data['passout_date'])) : null ,
 						'first_name'		=> $data['first_name'],
 						'middle_name'		=> $data['middle_name'],
 						'last_name'			=> $data['last_name'],
 						'mobile_no'			=> $data['mobile_no'],
-						'date_of_birth'		=> $data['date_of_birth'] !='' ? Date::excelToDateTimeObject($data['date_of_birth'])->format('Y-m-d') : '',
+						'date_of_birth'		=> $data['date_of_birth'] !='' ? date('Y-m-d',strtotime($data['date_of_birth'])) : '',
 						'email'				=> $data['email'],
 						'gender'			=> $data['gender'],
 						'cast_category'		=> $data['cast_category'],
