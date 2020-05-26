@@ -19,7 +19,7 @@
 
         </div>
 		<div class="col-sm-12 col-md-12 col-xl-12 ">
-		   <h3 class="text-center font-weight-bold">Book an Appointment Now With Lawyer / LawFirms Here !</h3>
+		   <h3 class="text-center font-weight-bold">Search / Book an Appointment from Web's largest lawyers directory.</h3>
 		   <p class="p-text text-center"><i>Easily Find Top Rated Lawyer / Law Firms ! </i></p>
 		</div>		
 	</div>

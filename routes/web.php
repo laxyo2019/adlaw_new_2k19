@@ -291,10 +291,16 @@ Route::group(['middleware' => ['role:lawcollege|teacher|student']], function() {
 	Route::post('/batch_wise_export', 'Student\StudentDashboardController@batch_wise_export')->name('batch_wise_export');
 
 	Route::resource('manage/batches', 'LawSchools\BatchMastController');
-	Route::get('attendence', 'LawSchools\AttendenceController@index')->name('attendence.index');
+	Route::get('attendence/dashboard', 'LawSchools\AttendenceController@index')->name('attendence.index');
 	Route::get('attendence/student', 'LawSchools\AttendenceController@student_attendence')->name('attendence.student');
 	Route::post('attendence/student_fetch', 'LawSchools\AttendenceController@student_fetch')->name('attendence.student_fetch');
 
+	Route::post('attendence/attendence_submit', 'LawSchools\AttendenceController@attendence_submit')->name('attendence.submit');
+
+	Route::get('attendence/staff', 'LawSchools\AttendenceController@staff_attendence')->name('attendence.staff');
+
+	Route::get('attendence/manage', 'LawSchools\AttendenceController@manage_attendence')->name('attendence.manage');
+	Route::post('attendence/student_filter', 'LawSchools\AttendenceController@student_filter')->name('attendence.student_filter');
 });
 /* --------------Lawcollege--------Teacher-----------Student---------- */
 
