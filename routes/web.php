@@ -301,6 +301,10 @@ Route::group(['middleware' => ['role:lawcollege|teacher|student']], function() {
 
 	Route::get('attendence/manage', 'LawSchools\AttendenceController@manage_attendence')->name('attendence.manage');
 	Route::post('attendence/student_filter', 'LawSchools\AttendenceController@student_filter')->name('attendence.student_filter');
+	Route::get('attendence/manage/show_attendence/{id}', 'LawSchools\AttendenceController@show_attendence')->name('attendence.show_attendence');
+	Route::post('attendence/attendence_list', 'LawSchools\AttendenceController@attendence_list')->name('attendence.list');
+	Route::post('attendence/attendence_update', 'LawSchools\AttendenceController@attendence_update')->name('attendence.update');
+	Route::get('attendence/upload','LawSchools\AttendenceController@attendence_upload')->name('attendence.upload');
 });
 /* --------------Lawcollege--------Teacher-----------Student---------- */
 

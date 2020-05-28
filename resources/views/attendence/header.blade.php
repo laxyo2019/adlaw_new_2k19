@@ -21,7 +21,7 @@
 						<h5>Staff Attendence</h5>
 						</div>
 					</a>
-					<a href="" >
+					<a href="{{route('attendence.upload')}}" >
 						<div class="col-md-2 col-sm-6 col-xs-11  col-div-mar col-div-nav {{Request()->segment(2) == 'upload' ? 'active-li' : ''}}" >
 						<i class="fa fa-graduation-cap"></i>
 						<h5>Upload Attendence</h5>

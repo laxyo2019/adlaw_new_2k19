@@ -6,10 +6,7 @@
 			</th>
 			<th>Student Name</th>
 			<th>Enrollment Number</th>
-			<th>Roll Number</th>
-			<th>Start Date</th>
-			<th>End Date</th>
-			{{-- <th>Attendent Date</th> --}}
+			<th>Roll Number</th                                                                      			{{-- <th>Attendent Date</th> --}}
 			<th>Action</th>
 		</tr>
 	</thead>
@@ -23,7 +20,7 @@
 				<td>{{$student->roll_no}}</td>
 				
 				<td>
-					<button class="btn btn-sm btn-primary">Show Attendence</button>
+					<a href="{{route('attendence.show_attendence',$student->id)}}" class="btn btn-sm btn-primary">Show Attendence</a>
 				</td>
 			</tr>
 		@endforeach

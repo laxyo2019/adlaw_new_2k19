@@ -26,6 +26,10 @@
 							<br>
 							<input type="submit" value="Submit" class="btn btn-sm btn-primary">
 							<br>
+							<div class="mt-4" style="
+							color: #e74c3c;
+background-color: #ffd1cc;
+border-color: #ffb8b0; padding: 20px">
 							<h5>Before upload read terms & conditions:</h5>
 							<ol>
 
@@ -80,6 +84,7 @@
 									<li>Fail - F</li>
 								</ul> 
 							</p>
+							</div>
 						</div>	
 						<div class="col-md-4 " style="margin-top: 10px;">
 							<div class="row">

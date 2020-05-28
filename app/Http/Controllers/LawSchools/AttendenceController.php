@@ -25,7 +25,7 @@ class AttendenceController extends Controller
            $batches = BatchMast::where('user_id',Auth::user()->parent_id)->orderBy('name','DESC')->get();
         }
 
-    	return view('attendence.student_attendence',compact('batches','qual_catgs'));
+    	return view('attendence.student.index',compact('batches','qual_catgs'));
     }
     public function student_fetch(Request $request){
 
@@ -34,7 +34,7 @@ class AttendenceController extends Controller
 
         $attendence_students = AttendenceMast::where('attendence_date',date('Y-m-d'))->whereIn('s_id',collect($students)->pluck('id'))->get();
         // return $attendence_students;
-    	return view('attendence.student_attendence_table',compact('students','attendence_students'));
+    	return view('attendence.student.table',compact('students','attendence_students'));
     }
     public function attendence_submit(Request $request){
         $present_students = $request->present_student;
@@ -93,7 +93,7 @@ class AttendenceController extends Controller
             $users = User::whereRoleIs('teacher')->where('parent_id',Auth::user()->parent_id)->get(); 
         }
 
-        return view('attendence.staff_attendence',compact('users'));
+        return view('attendence.staff.index',compact('users'));
     }
     public function manage_attendence(){
         $qual_catgs = QualCatg::where('qual_catg_code', '!=',4)->get();
@@ -104,13 +104,13 @@ class AttendenceController extends Controller
            $batches = BatchMast::where('user_id',Auth::user()->parent_id)->orderBy('name','DESC')->get();
         }
 
-        return view('attendence.manage_attendence',compact('qual_catgs','batches')); 
+        return view('attendence.manage.index',compact('qual_catgs','batches')); 
     }
     public function student_filter(Request $request){
         $students = $this->filter($request)->get();
         // $attendence_students = AttendenceMast::with('student')->whereBetween('attendence_date',array($request->start_date,$request->end_date))->whereIn('s_id',collect($students)->pluck('id'))->get();
 
-        return view('attendence.manage_attendence_table',compact('students'));
+        return view('attendence.manage.table',compact('students'));
     }
 
     public function filter($request){
@@ -129,5 +129,28 @@ class AttendenceController extends Controller
             $students = $students->where('user_id',Auth::user()->parent_id);
         }       
         return $students;
+    }
+    public function show_attendence($id){
+        $student = StudentMast::find($id);
+        return  view('attendence.manage.show',compact('student'));
+    } 
+    public function attendence_list(Request $request){
+        $attendences = AttendenceMast::where('s_id',$request->s_id)->whereBetween('attendence_date',array($request->start_date,$request->end_date))->get();  
+        return view('attendence.manage.list',compact('attendences'));
+    }
+
+    public function attendence_update(Request $request){
+
+        $unchecked_attendence_dates = array_diff($request->all_attendence_dates, $request->checked_attendence_dates);
+        if(count($unchecked_attendence_dates) !=0){
+            AttendenceMast::where('s_id',$request->s_id)->whereIn('attendence_date',$unchecked_attendence_dates)->update(['status' => 'A']);
+        }
+        if(count($request->checked_attendence_dates) !=0){
+            AttendenceMast::where('s_id',$request->s_id)->whereIn('attendence_date',$request->checked_attendence_dates)->update(['status' => 'P']);
+        }
+        return 'success';
+    }
+    public function attendence_upload(){
+        return view('attendence.upload.index');
     }
 }
