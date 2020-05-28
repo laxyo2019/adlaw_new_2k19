@@ -141,11 +141,20 @@ class AttendenceController extends Controller
 
     public function attendence_update(Request $request){
 
+        // return gettype();
+        if($request->checked_attendence_dates !=null){
         $unchecked_attendence_dates = array_diff($request->all_attendence_dates, $request->checked_attendence_dates);
+        }
+        else{
+            $unchecked_attendence_dates = $request->all_attendence_dates;
+        }
+
+
         if(count($unchecked_attendence_dates) !=0){
             AttendenceMast::where('s_id',$request->s_id)->whereIn('attendence_date',$unchecked_attendence_dates)->update(['status' => 'A']);
         }
-        if(count($request->checked_attendence_dates) !=0){
+
+        if($request->checked_attendence_dates !=null){
             AttendenceMast::where('s_id',$request->s_id)->whereIn('attendence_date',$request->checked_attendence_dates)->update(['status' => 'P']);
         }
         return 'success';
