@@ -1,12 +1,12 @@
 @extends('lawschools.main')
 @section('content')
 <section class="content">
-@include('attendence.header')
+@include('attendance.header')
 <div class="row">
 	<div class="col-md-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h4 class="panel-title">Student Attendence <p class="pull-right">Today Date :- {{date('d-m-Y')}} | Time: {{date('h:i A')}}</p></h4>
+				<h4 class="panel-title">Student Attendance <p class="pull-right">Today Date :- {{date('d-m-Y')}} | Time: {{date('h:i A')}}</p></h4>
 			</div>
 			<div class="panel-body">
 				<div class="row">
@@ -47,37 +47,38 @@
 		});
 		$('.btnSearch').on('click',function(e){
 			e.preventDefault();
-			attendence_filter();
+			attendance_filter();
 		});
 		$('.btnUpdate').on('click',function(e){
 			e.preventDefault();
-			var all_attendence_dates = [];
+			var all_attendance_dates = [];
 			var i = 0; 
-			$('input[name="attendence_date[]"]').each(function(){
-				all_attendence_dates[i++] = $(this).val() 
+			$('input[name="attendance_date[]"]').each(function(){
+				all_attendance_dates[i++] = $(this).val() 
 			});
-			var checked_attendence_dates = [];
+			var checked_attendance_dates = [];
 			var j = 0; 
-			$('input[name="attendence_date[]"]:checked').each(function(){
-				checked_attendence_dates[j++] = $(this).val();
+			$('input[name="attendance_date[]"]:checked').each(function(){
+				checked_attendance_dates[j++] = $(this).val();
 			});
 
 			var s_id = '{{$student->id}}';
 
-			if(all_attendence_dates.length !=0){
+			if(all_attendance_dates.length !=0){
 				$.ajax({
 					type:'post',
-					url:'{{route('attendence.update')}}',
-					data:{s_id:s_id,all_attendence_dates:all_attendence_dates,checked_attendence_dates:checked_attendence_dates},
+					url:'{{route('attendance.update')}}',
+					data:{s_id:s_id,all_attendance_dates:all_attendance_dates,checked_attendance_dates:checked_attendance_dates},
 					success:function(res){
 						if(res =='success'){
-							attendence_filter();
+							alert('Attendance Update')
+							attendance_filter();
 						}
 					}
 				})
 			}
 		});
-		function attendence_filter(){
+		function attendance_filter(){
 			var start_date = $('input[name="start_date"]').val();
 			var end_date =  $('input[name="end_date"]').val();
 			var s_id = '{{$student->id}}';
@@ -85,7 +86,7 @@
 				if(end_date >= start_date){
 					$.ajax({
 						type:'post',
-						url:'{{route('attendence.list')}}',
+						url:'{{route('attendance.list')}}',
 						data:{start_date:start_date,end_date:end_date,s_id:s_id},
 						success:function(res){
 							// console.log(res)

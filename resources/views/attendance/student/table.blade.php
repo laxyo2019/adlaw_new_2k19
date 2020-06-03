@@ -5,7 +5,7 @@
 				<input type="checkbox" name="all" class="selectAll">
 			</th>
 			<th>Name</th>
-			<th>Enrollment Number</th>
+			{{-- <th>Enrollment Number</th> --}}
 			<th>Roll Number</th>
 			<th>Status</th>
 		</tr>
@@ -15,9 +15,9 @@
 			<tr>
 				<td>
 					<input type="checkbox" name="s_id[]"  class="check" value="{{$student->id}}" 
-						@if(!empty($attendence_students))
-						@foreach($attendence_students as $attendence_student)
-							@if($attendence_student->s_id == $student->id)
+						@if(!empty($attendance_students))
+						@foreach($attendance_students as $attendance_student)
+							@if($attendance_student->s_id == $student->id)
 								checked="checked" 
 							@endif
 						@endforeach
@@ -28,13 +28,13 @@
 					<button class="btn btn-sm btn-danger">A</i></button>	 --}}
 				</td>
 				<td>{{$student->f_name .' '. $student->l_name }}</td>
-				<td>{{$student->enroll_no}}</td>
+				{{-- <td>{{$student->enroll_no}}</td> --}}
 				<td>{{$student->roll_no}}</td>
 				<td>
-					@if(!empty($attendence_students))
-						@foreach($attendence_students as $attendence_student)
-							@if($attendence_student->s_id == $student->id)
-								{{$attendence_student->status}}
+					@if(!empty($attendance_students))
+						@foreach($attendance_students as $attendance_student)
+							@if($attendance_student->s_id == $student->id)
+								{{$attendance_student->present}}
 							@endif
 						@endforeach
 					@endif

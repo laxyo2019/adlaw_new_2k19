@@ -1,62 +1,17 @@
 @extends('lawschools.main')
 @section('content')
 <section class="content">
-@include('attendence.header')
+@include('attendance.header')
 <div class="row">
 	<div class="col-md-12 m-auto">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h4 class="panel-title">Student Attendence <p class="pull-right">Today Date :- {{date('d-m-Y')}} | Time: {{date('h:i A')}}</p></h4>
+				<h4 class="panel-title">Student Attendance <p class="pull-right">Today Date :- {{date('d-m-Y')}} | Time: {{date('h:i A')}}</p></h4>
 
 			</div>
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-md-2">
-						<select class="form-control required" name="qual_catg_code" id="qual_catg">
-							<option value="">Select Qualification</option>
-							@foreach($qual_catgs as $qual_catg)
-								<option value="{{$qual_catg->qual_catg_code}}">{{$qual_catg->qual_catg_desc}}</option>
-							@endforeach
-						</select>
-					</div>
-					<div class="col-md-2">
-						<select class="form-control required" name="qual_code" id="qual_course">
-
-						</select>
-					</div>				
-					<div class="col-md-2">
-						<select class="form-control" name="batch">
-							<option value="">Select Batch</option>
-							@foreach($batches as $batch)
-								<option value="{{$batch->id}}">{{$batch->name}}</option>
-							@endforeach 
-						</select>
-					</div>
-					<div class="col-md-2">
-						<select class="form-control" name="year"> 
-							<option value="">Select Admission Year</option>
-							<option value="1">1 year</option>
-							<option value="2">2 year</option>
-							<option value="3">3 year</option>
-							<option value="4">4 year</option>
-							<option value="5">5 year</option>
-						</select>
-					</div>
-					<div class="col-md-2">
-						<select class="form-control" name="semester"> 
-							<option value="">Select Semester</option>
-							<option value="1">1st</option>
-							<option value="2">2nd</option>
-							<option value="3">3rd</option>
-							<option value="4">4th</option>
-							<option value="5">5th</option>
-							<option value="6">6th</option>
-							<option value="7">7th</option>
-							<option value="8">8th</option>
-							<option value="9">9th</option>
-							<option value="10">10th</option>
-						</select>
-					</div>
+					@include('attendance.details')
 					<div class="col-md-2">
 						<button class="btn btn-sm btn-primary search">Search</button>
 					</div>
@@ -82,12 +37,6 @@
 			 }
 		});
 
-		$('#qual_catg').on('change',function(e){
-			e.preventDefault();
-			var qual_catg_code = $(this).val();
-			qual_course(qual_catg_code);
-			qual_docs(qual_catg_code);
-		});
 		$('.search').on('click',function(e){
 			e.preventDefault();
 			filter_students();
@@ -111,13 +60,13 @@
 			if(present_student.length !=0){
 				$.ajax({
 					type:'post',
-					url:'{{route('attendence.submit')}}',
+					url:'{{route('attendance.submit')}}',
 					data:{present_student:present_student,total_student:total_student},
 					success:function(res){
 						if(res == 'success'){
-							alert('Students attendence successfully submitted');
+							alert('Students attendance successfully submitted');
 						}else{
-							alert('Students attendence already submitted');
+							alert('Students attendance already submitted');
 						}
 						filter_students();
 					}
@@ -136,7 +85,7 @@
 			if(qual_catg_code!='' && qual_code != '' && batch != '' && year != '' && semester !=''){
 				$.ajax({
 					type:'post',
-					url:'{{route('attendence.student_fetch')}}',
+					url:'{{route('attendance.student_fetch')}}',
 					data:{qual_code:qual_code,qual_catg_code:qual_catg_code,batch:batch,year:year,semester:semester},
 					success:function(res){
 						$('#tableBody').empty().html(res);

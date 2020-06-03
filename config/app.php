@@ -178,7 +178,8 @@ return [
         Askedio\Laravel5ProfanityFilter\Providers\ProfanityFilterServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class
 
     ],
 
@@ -234,6 +235,7 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Laratrust'   => Laratrust\LaratrustFacade::class,
         'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
         
     ],
 

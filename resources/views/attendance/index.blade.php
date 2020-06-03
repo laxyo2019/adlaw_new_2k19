@@ -1,7 +1,7 @@
 @extends('lawschools.main')
 @section('content')
 <section class="content">
-@include('attendence.header')
+@include('attendance.header')
 <div class="row">
 	<div class="col-md-12 m-auto">
 		<div class="card card-primary">

@@ -7,11 +7,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use DB;
 use Auth;
+use Carbon\Carbon;
 use App\User;
 use App\Models\State;
 use App\Models\UserQualification;
 use App\Models\QualCatg;
 use App\Models\QualMast;
+use App\Models\AcademicCalendarMast;
 use App\Helpers\Helpers;
 class LawSchoolsController extends Controller
 {
@@ -218,9 +220,59 @@ class LawSchoolsController extends Controller
 		return view('lawschools.dashboard.college.show_courses',compact('courses'));
 	}
 	public function show_course_details($id){
-
 		$course_details = UserQualification::find($id);  
-
 		return view('lawschools.dashboard.college.show_course_details',compact('course_details'));
+	}
+
+	public function academicCalendarIndex(){
+		
+		if(Auth::user()->hasRole('lawcollege')){
+			$academics = AcademicCalendarMast::where('user_id',Auth::user()->id)->whereYear('date_from',date('Y'))->get();
+		}else{
+			$academics = AcademicCalendarMast::where('user_id',Auth::user()->parent_id)->whereYear('date_upto',date('Y'))->get();
+		}
+		return view('lawschools.dashboard.manage.academic_calendar.index',compact('academics'));
+	}
+	public function academicCalendarCreate(){
+
+		return view('lawschools.dashboard.manage.academic_calendar.create');
+	}
+	public function academicCalendarStore(Request $request){
+		$data = $this->academic_validation($request);			
+		AcademicCalendarMast::create($data);
+		return redirect()->route('academic.index')->with('success','Calendar date successfully created');
+
+	}
+	public function academicCalendarShow($id){
+	
+	}
+	public function academicCalendarEdit($id){
+		$academic = AcademicCalendarMast::find($id);
+		return view('lawschools.dashboard.manage.academic_calendar.edit',compact('academic'));
+	}
+	public function academicCalendarUpdate(Request $request, $id){
+		$data = $this->academic_validation($request);		
+		
+		$academic = AcademicCalendarMast::find($id)->update($data);
+		return redirect()->route('academic.index')->with('success','Calendar date successfully updated');
+	}
+	public function academicCalendarDestroy($id){
+		AcademicCalendarMast::find($id)->delete();
+		return redirect()->route('academic.index')->with('success','Calendar date successfully deleted');
+	}
+	public function academic_validation($request){
+		$data =  $request->validate([
+			'title' => 'required|max:250|min:3',
+			'date_from' => 'required|date_format:Y-m-d',
+			'date_upto' => 'required|date_format:Y-m-d|after_or_equal:date_from',
+			'description' => 'required',
+		]);
+		$data['user_id'] = Auth::user()->id;
+		if($request->status == 'H') {
+			$data['is_holiday'] = '1';
+		}else{
+			$data['is_exam'] = '1';
+		}
+		return $data;
 	}
 }

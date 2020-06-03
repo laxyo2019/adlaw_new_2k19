@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Notifications;
-
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\BroadcastMessage;
-class AttendenceNotifications extends Notification
+class AttendanceNotifications extends Notification
 {
     use Queueable;
     public $data;
