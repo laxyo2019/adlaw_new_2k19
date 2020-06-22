@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AttendanceMast extends Model
+class StudentAttendance extends Model
 {
-    protected $table = 'attendance_mast';
+    protected $table = 'student_attendance';
 	protected $guarded = [];
 	
 	public function student(){

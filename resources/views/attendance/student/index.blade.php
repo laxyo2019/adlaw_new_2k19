@@ -57,24 +57,28 @@
 			});
 			
 			// console.log(s_ids1);
-			if(present_student.length !=0){
-				$.ajax({
-					type:'post',
-					url:'{{route('attendance.submit')}}',
-					data:{present_student:present_student,total_student:total_student},
-					success:function(res){
-						if(res == 'success'){
-							alert('Students attendance successfully submitted');
-						}else{
-							alert('Students attendance already submitted');
-						}
-						filter_students();
+			// if(present_student.length !=0){
+			$.ajax({
+				type:'post',
+				url:'{{route('attendance.submit')}}',
+				data:{present_student:present_student,total_student:total_student},
+				success:function(res){
+					// console.log(res)
+					if(res == 'success'){
+						$.notify("Students attendance successfully submitted",'success');
+						
+					}else if(res =='warning'){
+						$.notify("Student attendance already submitted");
+					}else{
+						$.notify("You can't submit weekend day attendance");
 					}
-				});
+					filter_students();
+				}
+			});
 
-			}else{
-				alert('Select the students first')
-			}	
+			// }else{
+			// 	alert('Select the students first')
+			// }	
 		});
 		function filter_students(){
 			var qual_catg_code = $('select[name="qual_catg_code"] option:selected').val();
@@ -95,7 +99,7 @@
 				})
 			}
 			else{
-				alert('All select field are mendarory');
+				$.notify("All select field are mandatory.");
 			}
 		}
 	})

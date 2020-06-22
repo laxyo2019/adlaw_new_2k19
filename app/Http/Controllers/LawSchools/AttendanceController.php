@@ -9,7 +9,8 @@ use App\User;
 use Carbon\Carbon;
 use App\Models\BatchMast;
 use App\Models\StudentMast;
-use App\Models\AttendanceMast;
+use App\Models\StudentAttendance;
+use App\Models\EmployeeAttendance;
 use App\Models\QualCatg;
 use App\Models\QualMast;
 use App\Models\AcademicCalendarMast;
@@ -18,6 +19,7 @@ use App\Notifications\AttendanceNotifications;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\StudentAttendenceExport;
 use App\Imports\AttendanceImport;
+use App\Helpers\Helpers;
 class AttendanceController extends Controller
 {
     public function index(){
@@ -29,87 +31,119 @@ class AttendanceController extends Controller
     }
     public function student_fetch(Request $request){
 
-     //    $students = AttendanceMast::
+     //    $students = StudentAttendance::
     	$students = $this->filter($request)->get();
 
-        $attendance_students = AttendanceMast::where('attendance_date',date('Y-m-d'))->whereIn('s_id',collect($students)->pluck('id'))->get();
+        $attendance_students = StudentAttendance::where('attendance_date',date('Y-m-d'))->whereIn('s_id',collect($students)->pluck('id'))->get();
         // return $attendance_students;
     	return view('attendance.student.table',compact('students','attendance_students'));
     }
     public function attendance_submit(Request $request){
-        $present_students = $request->present_student;
-        $total_students = $request->total_student;
+        
+        if(Carbon::now()->dayName != 'Sunday'){
+            $present_students = $request->present_student;
+            $total_students = $request->total_student;
 
-        if(Auth::user()->hasRole('lawcollege')){
-            $user_id = Auth::user()->id;
-            $submitted_by = $user_id;
+            if(Auth::user()->hasRole('lawcollege')){
+                $user_id = Auth::user()->id;
+                $submitted_by = $user_id;
+            }else{
+                $user_id = Auth::user()->parent_id;
+                $submitted_by = Auth::user()->id;
+            }  
+
+            $attendance = StudentAttendance::whereIn('s_id',$total_students)->where('attendance_date',date('Y-m-d'))->get();  
+
+            if($present_students !=null){
+                $absent_students = array_diff($total_students, $present_students);
+            }else{
+                $absent_students = $total_students;
+            }
+
+            // return $absent_students;
+
+            if(count($attendance) == 0){
+                    $data = [
+                        'user_id'         => $user_id,
+                        'submitted_by'    => $submitted_by,
+                        'attendance_date' => date('Y-m-d')
+                    ];
+                foreach ($absent_students as $absent_student) {
+                    $data['s_id'] = $absent_student;
+                    $data['present'] = 'A';
+                    StudentAttendance::create($data);
+                }
+                foreach ($present_students as $present_student) {       
+                    $data['s_id'] = $present_student;
+                    $data['present'] = 'P';
+                    StudentAttendance::create($data);
+                }
+                if(Auth::user()->hasRole('teacher')){
+                    $user = User::find(Auth::user()->parent_id);
+                    $message = [
+                        'id' => '',
+                        'title' => 'attendance Submit',
+                        'url' => 'attendance/dashboard',
+                        'message' => 'Students attendance submitted' 
+                    ];
+                    $user->notify(new attendanceNotifications($message));
+                }
+                return 'success';
+            }else{
+                return "warning";
+            }
         }else{
-            $user_id = Auth::user()->parent_id;
-            $submitted_by = Auth::user()->id;
-        }  
-
-        $attendance = AttendanceMast::whereIn('s_id',$total_students)->where('attendance_date',date('Y-m-d'))->get();  
-
-        $absent_students = array_diff($total_students, $present_students);
-
-        // return $absent_students;
-
-        if(count($attendance) == 0){
-                $data = [
-                    'user_id'         => $user_id,
-                    'submitted_by'    => $submitted_by,
-                    'attendance_date' => date('Y-m-d')
-                ];
-            foreach ($absent_students as $absent_student) {
-                $data['s_id'] = $absent_student;
-                $data['present'] = 'A';
-                AttendanceMast::create($data);
-            }
-            foreach ($present_students as $present_student) {       
-                $data['s_id'] = $present_student;
-                $data['present'] = 'P';
-                AttendanceMast::create($data);
-            }
-            if(Auth::user()->hasRole('teacher')){
-                $user = User::find(Auth::user()->parent_id);
-                $message = [
-                    'id' => '',
-                    'title' => 'attendance Submit',
-                    'url' => 'attendance/dashboard',
-                    'message' => 'Students attendance submitted' 
-                ];
-                $user->notify(new attendanceNotifications($message));
-            }
-            return 'success';
-        }else{
-            return "warning";
+            return "sunday";
         }
+
     }
 
     public function staff_attendance(){
+        $data = User::with(['attendances' => function($query){
+            $query->where('attendance_date',date('Y-m-d'));
+        }])->whereRoleIs('teacher');
+
         if(Auth::user()->hasRole('lawcollege')){
-            $users = User::whereRoleIs('teacher')->where('parent_id',Auth::user()->id)->get();
+            $users = $data->where('parent_id',Auth::user()->id)->get();
         }else{
-            $users = User::whereRoleIs('teacher')->where('parent_id',Auth::user()->parent_id)->get(); 
+            $users = $data->where('parent_id',Auth::user()->parent_id)->get(); 
         }
+        // return $users;
 
         return view('attendance.staff.index',compact('users'));
     }
-    public function manage_attendance(){
+    public function manage_student_attendance(){
         $data = $this->details();
 
-        return view('attendance.manage.index',compact('data')); 
+        return view('attendance.manage.student',compact('data')); 
+    }
+    public function manage_staff_attendance(){
+        $attendance_staffs =array();
+        return view('attendance.manage.staff',compact('attendance_staffs')); 
     }
     public function student_filter(Request $request){
         $students = $this->filter($request)->get();
         
         if(count($students) !=0){
-            $attendance_students = AttendanceMast::with('student')->where('attendance_date',$request->attendance_date)->whereIn('s_id',collect($students)->pluck('id'))->get();
+            $attendance_students = StudentAttendance::with('student')->where('attendance_date',$request->attendance_date)->whereIn('s_id',collect($students)->pluck('id'))->get();
         }else{
             $attendance_students = [];
         }
 
-        return view('attendance.manage.table',compact('students','attendance_students'));
+        return view('attendance.manage.student_table',compact('students','attendance_students'));
+    }
+    public function staff_filter(Request $request){
+
+        if(Auth::user()->hasRole('lawcollege')){
+            $users =User::whereRoleIs('teacher')->where('parent_id',Auth::user()->id)->get();
+        }else{
+            $users = User::whereRoleIs('teacher')->where('parent_id',Auth::user()->parent_id)->get(); 
+        }
+
+        $attendance_staffs = EmployeeAttendance::with('staff')->where('attendance_date',$request->attendance_date)->whereIn('emp_id',collect($users)->pluck('id'))->get();
+        // return $attendance_staffs;
+
+       return view('attendance.manage.staff_table',compact('attendance_staffs'));
     }
 
     public function filter($request){
@@ -134,7 +168,7 @@ class AttendanceController extends Controller
         return  view('attendance.manage.show',compact('student'));
     } 
     public function attendance_list(Request $request){
-        $attendances = AttendanceMast::where('s_id',$request->s_id)->whereBetween('attendance_date',array($request->start_date,$request->end_date))->get();  
+        $attendances = StudentAttendance::where('s_id',$request->s_id)->whereBetween('attendance_date',array($request->start_date,$request->end_date))->get();  
         return view('attendance.manage.list',compact('attendances'));
     }
 
@@ -165,24 +199,67 @@ class AttendanceController extends Controller
             foreach ($absent_students as $absent_student) {
                 $data['s_id'] = $absent_student;
                 $data['present'] = 'A';
-                AttendanceMast::where('s_id',$absent_student)->where('attendance_date',$request->attendance_date)->update(['present' => 'A']);
+                StudentAttendance::where('s_id',$absent_student)->where('attendance_date',$request->attendance_date)->update(['present' => 'A']);
             }
         if($present_students !=null){
             foreach ($present_students as $present_student) {       
                 $data['s_id'] = $present_student;
                 $data['present'] = 'P';
-                AttendanceMast::where('s_id',$present_student)->where('attendance_date',$request->attendance_date)->update(['present' => 'P']);
+                StudentAttendance::where('s_id',$present_student)->where('attendance_date',$request->attendance_date)->update(['present' => 'P']);
             }
         }
 
         return 'success';
     }
+    public function attendance_staff_update(Request $request){
+        $presents = $request->presents;
+        $totals = $request->totals;
+
+        if(Auth::user()->hasRole('lawcollege')){
+            $user_id = Auth::user()->id;
+            $submitted_by = $user_id;
+        }else{
+            $user_id = Auth::user()->parent_id;
+            $submitted_by = Auth::user()->id;
+        }  
+
+        $data = [
+            'user_id'         => $user_id,
+            'submitted_by'    => $submitted_by,
+            'attendance_date' => date('Y-m-d')
+        ];
+        if($presents !=null){
+            $absents = array_diff($totals, $presents);
+        }
+        else{
+            $absents = $totals;
+        }
+            foreach ($absents as $absent) {
+                $data['s_id'] = $absent;
+                $data['present'] = 'A';
+                EmployeeAttendance::where('emp_id',$absent)->where('attendance_date',$request->attendance_date)->update(['present' => 'A']);
+            }
+        if($presents !=null){
+            foreach ($presents as $present) {       
+                $data['emp_id'] = $present;
+                $data['present'] = 'P';
+                EmployeeAttendance::where('emp_id',$present)->where('attendance_date',$request->attendance_date)->update(['present' => 'P']);
+            }
+        }
+
+        return 'success';
+        return $request->all();
+    }   
     public function attendance_upload(){
         return view('attendance.upload.index');
     }
-    public function attendance_report(){
+    public function attendance_student_report(){
         $data = $this->details();
-        return view('attendance.report.index',compact('data'));
+        return view('attendance.report.student',compact('data'));
+    }
+    public function attendance_staff_report(){
+        
+        return view('attendance.report.staff');
     }
     public function report_generate(Request $request){
        $data =  $request->validate([
@@ -200,67 +277,35 @@ class AttendanceController extends Controller
         ]
     );
 
-        $attendance_date = $request->attendance_date;
-        $year = date('Y',strtotime($attendance_date));
-        $month = date('m',strtotime($attendance_date));   
-
-        $month1 = Carbon::createFromFormat('Y-m', $request->attendance_date);
-        $monthStart = $month1->startOfMonth()->copy();
-        $monthEnd = $month1->endOfMonth()->copy();
+        $date = $this->date_month_year($request->attendance_date);
+        $month = $date['month'];
+        $year = $date['year'];
+        $monthStart = $date['monthStart'];
+        $monthEnd = $date['monthEnd'];
+      
 
 
         $students = $this->filter($request)->with(['attendances' => function($query) use ($year, $month){
             $query->whereYear('attendance_date',$year)->whereMonth('attendance_date',$month);
         }])->get();      
         
-        $calendarData = AcademicCalendarMast::whereYear('date_from',$year)
-                            ->whereMonth('date_from',$month)
-                            ->whereYear('date_upto',$year)
-                            ->whereMonth('date_upto',$month)
-                            ->where('user_id', Auth::user()->id)
-                            ->get();
 
-        $academic_dates = [];
-        $monthDates = [];
-        $weekendDays =['Sunday'];
+        $academic_dates = Helpers::academic_dates($month,$year);
+        $monthDates = Helpers::month_dates($monthStart,$monthEnd);
 
+        $headerData = [
+            'monthYear' => $date['month1']->format('F, Y')
+        ];
 
-        foreach ($calendarData as $key => $value) {
-           for($date = $value->date_from->copy() ; $date->lte($value->date_upto); $date->addDay()){
-                if(!in_array($date->dayName, $weekendDays)){
-                    $symbol = 'H';
-                    if($value->is_exam == '1'){
-                        $symbol = 'E';
-                    }
-                    $academic_dates[$date->format('Y-m-d')]= $symbol;
-                }
-           }
-        }
+        $qual = QualMast::find($request->qual_code);
 
-// return $academic_dates;
-        for($date =$monthStart; $date->lte($monthEnd) ; $date->addDay() ){
-            $weekend = 0;
-            if(in_array($date->dayName, $weekendDays)){
-                $weekend = 1;
-            }
-            $monthDates[$date->format('Y-m-d')] = [
-                'day' =>  intval($date->format('d')),
-                'weekend' => $weekend
-            ];
-        }
-       $headerData = [
-            'monthYear' => $month1->format('F, Y')
-       ];
-
-       $qual = QualMast::find($request->qual_code);
-
-       $filter = [
+        $filter = [
             'qual' => $qual->qual_catg_desc,
             'qual_catg' => $qual->qual_desc,
             'year' => $request->year,
             'semester'=>$request->semester,
             'batch' => BatchMast::find($request->batch)->name
-       ];
+        ];
 
         return  view('attendance.report.clone',compact('monthDates','academic_dates','students','headerData','filter','data'));
 
@@ -273,13 +318,39 @@ class AttendanceController extends Controller
             'data' => $data,
         ];
 
-       return Excel::download(new StudentAttendenceExport($exportData), 'sheet.xlsx');
-
-
-
+        return Excel::download(new StudentAttendenceExport($exportData), 'sheet.xlsx');
          
     }
+    public function staff_report_generate(Request $request){
+        $date = $this->date_month_year($request->attendance_date);
+        $month = $date['month'];
+        $year = $date['year'];
+        $monthStart = $date['monthStart'];
+        $monthEnd = $date['monthEnd'];
+        
+        $usersData = User::with(['attendances' => function($query) use ($year, $month){
+            $query->whereYear('attendance_date',$year)->whereMonth('attendance_date',$month);
+        }])->whereRoleIs('teacher');
 
+        if(Auth::user()->hasRole('lawcollege')){
+            $users =$usersData->where('parent_id',Auth::user()->id)->get();
+
+        }else{
+            $users =$usersData->where('parent_id',Auth::user()->parent_id)->get(); 
+        }
+
+        $academic_dates = Helpers::academic_dates($month,$year);
+        $monthDates = Helpers::month_dates($monthStart,$monthEnd);
+
+        $headerData = [
+            'monthYear' => $date['month1']->format('F, Y')
+        ];
+
+       
+        return  view('attendance.report.staff_monthly_report',compact('monthDates','academic_dates','users','headerData'));
+
+        
+    }
     public function details(){
         $qual_catgs = QualCatg::where('qual_catg_code', '!=',4)->get();
 
@@ -297,5 +368,82 @@ class AttendanceController extends Controller
         
         $datas = Excel::toCollection(new AttendanceImport,$request->file('file'));
         return $datas;
+    }
+    public function attendanceStaffSubmit(Request $request){
+        if(Carbon::now()->dayName != 'Sunday'){
+            $present_staffs = $request->present;
+            $total_staffs = $request->total;
+
+            $attendances = EmployeeAttendance::whereIn('emp_id',$total_staffs)->where('attendance_date',date('Y-m-d'))->get();  
+
+            // return $attendances;
+                
+            if(Auth::user()->hasRole('lawcollege')){
+                $user_id = Auth::user()->id;
+                $submitted_by = $user_id;
+            }else{
+                $user_id = Auth::user()->parent_id;
+                $submitted_by = Auth::user()->id;
+            }  
+
+
+
+            if($present_staffs !=null){
+                $absent_staffs = array_diff($total_staffs, $present_staffs);
+            }else{
+                $absent_staffs = $total_staffs;
+            }
+
+            // return $absent_students;
+
+            if(count($attendances) == 0){
+                    $data = [
+                        'user_id'         => $user_id,
+                        'submitted_by'    => $submitted_by,
+                        'attendance_date' => date('Y-m-d')
+                    ];
+                foreach ($absent_staffs as $absent_staff) {
+                    $data['emp_id'] = $absent_staff;
+                    $data['present'] = 'A';
+                    EmployeeAttendance::create($data);
+                }
+                foreach ($present_staffs as $present_staff) {       
+                    $data['emp_id'] = $present_staff;
+                    $data['present'] = 'P';
+                    EmployeeAttendance::create($data);
+                }
+                if(Auth::user()->hasRole('teacher')){
+                    $user = User::find(Auth::user()->parent_id);
+                    $message = [
+                        'id' => '',
+                        'title' => 'attendance Submit',
+                        'url' => 'attendance/dashboard',
+                        'message' => 'Staff attendance submitted' 
+                    ];
+                    $user->notify(new attendanceNotifications($message));
+                }
+                return 'success';
+            }else{
+                return "warning";
+            }
+        }else{
+            return "sunday";
+        }
+
+    }
+    public function date_month_year($attendance_date){
+        $year = date('Y',strtotime($attendance_date));
+        $month = date('m',strtotime($attendance_date));   
+
+        $month1 = Carbon::createFromFormat('Y-m', $attendance_date);
+        $monthStart = $month1->startOfMonth()->copy();
+        $monthEnd = $month1->endOfMonth()->copy();
+        return $data = [
+            'year' => $year,
+            'month' => $month,
+            'month1' => $month1,
+            'monthStart' => $monthStart,
+            'monthEnd'  => $monthEnd,
+        ]; 
     }
 }

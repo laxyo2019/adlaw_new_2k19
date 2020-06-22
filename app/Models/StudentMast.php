@@ -46,6 +46,6 @@ class StudentMast extends Model
         return $this->belongsTo('App\Models\LanguageMast','language_id');
     }
     public function attendances(){
-        return $this->hasMany('App\Models\AttendanceMast','s_id');
+        return $this->hasMany('App\Models\StudentAttendance','s_id');
     }
 }

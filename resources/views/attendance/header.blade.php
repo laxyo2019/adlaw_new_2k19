@@ -27,13 +27,13 @@
 						<h5>Upload Attendance</h5>
 						</div>
 					</a>
-					<a href="{{route('attendance.manage')}}" >
+					<a href="{{route('attendance.manage_student')}}" >
 						<div class="col-md-2 col-sm-6 col-xs-11  col-div-mar col-div-nav {{Request()->segment(2) == 'manage' ? 'active-li' : ''}}" >
 						<i class="fa fa-graduation-cap"></i>
 						<h5>Manage Attendance</h5>
 						</div>
 					</a>
-					<a href="{{route('attendance.report')}}" >
+					<a href="{{route('attendance.student_report')}}" >
 						<div class="col-md-2 col-sm-6 col-xs-11  col-div-mar col-div-nav {{Request()->segment(2) == 'report' ? 'active-li' : ''}}" >
 						<i class="fa fa-graduation-cap"></i>
 						<h5>Report Attendance</h5>

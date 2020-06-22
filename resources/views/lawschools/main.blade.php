@@ -359,10 +359,10 @@
                 <a href="{{route('attendance.upload')}}" ><i class="fa fa-circle-o"></i>Upload Attendance</a>
               </li>
               <li class="nav-item {{Request()->segment(2) == 'manage' ? 'active' : ''}}">
-                <a href="{{route('attendance.manage')}}" ><i class="fa fa-circle-o"></i>Manage Attendance</a>
+                <a href="{{route('attendance.manage_student')}}" ><i class="fa fa-circle-o"></i>Manage Attendance</a>
               </li>
               <li class="nav-item {{Request()->segment(2) == 'manage' ? 'active' : ''}}">
-                <a href="{{route('attendance.report')}}" ><i class="fa fa-circle-o"></i>Reports Attendance</a>
+                <a href="{{route('attendance.student_report')}}" ><i class="fa fa-circle-o"></i>Reports Attendance</a>
               </li>
             </ul>
           </li>

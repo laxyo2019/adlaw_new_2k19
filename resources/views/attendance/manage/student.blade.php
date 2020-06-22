@@ -6,11 +6,18 @@
 	<div class="col-md-12 m-auto">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h4 class="panel-title">Student List <p class="pull-right">Today Date :- {{date('d-m-Y')}} | Time: {{date('h:i A')}}</p></h4>
+				<h4 class="panel-title">Manage Attendance <p class="pull-right">Today Date :- {{date('d-m-Y')}} | Time: {{date('h:i A')}}</p></h4>
 
 			</div>
 			<div class="panel-body">
 				<div class="row">
+					<div class="col-md-12">
+						<a href="{{route('attendance.manage_student')}}" class="btn btn-sm {{Request()->segment(3) == 'student' ? 'btn-primary' : 'btn-default'}}">Student attendance</a>
+						<a href="{{route('attendance.manage_staff')}}" class="btn btn-sm {{Request()->segment(3) == 'staff' ? 'btn-primary' : 'btn-default'}} ">Staff attendance</a>
+					</div>
+				</div>
+
+				<div class="row mt-4">
 					@include('attendance.details')
 					<div class="col-md-2">
 						<input type="text" readonly="" name="attendance_date" value="{{date('Y-m-d')}}" class="datepicker form-control">
@@ -65,7 +72,7 @@
 							
 			}
 			else{
-				alert('All select field are mendarory');
+				$.notify('All select field are mandatory');
 			}
 		}
 
