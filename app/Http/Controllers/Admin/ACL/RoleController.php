@@ -7,10 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Role;
 class RoleController extends Controller
 {
-    public function index(){
-    	$roles = Role::all();
-   		return view('admin.dashboard.acl.role.index',compact('roles'));
-   	}
+      public function index(){
+      	$roles = Role::all();
+      	return view('admin.dashboard.acl.role.index',compact('roles'));
+      }
    	public function create(){
    		return view('admin.dashboard.acl.role.create');
    	}
@@ -27,6 +27,7 @@ class RoleController extends Controller
    	}
    	public function edit($id){
    		$role = Role::find($id);
+        
    		return view('admin.dashboard.acl.role.edit',compact('role'));
    	}
    	public function update(Request $request,$id){

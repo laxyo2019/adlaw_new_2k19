@@ -121,7 +121,7 @@ class HomeController extends Search\SearchController
 
    public function connectLogin(){
       return redirect('http://127.0.0.1:8002/custom-login?email='.Auth::user()->email.'&password='.Auth::user()->password);
-        // return Redirect("http://connect-adlaw.laxyo.org");
+         // return Redirect("http://connect-adlaw.laxyo.org");
    } 
 
   public function password_change(){
