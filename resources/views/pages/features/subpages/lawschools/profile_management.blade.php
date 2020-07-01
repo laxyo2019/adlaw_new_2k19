@@ -18,12 +18,16 @@
                 </div>
 
                 <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 col-xl-7 mt-4">
-                   Adlaw offers profile management in which law colleges can create their profile, with all the details includes college name, date of registration, contact, e-mail address and prospectus etc. The created law colleges profile will be shown in search box as a result where user search for the law colleges.
+                <p class="p-text">
+                    Adlaw offers profile management in which law colleges can create their profile, with all the details includes college name, date of registration, contact, e-mail address and prospectus etc. The created law colleges profile will be shown in search box as a result where user search for the law colleges.
+                </p>
                 </div>
             </div>
             <div class="row">                
                 <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 col-xl-7 mt-4">
-                   User or student can find the law colleges by name anywhere and get full profile details of law colleges, courses and other information related law education. 
+                <p class="p-text">
+                    User or student can find the law colleges by name anywhere and get full profile details of law colleges, courses and other information related law education. 
+                </p>   
                 </div>
                 <div class="col-sm-12 col-xs-12 col-md-5 col-lg-5 col-xl-5 mt-4">
                     <img src="{{asset('images/dashboard/profile1.png')}}" class="w-100 h-100">

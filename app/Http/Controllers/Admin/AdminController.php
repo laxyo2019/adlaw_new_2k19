@@ -87,7 +87,7 @@ class AdminController extends Controller
 	public function show_subscription(){
 		$subscriptions =  SubcriptionContact::with('user.role')->where('active','0')->get();
 		$packages = Package::all();
-        return view('admin.dashboard.contact.show_subsription',compact('subscriptions','packages','renew_subscriptions','new_subscriptions'));
+        return view('admin.dashboard.contact.show_subsription',compact('subscriptions','packages'));
     }
     public function find_subscriptions(){
     	$all_subsc =  SubcriptionContact::with('user.role')->where('active','0')->get();

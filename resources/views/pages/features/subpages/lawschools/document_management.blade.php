@@ -8,7 +8,7 @@
         </div>
         <div class="col-sm-12 col-lg-12 col-xs-12 feature-p-text">
         	{{-- <h4 class="text-uppercase font-weight-bold">CASE MANAGEMENT</h4> --}}
-        	<p class="text-justify">
+        	<p class="p-text">
         		It allows law colleges to store the all the data and files education and related. With the adlaw Dropbox combination, you can exploit Dropbox's amazing highlights from directly within your adlaw account. To keep your records sorted out and in a state of sync, documents reports and envelopes added to a particular case organizer in Dropbox are promptly accessible inside the comparing case in adlaw.
         	</p>
 
@@ -26,7 +26,7 @@
                     </ul>
                 </div>
             </div>
-            <p class="text-justify mt-4">
+            <p class="p-text mt-4">
                  Each file stored is automatically numbered, versioned and archived. The software stores and maintains the copy of all the versions and allows for it to be viewed and edited at a later date. Adlaw Document Management feature maintains a copy of all previous versions in order to allow for inspection or review at a later date.
             </p>
 

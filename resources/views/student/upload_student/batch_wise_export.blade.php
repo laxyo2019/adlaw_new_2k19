@@ -13,6 +13,8 @@
 				<div class="row">
 					<div class="col-md-8" style="margin-top: 10px;" >
 						<div class="row form-group">
+						<form action="{{route('batch_wise_export')}}" method="post">
+							@csrf
 							<div class="col-md-4">
 								<label>Admission Batch</label>
 								<select class="form-control" name="batch_id">
@@ -21,6 +23,11 @@
 										<option value="{{$batch->id}}">{{$batch->name}}</option>
 									@endforeach
 								</select>
+								@error('batch_id')
+									<span class="text-danger">
+									    <strong>{{ $message }}</strong>
+									</span>
+								@enderror
 							</div>
 							<div class="col-md-4">
 								<label>Admission Year</label>
@@ -56,6 +63,7 @@
 							</div>
 						</div>
 					</div>
+					</form>
 					<div class="col-md-4 " style="margin-top: 10px;">
 							<div class="row">
 								<a href="{{route('student_sample')}}">
@@ -101,21 +109,21 @@
 </section>
 
 <script>
-	$(document).ready(function(){
-		$('#exportBtn').on('click',function(){
-			var batch_id = $('select[name="batch_id"] option:selected').val();
-			var qual_year = $('select[name="qual_year"] option:selected').val();
-			var semester = $('select[name="semester"] option:selected').val();
-			console.log(batch_id);
-			console.log(qual_year);
-			console.log(semester);
-			if(batch_id !='' || qual_year !='' || semester !=''){
-				console.log("success");
-			}else{
-				alert("select field");
-			}
-		});
-	});
+	// $(document).ready(function(){
+	// 	$('#exportBtn').on('click',function(){
+	// 		var batch_id = $('select[name="batch_id"] option:selected').val();
+	// 		var qual_year = $('select[name="qual_year"] option:selected').val();
+	// 		var semester = $('select[name="semester"] option:selected').val();
+	// 		console.log(batch_id);
+	// 		console.log(qual_year);
+	// 		console.log(semester);
+	// 		if(batch_id !='' || qual_year !='' || semester !=''){
+	// 			console.log("success");
+	// 		}else{
+	// 			alert("select field");
+	// 		}
+	// 	});
+	// });
 
 </script>
 @endsection

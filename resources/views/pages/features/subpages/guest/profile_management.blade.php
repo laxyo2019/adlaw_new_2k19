@@ -8,7 +8,7 @@
         </div>
         <div class="col-sm-12 col-lg-12 col-xs-12 feature-p-text">
         	{{-- <h4 class="text-uppercase font-weight-bold">CASE MANAGEMENT</h4> --}}
-        	<p class="text-justify">
+        	<p class="p-text">
         		Adlaw offers profile management in which user can create their profile, update and deactivate the profile whether user is a guest, lawyer or law intern. In the profile users can put all the detail about their area of specialization and relevant cases.
 
         	</p>

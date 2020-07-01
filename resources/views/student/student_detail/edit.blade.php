@@ -402,7 +402,7 @@
 													<label class="required">Country Name</label>
 													<select name="country_code[]" class="form-control" id="country">
 														@foreach($countries as $country)
-															<option value="{{$country->country_code}}" {{count($student->stud_addresses) ==0 ? '' : ($student->stud_addresses[0]->addr_type == 'S' ? ($student->stud_addresses[0]->country_code == $country->country_code  ? 'selected' :'' ): $student->stud_addresses[0]->country_code == $country->country_code  ? 'selected' : '')  }}>{{$country->country_name}}</option>
+															<option value="{{$country->country_code}}" {{count($student->stud_addresses) == 0 ? '' : ($student->stud_addresses[0]->addr_type == 'S' ? ($student->stud_addresses[0]->country_code == $country->country_code  ? 'selected' :'' ) : '')  }}>{{$country->country_name}}</option>
 														@endforeach
 													</select>
 												</div>
@@ -452,7 +452,7 @@
 													<label class="required">Country Name</label>
 													<select name="country_code[]" class="form-control" id="country1">
 														@foreach($countries as $country)
-															<option value="{{$country->country_code}}" {{count($student->stud_addresses) ==0 ? '' : ($student->stud_addresses[0]->addr_type == 'S' ? ($student->stud_addresses[0]->country_code == $country->country_code  ? 'selected' :'' ): $student->stud_addresses[1]->country_code == $country->country_code  ? 'selected' : '' ) }}>{{$country->country_name}}</option>
+															<option value="{{$country->country_code}}" {{count($student->stud_addresses) ==0 ? '' : ($student->stud_addresses[0]->addr_type == 'S' ? ($student->stud_addresses[0]->country_code == $country->country_code  ? 'selected' :'' ): '') }}>{{$country->country_name}}</option>
 														@endforeach
 													</select>
 												</div>

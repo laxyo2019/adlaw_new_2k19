@@ -9,7 +9,7 @@
               <i class="m-auto text-primary">  <img class="media-object" src="images/lawyers-law firm1.png" alt="Image"></i>
             </div>
             <h3 class="font-weight-bold">Lawyer / Law Firms</h3>
-            <p class="lead mb-0">Perfect CRM Solutions For Lawyer / Law Firms !</p>
+            <p class="lead mb-0">Feature Rich CRM Solution</p>
           </div>
           </a>
         </div>
@@ -20,7 +20,7 @@
             <div class="features-icons-icon d-flex">
               <i class="m-auto text-primary"> <img class="media-object" src="images/Guest1.png" alt="Image"> </i>
             </div>
-            <h3 class="font-weight-bold">Users / Guest</h3>
+            <h3 class="font-weight-bold">Company / Other Law Users</h3>
             <p class="lead mb-0">Easily Search Lawyer and Law Firms!</p>
           </div>
          </a>
@@ -33,7 +33,7 @@
                    <img class="media-object" src="images/Law-School1.png" alt="Image"> 
               </i>
             </div>
-            <h3 class="font-weight-bold">Law Schools</h3>
+            <h3 class="font-weight-bold">Law Schools / Students</h3>
             <p class="lead mb-0">Locate Perfect Lawschools!</p>
           </div>
           </a>

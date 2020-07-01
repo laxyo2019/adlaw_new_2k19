@@ -114,7 +114,7 @@ Route::group(['prefix' => 'features/lawschools'] ,function(){
 	Route::view('/document_management','pages.features.subpages.lawschools.document_management')->name('lawschools.document_management');
 	Route::view('/team_management','pages.features.subpages.lawschools.team_management')->name('lawschools.team_management');
 	Route::view('/agenda_management','pages.features.subpages.lawschools.agenda_management')->name('lawschools.agenda_management');
-	Route::view('/todo_management','pages.features.subpages.lawschools.todo_management')->name('features.todo_management');
+	// Route::view('/todo_management','pages.features.subpages.lawschools.todos_management')->name('features.todo_management');
 });
 
 
@@ -269,6 +269,7 @@ Route::group(['middleware' => ['role:lawyer|lawcompany|guest']], function(){
 Route::group(['middleware' => ['role:lawcollege|teacher|student']], function() {
 
 	Route::resource('/lawschools', 'LawSchools\LawSchoolsController');
+	
 
 // Route::group(['prefix' => 'features'] ,function(){	});
 	Route::resource('/student', 'Student\StudentDashboardController');
@@ -291,6 +292,56 @@ Route::group(['middleware' => ['role:lawcollege|teacher|student']], function() {
 	Route::post('/batch_wise_export', 'Student\StudentDashboardController@batch_wise_export')->name('batch_wise_export');
 
 	Route::resource('manage/batches', 'LawSchools\BatchMastController');
+	
+	Route::group(['prefix' => 'attendance', 'namespace' => 'LawSchools'], function ()  {
+
+		Route::get('/dashboard', 'AttendanceController@index')->name('attendance.index');
+		Route::get('/student', 'AttendanceController@student_attendance')->name('attendance.student');
+		Route::post('/student_fetch', 'AttendanceController@student_fetch')->name('attendance.student_fetch');
+		Route::post('/attendance_submit', 'AttendanceController@attendance_submit')->name('attendance.submit');
+		Route::get('/staff', 'AttendanceController@staff_attendance')->name('attendance.staff');
+
+		Route::get('/manage/student', 'AttendanceController@manage_student_attendance')->name('attendance.manage_student');
+		Route::post('/student_filter', 'AttendanceController@student_filter')->name('attendance.student_filter');
+
+
+		Route::get('/manage/staff', 'AttendanceController@manage_staff_attendance')->name('attendance.manage_staff');
+		Route::post('/staff_filter', 'AttendanceController@staff_filter')->name('attendance.staff_filter');
+		Route::post('/attendance_staff_update', 'AttendanceController@attendance_staff_update')->name('attendance.staff_update');
+
+		Route::get('/manage/show_attendance/{id}', 'AttendanceController@show_attendance')->name('attendance.show_attendance');
+		Route::post('/attendance_list', 'AttendanceController@attendance_list')->name('attendance.list');
+		Route::post('/attendance_update', 'AttendanceController@attendance_update')->name('attendance.update');
+		Route::get('/upload','AttendanceController@attendance_upload')->name('attendance.upload');
+		
+		Route::get('/report/student','AttendanceController@attendance_student_report')->name('attendance.student_report');
+
+		Route::get('/report/staff','AttendanceController@attendance_staff_report')->name('attendance.staff_report');
+
+		Route::post('/report_generate','AttendanceController@report_generate')->name('attendance.report_generate');
+
+		Route::post('/staff_report_generate','AttendanceController@staff_report_generate')->name('attendance.staff_report_generate');
+
+		Route::post('/attendance-staff-submit','AttendanceController@attendanceStaffSubmit')->name('attendance-staff.submit');
+
+		Route::post('/import','AttendanceController@importAttendence')->name('attendance.import');
+	});
+
+	Route::group(['prefix' => 'fees', 'namespace' => 'LawSchools'], function ()  {
+		Route::get('/dashboard','FeesController@index')->name('fees.index');
+
+	});
+
+	Route::group(['prefix' => 'manage/academic','namespace' => 'LawSchools'],function(){
+		Route::get('/index', 'LawSchoolsController@academicCalendarIndex')->name('academic.index');
+		Route::get('/create', 'LawSchoolsController@academicCalendarCreate')->name('academic.create');
+		Route::post('/store', 'LawSchoolsController@academicCalendarStore')->name('academic.store');	
+		Route::get('show/{id}', 'LawSchoolsController@academicCalendarShow')->name('academic.show');	
+		Route::get('edit/{id}', 'LawSchoolsController@academicCalendarEdit')->name('academic.edit');	
+		Route::patch('update/{id}', 'LawSchoolsController@academicCalendarUpdate')->name('academic.update');
+			
+		Route::get('destroy/{id}', 'LawSchoolsController@academicCalendarDestroy')->name('academic.destroy');	
+	});
 
 });
 /* --------------Lawcollege--------Teacher-----------Student---------- */

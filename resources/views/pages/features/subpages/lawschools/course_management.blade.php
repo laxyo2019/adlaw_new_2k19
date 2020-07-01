@@ -8,7 +8,7 @@
         </div>
         <div class="col-sm-12 col-lg-12 col-xs-12 feature-p-text">
         	{{-- <h4 class="text-uppercase font-weight-bold">CASE MANAGEMENT</h4> --}}
-        	<p class="text-justify">
+        	<p class="p-text">
         		Course and Batch Management feature offered by adlaw is designed for law colleges where they manage batch of students and courses what they provide. This includes the list of all law courses offering by the law colleges. The course name, qualification name, course duration, and syllabus can be added by law colleges. Students can find relevant course, course duration and see the syllabus offered by law colleges. 
         	</p>
 
@@ -26,7 +26,7 @@
                     </ul>
                 </div>
             </div>
-            <p class="text-justify mt-4">
+            <p class="p-text mt-4">
                  The batches can be filtered by batch name, start date, end date where the college management can manage the batches by adding new and update existing. The details can be searched by the course name and qualification name from the search box. 
             </p>
 

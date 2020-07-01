@@ -339,8 +339,9 @@ export default {
 		attendance(){
 			if(this.selectedUsersIds.length === 1){
 				let u_id = this.selectedUsersIds[0];
+								
 				return this.agenda.response_grps.map((e) => {
-					let response_check = (e.resp_users.filter((x) => { return x.responder_id == u_id }));
+					let response_check = (e.resp_users.filter((x) => { return x.responder_id == u_id && x.response_missed == 0 }));
 					return {
 						'start': response_check.length != 0 ? response_check[0].created_at : '',
 						'end': response_check.length != 0 ? response_check[0].created_at : '',

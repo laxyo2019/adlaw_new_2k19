@@ -8,7 +8,7 @@
         </div>
         <div class="col-sm-12 col-lg-12 col-xs-12 feature-p-text">
         	{{-- <h4 class="text-uppercase font-weight-bold">CASE MANAGEMENT</h4> --}}
-        	<p class="text-justify">
+        	<p class="p-text">
         		Adlaw helps you monitor what's going in your cases on one convenient, central calendar so nothing slips through the cracks. User can see occasions to specific cases created by lawyer or law firm. So whether it’s an upcoming court date or statement, to-dos, hearing sessions morning or evening etc. 
         	</p>
             <div class="row">
@@ -17,7 +17,10 @@
                 </div>
 
                 <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 col-xl-7 mt-4">
-                    The Adlaw Calendar ensures you’re always prepared. This feature provide a roll-up of all firm-wide appointments, deadlines, and meetings with lawyer on one central calendar so you can coordinate your efforts and see when others in your firm are available. Any time you create a calendar event by setting reminder, new or recurring for you, saving you time and hassle. Adlaw notifies all invited parties for you, saving you time and hassle.
+                    <p class="p-text">
+                       The Adlaw Calendar ensures you’re always prepared. This feature provide a roll-up of all firm-wide appointments, deadlines, and meetings with lawyer on one central calendar so you can coordinate your efforts and see when others in your firm are available. Any time you create a calendar event by setting reminder, new or recurring for you, saving you time and hassle. Adlaw notifies all invited parties for you, saving you time and hassle.
+                        
+                    </p>
                     
                 </div>
             </div>

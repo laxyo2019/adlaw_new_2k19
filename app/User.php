@@ -131,4 +131,7 @@ class User extends Authenticatable
     {
       return $this->belongsToMany('App\Permission');
     }
+    public function attendances(){
+        return $this->hasMany('App\Models\EmployeeAttendance','emp_id');
+    }
 }

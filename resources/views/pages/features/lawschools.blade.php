@@ -1,5 +1,5 @@
 <section class="py-1 border-bottom " style="background-color: #f0f0f0;">
-    <h2 class="font-weight-bold text-center text-captialize">Law Schools Features</h2>
+    <h2 class="font-weight-bold text-center text-captialize">Law Schools / Students Features</h2>
      <span class="span-line mt-4 mb-4"></span>
      <br>
    {{--  <p class="text-muted text-center" >

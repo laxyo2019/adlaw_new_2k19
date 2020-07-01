@@ -15,13 +15,13 @@ class StudentDetailExport implements FromQuery, WithMapping, WithHeadings, Shoul
 
     public function query()
     {
-        $data = StudentMast::with('qual_course','batch','reservation','country','language')->where('user_id',Auth::user()->id);
+        $data = StudentMast::with('qual_catg','qual_course','batch','reservation','country','language')->where('user_id',Auth::user()->id);
         return $data;
     }
     public function map($data) : array
     {
     	return [
-    		$data->qual_course->qual_catg_desc,
+    		$data->qual_catg->shrt_desc,
     		$data->qual_course->qual_desc,
     		$data->qual_year,
     		$data->batch->name,
@@ -29,8 +29,8 @@ class StudentDetailExport implements FromQuery, WithMapping, WithHeadings, Shoul
     		date('Y-m-d',strtotime($data->addm_date)),
     		$data->enroll_no,
     		$data->roll_no,
-    		$data->status == 'R' ? 'Running' : ($data->status == 'P' ? 'Pass' : ''),
-    		date('Y-m-d',strtotime($data->passout_date)),
+    		$data->status == 'R' ? 'R' : ($data->status == 'P' ? 'P' : 'F'),
+    		$data->passout_date !='' ? date('Y-m-d',strtotime($data->passout_date)) : '',
     		$data->f_name,
     		$data->m_name,
     		$data->l_name,

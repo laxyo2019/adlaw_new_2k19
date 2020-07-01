@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Student;
-
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -57,7 +57,6 @@ class StudentDetailController extends Controller
     public function store(Request $request){
         $id ='';
         $data = $this->create_data($request,$id);
-
         for($i= 0 ; $i < count($request->qual_doc_type_id); $i++) {
             $stud_docs= [
                 's_id'              => $data['s_id'],
@@ -76,7 +75,6 @@ class StudentDetailController extends Controller
         }
        
         $this->create_account($data);
-
         return redirect()->route('student_detail.create')->with('success','Student created successfully');
     }
 
@@ -408,7 +406,9 @@ class StudentDetailController extends Controller
 
     public function create_account($data){
 
-        $password = str_limit($data['f_name'],3,'@845');
+         $password = str_limit($data['f_name'],3,'@845');
+        // $password = 'rit@845';
+        // return $password;
         $student_data = [
             'name' => $data['f_name'] .' '. $data['l_name'],
             'email' => $data['email'],

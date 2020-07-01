@@ -249,6 +249,7 @@
           </a>
         </li>   
 
+
         {{-- 
          <li class="{{Request()->segment(1) == 'teams' ? 'active' : '' }} nav-item">
           <a class="nav-link" href="{{route('teams.index')}}">
@@ -264,20 +265,20 @@
         <li class="treeview {{Request()->segment(1) == 'student' ? 'active' : '' }} {{Request()->segment(1) == 'student_detail' ? 'active' : '' }} {{Request()->segment(1) == 'upload_student' ? 'active' : '' }} ">
           <a class="nav-link" href="">
             <i class="fa fa-graduation-cap"></i>
-            <span>Student</span> <span class="pull-right-container">
+            <span>Manage Student</span> <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
               </span>
             </a>
 
             <ul class="treeview-menu">
               <li class="nav-item {{Request()->segment(1) == 'student' ? 'active' : ''}}">
-                <a href="{{route('student.index')}}" ><i class="fa fa-circle-o"></i>Student Dashboard</a>
+                <a href="{{route('student.index')}}" ><i class="fa fa-circle-o"></i> Dashboard</a>
               </li>
               <li class="nav-item {{Request()->segment(1) == 'student_detail' ? 'active' : ''}}">
                 <a href="{{route('student_detail.index')}}" ><i class="fa fa-circle-o"></i>Student Details</a>
               </li>
               <li class="nav-item {{Request()->segment(1) == 'manage_student' ? 'active' : ''}}">
-                <a href="{{route('student_manage.index')}}" ><i class="fa fa-circle-o"></i>Manage Student</a>
+                <a href="{{route('student_manage.index')}}" ><i class="fa fa-circle-o"></i>Arrange Student</a>
               </li>
               <li class="nav-item {{Request()->segment(1) == 'upload_student' ? 'active' : ''}}">
                 <a href="{{route('upload_student')}}" ><i class="fa fa-circle-o"></i>Upload Student</a>
@@ -288,6 +289,7 @@
             </ul>
           </li>
 
+         
           <li class="treeview {{Request()->segment(1) == 'class' ? 'active' : '' }} {{Request()->segment(1) == 'class' ? 'active' : '' }} ">
             <a class="nav-link" href="">
               <i class="fa fa-graduation-cap"></i>
@@ -300,10 +302,14 @@
               <li class="nav-item {{Request()->segment(1) == 'class' ? 'active' : ''}}">
                 <a href="{{route('batches.index')}}" ><i class="fa fa-circle-o"></i>Manage Batches</a>
               </li>
+              <li class="nav-item {{Request()->segment(1) == 'class' ? 'active' : ''}}">
+                <a href="{{route('academic.index')}}" ><i class="fa fa-circle-o"></i>Academic Calendar</a>
+              </li>
+              <li class="nav-item {{Request()->segment(1) == 'class' ? 'active' : ''}}">
+                <a href="" ><i class="fa fa-circle-o"></i>Grade Master</a>
+              </li>
             </ul>
-          </li>
-
-
+          </li> 
         @endrole
 
         @role('teacher')         
@@ -330,6 +336,52 @@
           </li>    
           @endif
          @endrole
+
+          <li class="treeview {{Request()->segment(1) == 'attendance' ? 'active' : '' }} ">
+            <a class="nav-link" href="">
+              <i class="fa fa-clock-o"></i>
+                <span>Manage Attendance</span> <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+
+            <ul class="treeview-menu">
+              <li class="nav-item {{Request()->segment(2) == 'dashboard' ? 'active' : ''}}">
+                <a href="{{route('attendance.index')}}" ><i class="fa fa-circle-o"></i>Dashboard</a>
+              </li>
+              <li class="nav-item {{Request()->segment(2) == 'student' ? 'active' : ''}}">
+                <a href="{{route('attendance.student')}}" ><i class="fa fa-circle-o"></i>Student Attendance</a>
+              </li>
+              <li class="nav-item {{Request()->segment(2) == 'staff' ? 'active' : ''}}">
+                <a href="{{route('attendance.staff')}}" ><i class="fa fa-circle-o"></i>Staff Attendance</a>
+              </li>
+              <li class="nav-item {{Request()->segment(2) == 'upload' ? 'active' : ''}}">
+                <a href="{{route('attendance.upload')}}" ><i class="fa fa-circle-o"></i>Upload Attendance</a>
+              </li>
+              <li class="nav-item {{Request()->segment(2) == 'manage' ? 'active' : ''}}">
+                <a href="{{route('attendance.manage_student')}}" ><i class="fa fa-circle-o"></i>Manage Attendance</a>
+              </li>
+              <li class="nav-item {{Request()->segment(2) == 'manage' ? 'active' : ''}}">
+                <a href="{{route('attendance.student_report')}}" ><i class="fa fa-circle-o"></i>Reports Attendance</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="treeview {{Request()->segment(1) == 'fees' ? 'active' : '' }}">
+            <a class="nav-link" href="">
+              <i class="fa fa-money"></i>
+                <span>Fees</span> <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+
+            <ul class="treeview-menu">
+              <li class="nav-item {{Request()->segment(2) == 'dashboard' ? 'active' : '' }}">
+                <a href="{{route('fees.index')}}" ><i class="fa fa-circle-o"></i>dashboard</a>
+              </li>
+            </ul>
+          </li>     
+
 
          <li class="treeview {{Request()->segment(1) == 'master' ? 'active' : '' }}">
             <a href="#">

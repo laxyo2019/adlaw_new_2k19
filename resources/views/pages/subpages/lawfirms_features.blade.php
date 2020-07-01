@@ -5,7 +5,7 @@
         <div class="row ">
             <div class="col-sm-12 col-md-12 col-xl-12 text-center mb-2 h2-text">
                 <h2 class="h1-responsive font-weight-bold text-center text-white">LAWYER / LAWFIRMS FEATURES</h2>
-                <p class=" ">Perfect CRM Solutions For Lawyer / Law Firms !</p>          
+                <p class=" ">Featured CRM Solutions For Lawyer / Law Firms !</p>          
             </div>
         </div>
         <div class="row col-sm-12 col-lg-12 col-xs-12 mb-5">
@@ -15,25 +15,18 @@
         	</div>
         	{{-- content div --}}
         	<div class="col-sm-7 col-lg-7 col-md-7" >
-        		
-        			<h1 class="font-weight-bold text-captialize mb-5">Consult Best Lawyer / Law Firms in India</h1>
-        			<p class="p-text">
-                            Seeing the demand of various Legal problems we allow you to hire the professional experts having good experience in Civil Law, Corporate Law, Start-up Solutions, Criminal Law, Consumer Law, Family Law and much more in all over India.
-                    <br><br>
-                    We help you to consult with the well experienced team of lawyers, researchers & experts carry daily research on all latest current & new law, judgments & Court decisions and allows to hire the best lawyers in India for District Courts, High Court & Supreme Court matters. Our services includes to provide the best legal advisor for legal consultancy services, taxation services, corporate legal services, recovery solutions, financial legal services, bad debt recovery solutions, back office operation services, data entry service, documentation services, passport related services, fiscal documentation etc. 
-                    <br><br>
-                     
-                    </p>
-
-        	
-        	</div>
-        </div>
-        <div class="row">
-            <div class="col-md-10 m-auto">
-                <p class="p-text">
-                     When it comes to businesses, a legal consultant is responsible for providing legal advice and assistance in handling disputes, analyzing and identifying the legal issues, drafting the legal documents, maintaining legal correspondence, etc. If any client is looking for legal advice or legal documentation, Adlaw has the lists of advisors from various states who can help you with just one click. Even our website is meant for those young and energized lawyers who are looking for cases. They have to register them-self on our website providing all documents so that if any clients want to hire you, you will get a notification. Adlaw offers free legal help and advice online for almost any legal matters by our top and best Lawyers in different verticals of Industry.       
+                <h5 class="font-weight-bold text-captialize mt-2 mb-2">Featured CRM Solutions For Lawyer / Law Firms !</h5>
+        		<p class="p-text">                
+                    When it comes to lawyer’s requirements/necessities, our easy-to-use CRM solution for Lawyer / Law Firms allows you to keep record all your record confidential for better output of team members. It improvise your team’s work effectively. With Adlaw, you’ll have all the data you need to coach your team to success. Lawyers or Law Firms can have all details on one click in real-time. No matters where you are. You can discharge your obligation at your ease with roaming office facilities. With the help of Adlaw CRM you can get a complete case management solution, manage your Scheduling Time, Daily service report, information of team members, hearing date details for the lawyers/law firms to assign priorities, build momentum, collaborate without confusions and ensure that action steps are taken on time, every time. If not, don’t worry, Adlaw will remind you. 
                 </p>
-            </div>
+                <p class="p-text">
+                    This CRM will ensure in essential to manage work load effectively, helping you and your team members stay focused and organized. Adlaw offers a secure way to manage your client relationships and cases. You can access it from anywhere, share information and extract historical information into analytics reports that will help you continually improve the profitability of your law firm.
+                </p>
+                <p class="p-text">    
+                    We provide you an integrated law CRM solution that does all the management work for you. Regardless of whether you need to catch up with key contacts all the more consistently, streamline intake to convert more leads into clients, effective and confidential management of your data, or just get back some of your valuable time. We make your work more easy and efficient because of our professional approach and our constant improvements.
+                    Adlaw has everything you need to organize, track, and nurture your work.
+                </p>  
+        	</div>
         </div>
 </div>
 
