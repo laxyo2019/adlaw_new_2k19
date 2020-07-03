@@ -32,7 +32,7 @@ class CaseDocController extends Controller
 
 		$case_detail = CaseMast::where('case_id',Request()->case_id)->first();
 
-		$doc_types=DocTypeMast::all();
+		$doc_types = DocTypeMast::all();
 		return view('case_management.case_doc.create', compact('case_detail','doc_types','page_name'));
 	}
 

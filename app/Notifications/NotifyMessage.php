@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notification;
 class NotifyMessage extends Notification 
 {
     use Queueable;
-		public $data;
+	public $data;
 
     public function __construct($data)
     {
