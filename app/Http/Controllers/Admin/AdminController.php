@@ -15,6 +15,10 @@ use App\Models\ContactUs;
 use App\Models\SubcriptionContact;
 use App\Models\Package;
 use App\Models\UserPackage;
+use App\Imports\ExcelImport;
+// use App\Exports\StudentErrorExport;
+// use App\Exports\StudentDetailExport;
+use Maatwebsite\Excel\Facades\Excel;
 class AdminController extends Controller
 {
 	public function __construct(){
@@ -174,7 +178,20 @@ class AdminController extends Controller
     	$user->update(['user_package_id' => $user_package->id , 'package_start' => $data['package_start'], 'package_end' => $data['package_end']]);
     	// Mail::to($subscription->email)->send(new )
     	return "success";
+    }
+    public function uploadData(){
+    	return view('admin.dashboard.upload.index');
+    }
 
+    public function importData(Request $request){
+    	$request->validate([
+    		'type' => 'required|not_in:""',
+    		// 'file' => 'required'
+    	]);
 
+    	$status = true;
+    	$errors = array();
+        $datas = Excel::toCollection(new ExcelImport,$request->file('file'));
+    	return $datas;
     }
 }

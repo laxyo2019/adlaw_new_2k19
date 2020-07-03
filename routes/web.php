@@ -155,6 +155,11 @@ Route::group(['middleware' => ['role:admin']], function() {
 	Route::post('/subscription_package_active','Admin\AdminController@subscription_package_active')->name('admin.subscription_package_active');
 	Route::get('/package_fetch','Admin\AdminController@package_fetch')->name('admin.package_fetch');
 
+	Route::get('/upload','Admin\AdminController@uploadData')->name('admin.upload');
+
+	Route::post('/importData','Admin\AdminController@importData')->name('admin.importData');
+
+
 // Start Master module
 
 Route::group(['prefix' => 'master', 'namespace' => 'Admin\Master'], function ()  {
