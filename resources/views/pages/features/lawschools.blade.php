@@ -73,6 +73,66 @@
                     </div>
                 </a>
             </div>
+             <div class="col-md-4 mb-4 ">
+                <a href="" class="feature-link" >
+                    <div class="card feature-div">
+                        <div class="card-header bg-white border-0">
+                            <div class="feature-circle-images">
+                                <img src="{{asset('images/icons/appointment.png')}}" class="img-feature">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="font-weight-bold">Attendance Management</h4>
+                            <p class="p-text">
+                                Adlaw provide student attendance in Attendance Management feature where law college can create maintain student attendance and generate monthly report of attendance.
+                            </p> 
+                        </div>
+                        <div class="card-footer bg-white border-0">
+                            <button class="btn btn-sm btn-info">More Info</button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 mb-4 ">
+                <a href="" class="feature-link" >
+                    <div class="card feature-div">
+                        <div class="card-header bg-white border-0">
+                            <div class="feature-circle-images">
+                                <img src="{{asset('images/icons/appointment.png')}}" class="img-feature">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="font-weight-bold">Academic Calendar</h4>
+                            <p class="p-text">
+                                Adlaw provide academic calendar  in manage feature where law college manage exam and holiday date.
+                            </p> 
+                        </div>
+                        <div class="card-footer bg-white border-0">
+                            <button class="btn btn-sm btn-info">More Info</button>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 mb-4 ">
+                <a href="" class="feature-link" >
+                    <div class="card feature-div">
+                        <div class="card-header bg-white border-0">
+                            <div class="feature-circle-images">
+                                <img src="{{asset('images/icons/chat1.jpg')}}" class="img-feature">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="font-weight-bold">Messaging</h4>
+                            <p class="p-text">
+                                College teacher and students can chat together. College can create a group on messaging system and add student.
+                            </p> 
+                        </div>
+                        <div class="card-footer bg-white border-0">
+                            <button class="btn btn-sm btn-info">More Info</button>
+                        </div>
+                    </div>
+                </a>
+            </div>
         
             <div class="col-md-4 mb-4 ">
                 <a href="{{route('lawschools.document_management')}}" class="feature-link" >

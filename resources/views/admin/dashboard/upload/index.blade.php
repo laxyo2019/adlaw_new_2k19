@@ -15,9 +15,9 @@
 							<div class="col-md-6 form-group">
 								<select class="form-control" name="type">
 									<option value="">Select Import Data Type</option>
-									<option value="1">Lawyers</option>
-									<option value="2">Law Firms</option>
-									<option value="3">Law Schools</option>
+									<option value="2">Lawyers</option>
+									<option value="3">Law Firms</option>
+									<option value="4">Law Schools</option>
 								</select>
 								@error('type')
 				                  <span class="invalid-feedback d-block text-danger" role="alert">
