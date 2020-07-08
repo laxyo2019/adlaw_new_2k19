@@ -120,13 +120,13 @@ class HomeController extends Search\SearchController
 
 
    public function connectLogin(){
-<<<<<<< HEAD
-      return redirect('http://127.0.0.1:8002/custom-login?email='.Auth::user()->email.'&password='.Auth::user()->password);
+
+      //return redirect('http://127.0.0.1:8002/custom-login?email='.Auth::user()->email.'&password='.Auth::user()->password);
          // return Redirect("http://connect-adlaw.laxyo.org");
-=======
+
       return redirect('http://chat.adlaw.in/custom-login?email='.Auth::user()->email.'&password='.Auth::user()->password);
         // return Redirect("http://chat.adlaw.in/custom-login");
->>>>>>> 63d0501041c7e0d31ee31830f21b2a73cf45a2db
+
    } 
 
   public function password_change(){
