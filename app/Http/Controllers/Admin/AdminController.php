@@ -15,7 +15,9 @@ use App\Models\ContactUs;
 use App\Models\SubcriptionContact;
 use App\Models\Package;
 use App\Models\UserPackage;
+use App\Models\TempUsers;
 use App\Imports\ExcelImport;
+use Illuminate\Support\Str;
 // use App\Exports\StudentErrorExport;
 // use App\Exports\StudentDetailExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -188,10 +190,45 @@ class AdminController extends Controller
     		'type' => 'required|not_in:""',
     		// 'file' => 'required'
     	]);
+    	return Str::random(40);
 
     	$status = true;
+    	$duplicate = false;
     	$errors = array();
         $datas = Excel::toCollection(new ExcelImport,$request->file('file'));
-    	return $datas;
+        // return $datas;
+    	foreach($datas as $value){
+    		foreach ($value as $data) {
+    			if($data['name'] !=''){
+    				if($data['address'] !=''){
+    					if($data['email_and_telephone_no'] !=''){
+    						$email = explode('&',$data['email_and_telephone_no']);
+    						$userOld = TempUsers::where('email',$email[0])->first();
+    						if(empty($userOld)){
+								$userData = [
+									'name' 		=> $data['name'],
+									'address' 	=> $data['address'],
+									'email' 	=> $email[0],
+									'user_catg_id'=> $request->type,
+								];
+								
+								TempUsers::create($userData);								
+    						}else{
+    							$duplicate= true;
+    							$status = false;
+    						}
+
+
+    					}else{
+    						$status = false;
+    					}
+    				}else{
+						$status = false;
+					}
+    			}else{
+					$status = false;
+				}
+    		}
+    	}
     }
 }
