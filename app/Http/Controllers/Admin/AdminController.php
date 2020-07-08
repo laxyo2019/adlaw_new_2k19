@@ -17,6 +17,7 @@ use App\Models\Package;
 use App\Models\UserPackage;
 use App\Models\TempUsers;
 use App\Imports\ExcelImport;
+use App\Exports\ExcelUploadErrors;
 use Illuminate\Support\Str;
 // use App\Exports\StudentErrorExport;
 // use App\Exports\StudentDetailExport;
@@ -190,7 +191,7 @@ class AdminController extends Controller
     		'type' => 'required|not_in:""',
     		// 'file' => 'required'
     	]);
-    	return Str::random(40);
+    	// return Str::random(40);
 
     	$status = true;
     	$duplicate = false;
@@ -203,22 +204,16 @@ class AdminController extends Controller
     				if($data['address'] !=''){
     					if($data['email_and_telephone_no'] !=''){
     						$email = explode('&',$data['email_and_telephone_no']);
-    						$userOld = TempUsers::where('email',$email[0])->first();
-    						if(empty($userOld)){
-								$userData = [
-									'name' 		=> $data['name'],
-									'address' 	=> $data['address'],
-									'email' 	=> $email[0],
-									'user_catg_id'=> $request->type,
-								];
-								
-								TempUsers::create($userData);								
-    						}else{
-    							$duplicate= true;
-    							$status = false;
-    						}
-
-
+    						if(!empty($email)){
+	    						$userOld = TempUsers::where('email',$email[0])->first();
+	    						if(!empty($userOld)){
+									$duplicate =true;							
+	    						}else{
+	    							$duplicate = false;
+	    						}
+	    					}else{
+	    						$status = false;
+	    					}
     					}else{
     						$status = false;
     					}
@@ -228,7 +223,38 @@ class AdminController extends Controller
     			}else{
 					$status = false;
 				}
+
+				
+				if($status == true){
+					$userData = [
+						'name' 		=> $data['name'],
+						'address' 	=> $data['address'],
+						'email' 	=> $email[0],
+						'user_catg_id'=> $request->type,
+					];
+					if($duplicate){
+						TempUsers::find($userOld->id)->update($userData);
+					}else{
+						TempUsers::create($userData);
+					}
+				}else{
+					$errors[] = [
+						'sr_no' 			=> $data['sr_no'],
+						'advocate_code' => $data['advocate_code'],
+						'name' 			=> $data['name'],
+						'address' 		=> $data['address'],
+						'email' 		=> $data['email_and_telephone_no'],
+					];
+				}
     		}
     	}
+
+    	if(count($errors) !=0){
+            return Excel::download(new ExcelUploadErrors($errors), 'error_sheet.xlsx');
+        }
+        return back()->with('success',"Successfully");
+
+
+
     }
 }

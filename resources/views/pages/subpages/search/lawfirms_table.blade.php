@@ -15,7 +15,7 @@
 					   	@endif
 					</div>
 					<div class="col-md-7 col-lg-7 col-xs-12 col-sm-12 ">
-						<h3 class=" font-weight-bold text-capitalize"> {{$lawyer->name}}
+						<h3 class=" font-weight-bold text-capitalize"> {{$lawyer->name}} 
 							<br>
 							@if($lawyer->isOnline())
 						    	<span class="fa fa-circle text-success" style="font-size: 12px;"> Online</span>
@@ -24,6 +24,9 @@
 							@endif
 						   
 						</h3>
+						@if($lawyer->verified_account !=0)
+							<span class="badge badge-success ">Verified</span>
+						@endif
 						<h6 class="">	
 							@if(count($lawyer->user_courts) !=0)	
 								<i class="fa fa-university text-info"></i>
@@ -43,8 +46,10 @@
 						
 						<h6 class="">
 							
-							@if($lawyer->state['state_name']!='')
-								<i class="fa fa-map-marker text-success" style="font-size:18px"></i> &nbsp;{{ $lawyer->state['state_name'] .', '. $lawyer->city['city_name'] }}
+							@if($lawyer->state !=null)
+								@if($lawyer->state['state_name'] !=null)
+								<i class="fa fa-map-marker text-success" style="font-size:18px"></i> &nbsp;{{ $lawyer->state['state_name'] .', '. $lawyer->city !=null ? $lawyer->city['city_name'] : ''}}
+								@endif
 							@endif
 						</h6>
 

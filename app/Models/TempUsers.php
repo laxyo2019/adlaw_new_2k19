@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class TempUsers extends Model
 {
 	use SoftDeletes;
-   	protected $table = 'temp_user';
+   	protected $table = 'temp_users';
    	protected $guarded = [] ;
 }

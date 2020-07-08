@@ -60,7 +60,7 @@ class SearchController extends Controller
     }
 
     public function lawfirmsSearch(Request $request){
-      
+        
       $speciality_code = $request->speciality;
       $state_code = $request->state_code;
       $city_code = $request->city_code;
@@ -87,6 +87,7 @@ class SearchController extends Controller
 
   if($searchfield == 'lawyer'){
     $lawyers = $this->query;
+      
 
     if($speciality_code !=0){
       if($court_id !=0){
@@ -324,7 +325,7 @@ class SearchController extends Controller
   //     }      
   //   }
 
-     $lawyers = $lawyers->paginate(5);
+     $lawyers = $lawyers->orderBy('verified_account','DESC')->paginate(5);
    }
   else if($searchfield == 'lawcompany'){
     $lawyers = Helpers::lawcompanyDetails();
@@ -345,7 +346,6 @@ class SearchController extends Controller
         $lawyers = $lawyers->where('name', 'LIKE', '%' .$user_name. '%');
     }
     $lawyers = $lawyers->paginate(5);
-       
   }
 
   $slots = Slots::all();
@@ -367,7 +367,6 @@ class SearchController extends Controller
   $day = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
   $days = array_combine($day, $date);
 
-  // return $specialities;
   return view('pages.subpages.search.lawfirms_table', compact('lawyers','speciality_code','state_code','searchfield','days','slots'));
 
   }

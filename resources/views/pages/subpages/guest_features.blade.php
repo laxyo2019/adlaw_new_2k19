@@ -317,7 +317,7 @@ $(".filteBtn").on('click',function(e){
 		   // 		$("#tablediv").empty().html(data);
 		   // }
         }).done(function(data){
-
+        	
             $("#tablediv").empty().html(data);
             // console.log(data);
           
