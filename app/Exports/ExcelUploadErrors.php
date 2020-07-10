@@ -24,12 +24,12 @@ class ExcelUploadErrors implements FromCollection, WithHeadings, ShouldAutoSize
     public function headings(): array
 	{
         return [
-            'Sr. No.',
-			'Advocate Code',
+            'S. No.',
 			'Name',
-			'Address',
-			'semester',
-			'Email and Telephone No.'			
+			'Email',
+			'Contact No.',
+			'State',
+			'City'			
         ];
 	}
 }

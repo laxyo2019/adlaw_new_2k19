@@ -5,7 +5,7 @@ namespace App\Imports;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-
+// use Maatwebsite\Excel\Concerns\WithChunkReading;
 class ExcelImport implements ToCollection,WithHeadingRow
 {
     /**
@@ -15,5 +15,6 @@ class ExcelImport implements ToCollection,WithHeadingRow
     {
         //
     }
+    
     
 }

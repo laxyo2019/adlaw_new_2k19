@@ -35,7 +35,7 @@ class Helpers
 		$query = User::with(['reviews'=>function ($query) {
 			           $query->where('review_status','A');
 			        }])->with('city', 'state','slots')			        
-			        ->where('status','A')
+			        ->whereIn('status',['A','D'])
 			        ->where('user_catg_id',2)
 			        ->whereNull('parent_id');
 

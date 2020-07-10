@@ -13,9 +13,13 @@ use App\Models\Review;
 use App\Models\Status;
 use App\Models\ContactUs;
 use App\Models\SubcriptionContact;
+use App\Models\CourtMastHeader;
+use App\Models\Court;
 use App\Models\Package;
 use App\Models\UserPackage;
 use App\Models\TempUsers;
+use App\Models\State;
+use App\Models\City;
 use App\Imports\ExcelImport;
 use App\Exports\ExcelUploadErrors;
 use Illuminate\Support\Str;
@@ -197,57 +201,102 @@ class AdminController extends Controller
     	$duplicate = false;
     	$errors = array();
         $datas = Excel::toCollection(new ExcelImport,$request->file('file'));
-        // return $datas;
+         // return $datas;
     	foreach($datas as $value){
     		foreach ($value as $data) {
+    			$user = array();
     			if($data['name'] !=''){
-    				if($data['address'] !=''){
-    					if($data['email_and_telephone_no'] !=''){
-    						$email = explode('&',$data['email_and_telephone_no']);
-    						if(!empty($email)){
-	    						$userOld = TempUsers::where('email',$email[0])->first();
-	    						if(!empty($userOld)){
-									$duplicate =true;							
-	    						}else{
-	    							$duplicate = false;
-	    						}
-	    					}else{
-	    						$status = false;
-	    					}
+    				$user['name'] = $data['name'];
+    				if($data['contact_no'] !='' || $data['email'] !=''){
+    					if($data['contact_no'] !=''){
+    						if(is_numeric($data['contact_no'])){
+    							if(strlen($data['contact_no']) == '10' || strlen($data['contact_no']) == '11'  ){
+    								$oldUser = User::where('mobile',$data['contact_no'])->first();
+
+    								if(!empty($oldUser)){
+										$duplicate = true;
+									}
+    								$user['mobile'] = $data['contact_no'];
+								}else{
+    								$status = false;
+    							}
+    						}else{
+								$status = false;
+							}
+    					}
+    					if($data['email'] !=''){
+    						if(filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+    							$oldUser = User::where('email',$data['email'])->first();
+    							if(!empty($oldUser)){
+									$duplicate = true;
+								}
+								$user['email'] = $data['email'];
+								 
+    						}else{
+								$status = false;
+							}
+    					}
+    				}else{
+    					$status = false;
+    				}
+    				if($status){
+    					if($data['state'] !=''){
+    						$state = State::where('state_name',$data['state'])->first();
+    						if(!empty($state)){
+    							if($data['city'] !=''){
+    								$city = City::where('city_name',$data['city'])->first();
+    								if(!empty($city)){
+    									$user['state_code'] = $city->state_code; 
+    									$user['city_code'] = $city->city_code; 
+    								}else{
+    									$status = false;
+    								}
+    							}else{
+    								$status = false;
+    							}
+    						}else{
+    							$status = false;
+    						}
     					}else{
     						$status = false;
     					}
-    				}else{
-						$status = false;
-					}
+    				}
     			}else{
-					$status = false;
-				}
-
-				
+    				$status = false;
+    			}
 				if($status == true){
-					$userData = [
-						'name' 		=> $data['name'],
-						'address' 	=> $data['address'],
-						'email' 	=> $email[0],
-						'user_catg_id'=> $request->type,
-					];
+					$user['user_catg_id'] = $request->type;
+					$user['on_database']  = '1';
+					$user['status']  = 'D';
 					if($duplicate){
-						TempUsers::find($userOld->id)->update($userData);
+				  		User::find($oldUser->id)->update($user);
+				  		
 					}else{
-						TempUsers::create($userData);
+				  		$newuser = User::create($user);
+				  		$court = CourtMastHeader::where('city_code',$user['city_code'])->where('court_type','3')->first();
+				  		if(!empty($court)){
+				  			Court::insert(['user_id' => $newuser->id,'court_code' => $court->court_code]);
+				  		}
+				  		
 					}
 				}else{
 					$errors[] = [
-						'sr_no' 			=> $data['sr_no'],
-						'advocate_code' => $data['advocate_code'],
+						's_no' 		    => $data['sno'],
 						'name' 			=> $data['name'],
-						'address' 		=> $data['address'],
-						'email' 		=> $data['email_and_telephone_no'],
+						'contact_no' 	=> $data['contact_no'],
+						'email' 		=> $data['email'],
+						'city' 			=> $data['city'],
+						'state' 		=> $data['state'],
 					];
 				}
+				$status = true;
+				$duplicate = false;
     		}
+
+    		
     	}
+
+    	return $errors;
 
     	if(count($errors) !=0){
             return Excel::download(new ExcelUploadErrors($errors), 'error_sheet.xlsx');
