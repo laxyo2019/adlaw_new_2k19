@@ -1,6 +1,8 @@
 <?php
 
 use App\Team;
+use App\Models\City;
+use App\Models\State;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
@@ -61,4 +63,11 @@ if(!function_exists('get_user_filestack_id')){
     return $filestack_id;
   }
 }  // User filestack id get 
+
+if (!function_exists('city_fetch')) {
+  function city_fetch($city_code)
+  {
+    return City::find($city_code);
+  }
+}
 

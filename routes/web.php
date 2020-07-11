@@ -139,6 +139,7 @@ Route::group(['prefix' => 'features/guest'] ,function(){
 Route::group(['middleware' => ['role:admin']], function() {
 
 	Route::get('/admin','Admin\AdminController@index')->name('admin.index');
+
 	Route::get('/reviews','Admin\AdminController@pending_reviews')->name('admin.pending_reviews');
 	Route::get('/admin/{review_id}/active_pending_reviews','Admin\AdminController@active_pending_reviews')->name('admin.active_pending_reviews');
 	Route::get('/admin/decline_pending_reviews/{review_id}','Admin\AdminController@decline_pending_reviews')->name('admin.decline_pending_reviews');
@@ -158,6 +159,9 @@ Route::group(['middleware' => ['role:admin']], function() {
 	Route::get('/upload','Admin\AdminController@uploadData')->name('admin.upload');
 
 	Route::post('/importData','Admin\AdminController@importData')->name('admin.importData');
+
+	Route::resource('/referral','Admin\ReferralController');
+	Route::get('/referral/delete/{id}','Admin\ReferralController@delete')->name('referral.delete');
 
 
 // Start Master module

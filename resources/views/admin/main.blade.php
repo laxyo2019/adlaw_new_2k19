@@ -150,6 +150,12 @@
                <span> Users</span>
             </a>
         </li>   
+        <li class="{{Request()->segment(1) == 'referral' ? 'active' : ''}} nav-item">
+            <a href="{{route('referral.index')}}" class="nav-link">
+              <i class="fa fa-users"></i>
+               <span> Referral Users</span>
+            </a>
+        </li>   
          @endpermission
            <li class="{{Request()->segment(1) == 'reviews' ? 'active' : ''}} nav-item">
             <a class="nav-link" href="{{route('admin.pending_reviews')}}">
