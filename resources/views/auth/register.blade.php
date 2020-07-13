@@ -64,7 +64,7 @@
                          <div class="form-group row">
                             <label for="mobile" class="col-md-4 col-form-label text-md-right">{{ __('Mobile Number')}}</label>
                             <div class="col-md-6"> 
-                                <input type="text" name="mobile" class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" value="{{old('mobile')}}">
+                                <input type="text" name="mobile" class="form-control" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" value="{{old('mobile')}}" required>
                                 @error('mobile')
                                   <span class="help-block text-danger">
                                       <strong>{{ $message }}</strong>
