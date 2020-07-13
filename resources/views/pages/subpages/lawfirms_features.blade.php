@@ -1,4 +1,10 @@
 @extends("layouts.default")
+@section('title')
+{{'ADLAW'}}
+@endsection
+@section('title','Top Legal Firms in India | Best Corporate Law Firm | Top 5 Law Firms | Adlaw')
+@section('description','Find best corporate law firm, among the top Indian law firms. Adlaw helps the users to get best legal firm for all law related services.')
+@section('keywords','top 5 law firms in India, Law Firms In India, list of law firm in India, top Indian legal firms, best corporate law firm in India, top legal firms in India, top Indian law firms')
 @section('content')
 @include('layouts.hero_section')
 <div class="container-fluid container-div">
