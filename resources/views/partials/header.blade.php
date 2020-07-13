@@ -7,7 +7,7 @@
   <link rel = "icon" href ="{{asset('images/adlaw-logo.png')}}" type = "image/x-icon" style="line-height: 40px;">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <title>ADLAW</title>
-
+  {{-- @yield('meta') --}}
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
       crossorigin="anonymous"></script>
   <!-- Bootstrap CSS CDN -->

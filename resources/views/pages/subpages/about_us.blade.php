@@ -1,4 +1,11 @@
 @extends("layouts.default")
+@section('title')
+{{'ABOUT US'}}
+@endsection
+@section('title','CRM for Law Firms Indore | Law Office Management Software | Adlaw')
+@section('description','Get best CRM for law firms, lawyers and law school in Indore. Our law office management software will offer you to get the best CRM, lawyers, law firms and law schools.')
+@section('keywords', 'CRM for law firms, online law office management software, lawyer office software, law CRM software, CRM for law firms, best CRM for lawyers')
+
 @section('content')
 @include('layouts.hero_section')
 <div class="container container-div">
