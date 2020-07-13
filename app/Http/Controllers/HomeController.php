@@ -161,6 +161,16 @@ class HomeController extends Search\SearchController
       return response()->json(['captcha'=> captcha_img('flat')]);
   }
 
+
+  public function verified_account(){
+    $user = User::find(Auth::user()->id);
+    if($user->on_database == '1'){
+
+    }else{
+      
+    }
+  }
+
   public function testphone(){
 
         // $username="ritesh845";

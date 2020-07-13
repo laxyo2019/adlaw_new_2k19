@@ -19,6 +19,7 @@ class ReferralController extends Controller
     }
     public function store(Request $request){
     	// return rand(11,99);
+
     	$data = $request->validate([
     		'name' => 'required|min:3|max:255',
     		'email' => ['required', 'string', 'email', 'max:255', 'unique:referrals'],
@@ -28,8 +29,9 @@ class ReferralController extends Controller
     	]);
 
     	$referral = Referral::create($data);
-    	
-    	$referral_code = $referral->city_code.rand(11,99).$referral->id;
+        $lastDigit = strlen(Referral::where('city_code',$request->city_code)->count() +1);
+    	$referral_code = str_pad($referral->city_code, (7 - strlen($referral->city_code)) + strlen($request->city_code) , '0', STR_PAD_LEFT).str_pad($lastDigit, (3 - strlen($lastDigit)) + strlen($lastDigit) , '0', STR_PAD_LEFT);
+
     	Referral::find($referral->id)->update(['referral_code' => $referral_code]);
  	
     	return redirect()->route('referral.index')->with('success','Referral User Created Successfully');
@@ -49,6 +51,8 @@ class ReferralController extends Controller
     		'city_code' =>  'required|not_in:0'
     	]);
 
+    	// $data['referral_code'] = str_pad($request->city_code, (7 - strlen($request->city_code)) + strlen($request->city_code) , '0', STR_PAD_LEFT).$id;
+    	
     	Referral::find($id)->update($data);
     	return redirect()->route('referral.index')->with('success','Referral User Updated Successfully');
     }

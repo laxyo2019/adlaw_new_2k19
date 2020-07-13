@@ -15,7 +15,7 @@
                                {{$message}}
                             </div>
                         @endif
-                         <div class="form-group row">
+                        <div class="form-group row">
                             <label for="user_category" class="col-md-4 col-form-label text-md-right">User Category</label>
 
                             <div class="col-md-6">
@@ -33,6 +33,7 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('User Name') }}</label>
 
@@ -108,6 +109,19 @@
                                   </span>
                                 @enderror
                           </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Referral Code') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="referral_code" type="text" class="form-control @error('referral_code') is-invalid @enderror" name="referral_code" value="{{ old('referral_code') }}"  oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" value="{{old('mobile')}}" placeholder="Enter Referral Code">
+
+                                @error('referral_code')
+                                  <span class="help-block text-danger">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                                @enderror
+                            </div>
                         </div>
                         
                         {{-- <div class="form-group row" style="display: none" id="genderDiv">

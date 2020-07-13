@@ -16,6 +16,7 @@ use Mail;
 use App\Role;
 use Illuminate\Http\Request;
 use Crypt;
+use App\Models\Referral;
 class RegisterController extends Controller
 {
     use RegistersUsers;
@@ -28,15 +29,17 @@ class RegisterController extends Controller
 
    
 
-    protected function validator(array $data)
+    protected function validator(array $data,$id)
     {
+        // return $data;
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'mobile' => ['required','string','max:11','min:10', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$id],
+            'mobile' => ['required','string','max:11','min:10', 'unique:users,mobile,'.$id],
             'user_category' => 'required|not_in:0',
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'captcha' => 'required|captcha'
+            'captcha' => 'required|captcha',
+            'referral_code' => 'nullable|exists:referrals'
         ],
         [
             'captcha.captcha'=>'Invalid captcha code.'
@@ -46,36 +49,68 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-      
-        $this->validator($request->all())->validate();
-        event(new Registered($user = $this->create($request->all())));
+        $email = User::where('email',$request->email)->where('on_database','1')->first();
+        $mobile = User::where('mobile',$request->mobile)->where('on_database','1')->first();
+        $id = null;
+
+        if(!empty($email) || !empty($mobile)){
+            if(!empty($email)){
+                $id = $email->id;
+            }else{
+                $id = $mobile->id;
+
+            }
+        }
+     
+
+        $this->validator($request->all(),$id)->validate();
+
+        event(new Registered($user = $this->create($request->all(),$id)));
         // $this->guard()->login($user);
         return $this->registered($request, $user)
                         ?: redirect('/verify?phone='.$request->mobile)->with('success','We sent activation code, Check your mobile and also check your email and click on the link to verify your email');
     }
 
-    protected function create(array $data)
+    protected function create(array $data,$id)
     {
+
         $status = DB::table('status_mast')->select('*')->get();
         $status_id = $status[2]->status_id;
 
-        $user =  User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'mobile'        => $data['mobile'],
-            'user_catg_id'  => $data['user_category'],
-            'status'        => $status_id,
-            'pwd'           => Crypt::encrypt($data['password'])
-        ]);
-
+        if($id ==null){
+            $user =  User::create([
+                'name'          => $data['name'],
+                'email'         => $data['email'],
+                'password'      => Hash::make($data['password']),
+                'mobile'        => $data['mobile'],
+                'user_catg_id'  => $data['user_category'],
+                'status'        => $status_id,
+                'pwd'           => Crypt::encrypt($data['password']),
+                'referral_code' => $data['referral_code']
+            ]);
+        }else{
+            $user = User::find($id);
+            $user->name             = $data['name'];
+            $user->email            = $data['email'];
+            $user->password         = Hash::make($data['password']);
+            $user->mobile           = $data['mobile'];
+            $user->user_catg_id     = $data['user_category'];
+            $user->status           = $status_id;
+            $user->pwd              = Crypt::encrypt($data['password']);
+            $user->referral_code    = $data['referral_code'];
+            $user->save();
+        }
+                      
         if($user){
             $user->attachRole(request()->user_category);
             $user->otp = SendCode::sendCode($user->mobile);
             $user->remember_token = str_random(40);
             $user->save();
+
+            Referral::where('referral_code',$data['referral_code'])->increment('summary_count','1');
             Mail::to($user->email)->send(new VerifyMail($user));
         }
+
     }
 
 

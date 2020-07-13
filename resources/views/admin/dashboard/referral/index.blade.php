@@ -24,7 +24,7 @@
 									<th>State</th>
 									<th>City</th>
 									<th>Summary Count</th>
-									<th style="width: 30%">Action</th>
+									<th >Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -39,12 +39,8 @@
 										<td>{{$referral->city->city_name}}</td>
 										<td>{{$referral->summary_count}}</td>
 										<td>
-											
-
 											<a href="{{route('referral.edit',$referral->id)}}"><i class="fa fa-edit text-green btn btn-sm"></i></a>
 											<a href="{{route('referral.delete',$referral->id)}}"><i class="fa fa-trash text-red btn btn-sm"  onclick="return confirm('Are you sure?')"></i></a>
-
-										
 
 											</form>
 										</td>

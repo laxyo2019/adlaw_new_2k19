@@ -29,6 +29,7 @@ Route::get('/verify/{token}', 'VerifyController@verifyUser')->name('verifyUser')
 
 
 Route::get('/testphone','HomeController@testphone');
+Route::get('/verified_account','HomeController@verified_account')->name('verified_account');
 
 
 // Route::view('/connect', 'connect')->name('connect');
