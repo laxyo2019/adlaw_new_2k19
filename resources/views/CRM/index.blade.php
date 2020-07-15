@@ -11,7 +11,7 @@
 						@if(in_array(Auth::user()->user_catg_id, json_decode($module->permissions)->can_view))
 						 	@if(Auth::user()->parent_id !=null )  
 								@if($module->show_team == '1')
-									<a href="{{ $module->link != null ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('package.index')}}">
+									<a  href="{{ $module->link != null ? (in_array($module->id, $packageModules) ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('crm_dashboard.index')) : route('package.index')}}">
 										<div class="col-md-2 col-sm-6 col-xs-11 col-div-mar col-div-nav text-center ml-5">
 										<i class="fa {{$module->icon}}"></i>
 										<h5>{{$module->name}}</h5>
@@ -19,7 +19,7 @@
 									</a>
 								@endif
 							@else
-								<a href="{{ $module->link != null ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('package.index')}}">
+								<a  href="{{ $module->link != null ? (in_array($module->id, $packageModules) ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('crm_dashboard.index')) : route('package.index')}}" >
 									<div class="col-md-2 col-sm-6 col-xs-11 col-div-mar col-div-nav text-center ml-5">
 									<i class="fa {{$module->icon}}"></i>
 									<h5>{{$module->name}}</h5>

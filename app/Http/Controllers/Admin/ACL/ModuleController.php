@@ -9,7 +9,7 @@ use App\Role;
 class ModuleController extends Controller
 {
    public function index(){
-   		$modules = Module::all();
+   		$modules = Module::orderBy('line')->get();
    		$roles = Role::whereNotIn('id',['1'])->get();
 
    		return view('admin.dashboard.acl.module.index',compact('modules','roles'));
@@ -20,10 +20,10 @@ class ModuleController extends Controller
    	return view('admin.dashboard.acl.module.create',compact('roles'));
    }
    public function store(Request $request){
-      // return $request->permissions;
+         $data =  $this->validation($request);
          $permissions = array('can_view' => $request->permissions);  
          $data['permissions'] = json_encode($permissions);
-   		Module::create($data);
+   		   Module::create($data);
    		return redirect()->route('acl_module.index')->with('success','Module Created Successfully');
     }
     public function edit($id){
@@ -34,13 +34,13 @@ class ModuleController extends Controller
       return view('admin.dashboard.acl.module.edit',compact('roles','module'));
     }
     public function update(Request $request, $id){
-      $data =  $this->validation($request);
+      $data =  $this->validation($request,$id);
       $permissions = array('can_view' => $request->permissions);  
       $data['permissions'] = json_encode($permissions);
       Module::find($id)->update($data);
       return redirect()->route('acl_module.index')->with('success','Module Updated Successfully');
     }
-    public function validation($request){
+    public function validation($request,$id=null){
 
          if($request->is_active == '1'){
             $data = $request->validate([
@@ -50,7 +50,9 @@ class ModuleController extends Controller
                'to' => 'nullable',
                'icon' => 'required',
                'link' => 'required',
-               'show_team' => 'required'
+               'line' => 'required|unique:modules,line,'.$id,
+               'show_team' => 'required',
+               'module_type' => 'required|not_in:""'
             ]);
             
          }else{
@@ -61,7 +63,9 @@ class ModuleController extends Controller
                'to' => 'required',
                'icon' => 'required',
                'link' => 'required',
-               'show_team' => 'required'
+               'line' => 'required|unique:modules,line,'.$id,
+               'show_team' => 'required',               
+               'module_type' => 'required|not_in:""'
             ]);
          }   
          return $data;  

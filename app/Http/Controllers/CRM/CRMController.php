@@ -18,18 +18,19 @@ class CRMController extends Controller
 {
     public function index(){
 
-    	$modules = Module::all();
+    	$modules = Module::orderBy('line')->where('module_type','1')->get();
     	$package_id = Auth::user()->user_package_id;
 
 	    $packageCheck =  Helpers::user_package_check();
 		$moduleShow = $packageCheck['moduleShow'];
 		$beforeDate = $packageCheck['beforeDate'];
+		$packageModules = $packageCheck['packageModules'];
 
 	    $user_package = UserPackage::with('package')->where('user_id',Auth::user()->id)->where('status','1')->first();
 	    $oldpackages = UserPackage::with('package')->where('user_id',Auth::user()->id)->where('status','0')->first();
 
 
-    	return view('CRM.index',compact('modules','moduleShow','user_package','beforeDate','oldpackages'));
+    	return view('CRM.index',compact('modules','moduleShow','user_package','beforeDate','oldpackages','packageModules'));
     }
 
     public function old_subscription_package(){

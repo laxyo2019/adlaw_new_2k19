@@ -16,10 +16,16 @@
 
     $lawyer_pen = \App\User::with('state','city')->where('parent_id',Auth::user()->id)->where('user_flag','=','P')->get();
     
-    $modules = \App\Models\Module::all();
+    $modules = \App\Models\Module::orderBy('line')->get();
 
     $packageCheck =  \App\Helpers\Helpers::user_package_check();
     $moduleShow = $packageCheck['moduleShow'];
+    $packageModules  = $packageCheck['packageModules'];
+
+    // echo "<pre>";
+    // print_r(gettype());
+    // echo "</pre>";
+   // die;
   @endphp
 
   <header class="main-header">
@@ -41,9 +47,9 @@
       <div class="navbar-custom-menu" >
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
-            <li class="nav-item">
-              <a href="{{route('connect')}}"><i class="fa fa-comments-o"></i></a>
-            </li>
+           {{--  <li class="nav-item">
+              <a href="{{ $moduleShow == true ? route('connect.index') : route('crm_dashboard.index') }}"><i class="fa fa-comments-o"></i></a>
+            </li> --}}
             <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
@@ -228,7 +234,60 @@
               <span >Dashboard</span>
             </a>
           </li>
-          <li class="{{Request()->segment(1).'/'.Request()->segment(2) == 'lawfirm/'.Auth::user()->id ? 'active' : '' }} nav-item">
+           @foreach($modules as $module)
+                  @if(in_array(Auth::user()->user_catg_id, json_decode($module->permissions)->can_view))
+                    @if(Auth::user()->parent_id !=null )  
+                      @if($module->show_team == '1' && $module->module_type ='2' )
+                        <li class="">
+                          <a 
+                       
+                          href="{{ $module->link != null ? (in_array($module->id, $packageModules) ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('crm_dashboard.index')) : route('package.index')}}"
+
+                          >
+                            <i class="fa {{$module->icon}}"></i> <span>{{$module->name}}</span>
+                          </a>
+                        </li>
+                      @endif
+                    @else
+                      @if($module->module_type == '2')
+                      <li class="">
+                          <a 
+                             href="{{ $module->link != null ? (in_array($module->id, $packageModules) ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('crm_dashboard.index')) : route('package.index')}}"
+                          >
+                            <i class="fa {{$module->icon}}"></i> <span>{{$module->name}}</span>
+                          </a>
+                        </li>
+                        @endif
+                    @endif
+                  @endif
+              @endforeach  
+
+
+         
+         {{--  @foreach($modules as $module)
+            @if(in_array(Auth::user()->user_catg_id, json_decode($module->permissions)->can_view))
+              @if(Auth::user()->parent_id !=null )  
+                @if($module->show_team == '1' && $module->module_type == '2')
+                  <li class="">
+                    <a href="{{ $module->link != null ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('package.index')}}">
+                      <i class="fa {{$module->icon}}"></i> <span>{{$module->name}}</span>
+                    </a>
+                  </li>
+                @endif
+              @else
+                @if($module->module_type == '2')
+                <li class="">
+                    <a href="{{ $module->link != null ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('package.index')}}">
+                      <i class="fa {{$module->icon}}"></i> <span>{{$module->name}}</span>
+                    </a>
+                  </li>
+                  @endif
+              @endif
+            @endif
+        @endforeach   --}}
+
+
+       {{--    <li class="{{Request()->segment(1).'/'.Request()->segment(2) == 'lawfirm/'.Auth::user()->id ? 'active' : '' }} nav-item">
             <a class="nav-link" href="{{route('lawfirm.show',Auth::user()->id)}} ">
               <i class="fa fa-user"></i>
               <span >My Profile</span>
@@ -286,10 +345,10 @@
                 @endif
             </a>
           </li> 
-        @endif
+        @endif --}}
 
 
-           <li class="{{Request()->segment(1) == 'message' ? 'active' : '' }} {{Request()->segment(1) == 'sent_messages' ? 'active' : '' }} {{Request()->segment(1) == 'trash_message' ? 'active' : '' }} nav-item">
+       {{--     <li class="{{Request()->segment(1) == 'message' ? 'active' : '' }} {{Request()->segment(1) == 'sent_messages' ? 'active' : '' }} {{Request()->segment(1) == 'trash_message' ? 'active' : '' }} nav-item">
             <a class="nav-link" href="{{route('message.index')}}">
               <i class="fa fa-envelope"></i>
               <span >Message Box </span>
@@ -300,7 +359,7 @@
               @endif
 
             </a>
-          </li>
+          </li> --}}
 
            <li class="treeview {{Request()->segment(1) == 'crm_dashboard' ? 'active' : '' }}">
             <a href="#">
@@ -319,19 +378,27 @@
               @foreach($modules as $module)
                   @if(in_array(Auth::user()->user_catg_id, json_decode($module->permissions)->can_view))
                     @if(Auth::user()->parent_id !=null )  
-                      @if($module->show_team == '1')
+                      @if($module->show_team == '1' && $module->module_type ='1' )
                         <li class="">
-                          <a href="{{ $module->link != null ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('package.index')}}">
+                          <a 
+                       
+                          href="{{ $module->link != null ? (in_array($module->id, $packageModules) ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('crm_dashboard.index')) : route('package.index')}}"
+
+                          >
                             <i class="fa {{$module->icon}}"></i> <span>{{$module->name}}</span>
                           </a>
                         </li>
                       @endif
                     @else
+                      @if($module->module_type == '1')
                       <li class="">
-                          <a href="{{ $module->link != null ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('package.index')}}">
+                          <a 
+                             href="{{ $module->link != null ? (in_array($module->id, $packageModules) ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('crm_dashboard.index')) : route('package.index')}}"
+                          >
                             <i class="fa {{$module->icon}}"></i> <span>{{$module->name}}</span>
                           </a>
                         </li>
+                        @endif
                     @endif
                   @endif
               @endforeach  

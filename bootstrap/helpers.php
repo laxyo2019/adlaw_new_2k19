@@ -7,6 +7,17 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 use App\Helpers\Helpers;
+
+const MODULETYPE = [
+      1 => 'CRM',
+      2 => 'PROFILE'
+];
+const SHOWMEMBR = [
+      1 => 'Yes',
+      0 => 'No'
+];
+
+
 if (!function_exists('list_global_tags')) {
   function list_global_tags($tag)
   {

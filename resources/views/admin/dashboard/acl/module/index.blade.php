@@ -28,9 +28,11 @@
 										<th>Name</th>
 										<th>Icon</th>
 										<th>Link</th>
+										<th>Show Team Member</th>
 										{{-- <th>Can View</th> --}}
 										{{-- <th>From</th>
 										<th>To</th> --}}
+										<th>Module Type</th>
 										<th>Status</th>
 										{{-- <th>Created At</th> --}}
 										<th>Actions</th>
@@ -39,10 +41,12 @@
 								<tbody>
 									@foreach($modules as $module)
 										<tr>
-											<td>{{$module->id}}</td>
+											<td>{{$module->line}}</td>
 											<td>{{$module->name}}</td>
 											<td>{{$module->icon}}</td>
 											<td>{{$module->link}}</td>
+											<td>{{Arr::get(MODULETYPE,$module->module_type)}}</td>
+											<td>{{Arr::get(SHOWMEMBR,$module->show_team)}}</td>
 											{{-- <td>
 												@foreach ($roles as $role) 
 									               @if(in_array($role->id, json_decode($module->permissions)->can_view))
@@ -51,6 +55,7 @@
            									 	@endforeach</td> --}}
 											{{-- <td>{{$module->from != '' ? $module->from : ''}}</td>
 											<td>{{$module->to != '' ? $module->to : ''}}</td>	 --}}
+
 											<td>{{$module->is_active == '1' ? 'Active' : 'Pending'}}</td>
 											{{-- <td>{{date('d-m-Y',strtotime($module->created_at))}}</td> --}}
 											<td>

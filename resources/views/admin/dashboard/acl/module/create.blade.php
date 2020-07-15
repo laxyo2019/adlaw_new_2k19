@@ -94,7 +94,28 @@
 								<option value="0">No</option>
 							</select>
 						</div>
-					 </div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-group">
+							<label class="required">Module Type</label> {{-- <span class="text-muted"></span> --}}
+							<select name="module_type" class="form-control" required="required">
+								<option value="" >Select Module Type</option> 
+								@foreach(MODULETYPE as $key => $value)
+									<option value="{{$key}}" {{old('module_type') == $key ? 'selected' : ''}}>{{$value}}</option>
+								@endforeach
+							</select>
+						</div>
+						<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-group">
+							<label class="required">Module Line</label>
+							<input type="text" name="line" class="form-control" placeholder="Enter module line" value="{{old('line')}}"  oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+							@error('line')
+								<span class="invalid-feedback text-danger" role="alert">
+								<strong>{{ $message }}</strong>
+								</span>
+							@enderror
+						</div>	
+					</div>
+
 					<div class="row">
 						<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 form-group">
 							<button class="btn btn-sm btn-success">Submit</button>

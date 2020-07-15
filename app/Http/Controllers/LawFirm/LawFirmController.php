@@ -88,7 +88,11 @@ class LawFirmController extends Controller
 
 
 	}
-	public function show($id){
+	// public function show($id){
+		
+	// }
+	public function showProfile(){
+		$id =Auth::user()->id;
 		$user = User::with('city')->with('state')->where('id',$id)->first();
 
 		return view('lawfirm.dashboard.profile.index',compact('user'));

@@ -223,6 +223,8 @@ Route::group(['prefix' => 'master', 'namespace' => 'Admin\Master'], function () 
 
 Route::group(['middleware' => ['role:lawyer|lawcompany']], function() {
 	Route::resource('/lawfirm', 'LawFirm\LawFirmController');
+	Route::get('/profile', 'LawFirm\LawFirmController@showProfile')->name('lawfirms.profile');
+
 	Route::get('/upcoming_hearings','LawFirm\LawFirmController@upcoming_hearings')->name('upcomingHearings');
 	Route::get('/practicing_court', 'LawFirm\LawFirmController@practicing_court')->name('practicing_court.index');
 	Route::post('/practicing_court/store', 'LawFirm\LawFirmController@store_practicing_court')->name('practicing_court.store');

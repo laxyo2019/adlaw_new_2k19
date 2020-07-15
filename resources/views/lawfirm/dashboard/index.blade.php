@@ -68,7 +68,7 @@
             <div class="icon">
               <i class="fa fa-calendar"></i>
             </div>
-            <a href="{{route('booking.index')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href=" {{ $moduleShow == true ? route('booking.index') : route('crm_dashboard.index')}} " class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
 

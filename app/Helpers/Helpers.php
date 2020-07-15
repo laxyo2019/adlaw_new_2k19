@@ -9,6 +9,8 @@ use App\Models\CourtMastHeader;
 use App\Models\Todo;
 use Carbon\Carbon;
 use App\Models\AcademicCalendarMast;
+use App\Models\PackageModule;
+use App\Models\UserPackage;
 class Helpers 
 {
 	public static function deletedClients(){
@@ -159,18 +161,20 @@ class Helpers
     	$moduleShow = false;
 		$package_id = Auth::user()->user_package_id;
 		$beforeDate = '';
-
+		$packageModules = array();
 		if($package_id != '' ){
 	        $today = date('Y-m-d');
 	    	$package_end = Auth::user()->package_end;
 	 		$beforeDate = date('Y-m-d', strtotime(Auth::user()->package_end.'-16 days'));
 	        $end_date = date('Y-m-d',strtotime(Auth::user()->package_end));
+	        $pak_id = UserPackage::where('id',$package_id)->pluck('package_id');
+	        $packageModules = PackageModule::whereIn('package_id',$pak_id)->pluck('module_id')->toArray();
 	        if(strtotime($today) <= strtotime($end_date)){
 	           $moduleShow = true;
 	        }
 	    }
 
-	    return ['moduleShow' => $moduleShow, 'beforeDate' => $beforeDate];
+	    return ['moduleShow' => $moduleShow, 'beforeDate' => $beforeDate, 'packageModules' => $packageModules];
     }
 
     public static function date_diff($package_end){

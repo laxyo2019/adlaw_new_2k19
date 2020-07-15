@@ -84,7 +84,7 @@
                         <div class="card-body">
                             <h4 class="font-weight-bold">Attendance Management</h4>
                             <p class="p-text">
-                                Adlaw provide student attendance in Attendance Management feature where law college can create maintain student attendance and generate monthly report of attendance.
+                                Adlaw provides student’s attendance management system through which school management can quickly track attendance, manage attendance and generate monthly report. 
                             </p> 
                         </div>
                         <div class="card-footer bg-white border-0">
@@ -104,7 +104,7 @@
                         <div class="card-body">
                             <h4 class="font-weight-bold">Academic Calendar</h4>
                             <p class="p-text">
-                                Adlaw provide academic calendar  in manage feature where law college manage exam and holiday date.
+                                Academic calendar is a system by which the landmark dates that drive much of the day-to-day academic information can be defined.
                             </p> 
                         </div>
                         <div class="card-footer bg-white border-0">
