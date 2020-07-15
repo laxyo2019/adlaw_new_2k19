@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="google-site-verification" content="2iDNtR3LqBEDPUP45mwIXtE6a1XdOf7y9cz8TRGqxB0" />
     <title>Top Lawyers, Law Firm Portal | Law CRM Software| Find best Law Schools, | Adlaw</title>
     <meta name="description" content= "Adlaw is a Law Firm Portal and CRM for law firms, online law office management software for lawyers, law firms and law schools. Find best Law Schools and top Lawyers in India.">    
   <meta name="keywords" content="lawyers portal India, top 10 law firms India, law CRM software,  CRM for law firms, online law office management software, CRM for law firms, best CRM for lawyers">
@@ -35,7 +36,16 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-48209472-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-48209472-2');
+</script>
+
 </head>
 <style type="text/css">
     .carousel-item {
@@ -69,15 +79,15 @@
             <li class="nav-item {{Request()->segment(1) == '' ? 'active_class' : '' }}">
                 <a href="{{route('/')}}"  class="nav-link ped-4">HOME</a>
             </li> 
-            <li class="nav-item {{Request()->segment(1) == 'about_us' ? 'active_class' : '' }}">
-                <a href="{{url('/about_us')}}"  class="ped-4 nav-link" >ABOUT</a>
+            <li class="nav-item {{Request()->segment(1) == 'about-us' ? 'active_class' : '' }}">
+                <a href="{{route('about_us')}}"  class="ped-4 nav-link" >ABOUT</a>
                 {{-- <ul class="dropdown-menu">
                     <li class="nav-item"><a href="#" class="nav-link p-3">Why ADLAW?</a></li>
                     <li class="nav-item"><a href="#" class="nav-link p-3">More</a></li>
                 </ul> --}}
             </li>
-            <li class="nav-item {{Request()->segment(1) == 'why_adlaw' ? 'active_class' : '' }}">
-                <a href="{{url('/why_adlaw')}}"  class="nav-link ped-4">WHY ADLAW</a>
+            <li class="nav-item {{Request()->segment(1) == 'why-adlaw' ? 'active_class' : '' }}">
+                <a href="{{route('why_adlaw')}}"  class="nav-link ped-4">WHY ADLAW</a>
             </li>
             <li class="nav-item {{Request()->segment(2) == 'lawfirms' ? 'active_class' : '' }}">
                 <a class="nav-link ped-4 " href="{{route('lawfirms')}}">LAWYERS/LAW FIRMS </a>

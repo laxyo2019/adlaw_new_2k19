@@ -204,8 +204,8 @@
 				<div class="row form-group">
 					<div class="col-md-4" style="margin-top:10px;">
 						<label for="tot_user_count">
-						@role('lawyer')Number of Users @endrole
-						@role('lawcompany')Number of lawyers @endrole
+						@role('lawyer')Number of Team Members @endrole
+						@role('lawcompany')Number of Team Members @endrole
 						</label>
 						<input type="text" name="tot_user_count" class="form-control" value="{{old('tot_user_count') ?? $user->tot_user_count}}">
 						@error('tot_user_count')
@@ -215,7 +215,7 @@
 		                @enderror
 					</div>
 					<div class="col-md-4" style="margin-top:10px;">
-						<label for="tot_branch_count">Number of Branch</label>
+						<label for="tot_branch_count">Number of Office</label>
 						<input type="text" name="tot_branch_count" class="form-control " value="{{old('tot_branch_count') ?? $user->tot_branch_count}}">
 						@error('tot_branch_count')
 		                    <span class="invalid-feedback text-danger" role="alert">
