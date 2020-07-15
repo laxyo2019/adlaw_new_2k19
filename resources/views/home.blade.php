@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta name="google-site-verification" content="2iDNtR3LqBEDPUP45mwIXtE6a1XdOf7y9cz8TRGqxB0" />
+
     <!-- <title>Adlaw</title> -->
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="2iDNtR3LqBEDPUP45mwIXtE6a1XdOf7y9cz8TRGqxB0" />   
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Top Lawyers, Law Firm Portal | Law CRM Software| Find best Law Schools, | Adlaw</title>
     <meta name="description" content= "Adlaw is a Law Firm Portal and CRM for law firms, online law office management software for lawyers, law firms and law schools. Find best Law Schools and top Lawyers in India.">    

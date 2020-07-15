@@ -10,7 +10,7 @@
 	{{-- 					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Launch demo modal
 </button> --}}
-						<button type="button" data-toggle="modal" data-target="#verified_account" class="btn btn-sm btn-success pull-right mr-2">Verify Account</button>
+						{{-- <button type="button" data-toggle="modal" data-target="#verified_account" class="btn btn-sm btn-success pull-right mr-2">Verify Account</button> --}}
 
 					@else
 						{{-- Verified User --}}

@@ -79,27 +79,28 @@ Route::get('refresh_captcha', 'HomeController@refreshCaptcha')->name('refresh_ca
 
 
 Route::view('/tos','pages.subpages.tos');
-Route::view('/about_us','pages.subpages.about_us');
+Route::view('/about-us','pages.subpages.about_us')->name('about_us');
 Route::view('/disclaimer','pages.subpages.disclaimer');
-Route::view('/privacy_policy','pages.subpages.privacy_policy');
-Route::view('/why_adlaw','pages.subpages.why_adlaw');
+Route::view('/privacy-policy','pages.subpages.privacy_policy')->name('privacy_policy');
+Route::view('/why-adlaw','pages.subpages.why_adlaw')->name('why_adlaw');
 
 
 Route::group(['prefix' => 'features/lawfirms'] ,function(){
 
 	Route::view('/','pages.subpages.lawfirms_features')->name('lawfirms');
-	Route::view('/case_management','pages.features.subpages.lawfirms.case_management')->name('features.case_management');
-	Route::view('/client_management','pages.features.subpages.lawfirms.client_management')->name('features.client_management');
-	Route::view('/calendar_management','pages.features.subpages.lawfirms.calendar_management')->name('features.calendar_management');
-	Route::view('/document_management','pages.features.subpages.lawfirms.document_management')->name('features.document_management');
-	Route::view('/appointment_schedule','pages.features.subpages.lawfirms.appointment_schedule')->name('features.appointment_schedule');
-	Route::view('/schedule_management','pages.features.subpages.lawfirms.schedule_management')->name('features.schedule_management');
-	Route::view('/agenda_management','pages.features.subpages.lawfirms.agenda_management')->name('features.agenda_management');
-	Route::view('/chat_or_messanger','pages.features.subpages.lawfirms.chat_or_messanger')->name('features.chat_or_messanger');
-	Route::view('/team_management','pages.features.subpages.lawfirms.team_management')->name('features.team_management');
-	Route::view('/profile_management','pages.features.subpages.lawfirms.profile_management')->name('features.profile_management');
-	Route::view('/todo_management','pages.features.subpages.lawfirms.todo_management')->name('features.todo_management');
-	Route::view('/hearing_management','pages.features.subpages.lawfirms.hearing_management')->name('features.hearing_management');
+	Route::view('/case-management','pages.features.subpages.lawfirms.case_management')->name('features.case_management');
+	Route::view('/client-management','pages.features.subpages.lawfirms.client_management')->name('features.client_management');
+	Route::view('/calendar-management','pages.features.subpages.lawfirms.calendar_management')->name('features.calendar_management');
+	Route::view('/document-management','pages.features.subpages.lawfirms.document_management')->name('features.document_management');
+	Route::view('/appointment-schedule','pages.features.subpages.lawfirms.appointment_schedule')->name('features.appointment_schedule');
+	Route::view('/schedule-management','pages.features.subpages.lawfirms.schedule_management')->name('features.schedule_management');
+	Route::view('/agenda-management','pages.features.subpages.lawfirms.agenda_management')->name('features.agenda_management');
+	Route::view('/chat-or-messanger','pages.features.subpages.lawfirms.chat_or_messanger')->name('features.chat_or_messanger');
+	Route::view('/team-management','pages.features.subpages.lawfirms.team_management')->name('features.team_management');
+	Route::view('/profile-management','pages.features.subpages.lawfirms.profile_management')->name('features.profile_management');
+
+	Route::view('/todo-management','pages.features.subpages.lawfirms.todo_management')->name('features.todo_management');
+	Route::view('/hearing-management','pages.features.subpages.lawfirms.hearing_management')->name('features.hearing_management');
 });	
 
 
@@ -109,12 +110,12 @@ Route::group(['prefix' => 'features/lawschools'] ,function(){
 	Route::get('/search','Search\SearchController@lawschoolsSearch')->name('lawschools.search');
 	Route::get('/profile/{id}', 'Search\SearchController@lawschoolsprofileShow')->name('lawschoolsprofile.show');
 
-	Route::view('/course_management','pages.features.subpages.lawschools.course_management')->name('lawschools.course_management');
-	Route::view('/profile_management','pages.features.subpages.lawschools.profile_management')->name('lawschools.profile_management');
-	Route::view('/student_management','pages.features.subpages.lawschools.student_management')->name('lawschools.student_management');
-	Route::view('/document_management','pages.features.subpages.lawschools.document_management')->name('lawschools.document_management');
-	Route::view('/team_management','pages.features.subpages.lawschools.team_management')->name('lawschools.team_management');
-	Route::view('/agenda_management','pages.features.subpages.lawschools.agenda_management')->name('lawschools.agenda_management');
+	Route::view('/course-management','pages.features.subpages.lawschools.course_management')->name('lawschools.course_management');
+	Route::view('/profile-management','pages.features.subpages.lawschools.profile_management')->name('lawschools.profile_management');
+	Route::view('/student-management','pages.features.subpages.lawschools.student_management')->name('lawschools.student_management');
+	Route::view('/document-management','pages.features.subpages.lawschools.document_management')->name('lawschools.document_management');
+	Route::view('/team-management','pages.features.subpages.lawschools.team_management')->name('lawschools.team_management');
+	Route::view('/agenda-management','pages.features.subpages.lawschools.agenda_management')->name('lawschools.agenda_management');
 	// Route::view('/todo_management','pages.features.subpages.lawschools.todos_management')->name('features.todo_management');
 });
 
@@ -124,8 +125,8 @@ Route::group(['prefix' => 'features/guest'] ,function(){
 	Route::get('/search','Search\SearchController@lawfirmsSearch')->name('lawfirms.search');
 	Route::post('/review','Search\SearchController@writeReview')->name('lawfirms.writeReview');
 	Route::get('/profile/{id}', 'Search\SearchController@lawfirmsprofileShow')->name('lawfirmsprofile.show');	
-	Route::view('/profile_management','pages.features.subpages.guest.profile_management')->name('guest.profile_management');
-	Route::view('/search_lawyer','pages.features.subpages.guest.search_lawyer')->name('guest.search_lawyer');
+	Route::view('/profile-management','pages.features.subpages.guest.profile_management')->name('guest.profile_management');
+	Route::view('/search-lawyer','pages.features.subpages.guest.search_lawyer')->name('guest.search_lawyer');
 	Route::view('/calendar','pages.features.subpages.guest.calendar')->name('guest.calendar');
 });
 

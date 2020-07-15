@@ -3,10 +3,12 @@
 <head>
 
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google-site-verification" content="2iDNtR3LqBEDPUP45mwIXtE6a1XdOf7y9cz8TRGqxB0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">  
   <link rel = "icon" href ="{{asset('images/adlaw-logo.png')}}" type = "image/x-icon" style="line-height: 40px;">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <title>ADLAW</title>
+
   {{-- @yield('meta') --}}
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
       crossorigin="anonymous"></script>
