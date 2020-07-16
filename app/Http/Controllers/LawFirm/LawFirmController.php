@@ -184,7 +184,8 @@ class LawFirmController extends Controller
 			}
 		}
 
-		return redirect()->route('lawfirm.show',$user->id)->with('success','User Profile Updated Successfully');
+		// return view('lawfirm.dashboard.profile.index',compact('user'));
+		return redirect()->route('lawfirms.profile')->with('success','User Profile Updated Successfully');
 	
 		
 	}
