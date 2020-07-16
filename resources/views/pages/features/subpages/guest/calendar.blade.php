@@ -13,7 +13,7 @@
         	</p>
             <div class="row">
                  <div class="col-sm-12 col-xs-12 col-md-5 col-lg-5 col-xl-5 mt-4">
-                    <img src="{{asset('images/dashboard/search_lawyer.png')}}" class="w-100 h-100">
+                    <img src="{{asset('images/dashboard/calendar.png')}}" class="w-100 h-100">
                 </div>
 
                 <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 col-xl-7 mt-4">

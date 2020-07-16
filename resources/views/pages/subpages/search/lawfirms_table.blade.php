@@ -88,8 +88,6 @@
 							@foreach($lawyer->reviews as $review)
 								<?php $a[] = $review->review_rate ; ?>
 							@endforeach
-
-					
 					
 						</p>
 						<div><i class="ng-binding"><?php echo count($a) ?> Review</i></div>

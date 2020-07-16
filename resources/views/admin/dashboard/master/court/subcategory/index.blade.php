@@ -1,4 +1,6 @@
-@extends('admin.main')
+{{-- @extends('admin.main') --}}
+
+@extends('partials.main')
 @section('content')
   <section class="content">
     <div class="row">

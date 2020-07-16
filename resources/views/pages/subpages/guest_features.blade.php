@@ -181,6 +181,8 @@ $(document).ready(function(){
 
          $(this).removeClass('bg-color').addClass('activebtn').find('input').prop('checked', true) ;   
          var searchfield = $(this).find('input').val();
+
+
          if(searchfield == 'lawyer'){
          	$('#spect1').show();
          	$('#genderBox').show();
@@ -190,13 +192,9 @@ $(document).ready(function(){
          	$('#spect1').hide();
          	$('#genderBox').hide();
          }
+         $('#tablediv').empty();
     });
-	// $('.big').click(function() {
-	// 	$(this).addClass('activebtn');
-	// 	$(this).find('input').prop('checked', true);
 	
-	// });
-
 	$('#state').on('change',function(){
 		var state_code = $(this).val();	
 		var city_code = "";
@@ -247,8 +245,8 @@ $(document).ready(function(){
 		var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
 		var today = new Date(); 
 		today.setDate(today.getDate() - 1);
-
 		var b_date = $(this).find("input[name='b_date']").val();
+		b_date = new Date(b_date);
 		if(today < new Date(b_date)){
 			if(AuthUser){
 				$client_id = "{{(Auth::user()) ? Auth::user()->id : null }}";
@@ -262,6 +260,7 @@ $(document).ready(function(){
 				$('#BtnViewModal .modal-body ').find("input[name='slot_time']").val($slot_time);
 				$('#BtnViewModal .modal-body ').find("input[name='user_id']").val($user_id);
 				$('#BtnViewModal .modal-body ').find("input[name='client_id']").val($client_id);
+
 				$('#BtnViewModal').modal('show');
 			}
 			else{

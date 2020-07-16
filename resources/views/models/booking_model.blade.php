@@ -7,12 +7,12 @@
           
         </div>
       <div class="modal-body">
-        <form action="{{route('book_an_appointment')}}" method="post">
+        <form action="{{route('book_an_appointment')}}" method="post" id="bookingForm">
           @csrf
         <div class="row form-group">
           <div class="col-md-12">
             <label>Booking Date</label>
-            <input type="text"  value="" name="b_date" class="form-control" id="bookingDate" data-date-format="yyyy-mm-dd" placeholder="{{date('Y-m-d')}}" required="">
+            <input type="text"  value="{{date('Y-m-d')}}" name="b_date" class="form-control" id="bookingDate" data-date-format="yyyy-mm-dd" placeholder="{{date('Y-m-d')}}" required="">
           </div>
         </div>
         <div class="row form-group">
@@ -49,3 +49,15 @@
     </div>
   </div>              
 </div>
+<script >
+$(document).ready(function(){
+
+
+  var dateToday = new Date();
+
+  $('#bookingDate').datepicker({                                     
+      'startDate': dateToday
+  });
+
+});
+</script>

@@ -134,6 +134,7 @@ class LawFirmController extends Controller
 			$data['dob'] 	 	 		 = $verify['dob'];
 			$data['estd_year'] 	 		 = $verify['estd_year'];
 			$data['tot_user_count'] 	 = $verify['tot_user_count'];
+			$data['licence_no'] 	     = $verify['licence_no'];
 		}
 		elseif($user->user_catg_id == '3'){
 			$verify = $request->validate([
@@ -171,6 +172,7 @@ class LawFirmController extends Controller
 
         }
     
+    	// return $data;
 		$data['country_code'] = '102';
 	
 		if($user->update($data) == TRUE){
@@ -184,7 +186,7 @@ class LawFirmController extends Controller
 			}
 		}
 
-		return redirect()->route('lawfirm.show',$user->id)->with('success','User Profile Updated Successfully');
+		return redirect()->route('lawfirms.profile')->with('success','User Profile Updated Successfully');
 	
 		
 	}

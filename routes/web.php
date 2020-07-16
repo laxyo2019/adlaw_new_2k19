@@ -35,7 +35,6 @@ Route::get('/verified_account','HomeController@verified_account')->name('verifie
 // Route::view('/connect', 'connect')->name('connect');
 Route::get('/connect', 'HomeController@connectLogin')->name('connect');
 
-Route::view('/contact_support', 'package.contact_support')->name('contact_support');
 
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');
 Route::get('/state','HomeController@getStateList')->name('state');
@@ -83,6 +82,7 @@ Route::view('/about-us','pages.subpages.about_us')->name('about_us');
 Route::view('/disclaimer','pages.subpages.disclaimer');
 Route::view('/privacy-policy','pages.subpages.privacy_policy')->name('privacy_policy');
 Route::view('/why-adlaw','pages.subpages.why_adlaw')->name('why_adlaw');
+Route::view('/contact_support', 'package.contact_support')->name('contact_support');
 
 
 Route::group(['prefix' => 'features/lawfirms'] ,function(){
@@ -269,7 +269,7 @@ Route::group(['middleware' => ['role:lawyer']],function(){
 
 
 /* --------------Lawyer--------Lawcompany-----------Guest---------- */
-Route::group(['middleware' => ['role:lawyer|lawcompany|guest']], function(){
+Route::group(['middleware' => ['role:lawyer|lawcompany|guest|client']], function(){
 	Route::resource('/message', 'MessageController');
 	Route::post('/message/reply', 'MessageController@reply')->name('message.reply');
 	Route::get('/sent_messages', 'MessageController@show_send')->name('message.sent');
@@ -385,19 +385,20 @@ Route::group(['middleware' => ['role:lawyer|teacher|lawcollege']], function() {
 
 /* ----------------Lawyer---------------Teacher--------------- */
 
-Route::group(['middleware' => ['role:guest']], function() {
+Route::group(['middleware' => ['role:guest|client']], function() {
 	Route::get('/customer', 'CustomerController@index')->name('customer');
 	Route::patch('/updateProfile/{id}', 'CustomerController@updateProfile')->name('customer.update');
 	Route::get('/appointmentShow', 'BookingController@appointment_show')->name('customer.appointment');
 });
+Route::group(['middleware' => ['role:lawyer|lawcompany|lawcollege|admin|guest|teacher|student|client']], function() {
+	
+	Route::get('/password_change', 'HomeController@password_change')->name('password_change');
+	Route::post('/user/change-password', 'HomeController@changePassword')->name('change-password');
 
-
+});
 /* -------------------------------all--------------- */
 
 Route::group(['middleware' => ['role:lawyer|lawcompany|lawcollege|admin|guest|teacher|student']], function() {
-
-	Route::get('/password_change', 'HomeController@password_change')->name('password_change');
-		Route::post('/user/change-password', 'HomeController@changePassword')->name('change-password');
 
 	Route::resource('/crm_dashboard','CRM\CRMController');
 	Route::get('/old_subscription_package','CRM\CRMController@old_subscription_package')->name('old_subscription_package');
