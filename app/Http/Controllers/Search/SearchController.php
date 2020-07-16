@@ -357,7 +357,7 @@ class SearchController extends Controller
 
   for($i = 1; $i <= 7; $i++) {
     $ts = strtotime($year.'W'.$week.$i);
-    $date[] =  date("d/m/Y",$ts);
+    $date[] =  date("Y-m-d",$ts);
   }
   // $specialities = CatgMast::all();
   // $courts = CourtMast::all();

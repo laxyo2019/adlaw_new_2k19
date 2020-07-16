@@ -1,4 +1,5 @@
-@extends(Auth::user()->user_catg_id==2 ? 'lawfirm.main' :'lawschools.main')
+{{-- @extends(Auth::user()->user_catg_id==2 ? 'lawfirm.main' :'lawschools.main') --}}
+@extends('partials.main')
 @section('content')
 <section class="content">
 <div class="row">

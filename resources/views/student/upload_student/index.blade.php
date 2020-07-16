@@ -1,4 +1,6 @@
-@extends('lawschools.main')
+{{-- @extends('lawschools.main') --}}
+{{-- @extends('partials.main') --}}
+@extends('partials.main')
 @section('content')
 <section class="content">
 @include('student.header')

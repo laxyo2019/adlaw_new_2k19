@@ -1,4 +1,5 @@
-@extends('lawfirm.main')
+{{-- @extends('lawfirm.main') --}}
+@extends('partials.main')
 
 @section('content')
 <section class="content">

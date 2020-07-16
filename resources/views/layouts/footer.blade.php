@@ -19,9 +19,9 @@
        </div>
        <div class="col-sm-3">
          <ul class="list-inline social-links pl-4 ">
-           <li class="btn-facebook btn btn-sm "><a  href=""><span class="fa fa-facebook"></span></a></li>
-           <li class="btn-twitter btn btn-sm"><a  href=""><span class="fa fa-twitter"></span></a></li>
-           <li class="btn-linkedin btn btn-sm"><a  href=""><span class="fa fa-linkedin"></span></a></li>
+           <li class="btn-facebook btn btn-sm "><a  href="https://www.facebook.com/Adlaw-109225687182044/?modal=admin_todo_tour" target="_blank"><span class="fa fa-facebook"></span></a></li>
+           <li class="btn-twitter btn btn-sm"><a  href="https://twitter.com/adlaw6" target="_blank"><span class="fa fa-twitter"></span></a></li>
+           <li class="btn-linkedin btn btn-sm"><a  href="https://www.linkedin.com/in/adlaw-in-7b9632187/" target="_blank"><span class="fa fa-linkedin"></span></a></li>
          </ul>
        </div>
      </div>
