@@ -7,7 +7,7 @@
 		<div class="box box-primary">
 			<div class="box-header with-border">
 				<h3 class="" style="margin-top: 10px;">Edit Profile 
-					<a href="{{route('lawfirm.show',$user->id)}}" class="btn btn-sm btn-info pull-right">Back</a>
+					<a href="{{route('lawfirms.profile')}}" class="btn btn-sm btn-info pull-right">Back</a>
 				</h3>
 			</div>
 		

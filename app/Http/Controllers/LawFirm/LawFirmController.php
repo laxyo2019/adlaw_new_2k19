@@ -186,10 +186,6 @@ class LawFirmController extends Controller
 			}
 		}
 
-<<<<<<< HEAD
-		// return view('lawfirm.dashboard.profile.index',compact('user'));
-=======
->>>>>>> a95e9675eb2b8e14726f7b300c10610c9b06a54c
 		return redirect()->route('lawfirms.profile')->with('success','User Profile Updated Successfully');
 	
 		
