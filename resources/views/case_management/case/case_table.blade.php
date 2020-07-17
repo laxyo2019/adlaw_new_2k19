@@ -21,7 +21,7 @@
      <tr>   
   			<td>{{++$count}}</td>
         <td>{{$case->case->case_title}}</td>
-        <td>{{$case->case->client->cust_name}}</td>
+        <td>{{$case->case->client !=null ? $case->case->client->cust_name : ''}}</td>
   			<td>{{$case->case->court->court_type_desc}}</td>
         <td>
           @foreach($case->case->members as $value)
