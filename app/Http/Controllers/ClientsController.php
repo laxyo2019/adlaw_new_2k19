@@ -77,6 +77,7 @@ class ClientsController extends Controller
           $validate = $request->validate(['gender'=>'required|not_in:0']);
           $data['gender'] = $request->gender;
           Customer::create($data);
+        // return $data;
           $this->create_account($data);
           return redirect()->route('clients.index')->with('success','Client Added and Account Created Successfully');
         
