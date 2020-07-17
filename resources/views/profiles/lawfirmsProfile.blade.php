@@ -281,7 +281,7 @@ p.stars  i
                           @csrf
                       <div class="row form-group">
                         <div class="col-md-12" >
-                            <input type="hidden" name="user_id" value = "{{$userData->id}}">
+                            <input type="hidden" name="user_id" id="user_id" value = "{{$userData->id}}">
                             <input type="hidden" name="guest_id" value = "{{Auth::user() ? Auth::user()->id:''}}">
                         <!--  <input id="ratings-hidden" name="rating" type="hidden">  -->
                             <textarea class="form-control animated" cols="40" rows="5" id="review_text" name="review_text" placeholder="{{Auth::user() ? 'Enter your review here...' :'If want to write here so login first'}} " required   {{Auth::user() ? '' :'readonly'}}></textarea>
@@ -619,8 +619,9 @@ $.ajaxSetup({
 $('#review_submit').on('click',function(e){
     e.preventDefault();
      var review_text = $.trim($('#review_text').val());
-     var user_id = $('input[name="user_id"]').val();
+     var user_id = $('#user_id').val();
      var guest_id = $('input[name="guest_id"]').val();
+     alert(user_id)
      var review_rate =$('.live-rating').text();
 
        var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
