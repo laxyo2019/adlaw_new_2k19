@@ -79,16 +79,34 @@
             <li class="nav-item {{Request()->segment(1) == '' ? 'active_class' : '' }}">
                 <a href="{{route('/')}}"  class="nav-link ped-4">HOME</a>
             </li> 
-            <li class="nav-item {{Request()->segment(1) == 'about-us' ? 'active_class' : '' }}">
+
+             <li class="nav-item dropdown {{Request()->segment(1) == 'about-us' ? 'active_class' : '' }}">
+                <a class="ped-4 nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  ABOUT
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{{route('about_us')}}">ABOUT</a>
+                  <a class="dropdown-item" href="{{route('why_adlaw')}}">Why ADLAW?</a>
+                </div>
+              </li>
+
+             {{-- <li class="nav-item dropdown {{Request()->segment(1) == 'about-us' ? 'active_class' : '' }}">
+                <a href="#"  class="ped-4 nav-link dropdown-toggle" href="#" id="navbarDropdown"  >ABOUT</a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">>
+                    <li class="nav-item"><a href="#" class="nav-link p-3">ABOUT</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link p-3">Why ADLAW?</a></li>
+                </ul>
+            </li> --}}
+           {{--  <li class="nav-item {{Request()->segment(1) == 'about-us' ? 'active_class' : '' }}">
                 <a href="{{route('about_us')}}"  class="ped-4 nav-link" >ABOUT</a>
-                {{-- <ul class="dropdown-menu">
+                <ul class="dropdown-menu">
                     <li class="nav-item"><a href="#" class="nav-link p-3">Why ADLAW?</a></li>
                     <li class="nav-item"><a href="#" class="nav-link p-3">More</a></li>
-                </ul> --}}
+                </ul>
             </li>
             <li class="nav-item {{Request()->segment(1) == 'why-adlaw' ? 'active_class' : '' }}">
                 <a href="{{route('why_adlaw')}}"  class="nav-link ped-4">WHY ADLAW</a>
-            </li>
+            </li> --}}
             <li class="nav-item {{Request()->segment(2) == 'lawfirms' ? 'active_class' : '' }}">
                 <a class="nav-link ped-4 " href="{{route('lawfirms')}}">LAWYERS/LAW FIRMS </a>
             </li>
