@@ -212,14 +212,15 @@ $(document).ready(function(){
 
 
 
-	$('.right-button').click(function() {
+	$(document).on('click','.right-button', function() {
 		event.preventDefault();
 		$('.center,.center1').animate({
 		scrollLeft: "+=100px"
 		}, "slow");
 	});
 
-	$('.left-button').click(function() {
+	$(document).on('click','.left-button', function() {
+	// $('.left-button').click(function() {
 		event.preventDefault();
 		$('.center,.center1').animate({
 		scrollLeft: "-=100px"
@@ -295,9 +296,7 @@ $(document).ready(function(){
 	});
 
 $(".filteBtn").on('click',function(e){
-	@if(!Auth::user())
-		$('.login_modal').modal({"backdrop": "static"});
-	@else
+	
 	e.preventDefault();
 	var specialist =  $('#specialist_lawyer').val();
 	var state_code = $('#state').val();
@@ -323,13 +322,12 @@ $(".filteBtn").on('click',function(e){
         }).fail(function(jqXHR, ajaxOptions, thrownError){
             alert('No response from server');
 		});
-	@endif
+	
 });
 
 $(document).on('click', '.pagination a',function(event)
 {
     event.preventDefault();
-
     $('li').removeClass('active');
     $(this).parent('li').addClass('active');
 

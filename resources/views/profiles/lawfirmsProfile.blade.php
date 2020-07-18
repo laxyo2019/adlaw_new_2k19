@@ -621,7 +621,7 @@ $('#review_submit').on('click',function(e){
      var review_text = $.trim($('#review_text').val());
      var user_id = $('#user_id').val();
      var guest_id = $('input[name="guest_id"]').val();
-     alert(user_id)
+     // alert(user_id)
      var review_rate =$('.live-rating').text();
 
        var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";

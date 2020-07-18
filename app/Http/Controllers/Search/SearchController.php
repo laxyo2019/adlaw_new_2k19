@@ -383,7 +383,8 @@ class SearchController extends Controller
     else{
       $userData = Helpers::lawcompanyDetails()->where('id',$id)->first();
     }
-    // return $userData;
+    
+    // return $reviews;
     return view('profiles.lawfirmsProfile', compact('userData','slots','reviews'));
     
   }

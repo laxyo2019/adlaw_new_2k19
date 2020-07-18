@@ -143,7 +143,7 @@
 					</div>
 					<div class="right">
 					<button  class="btn btn-sm right-button">
-					<i class="fa fa-caret-right" style="font-size:27px"></i>
+						<i class="fa fa-caret-right" style="font-size:27px"></i>
 					</button>
 					</div>
 				</div>
