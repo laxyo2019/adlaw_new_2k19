@@ -227,6 +227,7 @@ $(document).ready(function(){
 		}, "slow");
 	});
 
+
 	$('body').on('click', '.right-button1', function() {
 		event.preventDefault();
 		$('.center,.center1').animate({
