@@ -296,7 +296,7 @@ class AdminController extends Controller
     		
     	}
 
-    	return $errors;
+    	// return $errors;
 
     	if(count($errors) !=0){
             return Excel::download(new ExcelUploadErrors($errors), 'error_sheet.xlsx');
