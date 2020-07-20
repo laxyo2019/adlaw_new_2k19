@@ -33,8 +33,7 @@ class AdminController extends Controller
 	}
 
 	public function index(){
-        //  print_r($_SERVER['QUERY_STRING']);
-        // die;
+
 		$users = User::whereNull('parent_id')->get();
 
 		return view('admin.dashboard.dashboard',compact('users'));      
@@ -297,7 +296,6 @@ class AdminController extends Controller
 
     		
     	}
-
 
     	if(count($errors) !=0){
             return Excel::download(new ExcelUploadErrors($errors), 'error_sheet.xlsx');

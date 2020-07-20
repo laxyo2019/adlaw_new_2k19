@@ -271,7 +271,7 @@ $(document).ready(function(){
 		}
 		else{
 			swal({
-				text : "You are not select previous date booking",
+				text : "You have not selected previous date booking.",
 				type : 'warning',
 				
 			});
