@@ -33,6 +33,8 @@ class AdminController extends Controller
 	}
 
 	public function index(){
+        //  print_r($_SERVER['QUERY_STRING']);
+        // die;
 		$users = User::whereNull('parent_id')->get();
 
 		return view('admin.dashboard.dashboard',compact('users'));      
