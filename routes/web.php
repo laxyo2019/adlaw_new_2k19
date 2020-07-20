@@ -82,6 +82,7 @@ Route::view('/about-us','pages.subpages.about_us')->name('about_us');
 Route::view('/disclaimer','pages.subpages.disclaimer');
 Route::view('/privacy-policy','pages.subpages.privacy_policy')->name('privacy_policy');
 Route::view('/why-adlaw','pages.subpages.why_adlaw')->name('why_adlaw');
+Route::view('/faqs','pages.subpages.faqs')->name('faqs');
 Route::view('/contact_support', 'package.contact_support')->name('contact_support');
 
 

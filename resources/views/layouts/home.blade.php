@@ -80,7 +80,7 @@
                 <a href="{{route('/')}}"  class="nav-link ped-4">HOME</a>
             </li> 
 
-             <li class="nav-item dropdown {{Request()->segment(1) == 'about-us' ? 'active_class' : '' }}">
+             <li class="nav-item dropdown ">
                 <a class="ped-4 nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   ABOUT
                 </a>
@@ -89,7 +89,20 @@
                   <a class="dropdown-item" href="{{route('why_adlaw')}}">Why ADLAW?</a>
                 </div>
               </li>
+              <li class="nav-item">
+                  <a href="{{route('faqs')}}"  class="nav-link ped-4">FAQs</a>
+              </li> 
 
+              <li class="nav-item dropdown">
+                <a class="ped-4 nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  SERVICES
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{{route('lawfirms')}}">LAWYERS/LAW FIRMS</a>
+                  <a class="dropdown-item" href="{{route('guest')}}">COMPANY/OTHER LAW USERS</a>
+                  <a class="dropdown-item" href="{{route('lawschools')}}">LAW SCHOOLS/STUDENTS</a>
+                </div>
+              </li>
              {{-- <li class="nav-item dropdown {{Request()->segment(1) == 'about-us' ? 'active_class' : '' }}">
                 <a href="#"  class="ped-4 nav-link dropdown-toggle" href="#" id="navbarDropdown"  >ABOUT</a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">>
@@ -107,7 +120,7 @@
             <li class="nav-item {{Request()->segment(1) == 'why-adlaw' ? 'active_class' : '' }}">
                 <a href="{{route('why_adlaw')}}"  class="nav-link ped-4">WHY ADLAW</a>
             </li> --}}
-            <li class="nav-item {{Request()->segment(2) == 'lawfirms' ? 'active_class' : '' }}">
+        {{--     <li class="nav-item {{Request()->segment(2) == 'lawfirms' ? 'active_class' : '' }}">
                 <a class="nav-link ped-4 " href="{{route('lawfirms')}}">LAWYERS/LAW FIRMS </a>
             </li>
 
@@ -116,7 +129,7 @@
             </li>
             <li class="nav-item {{Request()->segment(2) == 'lawschools' ? 'active_class' : '' }} ">
                 <a class="nav-link ped-4" href="{{route('lawschools')}}">LAW SCHOOLS/STUDENTS</a>
-            </li>
+            </li> --}}
             <li class="nav-item {{Request()->segment(1) == 'contact' ? 'active_class' : '' }}">
                 <a href="{{route('contact.index')}}" class="nav-link ped-4">CONTACT</a>
             </li> 
