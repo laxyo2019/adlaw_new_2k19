@@ -28,7 +28,7 @@ class ExcelUploadErrors implements FromCollection, WithHeadings, ShouldAutoSize
 			'Name',
 			'Contact No.',
 			'Email',
-			'City'			
+			'City',			
 			'State',
         ];
 	}
