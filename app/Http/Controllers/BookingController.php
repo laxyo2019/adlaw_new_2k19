@@ -8,7 +8,8 @@ use Auth;
 use App\User;
 use App\Models\Booking;
 use App\Models\Slots;
-
+use App\Notifications\BookingNotifications;
+use Illuminate\Notifications\Notification;
 class BookingController extends Controller
 {
      public function book_an_appointment(Request $request){
@@ -21,19 +22,38 @@ class BookingController extends Controller
                         ->where('b_date',$b_date)
                         ->where('client_id',$request->client_id)->get();
       if(count($booking)!=0){
-            return redirect()->back()->with('warning','You are already booked');
+            return redirect()->back()->with('warning','You have already booked appointment.');
       }
       else{
           $data = [
-          'plan_id' => $request->plan_id,
-          'b_date' => $b_date,
-          'user_id' =>  $request->user_id,
-          'client_id' =>  $request->client_id,
-          'client_status' =>  1,
-          'user_status' =>  0,
+            'plan_id' => $request->plan_id,
+            'b_date' => $b_date,
+            'user_id' =>  $request->user_id,
+            'client_id' =>  $request->client_id,
+            'client_status' =>  1,
+            'user_status' =>  0
           ];
+
           if(Auth::user()->id != $request->user_id){
-              Booking::create($data);
+
+            $user = User::find($request->user_id);
+             $booking =  Booking::create($data);
+            if($user->on_database  == '1' && $user->status == 'D'){
+              $sendData = [
+                'id' => $booking->id,
+                'title' => $user->name.' Appointment Booking.',
+                'url' => 'user_appointment',
+                'message' => 'On search some one want to contact to '.$user->name
+              ];
+
+              $admins = User::whereRoleIs('admin')->get();
+
+              foreach ($admins as $admin) {
+                $admin->notify(new BookingNotifications($sendData));
+              }
+              // Notification::send($admins, new BookingNotifications($sendData));
+            }
+
             return redirect()->back()->with('success','Your booking has been send to lawyer confirmation');
           }
           else{

@@ -142,6 +142,7 @@ Route::group(['prefix' => 'features/guest'] ,function(){
 Route::group(['middleware' => ['role:admin']], function() {
 
 	Route::get('/admin','Admin\AdminController@index')->name('admin.index');
+	Route::get('/user_appointment','Admin\AdminController@user_appointment')->name('admin.user_appointment');
 
 	Route::get('/reviews','Admin\AdminController@pending_reviews')->name('admin.pending_reviews');
 	Route::get('/admin/{review_id}/active_pending_reviews','Admin\AdminController@active_pending_reviews')->name('admin.active_pending_reviews');
