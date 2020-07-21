@@ -25,11 +25,15 @@ class SearchController extends Controller
       $this->query  = Helpers::lawyerDetails($court_id,$speciality_code);
   }
     public function lawfirms(){
+       // User::find('')
+
       $searchfield = 'lawyer';
       $specialities = CatgMast::all();
       $courts = CourtMast::all();
       $states = State::all();
       $slots = Slots::all();
+
+
 
       // start 7 days date fetch
     $curr_date = date("m/d/Y");

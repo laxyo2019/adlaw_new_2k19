@@ -715,6 +715,7 @@
             </a>
         </li>   
          @endpermission
+         @permission('manage_reviews')
            <li class="{{Request()->segment(1) == 'reviews' ? 'active' : ''}} nav-item">
             <a class="nav-link" href="{{route('admin.pending_reviews')}}">
               <i class="fa fa-comment"></i>
@@ -727,6 +728,7 @@
             </a>
           </li>  
           
+         @endpermission
           
 
         {{--    <li class="nav-item">
@@ -748,6 +750,7 @@
               <span class="menu-title"> Messages</span>
             </a>
           </li> --}}
+         @permission('manage_blogs')
 
           <li class="{{Request()->segment(1) == 'blogger' ? 'active' : ''}} nav-item">
             <a class="nav-link" href="{{route('admin.bloguser')}}">
@@ -763,6 +766,8 @@
             </a>
           </li>
 
+
+         @endpermission
           <li class="{{Request()->segment(1) == 'contact_details' ? 'active' : ''}} nav-item">
             <a class="nav-link" href="{{route('admin.contact_details')}}">
               <i class="fa fa-phone"></i>
@@ -847,6 +852,9 @@
           </li>
          
 
+      @endpermission
+
+      @permission('manage_uploads')
 
          <li class="nav-item">
             <a class="nav-link" href="{{route('admin.upload')}}">
@@ -871,6 +879,7 @@
           </ul>
         </li>
         @endpermission
+        @permission('manage_subscription')
         <li class="nav-item">
             <a class="nav-link" href="{{route('admin.show_subscription')}}">
               <i class="fa fa-phone"></i>
@@ -882,6 +891,20 @@
               @endif             
             </a>
         </li>
+        @endpermission
+        @permission('manage_user_appointment')
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('admin.user_appointment')}}">
+              <i class="fa fa-calendar"></i>
+              <span >User Appointment</span>  
+             {{--  @if(count($appointments) !=0)
+              <span class="pull-right-container">
+                <span class="label bg-red pull-right">{{count($subscriptions)}}</span>
+              </span>
+              @endif     --}}         
+            </a>
+        </li>
+        @endpermission
 
         @endrole
 

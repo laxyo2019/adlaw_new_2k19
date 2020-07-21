@@ -41,7 +41,7 @@ class CaseNotifications extends Notification
             'id' => $this->case->case_id,
             'title' => $this->case->case_title,  
             'url' => $this->case->notify_type == 'case_create' ? 'case_mast' : 'case_mast/'.$this->case->case_id.',case_diary',
-            'message' => $this->case->notify_type == 'case_create' ? ' Case assigned to you ' : ($this->case->notify_type == 'case_hearing' ? $this->case->date.' hearing date assigned to you' : ($this->case->notify_type == 'early_hearing' ? $this->case->date.' Tommorrow your case hearing announced' : ' Today your case hearing')),  
+            'message' => $this->case->notify_type == 'case_create' ? ' Case assigned to you ' : ($this->case->notify_type == 'case_hearing' ? $this->case->date.' hearing date assigned to you' : ($this->case->notify_type == 'early_hearing'   ? $this->case->date.' Tommorrow your case hearing announced' : ' Today your case hearing')),  
         ]);
     }
 }

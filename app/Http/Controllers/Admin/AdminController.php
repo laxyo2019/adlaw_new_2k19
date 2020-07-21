@@ -35,8 +35,11 @@ class AdminController extends Controller
 	public function index(){
 
 		$users = User::whereNull('parent_id')->get();
+        $deletedUsers = User::onlyTrashed()->whereNull('parent_id')->count();
+        $collect = collect($users)->where('user_catg_id','2')->where('on_database','1')->where('status','A')->count();
 
-		return view('admin.dashboard.dashboard',compact('users'));      
+        // return $collect;
+		return view('admin.dashboard.dashboard',compact('users','deletedUsers'));      
 	}
 
 	//show all pending reviews 
@@ -302,7 +305,8 @@ class AdminController extends Controller
         }
         return back()->with('success',"Successfully");
 
-
-
+    }
+    public function user_appointment(){
+        return "hello";
     }
 }
