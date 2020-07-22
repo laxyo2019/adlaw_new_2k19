@@ -35,12 +35,32 @@ class AdminController extends Controller
 	public function index(){
 
 		$users = User::whereNull('parent_id')->get();
-        $deletedUsers = User::onlyTrashed()->whereNull('parent_id')->count();
+        // $deletedUsers = User::onlyTrashed()->whereNull('parent_id')->count();
         $collect = collect($users)->where('user_catg_id','2')->where('on_database','1')->where('status','A')->count();
+        // return collect($users)->count();
 
         // return $collect;
-		return view('admin.dashboard.dashboard',compact('users','deletedUsers'));      
+		return view('admin.dashboard.dashboard',compact('users'));      
 	}
+    public function user_data_fetch(){
+        $users = User::whereNull('parent_id')->get();
+        return [
+            'user_total'       =>  collect($users)->count(),
+            'user_subscription' => collect($users)->where('user_package_id','!==', null)->where('package_end','>',date('Y-m-d'))->count(),
+            'user_unsubscription'=> collect($users)->where('user_package_id', null)->count(),
+            'user_delete'       =>User::onlyTrashed()->whereNull('parent_id')->count(),
+            'user_renewal'      => collect($users)->where('user_package_id','!==', null)->where('package_end','<',date('Y-m-d'))->count(),
+            'lawyer_total'      => collect($users)->where('user_catg_id','2')->count(),
+            'lawyer_registered'      => collect($users)->where('user_catg_id','2')->where('on_database','0')->count(),
+            'lawyer_import'      => collect($users)->where('user_catg_id','2')->where('on_database','1')->where('status','D')->count(),
+            'lawyer_import_reg'      => collect($users)->where('user_catg_id','2')->where('on_database','1')->where('status','!==','D')->count(),
+            'lawyer_subscirption'      => collect($users)->where('user_catg_id','2')->where('user_package_id','!==',null)->where('package_end','>',date('Y-m-d'))->count(),
+            'lawyer_unsubscirption'      => collect($users)->where('user_catg_id','2')->where('user_package_id',null)->count(),
+            'lawyer_renewal'      => collect($users)->where('user_catg_id','2')->where('user_package_id','!==', null)->where('package_end','<',date('Y-m-d'))->count(),
+
+        ];
+    }
+
 
 	//show all pending reviews 
 	public function pending_reviews(){
