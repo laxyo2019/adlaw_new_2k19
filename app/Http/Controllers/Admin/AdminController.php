@@ -273,7 +273,7 @@ class AdminController extends Controller
 					$user['on_database']  = '1';
 					$user['status']  = 'D';
 					if($duplicate){
-				  		User::find($oldUser->id)->update($user);
+				  		// User::find($oldUser->id)->update($user);
 				  		
 					}else{
 				  		$newuser = User::create($user);
