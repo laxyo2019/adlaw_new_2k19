@@ -22,10 +22,10 @@ use Crypt;
 class UsersController extends Controller
 {
 	public function index(){
-		$users = User::with(['state','city','country','role'])->whereNull('parent_id')->get();
+		$users = User::with(['state','city','country','role'])->whereNull('parent_id')->paginate(10);
 		$roles = Role::whereNotIn('id',['6','7','8'])->get();
 		$packages = Package::with('modules.module')->get();
-
+		
         return view('users.index',compact('users','roles','packages'));	
 	}
 	public function create(){
