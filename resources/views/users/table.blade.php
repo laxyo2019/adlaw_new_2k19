@@ -43,7 +43,10 @@
 
 				 	<a href="{{route('users.edit',$user->id)}}"><i class="fa fa-edit text-green btn btn-sm"></i></a>
 
-				 	<ul class="dropdown" style="float: right;">
+				 	<a href="javascript:void(0)" onclick="loginhistory('{{ $user->id }}')" title="user login history" data-id="modal" id="loginbtn"><i class="fa fa-clock-o btn btn-sm" style="font-size: 16px"></i></a>
+
+				 	<a href="javascript:$('#delform_{{ $user->id }}').submit();"  onclick="return confirm('Are you sure?')" ><i class="fa fa-trash text-danger btn btn-sm" ></i></a>
+				 	<ul class="dropdown " style="float: left;" >
 				 		<a class="btn bg-info dropdown-toggle" data-toggle="dropdown">
 				 			<i class="fa fa-gear" ></i>
 				 		</a>
@@ -56,10 +59,6 @@
 				 			</li>
 				 		</div>
 				 	</ul>
-
-				 	<a href="javascript:void(0)" onclick="loginhistory('{{ $user->id }}')" title="user login history" data-id="modal" id="loginbtn"><i class="fa fa-clock-o btn btn-sm" style="font-size: 16px"></i></a>
-
-				 	<a href="javascript:$('#delform_{{ $user->id }}').submit();"  onclick="return confirm('Are you sure?')" ><i class="fa fa-trash text-danger btn btn-sm" ></i></a>
 
 				 	@csrf
 					</form>
