@@ -57,9 +57,10 @@
 			<div class="col-md-4 shadow-lg ">
 				<div class="small-box bg-orange ">
 					<div class="inner">
-						<h3>{{collect($users)->where('user_catg_id','3')->count()}}</h3>
+						<h3 class="lawfirm_total"><div class="loader"></div></h3>
 						<h4>Total LawFirms</h4>
-						<span>Registered : {{collect($users)->where('user_catg_id','3')->where('on_database','0')->count()}} | Import: {{collect($users)->where('user_catg_id','3')->where('on_database','1')->where('status','D')->count()}} | Import Registered : {{collect($users)->where('user_catg_id','3')->where('on_database','1')->where('status','!==','D')->count()}} | Subcription : {{collect($users)->where('user_catg_id','3')->where('user_package_id','!==',null)->where('package_end','>',date('Y-m-d'))->count()}} | Unsubcription : {{collect($users)->where('user_catg_id','3')->where('user_package_id',null)->count()}} | Renewal : {{collect($users)->where('user_catg_id','3')->where('user_package_id','!==', null)->where('package_end','<',date('Y-m-d'))->count()}} </span>
+						<span>Registered : <span class="lawfirm_registered">0</span> | Import: <span class="lawfirm_import">0</span> | Import Registered : <span class="lawfirm_import_reg">0</span> | Subcription :  <span class="lawfirm_subscirption">0</span>  | Unsubcription : <span class="lawfirm_unsubscirption">0</span> | Renewal : <span class="lawfirm_renewal">0</span> </span>
+
 					</div>
 					<div class="icon">
 						<i class="fa fa-users"></i>
@@ -70,9 +71,9 @@
 			<div class="col-md-4 shadow-lg ">
 				<div class="small-box bg-green ">
 					<div class="inner">
-						<h3>{{collect($users)->where('user_catg_id','4')->count()}}</h4>
+						<h3 class="lawschools_total"><div class="loader"></div></h3>
 						<h4>Total Law Schools</h4>
-						<span>Registered : {{collect($users)->where('user_catg_id','4')->where('on_database','0')->count()}} | Import: {{collect($users)->where('user_catg_id','4')->where('on_database','1')->where('status','D')->count()}} | Import Registered : {{collect($users)->where('user_catg_id','4')->where('on_database','1')->where('status','!==','D')->count()}} | Subcription : {{collect($users)->where('user_catg_id','4')->where('user_package_id','!==',null)->where('package_end','>',date('Y-m-d'))->count()}} | Unsubcription : {{collect($users)->where('user_catg_id','4')->where('user_package_id',null)->count()}} | Renewal : {{collect($users)->where('user_catg_id','4')->where('user_package_id','!==', null)->where('package_end','<',date('Y-m-d'))->count()}} </span>
+						<span>Registered : <span class="lawschools_registered">0</span> | Import: <span class="lawschools_import">0</span> | Import Registered : <span class="lawschools_import_reg">0</span> | Subcription :  <span class="lawschools_subscirption">0</span>  | Unsubcription : <span class="lawschools_unsubscirption">0</span> | Renewal : <span class="lawschools_renewal">0</span> </span>
 					</div>
 					<div class="icon">
 						<i class="fa fa-users"></i>
@@ -192,6 +193,23 @@
 				$('.lawyer_subscirption').empty().html(res.lawyer_subscirption);
 				$('.lawyer_unsubscirption').empty().html(res.lawyer_unsubscirption);
 				$('.lawyer_renewal').empty().html(res.lawyer_renewal);
+
+				$('.lawfirm_total').empty().html(res.lawfirm_total);
+				$('.lawfirm_registered').empty().html(res.lawfirm_registered);
+				$('.lawfirm_import').empty().html(res.lawfirm_import);
+				$('.lawfirm_import_reg').empty().html(res.lawfirm_import_reg);
+				$('.lawfirm_subscirption').empty().html(res.lawfirm_subscirption);
+				$('.lawfirm_unsubscirption').empty().html(res.lawfirm_unsubscirption);
+				$('.lawfirm_renewal').empty().html(res.lawfirm_renewal);	
+				
+				$('.lawschools_total').empty().html(res.lawfirm_total);
+				$('.lawschools_registered').empty().html(res.lawschools_registered);
+				$('.lawschools_import').empty().html(res.lawschools_import);
+				$('.lawschools_import_reg').empty().html(res.lawschools_import_reg);
+				$('.lawschools_subscirption').empty().html(res.lawschools_subscirption);
+				$('.lawschools_unsubscirption').empty().html(res.lawschools_unsubscirption);
+				$('.lawschools_renewal').empty().html(res.lawschools_renewal);	
+
 			}
 		})
 	})

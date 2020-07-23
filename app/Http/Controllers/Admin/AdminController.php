@@ -57,6 +57,21 @@ class AdminController extends Controller
             'lawyer_subscirption'      => collect($users)->where('user_catg_id','2')->where('user_package_id','!==',null)->where('package_end','>',date('Y-m-d'))->count(),
             'lawyer_unsubscirption'      => collect($users)->where('user_catg_id','2')->where('user_package_id',null)->count(),
             'lawyer_renewal'      => collect($users)->where('user_catg_id','2')->where('user_package_id','!==', null)->where('package_end','<',date('Y-m-d'))->count(),
+            'lawfirm_total'      => collect($users)->where('user_catg_id','3')->count(),
+            'lawfirm_registered'      => collect($users)->where('user_catg_id','3')->where('on_database','0')->count(),
+            'lawfirm_import'      => collect($users)->where('user_catg_id','3')->where('on_database','1')->where('status','D')->count(),
+            'lawfirm_import_reg'      => collect($users)->where('user_catg_id','3')->where('on_database','1')->where('status','!==','D')->count(),
+            'lawfirm_subscirption'      => collect($users)->where('user_catg_id','3')->where('user_package_id','!==',null)->where('package_end','>',date('Y-m-d'))->count(),
+            'lawfirm_unsubscirption'      => collect($users)->where('user_catg_id','3')->where('user_package_id',null)->count(),
+            'lawfirm_renewal'      => collect($users)->where('user_catg_id','3')->where('user_package_id','!==', null)->where('package_end','<',date('Y-m-d'))->count(), 
+            'lawschools_total'      => collect($users)->where('user_catg_id','4')->count(),
+            'lawschools_registered'      => collect($users)->where('user_catg_id','4')->where('on_database','0')->count(),
+            'lawschools_import'      => collect($users)->where('user_catg_id','4')->where('on_database','1')->where('status','D')->count(),
+            'lawschools_import_reg'      => collect($users)->where('user_catg_id','4')->where('on_database','1')->where('status','!==','D')->count(),
+            'lawschools_subscirption'      => collect($users)->where('user_catg_id','4')->where('user_package_id','!==',null)->where('package_end','>',date('Y-m-d'))->count(),
+            'lawschools_unsubscirption'      => collect($users)->where('user_catg_id','4')->where('user_package_id',null)->count(),
+            'lawschools_renewal'      => collect($users)->where('user_catg_id','4')->where('user_package_id','!==', null)->where('package_end','<',date('Y-m-d'))->count(),
+
 
         ];
     }
