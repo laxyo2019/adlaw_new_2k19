@@ -1,5 +1,5 @@
 <section class="py-1 border-bottom bg-light" >
-    <h2 class="font-weight-bold text-center text-captialize">Company / Other Law Users Features</h2>
+    <h1 class="font-weight-bold text-center text-captialize">Company / Other Law Users Features</h1>
      <span class="span-line mt-4 mb-4"></span>
      <br>
    {{--  <p class="text-muted text-center" >
