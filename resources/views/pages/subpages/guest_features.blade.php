@@ -57,7 +57,7 @@
 	</div>
 	<div class="row mb-4">
 		<div class="col-md-6 col-xm-12 col-sm-12" >
-			<input type="text" class="form-control" name="user_name" placeholder="Search name here">
+			<input type="text" class="form-control" name="user_name" value="{{$name}}" placeholder="Search name here">
 		</div>
 		<div class="col-md-6 col-xm-12 col-sm-12" id="spect1" >
 			

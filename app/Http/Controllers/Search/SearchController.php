@@ -53,9 +53,10 @@ class SearchController extends Controller
 
     $days = array_combine($day, $date); //date to days wise indexing 
     if(request()->all() != null){
+        $name = request()->search;
         $lawyers =  $this->query->where('name', 'like', '%' . request()->search . '%')->paginate(6);
     }else{
-      // $name = '';
+      $name = request()->search;
       $lawyers =  $this->query->where('name', 'like', '%' . '' . '%')->paginate(6);
     }
     
@@ -65,7 +66,7 @@ class SearchController extends Controller
     // });
 
       return  view('pages.subpages.guest_features',
-        compact('searchfield','specialities','courts','states','lawyers','days','slots')
+        compact('searchfield','specialities','courts','states','lawyers','days','slots','name')
       );
     }
 
