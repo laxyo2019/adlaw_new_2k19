@@ -87,7 +87,7 @@ class UsersController extends Controller
     public function edit($id){
     	$user = User::find($id);
     	$roles = Role::where('id','>', 1)->get();
-        return view('users.edit',compact('countries','user','roles'));
+        return view('users.edit',compact('user','roles'));
     }
     public function update(Request $request, $id){
     	$olduser = User::find($id);
@@ -212,5 +212,9 @@ class UsersController extends Controller
 
 		return view('users.assign_permission',compact('user','permissions'));
 	
+	}
+	public function old_package(){
+
+		return view('users.old_package_table');
 	}
 }

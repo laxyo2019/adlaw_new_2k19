@@ -51,11 +51,12 @@
 					</div>
 				</div>
 			</div>
+@include('models.old_package')	
 @include('models.login_history')	
 @include('models.supscription_package_active')	
-		</div>
-	</section>
-	<script type="text/javascript">
+</div>
+</section>
+<script type="text/javascript">
 
 	function loginhistory($id){
 		var id = $id;
@@ -75,7 +76,7 @@
 	}
 
 	$(document).ready(function(){		
-		// $('#myTable').DataTable();
+	// $('#myTable').DataTable();
 		$.ajaxSetup({
 			headers: {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -95,14 +96,31 @@
 
 		$(document).on('click','#activeModalBtn',function(e){
 				e.preventDefault();
-			$('#activeModal').modal('show');
 			var id = $(this).attr('data-id');
 			var btn_id = $(this).attr('btn_id');
+			$('#activeModal').modal('show');
 
 			$('input[name="subscription_id"]').val(id);
 			$('input[name="btn_id"]').val(btn_id);
 
-		})
+		});
+
+
+		$(document).on('click','#oldPackageModel',function(e){
+			
+			e.preventDefault();	
+			var id = $(this).attr('data-id');	
+			
+			$.ajax({
+				type:'GET',
+				url:'/users/old_package/'+id,
+				success:function(res){
+					console.log(res)
+					$('#oldPackageTable').empty().html(res);
+					$('#oldPackage').modal('show');
+				}
+			});
+		});
 
 		$("#activeForm").submit(function(e){
 			e.preventDefault();
@@ -234,9 +252,9 @@
 			var package_amount = $('input[name="package_amount"]' ).val();	
 			
 			var re = /^([0-9]+[\.]?[0-9]?[0-9]?|[0-9]+)$/g;
-    		var re1 = /^([0-9]+[\.]?[0-9]?[0-9]?|[0-9]+)/g;
-    		if(package_id !=0){  
-    			if(percent !=''){    			
+			var re1 = /^([0-9]+[\.]?[0-9]?[0-9]?|[0-9]+)/g;
+			if(package_id !=0){  
+				if(percent !=''){    			
 					if(re.test(percent)){  
 		    			if(re1.test(percent)){ 
 		    				if(percent <= 100){
@@ -257,16 +275,16 @@
 		    		}else{
 		    			$('.percent_error').show();
 		    		}
-    				
-    			}else{
+					
+				}else{
 		    		$('input[name="dicount_amount"]').val(''); 
 		    		$('input[name="net_amount"]').val('');
-    				$('.percent_error').hide();
-    			}
-    			
-    		}else{
-    			alert('First select package');
-    		}
+					$('.percent_error').hide();
+				}
+				
+			}else{
+				alert('First select package');
+			}
 		}
 
 
@@ -284,7 +302,6 @@
 			var c_date = year + "-" + month  + "-" + day;
 			return c_date; 
 		}
-
 
     });
 </script>

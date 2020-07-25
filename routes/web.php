@@ -415,6 +415,10 @@ Route::group(['middleware' => ['role:lawyer|lawcompany|lawcollege|admin|guest|te
 		Route::get('/team_users','Teams\TeamController@team_users');
 
 		Route::resource('/users','Teams\UsersController');
+		
+		Route::get('/users/old_package/{id}','Teams\UsersController@old_package')->name('users.old_package');
+
+
 		Route::post('/login_history', 'Teams\UsersController@login_history')->name('login_history');
 		Route::post('/member_cases', 'Teams\UsersController@member_cases')->name('member_cases');
 

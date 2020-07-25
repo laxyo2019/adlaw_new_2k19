@@ -308,7 +308,7 @@ class AdminController extends Controller
 					$user['on_database']  = '1';
 					$user['status']  = 'D';
 					if($duplicate){
-				  		// User::find($oldUser->id)->update($user);
+				  		User::find($oldUser->id)->update($user);
 				  		
 					}else{
 				  		$newuser = User::create($user);
@@ -331,10 +331,7 @@ class AdminController extends Controller
 				$status = true;
 				$duplicate = false;
     		}
-
-    		
     	}
-
     	if(count($errors) !=0){
             return Excel::download(new ExcelUploadErrors($errors), 'error_sheet.xlsx');
         }
@@ -342,6 +339,6 @@ class AdminController extends Controller
 
     }
     public function user_appointment(){
-        return "hello";
+        return view('admin.dashboard.appointment.index');
     }
 }

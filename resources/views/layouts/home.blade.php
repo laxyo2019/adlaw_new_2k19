@@ -63,7 +63,21 @@
 .ped-4{
     padding: 0.92rem !important;
 }
+.carousel-caption {
+  position: absolute;
+  right: 15%;
+  bottom: 20px;
+  left: 15%;
+  z-index: 10;
+  padding-top: 10px;
+  padding-bottom: 60px !important;
+  color: #fff;
+  text-align: center;
+}
+.carousel-caption h2 p{
+  margin-top: 2.0rem !important;
 
+}
 </style>
 
 <body>

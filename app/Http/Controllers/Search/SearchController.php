@@ -27,6 +27,7 @@ class SearchController extends Controller
     public function lawfirms(){
        // User::find('')
 
+      
       $searchfield = 'lawyer';
       $specialities = CatgMast::all();
       $courts = CourtMast::all();
@@ -51,8 +52,13 @@ class SearchController extends Controller
     $day = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
 
     $days = array_combine($day, $date); //date to days wise indexing 
-
-    $lawyers =  $this->query->paginate(6);
+    if(request()->all() != null){
+        $lawyers =  $this->query->where('name', 'like', '%' . request()->search . '%')->paginate(6);
+    }else{
+      // $name = '';
+      $lawyers =  $this->query->where('name', 'like', '%' . '' . '%')->paginate(6);
+    }
+    
 
     // return collect($lawyers)->filter(function($e) {
     //  return $e['state_code'] == '20';

@@ -21,7 +21,7 @@
               <i class="m-auto text-primary"> <img class="media-object" src="images/Guest1.png" alt="Image"> </i>
             </div>
             <h3 class="font-weight-bold">Company / Other Law Users</h3>
-            <p class="lead mb-0">Easily Search Lawyer and Law Firms!</p>
+            <p class="lead mb-0">Easily Search to Find Lawyer and Law Firms!</p>
           </div>
          </a>
         </div>
@@ -34,7 +34,7 @@
               </i>
             </div>
             <h3 class="font-weight-bold">Law Schools / Students</h3>
-            <p class="lead mb-0">Locate Perfect Lawschools!</p>
+            <p class="lead mb-0">Locate Suitable Lawschools!</p>
           </div>
           </a>
         </div>

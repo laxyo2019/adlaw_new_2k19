@@ -16,11 +16,11 @@
 			<br><br>
 
 			</p>
-			<p class="p-text">
+		{{-- 	<p class="p-text">
 				The following details provided by us have been gathered and prepared for Users' convenience, and remarkably for informative purposes; they are in no way legal advice. More precisely, nothing on the adlaw website should be interpreted as being a legal opinion, a recommendation on how to act, or an answer that applies directly to a specific circumstance. Adlaw is no way, directly or indirectly responsible for the advice and assistance provided by the Lawyers. 
 
 				Adlaw will not be responsible for any issues/discrepancies created by the Lawyers about gathering their details.
-			</p>
+			</p> --}}
 
         </div>
 		<div class="col-sm-12 col-md-12 col-xl-12 ">
@@ -113,7 +113,7 @@
 
 	<div class="row mt-2"  id="withoutsearchDiv">
 		<div class="col-md-12 col-sm-12 col-xm-12" id="tablediv">
-			{{-- @include('pages.subpages.search.lawfirms_table') --}}
+			@include('pages.subpages.search.lawfirms_table')
 		</div>
 	</div>
 

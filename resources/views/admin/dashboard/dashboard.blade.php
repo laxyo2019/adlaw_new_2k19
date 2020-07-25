@@ -72,7 +72,7 @@
 				<div class="small-box bg-green ">
 					<div class="inner">
 						<h3 class="lawschools_total"><div class="loader"></div></h3>
-						<h4>Total Law Schools</h4>
+						<h4>Total Law Sfilechools</h4>
 						<span>Registered : <span class="lawschools_registered">0</span> | Import: <span class="lawschools_import">0</span> | Import Registered : <span class="lawschools_import_reg">0</span> | Subcription :  <span class="lawschools_subscirption">0</span>  | Unsubcription : <span class="lawschools_unsubscirption">0</span> | Renewal : <span class="lawschools_renewal">0</span> </span>
 					</div>
 					<div class="icon">

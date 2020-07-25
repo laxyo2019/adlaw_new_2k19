@@ -10,14 +10,24 @@
       <div class="carousel-item active" style="background-image: url('images/banner3.png') ;">
        
         <div class="carousel-caption d-none d-md-block">
-          
-          <h2 class="display-4">Lawyer / Law Firms</h2>
+          <form  action="{{route('guest')}}" method="get">
+            @csrf
+            <input type="text" class="p-2" name="search" style="width: 80%;border-radius: 10px;" placeholder="Lawyers search here...">
+              <button class="btn btn-md btn-primary p-2" style="border-radius: 10px;">Search</button>
+          </form>
+          <h2 class="display-4 mt-2">Lawyer / Law Firms</h2>
           <p class="lead ">Solo Lawyer, Small Firms, Medium and Large Law Firm manage.</p>
         </div>
       </div>
       <!-- Slide Two - Set the background image for this slide in the line below -->
       <div class="carousel-item" style="background-image: url('images/company_law.png'); ">
+
         <div class="carousel-caption d-none d-md-block">
+          <form  action="{{route('guest')}}" method="get">
+            @csrf
+            <input type="text" class="p-2" name="search" style="width: 80%;border-radius: 10px;" placeholder="Lawyers search here...">
+              <button class="btn btn-md btn-primary p-2" style="border-radius: 10px;">Search</button>
+          </form>
           <h2 class="display-4">Company / Other Law Users</h2>
           <p class="lead">Everything you need to manage your account.</p>
         </div>
@@ -25,10 +35,16 @@
       <!-- Slide Three - Set the background image for this slide in the line below -->
       <div class="carousel-item" style="background-image: url('images/1_law3.jpg')">
         <div class="carousel-caption d-none d-md-block">
+          <form  action="{{route('guest')}}" method="get">
+            @csrf
+            <input type="text" class="p-2" name="search" style="width: 80%;border-radius: 10px;" placeholder="Lawyers search here...">
+              <button class="btn btn-md btn-primary p-2" style="border-radius: 10px;">Search</button>
+          </form>
           <h2 class="display-4">Law Schools / Students</h2>
           <p class="lead">Everything you need to manage your Lawschools.</p>
         </div>
       </div>
+
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>

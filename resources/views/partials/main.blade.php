@@ -248,7 +248,7 @@
                   @if(in_array(Auth::user()->user_catg_id, json_decode($module->permissions)->can_view))
                     @if(Auth::user()->parent_id !=null )  
                       @if($module->show_team == '1' && $module->module_type ='2' )
-                        <li class="">
+                        <li class="{{Request()->segment(1).'/'.Request()->segment(2) == $module->slug ? 'active' : '' }}" >
                           <a 
                        
                           href="{{ $module->link != null ? (in_array($module->id, $packageModules) ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('crm_dashboard.index')) : route('package.index')}}"
@@ -260,7 +260,7 @@
                       @endif
                     @else
                       @if($module->module_type == '2')
-                      <li class="">
+                      <li class="{{Request()->segment(1).'/'.Request()->segment(2) == $module->slug ? 'active' : '' }}">
                           <a 
                              href="{{ $module->link != null ? (in_array($module->id, $packageModules) ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('crm_dashboard.index')) : route('package.index')}}"
                           >
@@ -371,7 +371,7 @@
             </a>
           </li> --}}
 
-           <li class="treeview {{Request()->segment(1) == 'crm_dashboard' ? 'active' : '' }}">
+           <li class="treeview {{Request()->segment(1) == 'crm_dashboard' ? 'active' : (Request()->segment(1) == 'clients' ? 'active' : (Request()->segment(1) == 'pms' ? 'active' : (Request()->segment(1) == 'teams' ? 'active' : (Request()->segment(1) == 'case_mast' ? 'active' : (Request()->segment(1) == 'calendar' ? 'active' : (Request()->segment(1) == 'docs' ? 'active' : (Request()->segment(1) == 'todos' ? 'active' : ''))))))) }}">
             <a href="#">
               <i class="fa fa-table"></i> <span>CRM</span>
               <span class="pull-right-container">
@@ -389,7 +389,7 @@
                   @if(in_array(Auth::user()->user_catg_id, json_decode($module->permissions)->can_view))
                     @if(Auth::user()->parent_id !=null )  
                       @if($module->show_team == '1' && $module->module_type ='1' )
-                        <li class="">
+                       <li class="{{Request()->segment(1).'/'.Request()->segment(2) == $module->slug ? 'active' : '' }}">
                           <a 
                        
                           href="{{ $module->link != null ? (in_array($module->id, $packageModules) ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('crm_dashboard.index')) : route('package.index')}}"
@@ -401,7 +401,7 @@
                       @endif
                     @else
                       @if($module->module_type == '1')
-                      <li class="">
+                      <li class="{{Request()->segment(1).'/'.Request()->segment(2) == $module->slug ? 'active' : '' }}">
                           <a 
                              href="{{ $module->link != null ? (in_array($module->id, $packageModules) ? ($moduleShow ? route($module->link) : route('crm_dashboard.index')) : route('crm_dashboard.index')) : route('package.index')}}"
                           >

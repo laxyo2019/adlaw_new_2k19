@@ -32,7 +32,9 @@
 
 				<td>
 					@if($user->user_package_id !='')
-						<a href="#" class="btn btn-sm bg-orange"  id="activeModalBtn" data-id="{{$user->id}}" btn_id="renew">Renew</a>
+						<a href="#" class="btn btn-sm bg-orange mb-3"  id="activeModalBtn" data-id="{{$user->id}}" btn_id="renew">Renew</a>
+
+						<a href="#" class="btn btn-sm bg-info"  id="oldPackageModel" data-id="{{$user->id}}" >Old Package</a>
 					@else								
 						<a href="#" class="btn btn-sm btn-success"  id="activeModalBtn" data-id="{{$user->id}}" btn_id="new">Active</a>
 					@endif
