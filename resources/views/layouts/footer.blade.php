@@ -8,7 +8,7 @@
      <div class="row">
        <div class="col-sm-9">
          <ul class="list-inline">
-           <li class="pl-4 text-center d-inline-block"><a href="{{url('/about_us')}}">About</a></li>
+           <li class="pl-4 text-center d-inline-block"><a href="{{url('/about-us')}}">About</a></li>
            <li class="pl-4 text-center d-inline-block"><a href="{{url('/tos')}}">Terms</a></li>
           {{--  <li class="pl-4 text-center d-inline-block"><a href="#">EULA</a></li> --}}
            <li class="pl-4 text-center d-inline-block"><a href="{{route('privacy_policy')}}">Privacy Policy</a></li>

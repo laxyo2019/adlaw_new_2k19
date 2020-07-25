@@ -235,12 +235,14 @@ class AdminController extends Controller
     		// 'file' => 'required'
     	]);
     	// return Str::random(40);
-
+        $test = [];
+        $test1 = [];
     	$status = true;
     	$duplicate = false;
     	$errors = array();
         $datas = Excel::toCollection(new ExcelImport,$request->file('file'));
-         // return $datas;
+        // return "hello";
+        //  return $datas;
     	foreach($datas as $value){
     		foreach ($value as $data) {
     			$user = array();
@@ -308,11 +310,33 @@ class AdminController extends Controller
 					$user['on_database']  = '1';
 					$user['status']  = 'D';
 					if($duplicate){
-				  		User::find($oldUser->id)->update($user);
+
+                        // $test1[] = [
+                        //     's_no'          => $data['sno'],
+                        //     'name'          => $data['name'],
+                        //     'contact_no'    => $data['contact_no'],
+                        //     'email'         => $data['email'],
+                        //     'city'          => $data['city'],
+                        //     'state'         => $data['state'],
+                        // ];  
+                        if(empty($oldUser)){
+                         User::find($oldUser['id'])->update($user);
+
+                        }
+
 				  		
 					}else{
+                        // $test[] = [
+                        //     's_no'          => $data['sno'],
+                        //     'name'          => $data['name'],
+                        //     'contact_no'    => $data['contact_no'],
+                        //     'email'         => $data['email'],
+                        //     'city'          => $data['city'],
+                        //     'state'         => $data['state'],
+                        // ];  
+
 				  		$newuser = User::create($user);
-				  		$court = CourtMastHeader::where('city_code',$user['city_code'])->where('court_type','3')->first();
+				  	    $court = CourtMastHeader::where('city_code',$user['city_code'])->where('court_type','3')->first();
 				  		if(!empty($court)){
 				  			Court::insert(['user_id' => $newuser->id,'court_code' => $court->court_code]);
 				  		}
@@ -332,6 +356,7 @@ class AdminController extends Controller
 				$duplicate = false;
     		}
     	}
+
     	if(count($errors) !=0){
             return Excel::download(new ExcelUploadErrors($errors), 'error_sheet.xlsx');
         }

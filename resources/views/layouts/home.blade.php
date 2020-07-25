@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="yandex-verification" content="8f0c9478d0aaca4e" />
     <meta name="google-site-verification" content="2iDNtR3LqBEDPUP45mwIXtE6a1XdOf7y9cz8TRGqxB0" />
     <title>Top Lawyers, Law Firm Portal | Law CRM Software| Find best Law Schools, | Adlaw</title>
     <meta name="description" content= "Adlaw is a Law Firm Portal and CRM for law firms, online law office management software for lawyers, law firms and law schools. Find best Law Schools and top Lawyers in India.">    
@@ -63,6 +64,7 @@
 .ped-4{
     padding: 0.92rem !important;
 }
+
 .carousel-caption {
   position: absolute;
   right: 15%;
@@ -76,7 +78,15 @@
 }
 .carousel-caption h2 p{
   margin-top: 2.0rem !important;
-
+}
+.img-photo{
+width: 33px; height: 29px;
+}
+#logout-form{
+ display: none;
+}
+.login-dropdown{
+left:-45px;
 }
 </style>
 
@@ -163,13 +173,12 @@
             <li class="nav-item dropdown ">
               <a class="dropdown-toggle nav-link ped-4" href="{{route('register')}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 @if(Auth::user()->photo !='')
-                <img src="{{ asset('storage/profile_photo/'.Auth::user()->photo)}}"  style="width: 33px; height: 29px;" class="" />
+                <img src="{{ asset('storage/profile_photo/'.Auth::user()->photo)}}" class="img-photo" />
                 @else
-                <img src="{{asset('storage/profile_photo/default.png')}}"  style="width: 33px; height: 29px;" class="rounded-circle" />
+                <img src="{{asset('storage/profile_photo/default.png')}}"  class="img-photo rounded-circle" />
                 @endif
               </a>
-              <ul class="dropdown-menu " style=" left:-45px;
-">
+              <ul class="dropdown-menu login-dropdown" >
                 <li class="nav-item">
                   <a class="nav-link p-3 text-dark"  href="{{route('login')}}">{{ __('Dashboard') }}</a>
                 </li>
@@ -180,7 +189,7 @@
                   <a class="nav-link p-3 text-dark" href="{{ route('logout') }}" onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                 </li>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST">
                 @csrf
                 </form>
               </ul>
