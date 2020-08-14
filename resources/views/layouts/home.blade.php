@@ -9,7 +9,7 @@
     <meta name="google-site-verification" content="2iDNtR3LqBEDPUP45mwIXtE6a1XdOf7y9cz8TRGqxB0" />
     <title>Top Lawyers, Law Firm Portal | Law CRM Software| Find best Law Schools, | Adlaw</title>
     <meta name="description" content= "Adlaw is a Law Firm Portal and CRM for law firms, online law office management software for lawyers, law firms and law schools. Find best Law Schools and top Lawyers in India.">    
-  <meta name="keywords" content="lawyers portal India, top 10 law firms India, law CRM software,  CRM for law firms, online law office management software, CRM for law firms, best CRM for lawyers">
+  <meta name="keywords" content="lawyers portal India, top 10 law firms India, law CRM software,  CRM for law firms, online law office management software, CRM for law firms, best CRM for lawyers, Best Lawyers in India">
 
     <link rel = "icon" href ="{{asset('images/adlaw-logo.png')}}" type = "image/x-icon" style="line-height: 40px;">
 

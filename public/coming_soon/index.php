@@ -5,24 +5,17 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-
-
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <!--===============================================================================================-->
-	<!-- <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css"> -->
-	    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
-	<!-- <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"> -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
 <!--===============================================================================================-->
-	<!-- <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css"> -->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
 <!--===============================================================================================-->
-	<!-- <link rel="stylesheet" type="text/css" href="css/util.css"> -->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 </head>
@@ -34,7 +27,7 @@
 		<div class="flex-c-m bg-img1 size2 where1 overlay1 where2 respon2" style="background-image: url('images/bg01.jpg');">
 			<div class="wsize2 flex-w flex-c-m cd100 js-tilt">
 				<div class="flex-col-c-m size6 bor2 m-l-10 m-r-10 m-t-15">
-					<span class="l2-txt1 p-b-9 days">35</span>
+					<span class="l2-txt1 p-b-9 days">11</span>
 					<span class="s2-txt4">Days</span>
 				</div>
 
@@ -58,15 +51,18 @@
 		<!-- Form -->
 		<div class="size3 flex-col-sb flex-w p-l-75 p-r-75 p-t-45 p-b-45 respon1">
 			<div class="wrap-pic1">
-				<img src="images/icons/logo.png" alt="LOGO">
+				<img src="images/adlaw-logo.png" alt="ADLAW">
 			</div>
 
 			<div class="p-t-50 p-b-60">
 				<p class="m1-txt1 p-b-36">
 					Our website is <span class="m1-txt2">Coming Soon</span>, follow us for update now!
-				</p>
 
-				<!-- <form class="contact100-form validate-form">
+
+
+				</p>
+<!-- 
+				<form class="contact100-form validate-form">
 					<div class="wrap-input100 m-b-10 validate-input" data-validate = "Name is required">
 						<input class="s2-txt1 placeholder0 input100" type="text" name="name" placeholder="Your Name">
 						<span class="focus-input100"></span>
@@ -82,24 +78,24 @@
 							Subscribe
 						</button>
 					</div>
-				</form> -->
+				</form>
 
 				<p class="s2-txt3 p-t-18">
 					And don’t worry, we hate spam too! You can unsubcribe at anytime.
 				</p>
-			</div>
+ -->			</div>
 
 			<div class="flex-w">
-				<a href="#" class="flex-c-m size5 bg3 how1 trans-04 m-r-5">
+				<a href="https://www.facebook.com/Adlaw-109225687182044/?modal=admin_todo_tour" class="flex-c-m size5 bg3 how1 trans-04 m-r-5">
 					<i class="fa fa-facebook"></i>
 				</a>
 
-				<a href="#" class="flex-c-m size5 bg4 how1 trans-04 m-r-5">
+				<a href="https://twitter.com/adlaw6" class="flex-c-m size5 bg4 how1 trans-04 m-r-5">
 					<i class="fa fa-twitter"></i>
 				</a>
 
-				<a href="#" class="flex-c-m size5 bg5 how1 trans-04 m-r-5">
-					<i class="fa fa-youtube-play"></i>
+				<a href="https://www.linkedin.com/in/adlaw-in-7b9632187/" class="flex-c-m size5 bg5 how1 trans-04 m-r-5">
+					<i class="fa fa-linkedin"></i>
 				</a>
 			</div>
 		</div>
@@ -110,15 +106,14 @@
 	
 
 <!--===============================================================================================-->	
-	 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-	<!-- <script src="vendor/select2/select2.min.js"></script> -->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-	<!-- <script src="vendor/countdowntime/moment.min.js"></script> -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
-
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/moment.min.js"></script>
 	<script src="vendor/countdowntime/moment-timezone.min.js"></script>
 	<script src="vendor/countdowntime/moment-timezone-with-data.min.js"></script>
 	<script src="vendor/countdowntime/countdowntime.js"></script>
@@ -128,7 +123,7 @@
 			/*Endtime must be > current time*/
 			endtimeYear: 0,
 			endtimeMonth: 0,
-			endtimeDate: 35,
+			endtimeDate: 11,
 			endtimeHours: 18,
 			endtimeMinutes: 0,
 			endtimeSeconds: 0,
@@ -148,4 +143,5 @@
 	<script src="js/main.js"></script>
 
 </body>
+>>>>>>> a05967b5f0391cffaef64f8c7d1267e50d23ac9e:public/coming_soon/index.php
 </html>
