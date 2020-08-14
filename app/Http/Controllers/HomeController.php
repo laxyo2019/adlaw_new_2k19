@@ -129,6 +129,11 @@ class HomeController extends Search\SearchController
 
    } 
 
+   public function connectcj(){
+
+      return redirect('https://courtsjudgments.com/site/signup');
+   } 
+
   public function password_change(){
     return view('auth.passwords.change_password');
   }

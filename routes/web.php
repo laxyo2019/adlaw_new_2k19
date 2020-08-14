@@ -34,6 +34,7 @@ Route::get('/verified_account','HomeController@verified_account')->name('verifie
 
 // Route::view('/connect', 'connect')->name('connect');
 Route::get('/connect', 'HomeController@connectLogin')->name('connect');
+Route::get('/connectcj', 'HomeController@connectcj')->name('connectcj');
 
 
 Route::get('/user/verify/{token}', 'Auth\RegisterController@verifyUser');

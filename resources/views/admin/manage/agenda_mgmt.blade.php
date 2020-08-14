@@ -4,7 +4,8 @@
 
 
 @section('content')
-<section class="content" >
+ <script src="{{ asset('js/app.js') }}" defer></script>
+<section class="content" id="app" >
 
 </section>
 

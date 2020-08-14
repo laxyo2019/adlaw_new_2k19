@@ -103,7 +103,7 @@
 							@if(!$moduleShow)		
 								<div class="card  p-0 col-centered">
 									<div class="card-header p-4" style="background-color: #3c8dbc; color:white">
-										<h4>Buy CRM Dashboard Contact Our Team <button class="btn btn-sm btn-warning pull-right" id="buyBtn">Buy Package</button></h4>
+										<h4>Buy Profile or CRM Dashboard Contact Our Team <button class="btn btn-sm btn-warning pull-right" id="buyBtn">Buy Package</button></h4>
 									</div>
 								</div>
 							@endif
@@ -139,7 +139,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		var btnName = $(this).attr('id');
 		if(btnName == 'buyBtn'){
-				var title = "Buy CRM Dashboard - Contact Our Team";
+				var title = "Buy Profile or CRM Dashboard - Contact Our Team";
 				$('#user_status').val('new');
 				$('.modal-title').empty().html(title);
 		}
