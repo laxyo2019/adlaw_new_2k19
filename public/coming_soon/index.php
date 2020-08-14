@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Coming Soon 1</title>
+	<title>ADLAW</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -27,7 +27,7 @@
 		<div class="flex-c-m bg-img1 size2 where1 overlay1 where2 respon2" style="background-image: url('images/bg01.jpg');">
 			<div class="wsize2 flex-w flex-c-m cd100 js-tilt">
 				<div class="flex-col-c-m size6 bor2 m-l-10 m-r-10 m-t-15">
-					<span class="l2-txt1 p-b-9 days">35</span>
+					<span class="l2-txt1 p-b-9 days">11</span>
 					<span class="s2-txt4">Days</span>
 				</div>
 
@@ -51,14 +51,17 @@
 		<!-- Form -->
 		<div class="size3 flex-col-sb flex-w p-l-75 p-r-75 p-t-45 p-b-45 respon1">
 			<div class="wrap-pic1">
-				<img src="images/icons/logo.png" alt="LOGO">
+				<img src="images/adlaw-logo.png" alt="ADLAW">
 			</div>
 
 			<div class="p-t-50 p-b-60">
 				<p class="m1-txt1 p-b-36">
 					Our website is <span class="m1-txt2">Coming Soon</span>, follow us for update now!
-				</p>
 
+
+
+				</p>
+<!-- 
 				<form class="contact100-form validate-form">
 					<div class="wrap-input100 m-b-10 validate-input" data-validate = "Name is required">
 						<input class="s2-txt1 placeholder0 input100" type="text" name="name" placeholder="Your Name">
@@ -80,19 +83,19 @@
 				<p class="s2-txt3 p-t-18">
 					And don’t worry, we hate spam too! You can unsubcribe at anytime.
 				</p>
-			</div>
+ -->			</div>
 
 			<div class="flex-w">
-				<a href="#" class="flex-c-m size5 bg3 how1 trans-04 m-r-5">
+				<a href="https://www.facebook.com/Adlaw-109225687182044/?modal=admin_todo_tour" class="flex-c-m size5 bg3 how1 trans-04 m-r-5">
 					<i class="fa fa-facebook"></i>
 				</a>
 
-				<a href="#" class="flex-c-m size5 bg4 how1 trans-04 m-r-5">
+				<a href="https://twitter.com/adlaw6" class="flex-c-m size5 bg4 how1 trans-04 m-r-5">
 					<i class="fa fa-twitter"></i>
 				</a>
 
-				<a href="#" class="flex-c-m size5 bg5 how1 trans-04 m-r-5">
-					<i class="fa fa-youtube-play"></i>
+				<a href="https://www.linkedin.com/in/adlaw-in-7b9632187/" class="flex-c-m size5 bg5 how1 trans-04 m-r-5">
+					<i class="fa fa-linkedin"></i>
 				</a>
 			</div>
 		</div>
@@ -120,7 +123,7 @@
 			/*Endtime must be > current time*/
 			endtimeYear: 0,
 			endtimeMonth: 0,
-			endtimeDate: 35,
+			endtimeDate: 11,
 			endtimeHours: 18,
 			endtimeMinutes: 0,
 			endtimeSeconds: 0,

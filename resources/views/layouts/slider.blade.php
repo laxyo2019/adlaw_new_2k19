@@ -12,7 +12,7 @@
         <div class="carousel-caption d-none d-md-block">
           <form  action="{{route('guest')}}" method="get">
             @csrf
-            <input type="text" class="p-2" name="search" style="width: 80%;border-radius: 10px;" placeholder="Lawyers search here...">
+            <input type="text" class="p-2" name="search" style="width: 80%;border-radius: 10px;" placeholder="Search a lawyer">
               <button class="btn btn-md btn-primary p-2" style="border-radius: 10px;">Search</button>
           </form>
           <h2 class="display-4 mt-2">Lawyer / Law Firms</h2>
@@ -20,12 +20,12 @@
         </div>
       </div>
       <!-- Slide Two - Set the background image for this slide in the line below -->
-      <div class="carousel-item" style="background-image: url('images/company_law.png'); ">
+      <div class="carousel-item" style="background-image: url('images/banner8.jpg'); ">
 
         <div class="carousel-caption d-none d-md-block">
           <form  action="{{route('guest')}}" method="get">
             @csrf
-            <input type="text" class="p-2" name="search" style="width: 80%;border-radius: 10px;" placeholder="Lawyers search here...">
+            <input type="text" class="p-2" name="search" style="width: 80%;border-radius: 10px;" placeholder="Search a lawyer">
               <button class="btn btn-md btn-primary p-2" style="border-radius: 10px;">Search</button>
           </form>
           <h2 class="display-4">Company / Other Law Users</h2>
@@ -37,7 +37,7 @@
         <div class="carousel-caption d-none d-md-block">
           <form  action="{{route('guest')}}" method="get">
             @csrf
-            <input type="text" class="p-2" name="search" style="width: 80%;border-radius: 10px;" placeholder="Lawyers search here...">
+            <input type="text" class="p-2" name="search" style="width: 80%;border-radius: 10px;" placeholder="Search a lawyer">
               <button class="btn btn-md btn-primary p-2" style="border-radius: 10px;">Search</button>
           </form>
           <h2 class="display-4">Law Schools / Students</h2>

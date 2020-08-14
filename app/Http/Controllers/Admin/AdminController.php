@@ -320,7 +320,7 @@ class AdminController extends Controller
                         //     'state'         => $data['state'],
                         // ];  
                         if(empty($oldUser)){
-                         User::find($oldUser['id'])->update($user);
+                         //User::find($oldUser['id'])->update($user);
 
                         }
 

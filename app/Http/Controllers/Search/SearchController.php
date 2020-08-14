@@ -57,7 +57,7 @@ class SearchController extends Controller
         $lawyers =  $this->query->where('name', 'like', '%' . request()->search . '%')->paginate(6);
     }else{
       $name = request()->search;
-      $lawyers =  $this->query->where('name', 'like', '%' . '' . '%')->paginate(6);
+      $lawyers =  $this->query->where('name',' ')->paginate(6);
     }
     
 

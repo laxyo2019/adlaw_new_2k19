@@ -2,7 +2,8 @@
 @extends('partials.main')
 
 @section('content')
-<section class="content" >
+ <script src="{{ asset('js/app.js') }}" defer></script>
+<section class="content" id="app" >
 	<stack-component
     :docs_users="{{ json_encode($users) }}"
     :stack="{{ json_encode($stack) }}"
