@@ -44,7 +44,7 @@ class CaseDocController extends Controller
 			'doc_remark'=>'required',
 			'doc_type'	=>'required|not_in:0',
 
-			'doc_name'	=>'required|mimes:jpeg,png,jpg,pdf,docx,doc,xlsx,txt|max:10240',
+			'doc_name'	=>'required|max:10240',
 
 		]);	
 		$file = $request->file('doc_name');

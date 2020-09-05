@@ -12,11 +12,11 @@
 					<table class="table table-stripped table-bordered" id="myTable">
 						<thead>
 							<tr>
-								<td>SNo.</td>
-								<td>Lawyer Name</td>
-								<td>Bopking Time</td>
-								<td>Booking Date</td>
-								<td>Booking Status</td>
+								<th>SNo.</th>
+								<th>Lawyer Name</th>
+								<th>Booking Time</th>
+								<th>Booking Date</th>
+								<th>Booking Status</th>
 							</tr>
 						</thead>
 						<tbody>

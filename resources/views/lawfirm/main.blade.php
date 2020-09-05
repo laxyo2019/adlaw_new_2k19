@@ -171,10 +171,10 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="{{route('lawfirm.show',Auth::user()->id)}}" class="btn btn-default btn-flat">Profile</a>
+                  <a href="{{route('lawfirms.profile')}}" class="btn btn-default btn-flat">Profile</a>
                 </div>
                {{--  <div class="pull-left ml-2">
-                  <a href="{{route('lawfirm.show',Auth::user()->id)}}" class="btn btn-default btn-flat">Admin Control</a>
+                  <a href="{{route('lawfirms.profile')}}" class="btn btn-default btn-flat">Admin Control</a>
                 </div> --}}
                 <div class="pull-right">
                   <a href="{{ route('logout') }}" onclick="event.preventDefault();

@@ -14,14 +14,14 @@
 
              <div class="row">
                 <div class="col-sm-12 col-xs-12 col-md-5 col-lg-5 col-xl-5 mt-4">
-                    <img src="{{asset('images/dashboard/document.png')}}" class="w-100 h-100">
+                    <img src="{{asset('images/dashboard/image/documents.png')}}" class="w-100 h-100" alt="Document Management">
                 </div>
                 <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 col-xl-7 mt-4">
                   Each file stored is automatically numbered, versioned and archived. The software stores and maintains the copy of all the versions and allows for it to be viewed and edited at a later date. You can. 
                      <ul class="feature_ul mt-4">
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">Folder Move, Rename, Delete, Get Info</li> 
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">File download by double click</li>
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">File copy and paste</li>
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}" alt="left-arrow">Folder Move, Rename, Delete, Get Info</li> 
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}" alt="left-arrow">File download by double click</li>
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}" alt="left-arrow">File copy and paste</li>
 
                     </ul>
 

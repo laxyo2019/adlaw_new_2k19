@@ -1,8 +1,5 @@
 @extends("layouts.default")
-@section('title')
-{{'ADLAW'}}
-@endsection
-@section('title','Top Law Schools India | College for Law Student | Adlaw')
+@section('title','Top Law Schools India | College for Law Student, Law Colleges | Adlaw')
 @section('description','Find the best law school among the top law Schools in India. Adlaw provides the list of all law schools which is the best for you to get education. See the latest College of Law updates and developments.')
 @section('keywords', 'best law colleges in India, list of law schools India, top law schools India, college for law student, top 5 law schools in India, best law schools in India')
 @section('content')

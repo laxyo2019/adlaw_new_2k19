@@ -16,6 +16,7 @@ use App\Models\City;
 use App\Models\ContactUs;
 use App\Models\SubcriptionContact;
 use App\Notifications\SubscriptionReminder;
+use App\Notifications\Notifications;
 
 class ContactController extends Controller
 {
@@ -30,7 +31,7 @@ class ContactController extends Controller
        $user =  $this->validate($request,[
                     'fname'         => 'required|max:100|string',  
                     'lname'         => 'required|max:100|string',                      
-                    'cemail'        => 'required|email|max:255|unique:contact_us,cemail',    
+                    'cemail'        => 'required|email|max:255',    
                     "mobile_no"     => "required|max:10|min:10|regex:/^([0-9\s\-\+\(\)]*)$/",                    
                     "address"       => "nullable",
                     "message"       => "required",
@@ -46,7 +47,16 @@ class ContactController extends Controller
         ContactUs::create($user);
 
         Mail::to($user['cemail'])->send(new Contact($user));
-
+        $admins = User::whereRoleIs('admin')->get();
+        $sendData = [
+            'id' =>'',
+            'title' => "someone contact",
+            'url'   => 'contact_details',
+            'message'=> $user['fname']." ".$user['fname']." want to contact you"
+        ];
+        foreach ($admins as $admin) {            
+            $admin->notify(new Notifications($sendData));
+        }
         return redirect()->back()->with(['message'=>'Thank You! For Contact Us. We Will Contact You Soon...']);
       
     }
@@ -75,15 +85,16 @@ class ContactController extends Controller
         // Mail::to('salonij245@gmail.com')->send(new SubscriptionContact($data));
         
         //Notification
-        $user = User::find('14');
-
+        $admins = User::whereRoleIs('admin')->get();
 
         $data['title'] = "Subscription Contact";
         $data['url'] = "show_subscription";
         $data['message'] = $data->user_catg_name." want to subscription";
 
 
-        $user->notify(new SubscriptionReminder($data));
+        foreach ($admins as $admin) {            
+            $admin->notify(new SubscriptionReminder($data));
+        }
 
         return redirect()->back()->with('success','Your request send to our team. We will be contact you soon...');
     }

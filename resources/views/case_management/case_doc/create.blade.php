@@ -32,7 +32,7 @@
 						<div class="col-md-6 col-xs-6 col-sm-6" style="margin-top: 10px;">
 							<label class="doc_name">Document Attach <span class="text-danger">*</span></label>
 
-							<input type="file" name="doc_name" class="form-control" >
+							<input type="file" name="doc_name" class="form-control-file" >
 							@error('doc_name')
 								<span class="invalid-feedback text-danger" role="alert">
 								<strong>{{ $message }}</strong>

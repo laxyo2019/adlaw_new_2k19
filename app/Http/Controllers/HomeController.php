@@ -13,6 +13,8 @@ use App\Models\CourtType;
 use App\Models\CourtMast;
 use App\Models\CourtMastHeader;
 use App\Models\SubCatgMast;
+
+use App\SendCode1;
 use Illuminate\Support\Facades\Hash;
 use Crypt;
 class HomeController extends Search\SearchController 
@@ -176,6 +178,32 @@ class HomeController extends Search\SearchController
     }
   }
 
+  public function message_sent(){
+    return view('admin.dashboard.message');
+  }
+
+  public function message_sent_store(Request $request){
+
+    $users =  User::where('user_catg_id','2')->where('state_code','21')->whereNotNull('mobile')->where('message_sent','0')->take('500')->get();
+
+    // return $users;
+      foreach ($users as $key => $value) {
+        $sendData = [
+            'message' => $request->message,
+            'mobile' => $value->mobile 
+        ]; 
+
+        SendCode1::sendCode($sendData);  
+        User::find($value->id)->update(['message_sent' => '1']);
+          
+      }
+
+  // die;
+
+// return redirect()->back()->with('success','Message Sent Successfully');
+
+    return "success";
+  }
   public function testphone(){
 
         // $username="ritesh845";

@@ -5,12 +5,18 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
+
 				<div class="box box-primary">
 					<div class="box-header with-border">
 						<h3 class="box-title">Upload
 						</h3>
 					</div>
 					<div class="box-body">
+						@if($message = Session::get('success'))
+							<div class="alert bg-success">
+								{{$message}}
+							</div>
+						@endif
 						<form action="{{route('admin.importData')}}" method="post" enctype="multipart/form-data">
 							@csrf
 						<div class="row">

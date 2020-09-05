@@ -1,7 +1,5 @@
 @extends("layouts.default")
-@section('title')
-{{'ADLAW'}}
-@endsection
+
 @section('title','Top Legal Firms in India | Best Corporate Law Firm | Top 5 Law Firms | Adlaw')
 @section('description','Find best corporate law firm, among the top Indian law firms. Adlaw helps the users to get best legal firm for all law related services.')
 @section('keywords','top 5 law firms in India, Law Firms In India, list of law firm in India, top Indian legal firms, best corporate law firm in India, top legal firms in India, top Indian law firms')
@@ -17,7 +15,7 @@
         <div class="row col-sm-12 col-lg-12 col-xs-12 mb-5">
         	{{-- image div  --}}
         	<div class="col-md-5 ">
-        		<img src="{{asset('images/Lawyer-LawFirms.png')}}" style="height:100%; width: 100%;">
+        		<img src="{{asset('images/Lawyer-LawFirms.png')}}" alt="Lawyer-LawFirms in India" style="height:100%; width: 100%;">
         	</div>
         	{{-- content div --}}
         	<div class="col-sm-7 col-lg-7 col-md-7" >

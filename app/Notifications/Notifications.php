@@ -26,22 +26,21 @@ class Notifications extends Notification
     public function toArray($notifiable)
     {
         return [
-            'id' => ,
-            'title' => ,  
-            'url' => ,
-            'message' => ,  
+            'id' => $this->data['id'],
+            'title' => $this->data['title'],  
+            'url' => $this->data['url'],
+            'message' =>$this->data['message']  
             //'date' => $this->case->date, 
-                           
         ];
     }
 
-  public function toBroadcast($notifiable)
+    public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'id' => ,
-            'title' => ,  
-            'url' => ,
-            'message' => ,  
+            'id' => $this->data['id'],
+            'title' => $this->data['title'],  
+            'url' => $this->data['url'],
+            'message' =>$this->data['message']   
         ]);
     }
 }

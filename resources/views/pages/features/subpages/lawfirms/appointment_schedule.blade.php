@@ -14,13 +14,13 @@
 
              <div class="row">
                 <div class="col-sm-12 col-xs-12 col-md-5 col-lg-5 col-xl-5 mt-4">
-                    <img src="{{asset('images/dashboard/schedule_appointment.png')}}" class="w-100 h-100">
+                    <img src="{{asset('images/dashboard/image/appointment-schedule.png')}}" class="w-100 h-100" alt="Appointment Schedule Show">
                 </div>
 
                 <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 col-xl-7 mt-4">
                    If your office has more than one lawyer or attorney working, add them into your adlaw account and let your clients see who is available at what time. Make time for people who really long you. 
                     <ul class="feature_ul mt-4">
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">Manage your Scheduling Time</li> 
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}" alt="left-arrow">Manage your Scheduling Time</li> 
                     </ul>
 
                 </div>
@@ -29,13 +29,13 @@
                 <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 col-xl-7 mt-4">
                    If your office has more than one lawyer or attorney working, add them into your adlaw account and let your clients see who is available at what time. Make time for people who really long you. 
                     <ul class="feature_ul mt-4">
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">You can also confirmed appointment</li> 
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">You can see unconfirmed appointment</li> 
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">You can also cancelled appointment</li> 
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}" alt="left-arrow">You can also confirmed appointment</li> 
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}" alt="left-arrow">You can see unconfirmed appointment</li> 
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}" alt="left-arrow">You can also cancelled appointment</li> 
                     </ul>
                 </div>
                 <div class="col-sm-12 col-xs-12 col-md-5 col-lg-5 col-xl-5 mt-4">
-                    <img src="{{asset('images/dashboard/schedule_appointment1.png')}}" class="w-100 h-100">
+                    <img src="{{asset('images/dashboard/image/appointment.png')}}" class="w-100 h-100" alt="Appointment Confirmation">
                 </div>
             </div>
             <p class="p-text mt-4">

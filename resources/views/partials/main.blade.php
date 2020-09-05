@@ -180,10 +180,10 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="{{route('lawfirm.show',Auth::user()->id)}}" class="btn btn-default btn-flat">Profile</a>
+                  <a href="{{route('lawfirms.profile')}}" class="btn btn-default btn-flat">Profile</a>
                 </div>
                {{--  <div class="pull-left ml-2">
-                  <a href="{{route('lawfirm.show',Auth::user()->id)}}" class="btn btn-default btn-flat">Admin Control</a>
+                  <a href="{{route('lawfirms.profile')}}" class="btn btn-default btn-flat">Admin Control</a>
                 </div> --}}
                 <div class="pull-right">
                   <a href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -247,7 +247,7 @@
            @foreach($modules as $module)
                   @if(in_array(Auth::user()->user_catg_id, json_decode($module->permissions)->can_view))
                     @if(Auth::user()->parent_id !=null )  
-                      @if($module->show_team == '1' && $module->module_type ='2' )
+                      @if($module->show_team == '1' && $module->module_type == '2')
                         <li class="{{Request()->segment(1).'/'.Request()->segment(2) == $module->slug ? 'active' : '' }}" >
                           <a 
                        
@@ -388,7 +388,7 @@
               @foreach($modules as $module)
                   @if(in_array(Auth::user()->user_catg_id, json_decode($module->permissions)->can_view))
                     @if(Auth::user()->parent_id !=null )  
-                      @if($module->show_team == '1' && $module->module_type ='1' )
+                      @if($module->show_team == '1' && $module->module_type =='1' )
                        <li class="{{Request()->segment(1).'/'.Request()->segment(2) == $module->slug ? 'active' : '' }}">
                           <a 
                        
@@ -860,6 +860,12 @@
             <a class="nav-link" href="{{route('admin.upload')}}">
               <i class="fa fa-upload"></i>
               <span class="menu-title"> Uploads</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('message_sent')}}">
+              <i class="fa fa-upload"></i>
+              <span class="menu-title"> Message</span>
             </a>
           </li>
          @endpermission

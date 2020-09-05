@@ -14,23 +14,29 @@
 
              <div class="row">
                 <div class="col-sm-12 col-xs-12 col-md-5 col-lg-5 col-xl-5 mt-4">
-                    <img src="{{asset('images/dashboard/client.png')}}" class="w-100 h-100">
+                    <img src="{{asset('images/dashboard/image/client.png')}}" class="w-100 h-100" alt="Client Details">
                 </div>
                 <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 col-xl-7 mt-4">
                     <ul class="feature_ul ">
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}"> Add any number of clients easily</li>
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}"> Easily maintain Indiviual and Corporate Client</li>
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}"> Client related cases maintain</li>
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}"> Client related cases maintain</li>
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}"> Client related cases maintain</li>
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}" alt="left-arrow"> Add any number of clients easily</li>                        
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}" alt="left-arrow"> You can also manage client related cases</li> 
                     </ul>
                 </div>
             </div>
-            <p class="p-text mt-4">
-                 The data is moved onto your customer consumption form(s) and can be surveyed by you or an individual from your staff before the appointment. If there are questions or more information is needed, someone can call and collect it. It tends to be gathered when the potential customer lands for their discussion.
-            </p>
-
-
+            <div class="row">                
+                <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 col-xl-7 mt-4">
+                    <p class="p-text mt-4">
+                         The data is moved onto your customer consumption form(s) and can be surveyed by you or an individual from your staff before the appointment. If there are questions or more information is needed, someone can call and collect it. It tends to be gathered when the potential customer lands for their discussion.
+                    </p>
+                    <ul class="feature_ul ">
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}" alt="left-arrow">Easily client create</li>
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}" alt="left-arrow">Individual & Corporate Client Create</li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-xs-12 col-md-5 col-lg-5 col-xl-5 mt-4">
+                    <img src="{{asset('images/dashboard/image/client_add.png')}}" class="w-100 h-100" alt="Client Create Easily">
+                </div>
+            </div>
         </div>
         <div class="col-sm-12 col-lg-12 col-xs-12 mt-4 mb-5">
             <a href="{{route('features.case_management')}}" class="btn btn-md bg-info pull-left text-white"><i class="fa fa-angle-left"></i></a>

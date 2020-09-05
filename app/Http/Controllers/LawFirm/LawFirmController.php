@@ -84,6 +84,7 @@ class LawFirmController extends Controller
 		$moduleShow = $packageCheck['moduleShow'];
 		$beforeDate = $packageCheck['beforeDate'];
 
+		// return $pen_todos;
 		return view('lawfirm.dashboard.index',compact('user','cases','running_cases','closed_cases','order_cases','direction_cases','transferred_cases','appointments','unbookings','booked','cancelled','todos','pen_todos','com_todos','mis_todos','clos_todos','awt_todos','hearings','moduleShow'));
 
 

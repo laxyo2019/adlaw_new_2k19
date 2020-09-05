@@ -62,8 +62,11 @@ class UsersController extends Controller
 	        }
 
 
+
 	        $data['parent_id'] = Auth::user()->id;
-	        $data['user_package_id'] = Auth::user()->id;
+	        $data['user_package_id'] = Auth::user()->user_package_id;
+	        $data['package_start'] = Auth::user()->package_start;
+	        $data['package_end'] = Auth::user()->package_end;
 	        $data['parent_id'] = Auth::user()->id;
 
 		}
@@ -144,8 +147,10 @@ class UsersController extends Controller
     public function create_user($data,$oldEmail =null){
         $status = Status::all();
         $status_id = $status[2]->status_id;
+        $rand_no = rand(1111,9999);
 
-        $password  = str_limit($data['name'],3,'@845');
+        $password  = str_limit($data['name'],3,'@'.$rand_no);
+        
         $data['password'] = Hash::Make($password);
         $data['pwd'] = Crypt::encrypt($password);
         
@@ -160,7 +165,7 @@ class UsersController extends Controller
         
        	$user->remember_token = str_random(40);
         $user->save();
-        
+        $user->attachPermission('6');
         $user['password'] = $password;
         Mail::to($user->email)->send(new UserMail($user));
     }

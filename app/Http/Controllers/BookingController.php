@@ -94,9 +94,20 @@ class BookingController extends Controller
     						->where('client_status',0)
     						->where('user_status',0)
     						->get();
-    	 // return $booked;
+
+      $cancelled = Booking::
+                select('bookings.*','users.name','users.mobile','users.city_code','users.state_code','users.country_code','state_mast.state_name','city_mast.city_name')
+                ->join('users','users.id','=','bookings.client_id')
+                ->join('state_mast','state_mast.state_code','users.state_code')
+                ->join('city_mast','city_mast.city_code','users.city_code')
+                ->where('user_id',Auth::user()->id)
+                ->where('client_status',0)
+                ->where('user_status',0)
+                ->get();
+    	 // return $unbookings;
+      $apply_bookings = Booking::select('bookings.*','users.name','slots.slot')->join('users','users.id','bookings.user_id')->join('slots','slots.id','bookings.plan_id')->where('client_id',Auth::user()->id)->get();
     	$slots = Slots::all();
-    	return view('booking.show',compact('unbookings','slots','booked', 'cancelled'));
+    	return view('booking.show',compact('unbookings','slots','booked', 'cancelled','apply_bookings'));
     } 
     public function bookingUpdate($id){
 
@@ -119,7 +130,7 @@ class BookingController extends Controller
     }
     public function bookingCancelled($id){
       $booking = Booking::find($id);
-      Bookings::where('id',$id)->update(['user_status'=>0,'client_status'=>0]);
+      Booking::where('id',$id)->update(['user_status'=>0,'client_status'=>0]);
       return redirect()->back()->with('success','Appointment cancelled successfully');
     }
 

@@ -43,6 +43,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+  {{-- <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script> --}}
+  <script src="https://cdn.jsdelivr.net/sweetalert2/4.2.4/sweetalert2.min.js"></script>
   <script src="{{asset('js/jquery.star-rating-svg.js')}}"></script>
   <script src="{{asset('js/all_category.js')}}"></script>
   <script>
@@ -60,6 +62,13 @@ $(window).on("scroll", function() {
   }
 });
   </script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-48209472-2');
+</script>
   {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
   </main>
 </body>

@@ -9,21 +9,21 @@
         <div class="col-sm-12 col-lg-12 col-xs-12 feature-p-text">
         	{{-- <h4 class="text-uppercase font-weight-bold">CASE MANAGEMENT</h4> --}}
         	<p class="p-text">
-        		Agenda Management allows the lawyers/law firms to assign priorities, build momentum, collaborate without confusions and ensure that action steps are taken on time, every time. They are also essential to manage work overload effectively, helping you and your team members stay focused and organized. Beyond the cases, agenda help in strengthening the efficiency of day-to-day firm operations while also positively influencing individual productivity. They play an important role in enabling lawyers and law firms to produce the results they seek. 
+        		Adlaw provides you a platform in which attorney and user can chat 24x7 regarding their cases. They can also share case related files to each other. By creating group attorney can add case related team members and chat with together. 
 
         	</p>
 
              <div class="row">
                 <div class="col-sm-12 col-xs-12 col-md-5 col-lg-5 col-xl-5 mt-4">
-                    <img src="{{asset('images/dashboard/agenda.png')}}" class="w-100 h-100">
+                    <img src="{{asset('images/dashboard/image/chat.png')}}" class="w-100 h-100">
                 </div>
 
                 <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 col-xl-7 mt-4">
-                In this feature you can Create any number of agendas, Link tasks to cases, Set calendar deadlines, Assign tasks to team members, View pending, upcoming and completed tasks, Set email and/or SMS reminders to your own frequencies for the exact alerts you want and Edit or delete tasks as needed.
+                    You'll be able to start taking advantage of all that Adlaw has to offer with guided account setup and training for everyone at your firm.
                     <ul class="feature_ul mt-4">
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">Manage your Agenda</li> 
-                         <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">Crearte any number of agenda</li> 
-                         <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">Agenda used for as attendance purpose.</li> 
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">Push Notification</li> 
+                         <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">Message Encryption</li> 
+                         <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">Attach document and sent.</li> 
 
                     </ul>
 
@@ -31,15 +31,15 @@
             </div>
             <div class="row">                
                 <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 col-xl-7 mt-4">
-                     In this feature you can submit your agenda. you can also show your today agenda and overall agendas
+                     With the help of messenger anybody like other users can contact to attorney as a message chat by sending or receiving messages. Messages are automatically date and time stamped. Get notification if a message can be received. For security reasons, users should log out once they're finished as the computer they're using might be used by other people who, if they forgot to log out, would be able to gain access to their email. Messages can be sent 24 hours a day, 365 days a year. 
                     <ul class="feature_ul mt-4">
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">You can also confirmed appointment</li> 
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">You can see unconfirmed appointment</li> 
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">You can also cancelled appointment</li> 
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">Click 'New' or 'Compose'.</li> 
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">Click 'Send' to send the email.</li> 
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">Write the message in the space below the Subject field.</li> 
                     </ul>
                 </div>
                 <div class="col-sm-12 col-xs-12 col-md-5 col-lg-5 col-xl-5 mt-4">
-                    <img src="{{asset('images/dashboard/agenda1.png')}}" class="w-100 h-100">
+                    <img src="{{asset('images/dashboard/image/messagebox.png')}}" class="w-100 h-100">
                 </div>
             </div>
             <p class="p-text mt-4">

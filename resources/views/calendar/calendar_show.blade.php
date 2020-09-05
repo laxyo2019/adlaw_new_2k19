@@ -66,7 +66,7 @@
 			{	
 				id: '{{$todo->id}}',
 				title: '{{$todo->title}}',
-				description: 'Creator : {{$todo->created_user->name}} <br> Assignee: {{$todo->assigned_user->name}} <br>Status: {{$todo->status == 'P' ? 'Pending' : ''}} <br> Start Date: {{date('d-m-Y', strtotime($todo->start_date))}} <br> End Date: {{date('d-m-Y', strtotime($todo->end_date))}}',
+				description: 'Creator : {{$todo->created_user !=null ? $todo->created_user->name : ''}} <br> Assignee:  {{$todo->assigned_user !=null ? $todo->assigned_user->name : ''}} <br>Status: {{$todo->status == 'P' ? 'Pending' : ''}} <br> Start Date: {{date('d-m-Y', strtotime($todo->start_date))}} <br> End Date: {{date('d-m-Y', strtotime($todo->end_date))}}',
 				color: '{{$todo->user_id1 == Auth::user()->id ? '#3c8dbc': '#157b7f'}}',
 				url : '{{route('todos.show',$todo->id.'_')}}',
 				start: '{{$todo->start_date}}',

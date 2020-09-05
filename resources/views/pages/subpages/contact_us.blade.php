@@ -59,7 +59,7 @@
                         </div>
                         <div class="col-md-6">
                               <label for="mobile" class="font-weight-bold">Your Mobile Number <span class="text-danger">*</span></label>
-                              <input type="text" id="mobile" name="mobile_no" class="form-control" placeholder="Enter mobile number" value="{{old('mobile_no')}}">
+                              <input type="text" id="mobile" name="mobile_no" class="form-control" placeholder="Enter mobile number" value="{{old('mobile_no')}}" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" value="{{old('mobile')}}">
                               @error('mobile_no')
                                 <span class="invalid-feedback d-block" role="alert">
                                   <strong>{{ $message }}</strong>

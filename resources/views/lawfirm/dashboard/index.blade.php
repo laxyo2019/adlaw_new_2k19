@@ -171,126 +171,89 @@
       </div> --}}
     </div>
 @endif
-      <div class="row">
-        <div class="col-md-6" >
-            <div class="box box-primary " style="height: 300px;">
-            <div class="box-header">
-              <i class="fa fa-list"></i>
-              <h3 class="box-title">Pending To-Dos</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body" >
-              <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-              <ul class="todo-list" style="height: 200px;">
-                @foreach($pen_todos as $todo)
-                <li>
-                  <span><b><span>Start Date: &nbsp;{{date('M d, Y' , strtotime($todo->start_date))}}</span>  <p class="pull-right">End Date: &nbsp; {{date('M d, Y' , strtotime($todo->end_date))}}</p></b></span>
-                  <br>
-                  <span style="margin-right: 10px;"><b>Creator:</b> {{$todo->created_user->name}} </span> 
-                  <span><b>Assignee:</b> {{$todo->assigned_user->name}}</span>
-                  <br> 
-                  <span><b>Title: </b></span>
-                  
-                  <span class="text-capitalize">{{ str_limit($todo->title, $limit = 40, $end = '...') }}</span>
-                
-                  <div class="tools">
-                    <a href="{{route('todos.show',$todo->id)}}"><i class="fa fa-eye text-primary fa-icon" ></i></a>
-                  @if($todo->user_id == Auth::user()->id)  <a href="{{route('todos.edit',$todo->id)}}"><i class="fa fa-edit text-success fa-icon" ></i></a>@endif
-                   {{--  <a href="{{route('todos.delete',$todo->id)}}"><i class="fa fa-trash-o fa-icon"></i></a> --}}
+<div class="row">
+  <div class="col-md-6" >
+    <div class="box box-primary " style="height: 300px;">
+    <div class="box-header">
+      <i class="fa fa-list"></i>
+      <h3 class="box-title">Pending To-Dos</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body" >
+      <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+      <ul class="todo-list" style="height: 200px;">
+        @foreach($pen_todos as $todo)
+        <li>
+          <span><b><span>Start Date: &nbsp;{{date('M d, Y' , strtotime($todo->start_date))}}</span>  <p class="pull-right">End Date: &nbsp; {{date('M d, Y' , strtotime($todo->end_date))}}</p></b></span>
+          <br>
+          <span style="margin-right: 10px;"><b>Creator:</b> {{$todo->created_user !=null ? $todo->created_user->name : ''}} </span> 
+          <span><b>Assignee:</b> {{$todo->assigned_user !=null ? $todo->assigned_user->name : ''}}</span>
+          <br> 
+          <span><b>Title: </b></span>
+          
+          <span class="text-capitalize">{{ str_limit($todo->title, $limit = 40, $end = '...') }}</span>
+        
+          <div class="tools">
+            <a href="{{route('todos.show',$todo->id)}}"><i class="fa fa-eye text-primary fa-icon" ></i></a>
+          @if($todo->user_id == Auth::user()->id)  <a href="{{route('todos.edit',$todo->id)}}"><i class="fa fa-edit text-success fa-icon" ></i></a>@endif
+           {{--  <a href="{{route('todos.delete',$todo->id)}}"><i class="fa fa-trash-o fa-icon"></i></a> --}}
 
-                  </div>
-                </li>
-                @endforeach
-               
-              </ul>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix no-border">
-            
-              <a href="{{ $moduleShow == true ? route('todos.index') : route('crm_dashboard.index')}}" class="btn btn-default pull-right">More info <i class="fa fa-arrow-circle-right"></i></a>
-                @if(Auth::user()->parent_id == null )
-                    <a href="{{ $moduleShow == true ? route('todos.create') : route('crm_dashboard.index')}}" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add Todo</a>
-                @endif
-               
-              </div>
           </div>
-        </div>
+        </li>
+        @endforeach
+       
+      </ul>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer clearfix no-border">
+    
+      <a href="{{ $moduleShow == true ? route('todos.index') : route('crm_dashboard.index')}}" class="btn btn-default pull-right">More info <i class="fa fa-arrow-circle-right"></i></a>
+        @if(Auth::user()->parent_id == null )
+            <a href="{{ $moduleShow == true ? route('todos.create') : route('crm_dashboard.index')}}" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add Todo</a>
+        @endif
+       
+      </div>
+  </div>
+</div>
+  <div class="col-md-6" >
+      <div class="box box-primary " style="height: 300px;">
+      <div class="box-header">
+        <i class="fa fa-list"></i>
+        <h3 class="box-title">Upcoming Hearing Dates</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+        <ul class="todo-list"  style="height: 200px;">
+          @foreach($hearings as $hearing)
+          <li>
+            <label>{{date('M d, Y', strtotime($hearing->hearing_date))}}</label>
+            <br>
+            <span>{{$hearing->case->case_title}}</span>
+        
+            <div class="tools">
+              <a href="{{ route('case_mast.show', $hearing->case_id.',case_diary') }}"><i class="fa fa-eye text-primary fa-icon"></i></a>
+             @if($hearing->user_id == Auth::user()->id)  <a href="{{route('case_hearing.edit', $hearing->case_tran_id.',case_diary')}}"><i class="fa fa-edit text-success fa-icon" ></i></a>@endif
+            </div>
+          </li>
+          @endforeach
+         
+        </ul>
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer clearfix no-border">
+        @if($moduleShow)
+        <a href="{{ $moduleShow == true ? route('upcomingHearings') : route('crm_dashboard.index')}}" class="btn btn-default pull-right">More info <i class="fa fa-arrow-circle-right"></i></a>
+       {{-- @if(Auth::user()->parent_id == null ) <a href="" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add Hearing</a>@endif --}}
+       @endif
+      </div>
+    </div>
+  </div>
+</div>
 
-        <div class="col-md-6" >
-            <div class="box box-primary " style="height: 300px;">
-            <div class="box-header">
-              <i class="fa fa-list"></i>
-              <h3 class="box-title">Upcoming Hearing Dates</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-              <ul class="todo-list"  style="height: 200px;">
-                @foreach($hearings as $hearing)
-                <li>
-                  <label>{{date('M d, Y', strtotime($hearing->hearing_date))}}</label>
-                  <br>
-                  <span>{{$hearing->case->case_title}}</span>
-              
-                  <div class="tools">
-                    <a href="{{ route('case_mast.show', $hearing->case_id.',case_diary') }}"><i class="fa fa-eye text-primary fa-icon"></i></a>
-                   @if($hearing->user_id == Auth::user()->id)  <a href="{{route('case_hearing.edit', $hearing->case_tran_id.',case_diary')}}"><i class="fa fa-edit text-success fa-icon" ></i></a>@endif
-                  </div>
-                </li>
-                @endforeach
-               
-              </ul>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix no-border">
-              @if($moduleShow)
-              <a href="{{ $moduleShow == true ? route('upcomingHearings') : route('crm_dashboard.index')}}" class="btn btn-default pull-right">More info <i class="fa fa-arrow-circle-right"></i></a>
-             {{-- @if(Auth::user()->parent_id == null ) <a href="" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add Hearing</a>@endif --}}
-             @endif
-            </div>
-          </div>
-        </div>
-      </div>
-   {{--    <div class="row">
-        <div class="col-md-12">
-          <div class="box box-primary" style="height: 300px;">
-            <div class="box-header">
-              <h3 class="box-title">Recent Activity</h3>
-            </div>
-            <div class="box-body" style="height: 200px;">
-                 
-              <ul class="todo-list">
-                <li>
-                  <label>September 17, 2019</label>
-                  <br>
-                  <span>Original Suit 1231 / 2019 - case</span>
-                 
-                  <!-- todo text -->
-                  <span class="text">Design a nice theme</span>
-                  <!-- Emphasis label -->
-                  <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
-                  <!-- General tools such as edit or delete-->
-                  <div class="tools">
-                    <i class="fa fa-edit"></i>
-                    <i class="fa fa-trash-o"></i>
-                  </div>
-                </li>
-               
-              </ul>
-            </div>
-            <div class="box-footer clearfix no-border">
-              <button type="button" class="btn btn-default pull-right">More info <i class="fa fa-arrow-circle-right"></i></button>
-               
-            </div>
-          </div>
-        </div>
-      </div>
-     {{-- @include('calendar.calendar_show') --}} 
-    <br>
+ <br>
         @include('calendar.calendar_show')
     </br>
-     </div>
-
 	</section>
 <script>
     $(document).ready(function(){

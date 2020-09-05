@@ -17,6 +17,8 @@ use App\Role;
 use Illuminate\Http\Request;
 use Crypt;
 use App\Models\Referral;
+use App\Notifications\Notifications;
+
 class RegisterController extends Controller
 {
     use RegistersUsers;
@@ -109,6 +111,19 @@ class RegisterController extends Controller
 
             Referral::where('referral_code',$data['referral_code'])->increment('summary_count','1');
             Mail::to($user->email)->send(new VerifyMail($user));
+
+
+            $admins = User::whereRoleIs('admin')->get();
+
+            $sendData = [
+                'id' =>'',
+                'title' => "New Registration",
+                'url'   => 'users',
+                'message'=> $user->name." is registered."
+            ];
+            foreach ($admins as $admin) {            
+                $admin->notify(new Notifications($sendData));
+            }
         }
 
     }

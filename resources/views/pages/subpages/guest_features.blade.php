@@ -1,4 +1,7 @@
 @extends("layouts.default")
+@section('title','Best Lawyers for Consulting | Top 10 Criminal Lawyers | Lawyers Association India')
+@section('description','Get best lawyers for consulting, whether you are finding criminal lawyers, family lawyers, corporate lawyers for free law advice, legal answer or any Law Association in India.')
+@section('keywords','lawyers association India, top 100 lawyers in India, top 10 criminal lawyers in India, top 50 lawyers in India, best lawyers for consulting, free Legal advice, legal advice, consult with best lawyer, legal help, legal issues, law questions, law advice, ask a lawyer, legal question, law answers, free law advice, legal answers, law advisers, free legal help')
 @section('content')
 @include('layouts.hero_section')
 <div class="container container-div">

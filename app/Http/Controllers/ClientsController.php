@@ -209,8 +209,11 @@ class ClientsController extends Controller
 
     }
      public function create_account($data,$oldEmail = null){
+        $rand_no = rand(1111,9999);
 
-        $password = str_limit($data['cust_name'],3,'@845');
+
+        $password = str_limit($data['cust_name'],3,'@'.$rand_no);
+        
         $clientData = [
             'name' => $data['cust_name'],
             'email' => $data['email'],

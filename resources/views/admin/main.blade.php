@@ -296,6 +296,12 @@
               <span class="menu-title"> Uploads</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('admin.upload')}}">
+              <i class="fa fa-upload"></i>
+              <span class="menu-title"> Message</span>
+            </a>
+          </li>
          @endpermission
         @permission('acl_manage')
          <li class="treeview {{Request()->segment(1) == 'acl' ? 'active' : ''}}">

@@ -34,6 +34,10 @@ Route::get('/verified_account','HomeController@verified_account')->name('verifie
 
 // Route::view('/connect', 'connect')->name('connect');
 Route::get('/connect', 'HomeController@connectLogin')->name('connect');
+
+Route::get('/message_sent', 'HomeController@message_sent')->name('message_sent');
+Route::post('/message_sent_store', 'HomeController@message_sent_store')->name('message_sent_store');
+
 Route::get('/connectcj', 'HomeController@connectcj')->name('connectcj');
 
 
@@ -87,9 +91,9 @@ Route::view('/faqs','pages.subpages.faqs')->name('faqs');
 Route::view('/contact_support', 'package.contact_support')->name('contact_support');
 
 
+Route::view('/features/law-firms','pages.subpages.lawfirms_features')->name('lawfirms');
 Route::group(['prefix' => 'features/lawfirms'] ,function(){
 
-	Route::view('/','pages.subpages.lawfirms_features')->name('lawfirms');
 	Route::view('/case-management','pages.features.subpages.lawfirms.case_management')->name('features.case_management');
 	Route::view('/client-management','pages.features.subpages.lawfirms.client_management')->name('features.client_management');
 	Route::view('/calendar-management','pages.features.subpages.lawfirms.calendar_management')->name('features.calendar_management');
@@ -106,9 +110,9 @@ Route::group(['prefix' => 'features/lawfirms'] ,function(){
 });	
 
 
+Route::get('/features/law-schools','Search\SearchController@lawSchools')->name('lawschools');
 Route::group(['prefix' => 'features/lawschools'] ,function(){	
 
-	Route::get('/','Search\SearchController@lawSchools')->name('lawschools');
 	Route::get('/search','Search\SearchController@lawschoolsSearch')->name('lawschools.search');
 	Route::get('/profile/{id}', 'Search\SearchController@lawschoolsprofileShow')->name('lawschoolsprofile.show');
 

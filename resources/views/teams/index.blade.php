@@ -8,7 +8,7 @@
 			<div class="box-header with-border">
 				<h4>Manage Teams</h4>
 				<button class="btn btn-md btn-primary" id="teamBtn">Teams</button>
-				<button class="btn btn-md btn-default" id="membBtn">Users</button>
+				<button class="btn btn-md btn-default" id="membBtn">Members</button>
 			</div>	
 			<div class="box-body" id="mainDiv">
 				@include('teams.show')

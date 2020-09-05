@@ -15,15 +15,15 @@
 
              <div class="row">
                 <div class="col-sm-12 col-xs-12 col-md-5 col-lg-5 col-xl-5 mt-4 ">
-                    <img src="{{asset('images/dashboard/agenda.png')}}" class="w-100 h-100">
+                    <img src="{{asset('images/dashboard/image/agenda_add.png')}}" class="w-100 h-100" alt="DSR create">
                 </div>
 
                 <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 col-xl-7 mt-4">
                 In this feature you can Create any number of Daily Service Report, Link tasks to cases, Set calendar deadlines, Assign tasks to team members, View pending, upcoming and completed tasks, Set email and/or SMS reminders to your own frequencies for the exact alerts you want and Edit or delete tasks as needed.
                     <ul class="feature_ul mt-4">
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">Manage your Daily Service Report</li> 
-                         <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">Crearte any number of Daily Service Report</li> 
-                         <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">Daily Service Report used for as attendance purpose.</li> 
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}" alt="left-arrow">Manage your Daily Service Report</li> 
+                         <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}" alt="left-arrow">Crearte number of Daily Service Report</li> 
+                         <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}" alt="left-arrow">Daily Service Report used for as attendance purpose.</li> 
 
                     </ul>
 
@@ -33,13 +33,13 @@
                 <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 col-xl-7 mt-4">
                      In this feature you can submit your Daily Service Report. you can also show your today Daily Service Report and overall Daily Service Report
                     <ul class="feature_ul mt-4">
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">You can also confirmed appointment</li> 
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">You can see unconfirmed appointment</li> 
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">You can also cancelled appointment</li> 
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}" alt="left-arrow">You can create DSR time easily </li> 
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}" alt="left-arrow">Response can be filled before the time, after that you cannot reply.</li> 
+                      
                     </ul>
                 </div>
                 <div class="col-sm-12 col-xs-12 col-md-5 col-lg-5 col-xl-5 mt-4 ">
-                    <img src="{{asset('images/dashboard/agenda1.png')}}" class="w-100 h-100">
+                    <img src="{{asset('images/dashboard/image/agenda.png')}}" class="w-100 h-100" alt="DSR Response Show">
                 </div>
             </div>
             <p class="p-text mt-4">

@@ -14,14 +14,14 @@
 
              <div class="row">
                 <div class="col-sm-12 col-xs-12 col-md-5 col-lg-5 col-xl-5 mt-4">
-                    <img src="{{asset('images/dashboard/schedule.png')}}" class="w-100 h-100">
+                    <img src="{{asset('images/dashboard/image/schedule.png')}}" class="w-100 h-100" alt="Schedule Show">
                 </div>
 
                 <div class="col-sm-12 col-xs-12 col-md-7 col-lg-7 col-xl-7 mt-4">
                    You can see see all your upcoming appointments, your total revenue, your top staff and your top services. This makes it easier for you to analyze for which services appointments are booked the most on specific days and helps you hire more staff.
                     <ul class="feature_ul mt-4">
-                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">Manage your Scheduling Time</li> 
-                         <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}">Create your monthly, yearly, every day Scheduling</li> 
+                        <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}" alt="left-arrow">Manage your Scheduling Time</li> 
+                         <li><img class="mr-2" src="{{asset('images/dashboard/list-style-image.png')}}" alt="left-arrow">Create your monthly, yearly, every day Scheduling</li> 
                     </ul>
 
                 </div>

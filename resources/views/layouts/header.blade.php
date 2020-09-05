@@ -5,9 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-      <title>@yield('title','ADLAW')</title>
-  <meta name="description" content="@yield('description')">
-  <meta name="keywords" content="@yield('keywords')">
+    <meta name="yandex-verification" content="8f0c9478d0aaca4e" />
+    <meta name="google-site-verification" content="2iDNtR3LqBEDPUP45mwIXtE6a1XdOf7y9cz8TRGqxB0" />
+    <title>@yield('title','ADLAW')</title>
+    <meta name="description" content="@yield('description')">
+    <meta name="keywords" content="@yield('keywords')">
     <link rel = "icon" href ="{{asset('images/adlaw-logo.png')}}" type = "image/x-icon" style="line-height: 40px;">
 
 
@@ -27,17 +29,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     
-    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
-    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    {{-- <link rel="stylesheet" href="http://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"> --}}
+    
     <link href="https://cdn.jsdelivr.net/sweetalert2/4.2.4/sweetalert2.min.css" rel="stylesheet"/>
-    <script src="https://cdn.jsdelivr.net/sweetalert2/4.2.4/sweetalert2.min.js"></script>
+    
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-48209472-2"></script>
+
 </head>
 <style type="text/css">
-    .carousel-item {
+  .carousel-item {
   /*height: 100vh;*/
   min-height: 500px;
   background: no-repeat center center scroll;
@@ -52,7 +57,34 @@
 .ped-4{
     padding: 0.92rem !important;
 }
+.display-4{
+  font-family: "Segoe UI",Arial,sans-serif !important;
+  color : white !important;
+}
 
+.carousel-caption {
+  position: absolute;
+  right: 15%;
+  bottom: 20px;
+  left: 15%;
+  z-index: 10;
+  padding-top: 10px;
+  padding-bottom: 60px !important;
+  color: #fff;
+  text-align: center;
+}
+.carousel-caption h2 p{
+  margin-top: 2.0rem !important;
+}
+.img-photo{
+width: 33px; height: 29px;
+}
+#logout-form{
+ display: none;
+}
+.login-dropdown{
+left:-45px;
+}
 </style>
 
 <body>
