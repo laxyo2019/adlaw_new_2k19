@@ -10,6 +10,7 @@ use App\Models\Booking;
 use App\Models\Slots;
 use App\Notifications\BookingNotifications;
 use Illuminate\Notifications\Notification;
+use App\Notifications\Notifications;
 class BookingController extends Controller
 {
      public function book_an_appointment(Request $request){
@@ -128,9 +129,20 @@ class BookingController extends Controller
     	return redirect()->back()->with('success','Appointment accepted successfully');
 
     }
-    public function bookingCancelled($id){
-      $booking = Booking::find($id);
-      Booking::where('id',$id)->update(['user_status'=>0,'client_status'=>0]);
+    public function bookingCancelled(Request $request){
+      $booking = Booking::find($request->booking_id);
+      $booking->update(['user_status'=>0,'client_status'=>0,'reason' => $request->reason]);
+
+      $client_id =  User::find($booking->client_id);
+      $sendData = [
+          'id' => $booking->id,
+          'title' =>'Your booking appointment cancelled on date '.$booking->b_date,
+          'url' => 'booking',
+          'message' => 'Booking cancelled reason:- '.str_limit($request->reason,'10')
+        ];
+
+      $client_id->notify(new Notifications($sendData));
+
       return redirect()->back()->with('success','Appointment cancelled successfully');
     }
 

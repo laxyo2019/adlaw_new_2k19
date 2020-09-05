@@ -38,9 +38,7 @@
 								<th>Client Mobile Number</th>
 								<th>Appointment Time</th>
 								<th>Appointment Date</th>
-								<th>Accept</th>
-								<th>Cancelled</th>
-
+								<th>Action</th>								
 							</tr>
 						</thead>
 						<tbody>
@@ -58,9 +56,9 @@
 								<td>{{date('d-m-Y', strtotime($booking->b_date))}}</td>			
 								<td>
 									<a href="{{route('bookingUpdate',['id'=>$booking->id])}}" class="btn btn-sm btn-success" id="Accept">Accept</a>
-								</td>	
-								<td>
-									<a href="{{route('bookingCancelled',['id'=>$booking->id])}}" class="btn btn-sm btn-danger" id="Accept">Cancelled</a>
+				
+									<button class="btn btn-sm btn-danger" id="cancelBtn" data-id ="{{$booking->id}}"> Cancelled</button>
+								
 								</td>		
 							</tr>
 							@endforeach
@@ -139,6 +137,7 @@
 									<th>Lawyer Name</th>
 									<th>Booking Time</th>
 									<th>Booking Date</th>
+									<th>Reason</th>
 									<th>Booking Status</th>	
 								</tr>
 							</thead>
@@ -150,14 +149,16 @@
 									<td>{{$booking->name}}</td>
 									<td>{{date('h:i A',strtotime($booking->slot))}}</td>
 									<td>{{date('d-m-Y',strtotime($booking->b_date))}}</td>
+									<td>{{$booking->reason}}</td>
 									<td>
 									@if($booking->client_status==1 && $booking->user_status==0)
 										<p class="text-primary">{{'Pending'}}</p>
 									@elseif($booking->client_status==1 && $booking->user_status==1)
 										<p class="text-success">{{'Booked'}}</p>
 									@else
-										<p class="text-danger">{{'Cancelled'}}</p>
+										<p class="text-danger">{{'Cancelled'}} </p>
 									@endif
+
 									</td>
 								</tr>
 								@endforeach
@@ -166,6 +167,7 @@
 					</div>				
 				</div>			
 			</div>
+			@include('models.booking_cancel')
 		</div>
 	</div>
 </div>
@@ -226,6 +228,12 @@
 			$('#applyBtn').addClass('btn-info');
 			$('#cancelled').removeClass('btn-info');
 		});
+
+		$('#cancelBtn').on('click',function(e){
+			e.preventDefault();
+			$('#booking_id').val($(this).data('id'));
+			$('#cancelledAppointmentModal').modal('show');
+		})
 	});
 </script>
 @endsection

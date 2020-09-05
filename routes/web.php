@@ -261,7 +261,7 @@ Route::group(['middleware' => ['role:lawyer|lawcompany']], function() {
 	Route::get('/fileDownload', 'CaseManagement\CaseDocController@fileDownload')->name('fileDownload');
 	Route::resource('/booking','BookingController');
 	Route::get('/bookingUpdate/{id}','BookingController@bookingUpdate')->name('bookingUpdate');
-	Route::get('/bookingCancelled/{id}','BookingController@bookingCancelled')->name('bookingCancelled');
+	Route::post('/bookingCancelled','BookingController@bookingCancelled')->name('bookingCancelled');
 
 	
 });
