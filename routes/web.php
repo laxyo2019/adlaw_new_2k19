@@ -33,7 +33,7 @@ Route::get('/verified_account','HomeController@verified_account')->name('verifie
 
 
 // Route::view('/connect', 'connect')->name('connect');
-Route::get('/connect', 'HomeController@connectLogin')->name('connect');
+Route::get('/connect', 'Admin\AdminController@connectLogin')->name('connect');
 
 Route::get('/message_sent', 'HomeController@message_sent')->name('message_sent');
 Route::post('/message_sent_store', 'HomeController@message_sent_store')->name('message_sent_store');
@@ -431,6 +431,8 @@ Route::group(['middleware' => ['role:lawyer|lawcompany|lawcollege|admin|guest|te
 		Route::post('/user_role_assign', 'Teams\UsersController@user_role_assign')->name('user_role_assign');
 
 		Route::get('/assign_permission/{id}', 'Teams\UsersController@assign_permission')->name('assign_permission');
+
+		Route::post('/filterUser', 'Teams\UsersController@filterUser')->name('filterUser');
 
 		Route::post('/user_permission_assign', 'Teams\UsersController@user_permission_assign')->name('user_permission_assign');
 

@@ -184,19 +184,24 @@ class HomeController extends Search\SearchController
 
   public function message_sent_store(Request $request){
 
-    $users =  User::where('user_catg_id','2')->where('state_code','21')->whereNotNull('mobile')->where('message_sent','0')->take('500')->get();
+    $users =  User::where('user_catg_id','2')->where('state_code','21')->whereNotNull('mobile')->where('message_sent','1')->get();
 
-    // return $users;
-      foreach ($users as $key => $value) {
-        $sendData = [
-            'message' => $request->message,
-            'mobile' => $value->mobile 
-        ]; 
+    // // return $users;
+    //   foreach ($users as $key => $value) {
+    //     $sendData = [
+    //         'message' => $request->message,
+    //         'mobile' => $value->mobile 
+    //     ]; 
 
-        SendCode1::sendCode($sendData);  
-        User::find($value->id)->update(['message_sent' => '1']);
+    //     SendCode1::sendCode($sendData);  
+    //     User::find($value->id)->update(['message_sent' => '1']);
           
-      }
+    //   }
+       $sendData = [
+            'message' => $request->message,
+            'mobile' => '8815218315' 
+        ]; 
+       SendCode1::sendCode($sendData);     
 
   // die;
 

@@ -9,7 +9,7 @@
 			<td class="col-md-6 col-xm-12 col-sm-12 " style="padding: 20px;">
 				<div class="row mt-4 profile-div" >
 					<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5  pb-2" id="user_img">
-					 @if($lawyer->photo !='')<img src="  {{asset('storage/profile_photo/'.$lawyer->photo)}}" class="w-100 h-80" />
+					 @if($lawyer->photo !='')<img src="  {{asset('storage/profile_photo/'.$lawyer->photo)}}" class="w-100 h-80" style="height: 200px;" />
 					   	@else
 					   	<img src="{{asset('storage/profile_photo/default.png')}}"  class="w-100 h-100" />
 					   	@endif

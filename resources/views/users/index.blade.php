@@ -9,7 +9,12 @@
 					<div class="box-header">
 						<h3 class="">Users <a href="{{route('users.create')}}" class="btn btn-sm btn-primary pull-right">Add User</a></h3>
 
+
 						<div class="row">
+							<div class="col-md-4 mt-4 form-group">
+								<label>Name</label>
+								<input type="text" name="name" class="form-control">
+							</div>
 							<div class="col-md-4 mt-4 form-group">
 								<label>User Category</label>
 								<select class="form-control">
@@ -32,7 +37,7 @@
 							</div>
 							<div class="col-md-1 mt-4 form-group">
 								<label></label>
-								<button class="btn btn-sm btn-info form-control mt-2">Filter</button>
+								<button class="btn btn-sm btn-info form-control mt-2" id="filterBtn">Filter</button>
 							</div>
 						</div>
 					</div>
@@ -83,6 +88,22 @@
 			}
 		});
 
+
+
+		$(document).on('click','#filterBtn',function(e){
+			e.preventDefault();
+			var name = $('input[name="name"]').val();	
+			
+			$.ajax({
+				type:'POST',
+				url:'{{route('filterUser')}}',
+				data:{name:name},
+				success:function(res){
+					$('#tablebody').empty().html(res);
+					
+				}
+			});
+		})
 
 		$(function () {
 			$('.datepicker').datepicker({ 
@@ -304,5 +325,7 @@
 		}
 
     });
+	
+
 </script>
 @endsection

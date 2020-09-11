@@ -180,35 +180,35 @@
 			type:'get',
 			url : "{{route('admin.user_data_fetch')}}",
 			success:function(res){
-				$('.user_total').empty().html(res.user_total);
-				$('.user_subscription').empty().html(res.user_subscription);
-				$('.user_unsubscription').empty().html(res.user_unsubscription);
-				$('.user_delete').empty().html(res.user_delete);
-				$('.user_renewal').empty().html(res.user_renewal);
+		// 		$('.user_total').empty().html(res.user_total);
+		// 		$('.user_subscription').empty().html(res.user_subscription);
+		// 		$('.user_unsubscription').empty().html(res.user_unsubscription);
+		// 		$('.user_delete').empty().html(res.user_delete);
+		// 		$('.user_renewal').empty().html(res.user_renewal);
 				
 				$('.lawyer_total').empty().html(res.lawyer_total);
-				$('.lawyer_registered').empty().html(res.lawyer_registered);
-				$('.lawyer_import').empty().html(res.lawyer_import);
-				$('.lawyer_import_reg').empty().html(res.lawyer_import_reg);
-				$('.lawyer_subscirption').empty().html(res.lawyer_subscirption);
-				$('.lawyer_unsubscirption').empty().html(res.lawyer_unsubscirption);
-				$('.lawyer_renewal').empty().html(res.lawyer_renewal);
+				// $('.lawyer_registered').empty().html(res.lawyer_registered);
+				// $('.lawyer_import').empty().html(res.lawyer_import);
+				// $('.lawyer_import_reg').empty().html(res.lawyer_import_reg);
+				// $('.lawyer_subscirption').empty().html(res.lawyer_subscirption);
+				// $('.lawyer_unsubscirption').empty().html(res.lawyer_unsubscirption);
+				// $('.lawyer_renewal').empty().html(res.lawyer_renewal);
 
-				$('.lawfirm_total').empty().html(res.lawfirm_total);
-				$('.lawfirm_registered').empty().html(res.lawfirm_registered);
-				$('.lawfirm_import').empty().html(res.lawfirm_import);
-				$('.lawfirm_import_reg').empty().html(res.lawfirm_import_reg);
-				$('.lawfirm_subscirption').empty().html(res.lawfirm_subscirption);
-				$('.lawfirm_unsubscirption').empty().html(res.lawfirm_unsubscirption);
-				$('.lawfirm_renewal').empty().html(res.lawfirm_renewal);	
+		// 		$('.lawfirm_total').empty().html(res.lawfirm_total);
+		// 		$('.lawfirm_registered').empty().html(res.lawfirm_registered);
+		// 		$('.lawfirm_import').empty().html(res.lawfirm_import);
+		// 		$('.lawfirm_import_reg').empty().html(res.lawfirm_import_reg);
+		// 		$('.lawfirm_subscirption').empty().html(res.lawfirm_subscirption);
+		// 		$('.lawfirm_unsubscirption').empty().html(res.lawfirm_unsubscirption);
+		// 		$('.lawfirm_renewal').empty().html(res.lawfirm_renewal);	
 				
-				$('.lawschools_total').empty().html(res.lawfirm_total);
-				$('.lawschools_registered').empty().html(res.lawschools_registered);
-				$('.lawschools_import').empty().html(res.lawschools_import);
-				$('.lawschools_import_reg').empty().html(res.lawschools_import_reg);
-				$('.lawschools_subscirption').empty().html(res.lawschools_subscirption);
-				$('.lawschools_unsubscirption').empty().html(res.lawschools_unsubscirption);
-				$('.lawschools_renewal').empty().html(res.lawschools_renewal);	
+		// 		$('.lawschools_total').empty().html(res.lawfirm_total);
+		// 		$('.lawschools_registered').empty().html(res.lawschools_registered);
+		// 		$('.lawschools_import').empty().html(res.lawschools_import);
+		// 		$('.lawschools_import_reg').empty().html(res.lawschools_import_reg);
+		// 		$('.lawschools_subscirption').empty().html(res.lawschools_subscirption);
+		// 		$('.lawschools_unsubscirption').empty().html(res.lawschools_unsubscirption);
+		// 		$('.lawschools_renewal').empty().html(res.lawschools_renewal);	
 
 			}
 		})

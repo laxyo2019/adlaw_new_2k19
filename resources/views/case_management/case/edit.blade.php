@@ -488,7 +488,9 @@ $(document).ready(function(){
 
 	var auth_id = "{{Auth::user()->id}}";
 	var auth_name = "{{Auth::user()->name}}";	
+	var team_id = "{{old('team_id') !='' ? old('team_id') : '0'}}";
 
+	team_users(team_id,auth_id,auth_name);	
 	$('#team').on('change',function(e){
 		var team_id = $(this).val();
 		team_users(team_id,auth_id,auth_name);	

@@ -222,4 +222,9 @@ class UsersController extends Controller
 
 		return view('users.old_package_table');
 	}
+
+	public function filterUser(Request $request){
+		$users = User::with(['state','city','country','role'])->whereNull('parent_id')->where('name','LIKE','%'.$request->name.'%')->paginate(10);
+		return view('users.table',compact('users'));
+	}
 }

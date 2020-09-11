@@ -12,7 +12,7 @@
         <div class="carousel-caption d-none d-md-block">
           <form  action="{{route('guest')}}" method="get">
             @csrf
-            <input type="text" class="p-2" name="search" style="width: 80%;border-radius: 10px;" placeholder="Search a lawyer">
+            <input type="text" class="p-2" name="search" style="width: 80%;border-radius: 10px;" placeholder="Search a lawyer" autocomplete="off">
               <button class="btn btn-md btn-primary p-2" style="border-radius: 10px;">Search</button>
           </form>
           <h2 class="display-4 mt-2">Lawyer / Law Firms</h2>
@@ -25,7 +25,7 @@
         <div class="carousel-caption d-none d-md-block">
           <form  action="{{route('guest')}}" method="get">
             @csrf
-            <input type="text" class="p-2" name="search" style="width: 80%;border-radius: 10px;" placeholder="Search a lawyer">
+            <input type="text" class="p-2" name="search" style="width: 80%;border-radius: 10px;" placeholder="Search a lawyer" autocomplete="off">
               <button class="btn btn-md btn-primary p-2" style="border-radius: 10px;">Search</button>
           </form>
           <h2 class="display-4">Company / Other Law Users</h2>
@@ -37,7 +37,7 @@
         <div class="carousel-caption d-none d-md-block">
           <form  action="{{route('guest')}}" method="get">
             @csrf
-            <input type="text" class="p-2" name="search" style="width: 80%;border-radius: 10px;" placeholder="Search a lawyer">
+            <input type="text" class="p-2" name="search" style="width: 80%;border-radius: 10px;" placeholder="Search a lawyer" autocomplete="off">
               <button class="btn btn-md btn-primary p-2" style="border-radius: 10px;">Search</button>
           </form>
           <h2 class="display-4">Law Schools / Students</h2>
@@ -56,3 +56,13 @@
         </a>
   </div>
 </header>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('input[name="search"]').on('keyup',function(e){
+      e.preventDefault();
+      $('input[name="search"]').val($(this).val());
+    });
+
+  })
+</script>

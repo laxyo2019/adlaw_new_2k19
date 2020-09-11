@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Auth\Events\Registered;
 use App\Mail\VerifyMail;
 use App\SendCode;
+use App\Models\Package;
 use DB;
 use Mail;
 use App\Role;
@@ -18,6 +19,8 @@ use Illuminate\Http\Request;
 use Crypt;
 use App\Models\Referral;
 use App\Notifications\Notifications;
+use App\Models\UserPackage;
+use App\Helpers\Helpers;
 
 class RegisterController extends Controller
 {
@@ -108,6 +111,26 @@ class RegisterController extends Controller
             $user->otp = SendCode::sendCode($user->mobile);
             $user->remember_token = str_random(40);
             $user->save();
+             $package = Package::find('4');
+            if($user->user_catg_id == '2' || $user->user_catg_id == '3'){
+                
+                $userPackageData = [
+                    'user_id' => $user->id,
+                    'package_id' => '4',
+                    'discount_perc' => null,
+                    'dicount_amount' => null,
+                    'net_amount' => '0',
+                    'reference_by' => null,
+                    'package_start' => date('Y-m-d'),
+                    'package_end' => Helpers::package_end_date($package),
+                    'payment_mode' => 'Payumoney',
+                    'txnid' => 'free',
+                ];
+
+                $user_package = UserPackage::create($userPackageData);  
+                $user->attachPermission('6');
+
+            }
 
             Referral::where('referral_code',$data['referral_code'])->increment('summary_count','1');
             Mail::to($user->email)->send(new VerifyMail($user));
@@ -124,6 +147,8 @@ class RegisterController extends Controller
             foreach ($admins as $admin) {            
                 $admin->notify(new Notifications($sendData));
             }
+
+
         }
 
     }
