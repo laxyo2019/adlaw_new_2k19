@@ -10,9 +10,11 @@
       <div class="carousel-item active" style="background-image: url('images/banner3.png') ;">
        
         <div class="carousel-caption d-none d-md-block">
-          <form  action="{{route('guest')}}" method="get">
+          <form  action="{{route('search')}}" method="get">
             @csrf
-            <input type="text" class="p-2" name="search" style="width: 80%;border-radius: 10px;" placeholder="Search a lawyer" autocomplete="off">
+
+            <input type="text" class="p-2" name="user_name" style="width: 80%;border-radius: 10px;" placeholder="Search a lawyer">
+
               <button class="btn btn-md btn-primary p-2" style="border-radius: 10px;">Search</button>
           </form>
           <h2 class="display-4 mt-2">Lawyer / Law Firms</h2>
@@ -23,9 +25,11 @@
       <div class="carousel-item" style="background-image: url('images/banner8.jpg'); ">
 
         <div class="carousel-caption d-none d-md-block">
-          <form  action="{{route('guest')}}" method="get">
+          <form  action="{{route('search')}}" method="get">
             @csrf
-            <input type="text" class="p-2" name="search" style="width: 80%;border-radius: 10px;" placeholder="Search a lawyer" autocomplete="off">
+
+            <input type="text" class="p-2" name="user_name" style="width: 80%;border-radius: 10px;" placeholder="Search a lawyer">
+
               <button class="btn btn-md btn-primary p-2" style="border-radius: 10px;">Search</button>
           </form>
           <h2 class="display-4">Company / Other Law Users</h2>
@@ -35,9 +39,11 @@
       <!-- Slide Three - Set the background image for this slide in the line below -->
       <div class="carousel-item" style="background-image: url('images/1_law3.jpg')">
         <div class="carousel-caption d-none d-md-block">
-          <form  action="{{route('guest')}}" method="get">
+          <form  action="{{route('search')}}" method="get">
             @csrf
-            <input type="text" class="p-2" name="search" style="width: 80%;border-radius: 10px;" placeholder="Search a lawyer" autocomplete="off">
+
+            <input type="text" class="p-2" name="user_name" style="width: 80%;border-radius: 10px;" placeholder="Search a lawyer">
+
               <button class="btn btn-md btn-primary p-2" style="border-radius: 10px;">Search</button>
           </form>
           <h2 class="display-4">Law Schools / Students</h2>

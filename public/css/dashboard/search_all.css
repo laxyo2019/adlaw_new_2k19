@@ -78,7 +78,7 @@ font-size: 13px;
 
 .hideContent {
 	overflow-y: scroll;
-    height: 15em;
+    height: 18em;
 }
 
 @media screen and (max-width: 360px) {

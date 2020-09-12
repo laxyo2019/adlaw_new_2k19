@@ -9,9 +9,11 @@
 			<td class="col-md-6 col-xm-12 col-sm-12 " style="padding: 20px;">
 				<div class="row mt-4 profile-div" >
 					<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5  pb-2" id="user_img">
-					 @if($lawyer->photo !='')<img src="  {{asset('storage/profile_photo/'.$lawyer->photo)}}" class="w-100 h-80" style="height: 200px;" />
+
+					 @if($lawyer->photo !='')<img src="  {{asset('storage/profile_photo/'.$lawyer->photo)}}" class="w-100 "  style="height:230px;" />
+
 					   	@else
-					   	<img src="{{asset('storage/profile_photo/default.png')}}"  class="w-100 h-100" />
+					   	<img src="{{asset('storage/profile_photo/default.png')}}"  class="w-100" style="height:230px;"  />
 					   	@endif
 					</div>
 					<div class="col-md-7 col-lg-7 col-xs-12 col-sm-12 ">
@@ -156,10 +158,35 @@
 					
 						<tr class="list-group list-group-horizontal center1" >
 							@foreach($days as $key => $value)
-							<td class="list-group-item  internal1 p-1" style="font-size: 12px"><a href="javascript:void(0)" class="btn btn-sm m-0 bookingBtn" style="background-color: #f3f3f3" id="{{$slot->id}}" >{{ date('h:i A', strtotime($slot->slot)) }}
+							@php 
+								$day = $key =='Mon' ? '1' : ($key =='Tue' ? '2' : ($key =='Wed' ? '3' :($key =='Thu' ? '4' : ($key =='Fri' ? '5' : ($key =='Sat' ? '6' : ($key =='Sun' ? '7' : '1' ))))))
+							@endphp
+							<td class="list-group-item  internal1 p-1" style="font-size: 12px">
+								@if(count($lawyer->slots) !='0')
+									
+									<a href="javascript:void(0)" class="btn btn-sm m-0 bookingBtn " 
+									@foreach($lawyer->slots as $slo)
+										@if($day == $slo->day && $slo->slot == $slot->slot)
+										 	style="background-color: #28a745;color:white" 
+											data-id='true'	
+										@endif
+									@endforeach 
+
+										 id="{{$slot->id}}" >{{ date('h:i A', strtotime($slot->slot)) }}
+								
+
+								@else
+									<a href="javascript:void(0)" class="btn btn-sm m-0 bookingBtn" style="background-color: #f3f3f3" id="{{$slot->id}}" data-id="true">{{ date('h:i A', strtotime($slot->slot)) }}
+
+									
+								@endif
+								
+
 								<input type="hidden" name="user_id" value="{{$lawyer->id}}">
+								<input type="hidden" name="slot_t" value="{{$slot->slot}}">
 								<input type="hidden" name="b_date" value="{{$value}}">
-							</a></td> 
+								</a>
+							</td> 
 							@endforeach
 						</tr>
 					

@@ -140,6 +140,7 @@ Route::group(['prefix' => 'features/guest'] ,function(){
 // Route::resource('/admin/users', 'Admin\UsersController');
 // Route::get('/admin/send-credentials/{id}','UsersController@sendCredentials');
 
+	Route::get('/search/{id?}/{id1?}','Search\SearchController@search')->name('search');
 
 /*End Pages View */
 
