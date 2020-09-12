@@ -1,24 +1,35 @@
 @extends("layouts.default")
-@section('title','Best Lawyers for Consulting | Top 10 Criminal Lawyers | Lawyers Association India')
-@section('description','Get best lawyers for consulting, whether you are finding criminal lawyers, family lawyers, corporate lawyers for free law advice, legal answer or any Law Association in India.')
-@section('keywords','lawyers association India, top 100 lawyers in India, top 10 criminal lawyers in India, top 50 lawyers in India, best lawyers for consulting, free Legal advice, legal advice, consult with best lawyer, legal help, legal issues, law questions, law advice, ask a lawyer, legal question, law answers, free law advice, legal answers, law advisers, free legal help')
+@section('title',$content['title'])
+@section('description',$content['description'])
+@section('keywords',$content['keywords'])
 @section('content')
 @include('layouts.hero_section')
 <div class="container container-div">
     <div class="row ">
-    	<div class="col-sm-12 col-md-12 col-xl-12 text-center mb-2 h2-text">
-            <h2 class="font-weight-bold text-center text-uppercase text-white">COMPANY / OTHER LAW USERS</h2>   
-            <p class="lead mb-0">Easily Search Lawyer and Law Firms!</p>       
+    	<div class="col-sm-12 col-md-12 col-xl-12 text-center mb-2 h2-text" >
+         <h2 class="font-weight-bold text-center text-uppercase text-white">COMPANY / OTHER LAW USERS</h2>   
+         <p class="lead mb-0">Easily Search Lawyer and Law Firms!</p>       
         </div>
-         <div class="col-md-12 col-sm-12 col-xl-12">
-        	<h3 class="font-weight-bold text-captialize mb-3">Consult Best Lawyer / Law Firms in India</h3>
-			<p class="p-text">
-			    Seeing the demand of various Legal problems we allow you to hire the professional experts having good experience in Civil Law, Corporate Law, Start-up Solutions, Criminal Law, Consumer Law, Family Law and much more in all over India.
-			<br><br>
-			We help you to consult with the well experienced team of lawyers, researchers & experts carry daily research on all latest current & new law, judgments & Court decisions and allows to hire the best lawyers in India for District Courts, High Court & Supreme Court matters. Our services includes to provide the best legal advisor for legal consultancy services, taxation services, corporate legal services, recovery solutions, financial legal services, bad debt recovery solutions, back office operation services, data entry service, documentation services, passport related services, fiscal documentation etc. 
-			<br><br>
+        <div class="col-md-12 col-sm-12 col-xl-12"  id="content_dynamic">
+        	
+        		<span class="halfText">
+        			@php 
+	        			echo substr($content['content'],0, strpos($content['content'],'</p>'));
+	        		@endphp
+	        	</span>
 
-			</p>
+	        	  </p>
+	        	  <span class="full-text" style="display: none">
+        			@php 
+	        			echo substr($content['content'],strpos($content['content'],'</p>'),strlen($content['content']));
+	        		@endphp
+	        	</span>
+	        	</p>
+	           
+	            <a href="javascript:void(0)" class="readmore"><b> >> Read More</b></a>
+	            <a href="javascript:void(0)" class="readless" style="display: none"><b> << Read Less</b></a>
+               	
+        	
 		{{-- 	<p class="p-text">
 				The following details provided by us have been gathered and prepared for Users' convenience, and remarkably for informative purposes; they are in no way legal advice. More precisely, nothing on the adlaw website should be interpreted as being a legal opinion, a recommendation on how to act, or an answer that applies directly to a specific circumstance. Adlaw is no way, directly or indirectly responsible for the advice and assistance provided by the Lawyers. 
 
@@ -33,13 +44,13 @@
 	</div>
 	<div class="row" id="search_field">
 		<div class="col-md-8 col-sm-8 col-xs-8 d-inline-flex radio-group m-auto" style=" padding:0;background-color: #efefef; "> 
-			<div class="col-md-6  text-center btn big {{ $searchfield=='lawyer' ? 'activebtn' : '' }} " id="lawyer">
+			<div class="col-md-6  text-center btn big {{ $searchfield == 'lawyer' ? 'activebtn' : 'bg-color' }} " id="lawyer">
 			Lawyer
-			<input id="chb1" type="radio" name="searchfield" style="visibility: hidden" value="lawyer" {{ $searchfield=='lawyer' ? 'checked' : ''}}   />
+			<input id="chb1" type="radio" name="searchfield" style="visibility: hidden" value="lawyer" {{ $searchfield=='lawyer' ? 'checked="checked"' : ''}}   />
 			</div>
-			<div class="col-md-6 text-center btn big {{ $searchfield == 'lawcompany' ? 'activebtn' : ''}} bg-color" id="lawcompany">
+			<div class="col-md-6 text-center btn big {{ $searchfield == 'lawcompany' ? 'activebtn' : 'bg-color'}} " id="lawcompany">
 			Law Company
-			<input id="chb2" type="radio" name="searchfield" style="visibility: hidden" value="lawcompany" {{ $searchfield == 'lawcompany' ? 'checked' : ''}} />
+			<input id="chb2" type="radio" name="searchfield" style="visibility: hidden" value="lawcompany" {{ $searchfield == 'lawcompany' ? 'checked="checked"' : ''}} />
 			</div>
 		</div>
 	</div>
@@ -52,10 +63,10 @@
 		<div class="col-md-4 col-xm-12 col-sm-12 text-right "  id="genderBox">
 			{{-- <p class="mb-1" style="font-size: 18px; font-weight: 550"></p> --}}
 			<br>
-			<label class="radio-inline mr-3"><input type="radio" name="gender" value="all" checked> Any</label>
-			<label class="radio-inline mr-3"><input type="radio" name="gender" value="m" > Male</label>
-			<label class="radio-inline mr-3"><input type="radio" name="gender" value="f"> Female</label>
-			<label class="radio-inline "><input type="radio" name="gender" value="t"> Other</label>
+			<label class="radio-inline mr-3"><input type="radio" name="gender" value="all" {{$gender == null ? "checked='checked'" : ''}}> Any</label>
+			<label class="radio-inline mr-3"><input type="radio" name="gender" value="m"  {{$gender == 'm' ? "checked='checked'" : ''}}> Male</label>
+			<label class="radio-inline mr-3"><input type="radio" name="gender" value="f" {{$gender == 'f' ? "checked='checked'" : ''}}> Female</label>
+			<label class="radio-inline "><input type="radio" name="gender" value="t" {{$gender == 't' ? "checked='checked'" : ''}}> Other</label>
 		</div>
 	</div>
 	<div class="row mb-4">
@@ -64,10 +75,10 @@
 		</div>
 		<div class="col-md-6 col-xm-12 col-sm-12" id="spect1" >
 			
-			<select class="form-control select2" id='specialist_lawyer' >
-			<option value="0">Select Specialization</option>
+			<select class="form-control select2 input-sm" id='specialist_lawyer' >
+			<option value="0" data-id="0">Select Specialization</option>
 				@foreach($specialities as $speciality)
-					<option value="{{ $speciality->catg_code }}">{{$speciality->catg_desc}}</option>
+					<option value="{{ $speciality->catg_code }}" data-id="{{$speciality->catg_desc}}" {{$catg_code == $speciality->catg_code ? 'selected="selected"' :'' }}>{{$speciality->catg_desc}}</option>
 				@endforeach
 			</select>
 		
@@ -78,20 +89,20 @@
 			<h5 class="font-weight-bold">Search By Practicing Courts</h5>
 		</div> --}}
 		<div class="col-md-3 col-xm-12 col-sm-12">
-			<select class="form-control select2" id="state" name="state_code">
+			<select class="form-control select2 input-sm" id="state" name="state_code">
 			<option value="0">Choose a state</option>
 				@foreach($states as $state)
-					<option value="{{ $state->state_code }}" >{{$state->state_name}}</option>
+					<option value="{{ $state->state_code }}" {{$state_code == $state->state_code ? 'selected="selected"' :'' }}>{{$state->state_name}}</option>
 				@endforeach
 			</select>
 		</div>
 		<div class="col-md-3 col-xm-12 col-sm-12">
-			<select class="form-control select2" id="city" name="city_code">
-				<option value="0">Select City</option>
+			<select class="form-control select2 input-sm" id="city" name="city_code">
+				<option value="0" data-id="0">Select City</option>
 			</select>
 		</div>	
 		<div class="col-md-3 col-xm-12 col-sm-1" id="court1">
-			<select class="form-control select2" id='court_id' >
+			<select class="form-control select2 input-sm" id='court_id' >
 			<option value="0">Select Practicing Courts</option>
 				
 			</select>
@@ -111,7 +122,7 @@
 		</div>
 	</div>	
 	<div class="row">
-		
+		{{-- @include('pages.subpages.search.lawfirms_table') --}}
 	</div>
 
 	<div class="row mt-2"  id="withoutsearchDiv">
@@ -172,12 +183,31 @@ function loginChecked($user_id){
 
 <script>	
 $(document).ready(function(){
+	 $('.readmore, .readless').on('click',function(e){
+       e.preventDefault();
+           
+       $('.full-text').toggle();
+       $('.readmore').toggle();
+       $('.readless').toggle();
+    });
+
+
 
 	$('.radio-inline').click(function() {
 
 		$(this).find('input').prop('checked', true) ;   
 	});
 	$('.select2').select2();
+
+	@if($searchfield == 'lawcompany')	
+     	$('#spect1').hide();
+        $('#genderBox').hide();      
+    @else
+    	$('#spect1').show();
+     	$('#genderBox').show();
+	@endif
+
+
 
 	$('.big').click(function() {
         $('.activebtn').addClass('bg-color').removeClass('activebtn');
@@ -197,23 +227,19 @@ $(document).ready(function(){
          }
          $('#tablediv').empty();
     });
+
+   @if($state_code !='0')
+		var court_id = '#court_id';
+		state("{{$state_code}}","{{$city_code}}");
+		state_city_court("{{$city_code}}","{{$state_code}}",court_id,"{{$court_code}}");
+   @endif
 	
 	$('#state').on('change',function(){
 		var state_code = $(this).val();	
 		var city_code = "";
-		state(state_code,city_code);
 	
+		state(state_code,city_code);
 	});
-
-	$('#city').on('change',function(){
-		var city_code = $(this).val();
-		var state_code = '';
-		var court_id = '#court_id';
-		state_city_court(city_code,state_code,court_id);
-	});
-
-
-
 
 	$(document).on('click','.right-button', function() {
 		event.preventDefault();
@@ -247,39 +273,56 @@ $(document).ready(function(){
 
 
 	$('body').on('click','.bookingBtn' ,function(){
-		var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
-		var today = new Date(); 
-		today.setDate(today.getDate() - 1);
+		
+		var today = new Date(); 		
 		var b_date = $(this).find("input[name='b_date']").val();
-		b_date = new Date(b_date);
-		if(today < new Date(b_date)){
-			if(AuthUser){
-				$client_id = "{{(Auth::user()) ? Auth::user()->id : null }}";
-				$slot_id = $(this).attr('id');
-				$slot_time = $(this).text();
-				$user_id = $(this).find("input[name='user_id']").val();
-				$b_date = $(this).find("input[name='b_date']").val();
-				 console.log($b_date);
-				$('#BtnViewModal .modal-body ').find("input[name='b_date']").val($b_date);
-				$('#BtnViewModal .modal-body ').find("input[name='plan_id']").val($slot_id);
-				$('#BtnViewModal .modal-body ').find("input[name='slot_time']").val($slot_time);
-				$('#BtnViewModal .modal-body ').find("input[name='user_id']").val($user_id);
-				$('#BtnViewModal .modal-body ').find("input[name='client_id']").val($client_id);
+		var slot_time = $(this).find("input[name='slot_t']").val();
+		var slot_id = $(this).attr('id');			
+		var user_id = $(this).find("input[name='user_id']").val();
 
-				$('#BtnViewModal').modal('show');
+		var appoint_status = $(this).data('id');			
+		console.log(appoint_status);
+
+		b_date = new Date(b_date);
+		var current_time = today.getHours() + ":" + (today.getMinutes() < 10 ? '0' : '' ) + today.getMinutes() + ":" + (today.getSeconds() < 10 ? '0' : '' ) + today.getSeconds();
+		if(appoint_status){	
+			if(today.getDate() == b_date.getDate()){
+				var b_date = $(this).find("input[name='b_date']").val();
+				if(current_time < slot_time){
+					booking(b_date,slot_id,user_id)
+				}else{
+					swal({
+						text : "You have not selected previous time booking.",
+						type : 'warning',
+						
+					});
+				}
+
+			}else{
+				var b_date = $(this).find("input[name='b_date']").val();
+				booking(b_date,slot_id,user_id)
 			}
-			else{
-				$('.login_modal').modal({"backdrop": "static"});
-			}
-		}
-		else{
+		}else{
 			swal({
-				text : "You have not selected previous date booking.",
+				text : "You have only booked Appointment schedule time.",
 				type : 'warning',
 				
 			});
 		}
+	
 	});
+	function booking(b_date,slot_id,user_id){
+		var AuthUser = "{{{ (Auth::user()) ? Auth::user() : null }}}";
+		if(AuthUser){		
+			$('#bookingDate').val(b_date);
+			$('#booking_plan_id').val(slot_id);			
+			$('#booking_user_id').val(user_id);
+			$('#BtnViewModal').modal('show');
+		}
+		else{
+			$('.login_modal').modal({"backdrop": "static"});
+		}
+	}
 
 	$('body').on('click','.bookBtn' ,function(){	
 		$user_id = $(this).attr('id');
@@ -302,30 +345,33 @@ $(document).ready(function(){
 $(".filteBtn").on('click',function(e){
 	
 	e.preventDefault();
-	var specialist =  $('#specialist_lawyer').val();
+	var specialist =  $('#specialist_lawyer option:selected').attr('data-id');
 	var state_code = $('#state').val();
-	var city_code = $('#city').val();
+	var city = $('#city option:selected').attr('data-id');
+	// var city_code = $('#city option:selected').attr('data-id');
 	var gender = $("input[name='gender']:checked").val();
 	var searchfield = $("input[name='searchfield']:checked").val();
 	var court_id = $('#court_id').val();
 	var user_name = $("input[name='user_name']").val();
-	// console.log(user_name);
+	console.log(specialist);
+	console.log(city);
 // alert(searchfield);
+	var url1 = '';
+	if(specialist !='0'){
+		if(city !='0'){
+			url1 = "{{url('search')}}/"+slug_name(specialist)+'/'+slug_name(city); 
+		}else{
+			url1 = "{{url('search')}}/"+slug_name(specialist); 
+		}
+	}else if(city !='0'){
+		url1 = "{{url('search')}}/"+slug_name(city); 
 
-	$.ajax({
-	    type:"get",
-	    url:"{{ route('lawfirms.search') }}?speciality="+specialist+'&state_code='+state_code+'&city_code='+city_code+'&gender='+gender+'&searchfield='+searchfield+'&court_id='+court_id+'&user_name='+user_name,
-		   // success:function(data){ 
-		   // 		$("#tablediv").empty().html(data);
-		   // }
-        }).done(function(data){
-        	
-            $("#tablediv").empty().html(data);
-            // console.log(data);
-          
-        }).fail(function(jqXHR, ajaxOptions, thrownError){
-            alert('No response from server');
-		});
+	}else{
+		url1 = "{{url('search')}}";
+	}
+	window.location.href = url1 + '?' + 'gender='+gender+'&searchfield='+searchfield+'&court_id='+court_id+'&user_name='+user_name;
+
+
 	
 });
 
@@ -363,6 +409,50 @@ function getData(page,specialist,state_code,city_code,gender,searchfield,court_i
           alert('No response from server');
     });
 }
+
+$(document).on('change','#specialist_lawyer',function(e){
+	e.preventDefault();
+	var city = $('#city option:selected').attr('data-id');
+	var catg = $('#specialist_lawyer option:selected').attr('data-id');	
+	if(catg !='0' ){
+		if(city !='0'){
+	      window.location.href = "{{url('search')}}/"+slug_name(catg)+'/'+slug_name(city); 
+		}else{
+	     	window.location.href = "{{url('search')}}/"+slug_name(catg); 
+		}
+	}
+
+});
+
+$(document).on('change','#city',function(e){
+	e.preventDefault();
+
+	var city = $('#city option:selected').attr('data-id');
+	var catg = $('#specialist_lawyer option:selected').attr('data-id');
+
+	  var searchfield = $('input[name="searchfield"]:checked').val();
+	  
+	if(searchfield != 'lawcompany'){	  
+		if(city !='0' ){
+			if(catg !='0'){
+
+		      window.location.href = "{{url('search')}}/"+slug_name(catg)+'/'+slug_name(city); 
+			}else{
+		     	window.location.href = "{{url('search')}}/"+slug_name(city); 
+			}
+		}
+	}else{
+		var city_code = $(this).val();
+		var state_code = '';
+		var court_id = '#court_id';
+		state_city_court(city_code,state_code,court_id);
+	}
+	
+
+});
+
+
+
 
 });
 </script>

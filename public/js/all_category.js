@@ -8,7 +8,7 @@ function state_city_court(city_code,state_code,court_id,court_type = ''){
 
 				$(court_id).append('<option value="0">Select Practicing Courts</option>');
 				$.each(res,function(key,value){
-					$(court_id).append('<option value="'+value.court_type+'" '+(court_type == value.court_type ? 'selected' : '')+'>'+value.court_type_desc+'</option>');
+					$(court_id).append('<option value="'+value.court_type+'" '+(court_type == value.court_type ? 'selected' : '')+' >'+value.court_type_desc+'</option>');
 				});
 			}
 			else{
@@ -110,18 +110,21 @@ function state(state_code,city_code){
            success:function(res){                     
             if(res){
                 $("#city").empty();
-                $("#city").append('<option value="0">Select City</option>');
+                $("#city").append('<option value="0" data-id="0">Select City</option>');
                 $.each(res,function(key,value){
-                    $("#city").append('<option value="'+value.city_code+'" '+(value.city_code == city_code ? 'selected="selected"' : '' )+'>'+value.city_name+'</option>');
+                    $("#city").append('<option value="'+value.city_code+'" data-id="'+value.city_name+'" '+(value.city_code == city_code ? 'selected="selected"' : '' )+'>'+value.city_name+'</option>');
                 });
            
             }else{
-               $("#city").empty();
+               $("#city").empty().append('<option value="0" data-id="0">Select City</option>');
+                $('#court_id').empty().append('<option value="0">Select Practicing Courts</option>');	
             }
            }
         });
     }else{
-        $("#city").empty();
+         $("#city").empty().append('<option value="0" data-id="0">Select City</option>');
+         $('#court_id').empty().append('<option value="0" >Select Practicing Courts</option>');	
+        
     }
 }
 
@@ -476,6 +479,15 @@ function unique_email_check(value){
 
 		}
 	});
+}
+function slug_name(name){
+	name = jQuery.trim(name.toLowerCase());
+	name =name.replace(/[^a-zA-Z0-9]+/g,'-');
+	if(name[name.length-1] === '-'){
+		name = name.slice(0,-1);
+	}
+
+	return name;
 }
 
 

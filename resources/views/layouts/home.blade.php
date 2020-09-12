@@ -37,7 +37,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="{{route('lawfirms')}}">LAWYERS/LAW FIRMS</a>
-                  <a class="dropdown-item" href="{{route('guest')}}">COMPANY/OTHER LAW USERS</a>
+                  <a class="dropdown-item" href="{{route('search')}}">COMPANY/OTHER LAW USERS</a>
                   <a class="dropdown-item" href="{{route('lawschools')}}">LAW SCHOOLS/STUDENTS</a>
                 </div>
               </li>
@@ -62,8 +62,8 @@
                 <a class="nav-link ped-4 " href="{{route('lawfirms')}}">LAWYERS/LAW FIRMS </a>
             </li>
 
-            <li class="nav-item {{Request()->segment(2) == 'guest' ? 'active_class' : '' }} ">
-                <a class="nav-link ped-4" href="{{route('guest')}}">COMPANY/OTHER LAW USERS</a>
+            <li class="nav-item {{Request()->segment(2) == 'search' ? 'active_class' : '' }} ">
+                <a class="nav-link ped-4" href="{{route('search')}}">COMPANY/OTHER LAW USERS</a>
             </li>
             <li class="nav-item {{Request()->segment(2) == 'lawschools' ? 'active_class' : '' }} ">
                 <a class="nav-link ped-4" href="{{route('lawschools')}}">LAW SCHOOLS/STUDENTS</a>

@@ -15,7 +15,7 @@
         </div>
 
         <div class="col-lg-4 border-right">
-          <a href="{{route('guest')}}" style="text-decoration: none">
+          <a href="{{route('search')}}" style="text-decoration: none">
           <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
             <div class="features-icons-icon d-flex">
               <i class="m-auto text-primary"> <img class="media-object" src="images/Guest1.png" alt="Image"> </i>

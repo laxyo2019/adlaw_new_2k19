@@ -7,7 +7,7 @@
           
         </div>
       <div class="modal-body">
-        <form action="{{route('book_an_appointment')}}" method="post" id="bookingForm">
+        <form action="{{route('book_an_appointment')}}" method="post" id="bookingForm" autocomplete="off">
           @csrf
         <div class="row form-group">
           <div class="col-md-12">
@@ -18,7 +18,7 @@
         <div class="row form-group">
           <div class="col-md-12">
             <label>Booking Time</label>
-            <select class="form-control" name="plan_id">
+            <select class="form-control" name="plan_id" id="booking_plan_id">
             
               @foreach($slots as $slot)
                 <option value="{{$slot->id}}">{{ date('h:i A', strtotime($slot->slot)) }}</option>
@@ -32,7 +32,7 @@
         <div class="row form-group">
           <div class="col-md-12">
           
-            <input type="hidden" name="user_id" value="">
+            <input type="hidden" name="user_id" value="" id="booking_user_id">
             <input type="hidden" name="client_id" value="{{(Auth::user()) ? Auth::user()->id : null }}">
              @if(Auth::user())                 
                 <button type="submit" class="btn btn-info">Submit</button>

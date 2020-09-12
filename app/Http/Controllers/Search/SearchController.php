@@ -10,6 +10,7 @@ use App\User;
 use App\Models\CatgMast;
 use App\Models\Court;
 use App\Models\State;
+use App\Models\City;
 use App\Models\CourtMast;
 use App\Models\CourtMastHeader;
 use App\Helpers\Helpers;
@@ -17,6 +18,7 @@ use App\Models\Slots;
 use App\Models\Specialization;
 use App\Models\Review;
 use App\Models\Status;
+use Carbon\Carbon;
 class SearchController extends Controller
 {
   public function __construct(){
@@ -89,11 +91,7 @@ class SearchController extends Controller
       }
    
 
-    $spe_details = Specialization::where('catg_code',$speciality_code)->get();
-    $user_ids =array();
-    foreach ($spe_details as $spe_detail) {
-     $user_ids[] =  $spe_detail->user_id;
-    }
+   
 
 
   if($searchfield == 'lawyer'){
@@ -459,5 +457,123 @@ class SearchController extends Controller
     $lawschools = $lawschools->paginate(2);
 
     return view('pages.subpages.search.lawschools_table',compact('lawschools'));
+  }
+
+
+  public function search($id =null,$id1=null){
+
+    
+
+     $searchfield = 'lawyer';
+     $specialities = CatgMast::all();
+     $courts = CourtMast::all();
+     $states = State::all();
+     $slots = Slots::all();
+     $gender = null;
+     $name = '';
+     $catg_code = null;
+     $city_code = '0';
+     $state_code = '0';
+     $court_code = '0';
+     $content = search_content();
+
+      $date = array();
+      $curr_date = Carbon::now()->addDays('-1');
+      $day = array();
+      $toDate = Carbon::now()->addDays('-1');
+
+      for($i=0 ; $i<=6;$i++){
+       $day[] = $toDate->addDays('+1')->format('D');
+       $date[] = $curr_date->addDays('+1')->format('Y-m-d');
+      }
+
+      $days = array_combine($day, $date); //date to days wise indexing 
+      // return $days;
+
+      if(request()->all() != null){
+        $searchfield = request()->searchfield;
+        $name = request()->user_name;
+        $gender = request()->gender !='all' ? request()->gender : null;
+        $court_code = request()->court_id ;
+      }
+
+      
+
+
+    if($searchfield =='lawyer'){
+      if($id !=null){
+          if($id !=null && $id1 !=null) {
+            // return $id;
+            $catg_code = catg_by_name($id);
+            $city = city_by_name($id1);
+
+            $city_code = !empty($city) ? $city->city_code : '0';
+            $state_code = !empty($city) ? $city->state_code : '0';
+
+            $content = search_content('city',$city->city_name,court_name_by_city($city_code));
+
+            $lawyers =   $lawyers = Helpers::lawyerDetails($court_id=0, $catg_code)->whereIn('id',spec_users_ids($catg_code))->where('users.city_code',$city_code);
+
+          }else{
+            $catg_code = catg_by_name($id);                    
+            if($catg_code !=null){  
+
+              $lawyers = Helpers::lawyerDetails($court_id=0, $catg_code)->whereIn('id',spec_users_ids($catg_code)); 
+            // return "test";
+            }else{
+               $city = city_by_name($id);
+               $city_code = !empty($city) ? $city->city_code : '0';
+               $state_code = !empty($city) ? $city->state_code : '0';
+              
+              
+               $content = search_content('city',$city->city_name,court_name_by_city($city_code));
+
+              $lawyers = $this->query->where('users.city_code',$city_code);
+                             
+            }
+        }
+      }else{
+        $lawyers = $this->query;
+      }
+            
+   
+      if(request()->all() != null){
+
+        if($name !=null){
+          $lawyers =  $lawyers->where('name', 'like', '%' . request()->user_name . '%');
+        }
+        if($court_code !='0' && $court_code !=''){
+            $lawyers = $lawyers->whereIn('id',court_users_ids($city_code,$court_code));
+        }
+        if($gender !=null){
+          $lawyers = $lawyers->where('gender',$gender);
+        }     
+      }
+    }else{
+        $lawyers = Helpers::lawcompanyDetails();
+        $city = city_by_name($id);
+        $city_code = !empty($city) ? $city->city_code : '0';
+        $state_code = !empty($city) ? $city->state_code : '0';
+        if($court_code !='0' && $court_code !=''){  
+           $lawyers = Helpers::lawcompanyDetails($court_code,$city_code)->whereIn('id',court_users_ids($city_code,$court_code));
+        }
+
+
+        if($name != ''){
+            $lawyers = $lawyers->where('name', 'LIKE', '%' .$name. '%');
+        }
+    } 
+    
+    $lawyers =  $lawyers->orderBy('verified_account','DESC')->paginate(10);
+ // return $lawyers;
+      return  view('search.index',
+        compact('searchfield','specialities','courts','states','lawyers','days','slots','name','catg_code','city_code','state_code','court_code','gender','content')
+      );
+
+
+
+
+
+
   }
 }

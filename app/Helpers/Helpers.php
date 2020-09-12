@@ -63,9 +63,7 @@ class Helpers
 		else if($speciality_code !=0){
 			$result = $query->with(['specialities'=>function($query) use($speciality_code){
                           	$query->with('specialization_catgs')->where('user_specialization.catg_code',$speciality_code);
-                        }])->with(['user_courts'=>function($query){
-			          			$query->with('court_catg');
-			        	}]);
+                        }])->with('user_courts.court_catg');
 		}
 		else{
 			$result = $query->with(['specialities'=>function($query){
