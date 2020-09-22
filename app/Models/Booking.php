@@ -8,5 +8,9 @@ class Booking extends Model
 {
     protected $table = "bookings" ;
 	protected $guarded = [];
+
+	public function users(){
+		return $this->belongsTo('App\User','client_id');
+	}
 		
 }

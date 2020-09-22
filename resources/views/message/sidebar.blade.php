@@ -27,7 +27,7 @@
             <!-- /.box-body -->
           </div>
           <!-- /. box -->
-          <div class="box box-solid">
+         {{--  <div class="box box-solid">
             <div class="box-header with-border">
               <h3 class="box-title">Labels</h3>
 
@@ -42,9 +42,8 @@
                 <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Promotions</a></li>
                 <li><a href="#"><i class="fa fa-circle-o text-light-blue"></i> Social</a></li>
               </ul>
-            </div>
-     
-          </div>
+            </div>     
+          </div> --}}
           <!-- /.box -->
         </div>
 	@yield('inbox-body')

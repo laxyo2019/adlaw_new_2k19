@@ -59,7 +59,7 @@
            {{--  <li class="nav-item">
               <a href="{{ $moduleShow == true ? route('connect.index') : route('crm_dashboard.index') }}"><i class="fa fa-comments-o"></i></a>
             </li> --}}
-            <li class="dropdown messages-menu">
+{{--             <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
               @if(count($messages) !=0)
@@ -96,7 +96,7 @@
               <li class="footer"><a href="{{route('message.index')}}">See All Messages</a></li>
             </ul>
              @endif
-          </li>
+          </li> --}}
         {{-- @include('notifications.notification') --}}
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
@@ -695,12 +695,20 @@
 
 
         @role('admin')
-                  <li class="{{Request()->segment(1) == 'admin' ? 'active' : ''}} nav-item">
+          <li class="{{Request()->segment(1) == 'admin' ? 'active' : ''}} nav-item">
             <a class="nav-link" href="{{route('admin.index')}}">
              <i class="fa fa-tachometer"></i>
               <span> Dashboard</span>
             </a>
           </li> 
+          @permission('view_reports')
+            <li class="{{Request()->segment(1) == 'reports' ? 'active' : ''}} nav-item">
+            <a href="{{route('reports.index')}}" class="nav-link">
+              <i class="fa fa-table"></i>
+               <span> Reports</span>
+            </a>
+            </li>  
+          @endpermission
         @permission('users_manage')  
         <li class="{{Request()->segment(1) == 'users' ? 'active' : ''}} nav-item">
             <a href="{{route('users.index')}}" class="nav-link">
@@ -708,6 +716,7 @@
                <span> Users</span>
             </a>
         </li>   
+
         <li class="{{Request()->segment(1) == 'referral' ? 'active' : ''}} nav-item">
             <a href="{{route('referral.index')}}" class="nav-link">
               <i class="fa fa-users"></i>
@@ -715,6 +724,11 @@
             </a>
         </li>   
          @endpermission
+
+        
+
+
+
          @permission('manage_reviews')
            <li class="{{Request()->segment(1) == 'reviews' ? 'active' : ''}} nav-item">
             <a class="nav-link" href="{{route('admin.pending_reviews')}}">

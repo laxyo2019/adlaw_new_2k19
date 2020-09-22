@@ -8,26 +8,35 @@ class SendCode1
 	
 	public static function sendCode($sendData)
 	{
-		  // return $sendData['message'];
-		
-		//$code = rand(1111,9999);
 
-		
-        // $number = (int)$phone;
-        // $sender = "TESTID";
-        // $message = 'Verify Code: '.$code;
+        $ch = curl_init(); 
 
-        //$url="login.bulksmsgateway.in/sendmessage.php?user=".urlencode($username)."&password=".urlencode($password)."&mobile=".urlencode($number)."&sender=".urlencode($sender)."&message=".urlencode($message)."&type=".urlencode('3'); 
-
-        $url = "http://login.yourbulksms.com/api/sendhttp.php?authkey=11456AxEiTIeN5ca87c66&mobiles=".$sendData['mobile']."&message=".$sendData['message']." & new&mobile&sender=ADLAWS&route=4";
-
-        $ch = curl_init($url);
-
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_URL, 'http://login.yourbulksms.com/api/sendhttp.php?authkey=11456AxEiTIeN5ca87c66&mobiles='.$sendData['mobile'].'&message=' . rawurlencode($sendData['message']).'&sender=ADLAWS&route=4&country=91');
 
         $curl_scraped_page = curl_exec($ch);
 
         curl_close($ch);
+
+
+        // $ch = curl_init();
+        // curl_setopt_array($ch, array(
+        // CURLOPT_URL => $url,
+        // CURLOPT_RETURNTRANSFER =>true,        
+        // ));
+
+        // curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,0);
+        // curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,0);
+
+        // $output = curl_exec($ch);
+
+        // if(curl_errno($ch)){
+        //         echo 'error :'. curl_error($ch);
+        // }
+        // curl_close($ch);
+
+
+
+
 
         // return $code;
 	}

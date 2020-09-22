@@ -6,11 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="yandex-verification" content="8f0c9478d0aaca4e" />
+    <link rel="canonical" href="https://www.adlaw.in/"/>
     <meta name="google-site-verification" content="2iDNtR3LqBEDPUP45mwIXtE6a1XdOf7y9cz8TRGqxB0" />
     <title>@yield('title','ADLAW')</title>
     <meta name="description" content="@yield('description')">
     <meta name="keywords" content="@yield('keywords')">
-    <link rel = "icon" href ="{{asset('images/adlaw-logo.png')}}" type = "image/x-icon" style="line-height: 40px;">
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="@yield('title','ADLAW')" />
+    <meta property="og:description" content="@yield('description')" />
+    <meta property="og:url" content="http://www.adlaw.in/" />
+    <meta property="og:site_name" content="Adlaw" />
+    <link rel = "icon" href ="{{asset('images/adlaw-logo.png')}}" alt="Adlaw" type = "image/x-icon" style="line-height: 40px;">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>

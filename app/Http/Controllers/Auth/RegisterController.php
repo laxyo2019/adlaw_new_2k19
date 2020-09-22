@@ -111,7 +111,7 @@ class RegisterController extends Controller
             $user->otp = SendCode::sendCode($user->mobile);
             $user->remember_token = str_random(40);
             $user->save();
-             $package = Package::find('4');
+            $package = Package::find('4');
             if($user->user_catg_id == '2' || $user->user_catg_id == '3'){
                 
                 $userPackageData = [
@@ -130,7 +130,13 @@ class RegisterController extends Controller
                 $user_package = UserPackage::create($userPackageData);  
                 $user->attachPermission('6');
 
+                $user->user_package_id = $user_package->id;
+                $user->package_start = $user_package->package_start;
+                $user->package_end = $user_package->package_end;
+                $user->save();
             }
+
+
 
             Referral::where('referral_code',$data['referral_code'])->increment('summary_count','1');
             Mail::to($user->email)->send(new VerifyMail($user));

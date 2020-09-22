@@ -36,14 +36,17 @@ class LawFirmController extends Controller
 		$id = Auth::user()->id;
 	
 		$del_client = Helpers::deletedClients();
+
 		$user = User::with(['clients' => function($query)use($del_client){
 				$query->whereNotIn('cust_id',$del_client);
 		}, 'messages' => function($query){
 			$query->where('status',0);
 		},'members' => function($query){
-			$query->where('status','!=','S');
+			$query->where('status','!=','S')->where('user_catg_id','2');
 		}])->with('teams')->find($id);
 
+
+		// return $user;
 
 		$case_assign = CaseLawyer::where('user_id1',$id)->where('deallocate_date',null)->get();
         $case_id = collect($case_assign)->map(function($e){

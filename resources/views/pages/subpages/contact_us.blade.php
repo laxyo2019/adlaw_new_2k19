@@ -1,4 +1,7 @@
 @extends('layouts.default')
+@section('title','Contact Us - Lawyers, Law Firm, Law School Portal | Legal Services |Adlaw')
+@section('description','Contact us for all legal services or find the best Lawyers, law firms and law schools.')
+@section('keywords', 'legal services, find a lawyer, lawyers portal India, find legal advisor, Best Lawyers in India, top lawyers, law firm portal, top lawyers in India, lawyers ranking in India')
 @section('content')
 @include('layouts.hero_section')
 <div class="container container-div">

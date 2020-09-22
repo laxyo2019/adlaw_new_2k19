@@ -1,4 +1,3 @@
-{{-- @extends(Auth::user()->user_catg_id == '5' ? 'customer.main' : (Auth::user()->user_catg_id == '2' ? 'lawfirm.main' : (Auth::user()->user_catg_id == '3' ? 'lawfirm.main' : (Auth::user()->user_catg_id == '4' ? 'lawschools.main' : (Auth::user()->user_catg_id == '6' ? 'lawschools.main' : (Auth::user()->user_catg_id == '7' ? 'lawschools.main' : 'admin.main')))))) --}}
 @extends('partials.main')
 @section('content')
 <section class="content">
@@ -39,6 +38,7 @@
 					<div class="col-md-12 mt-5">
 					@if(Auth::user()->parent_id ==null)		
 						@if(!empty($user_package))	
+
 							<div class="card  p-0 col-centered">
 								<div class="card-header p-4" style="background-color: #3c8dbc; color:white">
 									<h4 class="card-title">Your Current Package Details:
@@ -52,6 +52,7 @@
 									</h4>
 								</div>
 								<div class="card-body " style="background-color: #f7f6f6; ">
+								<div class="row">
 									<div class="card col-md-6 p-0">
 										<div class="card-header with-border p-3"  style="background-color: rgb(234, 239, 255); ">
 											<h3>{{$user_package->package->name}}</h3>
@@ -79,7 +80,7 @@
 												<div class="col-md-12">
 													@php echo $user_package->package->description; @endphp
 												</div>
-											</div>
+											</div>	
 										</div>
 										@if(strtotime($beforeDate) <= strtotime(date('Y-m-d')))
 											<div class="card-footer "  style="background-color: rgb(255, 236, 207); ">
@@ -96,8 +97,32 @@
 											</div>
 										@endif		
 									</div>
+								@if(Auth::user()->id == '119287')
+								@if($user_package->package_id =='4')
+								<div class="card col-md-6 p-0">
+									<div class="card-header with-border p-3"  style="background-color: rgb(234, 239, 255); ">
+										<h3>{{$package_premium->name}}
+										{{-- @if(strtotime($beforeDate) <= strtotime(date('Y-m-d'))) --}}
+									 		<button class="btn btn-sm btn-warning pull-right " id="upgradeBtn">Upgrade Package</button>
+									 	</h3>
+
+									 	{{-- @endif --}}
+									</div>
+									<div class="card-body p-4" >
+										<h4 class=""><i class="fa fa-rupee"></i>
+											{{$package_premium->price}}
+									 	</h4>
+									 	<div class="col-md-12">
+											@php echo $package_premium->description; @endphp
+										</div>
+										
+									</div>
+								</div>
+								@endif
+								@endif
 								</div>
 							</div>
+							
 
 						@else
 							@if(!$moduleShow)		

@@ -34,43 +34,44 @@ class AdminController extends Controller
 
 	public function index(){
 
-		$users = User::whereNull('parent_id')->get();
-        $collect = collect($users)->where('user_catg_id','2')->where('on_database','1')->where('status','A')->count();
+		// $users = User::whereNull('parent_id')->get();
+        // $collect = collect($users)->where('user_catg_id','2')->where('on_database','1')->where('status','A')->count();
+        
 		return view('admin.dashboard.dashboard',compact('users'));      
 	}
     public function user_data_fetch(){
         $users = User::whereNull('parent_id')->get();
 
         // return collect($users)->where('user_catg_id','2')->count();
-        return [
+        // return [
 
-            // 'user_total'       =>  collect($users)->count(),
-            // 'user_subscription' => collect($users)->where('user_package_id','!==', null)->where('package_end','>',date('Y-m-d'))->count(),
-            // 'user_unsubscription'=> collect($users)->where('user_package_id', null)->count(),
-            // 'user_delete'       =>User::onlyTrashed()->whereNull('parent_id')->count(),
-            // 'user_renewal'      => collect($users)->where('user_package_id','!==', null)->where('package_end','<',date('Y-m-d'))->count(),
-            'lawyer_total'  => collect($users)->where('user_catg_id','2')->count()
-            // 'lawyer_registered'      => collect($users)->where('user_catg_id','2')->where('on_database','0')->count(),
-            // 'lawyer_import'      => collect($users)->where('user_catg_id','2')->where('on_database','1')->where('status','D')->count(),
-            // 'lawyer_import_reg'      => collect($users)->where('user_catg_id','2')->where('on_database','1')->where('status','!==','D')->count(),
-            // 'lawyer_subscirption'      => collect($users)->where('user_catg_id','2')->where('user_package_id','!==',null)->where('package_end','>',date('Y-m-d'))->count(),
-            // 'lawyer_unsubscirption'      => collect($users)->where('user_catg_id','2')->where('user_package_id',null)->count(),
-            // 'lawyer_renewal'      => collect($users)->where('user_catg_id','2')->where('user_package_id','!==', null)->where('package_end','<',date('Y-m-d'))->count(),
-            // 'lawfirm_total'      => collect($users)->where('user_catg_id','3')->count(),
-            // 'lawfirm_registered'      => collect($users)->where('user_catg_id','3')->where('on_database','0')->count(),
-            // 'lawfirm_import'      => collect($users)->where('user_catg_id','3')->where('on_database','1')->where('status','D')->count(),
-            // 'lawfirm_import_reg'      => collect($users)->where('user_catg_id','3')->where('on_database','1')->where('status','!==','D')->count(),
-            // 'lawfirm_subscirption'      => collect($users)->where('user_catg_id','3')->where('user_package_id','!==',null)->where('package_end','>',date('Y-m-d'))->count(),
-            // 'lawfirm_unsubscirption'      => collect($users)->where('user_catg_id','3')->where('user_package_id',null)->count(),
-            // 'lawfirm_renewal'      => collect($users)->where('user_catg_id','3')->where('user_package_id','!==', null)->where('package_end','<',date('Y-m-d'))->count(), 
-            // 'lawschools_total'      => collect($users)->where('user_catg_id','4')->count(),
-            // 'lawschools_registered'      => collect($users)->where('user_catg_id','4')->where('on_database','0')->count(),
-            // 'lawschools_import'      => collect($users)->where('user_catg_id','4')->where('on_database','1')->where('status','D')->count(),
-            // 'lawschools_import_reg'      => collect($users)->where('user_catg_id','4')->where('on_database','1')->where('status','!==','D')->count(),
-            // 'lawschools_subscirption'      => collect($users)->where('user_catg_id','4')->where('user_package_id','!==',null)->where('package_end','>',date('Y-m-d'))->count(),
-            // 'lawschools_unsubscirption'      => collect($users)->where('user_catg_id','4')->where('user_package_id',null)->count(),
-            // 'lawschools_renewal'      => collect($users)->where('user_catg_id','4')->where('user_package_id','!==', null)->where('package_end','<',date('Y-m-d'))->count(),
-        ];
+        //     // 'user_total'       =>  collect($users)->count(),
+        //     // 'user_subscription' => collect($users)->where('user_package_id','!==', null)->where('package_end','>',date('Y-m-d'))->count(),
+        //     // 'user_unsubscription'=> collect($users)->where('user_package_id', null)->count(),
+        //     // 'user_delete'       =>User::onlyTrashed()->whereNull('parent_id')->count(),
+        //     // 'user_renewal'      => collect($users)->where('user_package_id','!==', null)->where('package_end','<',date('Y-m-d'))->count(),
+        //     // 'lawyer_total'  => collect($users)->where('user_catg_id','2')->count()
+        //     // 'lawyer_registered'      => collect($users)->where('user_catg_id','2')->where('on_database','0')->count(),
+        //     // 'lawyer_import'      => collect($users)->where('user_catg_id','2')->where('on_database','1')->where('status','D')->count(),
+        //     // 'lawyer_import_reg'      => collect($users)->where('user_catg_id','2')->where('on_database','1')->where('status','!==','D')->count(),
+        //     // 'lawyer_subscirption'      => collect($users)->where('user_catg_id','2')->where('user_package_id','!==',null)->where('package_end','>',date('Y-m-d'))->count(),
+        //     // 'lawyer_unsubscirption'      => collect($users)->where('user_catg_id','2')->where('user_package_id',null)->count(),
+        //     // 'lawyer_renewal'      => collect($users)->where('user_catg_id','2')->where('user_package_id','!==', null)->where('package_end','<',date('Y-m-d'))->count(),
+        //     // 'lawfirm_total'      => collect($users)->where('user_catg_id','3')->count(),
+        //     // 'lawfirm_registered'      => collect($users)->where('user_catg_id','3')->where('on_database','0')->count(),
+        //     // 'lawfirm_import'      => collect($users)->where('user_catg_id','3')->where('on_database','1')->where('status','D')->count(),
+        //     // 'lawfirm_import_reg'      => collect($users)->where('user_catg_id','3')->where('on_database','1')->where('status','!==','D')->count(),
+        //     // 'lawfirm_subscirption'      => collect($users)->where('user_catg_id','3')->where('user_package_id','!==',null)->where('package_end','>',date('Y-m-d'))->count(),
+        //     // 'lawfirm_unsubscirption'      => collect($users)->where('user_catg_id','3')->where('user_package_id',null)->count(),
+        //     // 'lawfirm_renewal'      => collect($users)->where('user_catg_id','3')->where('user_package_id','!==', null)->where('package_end','<',date('Y-m-d'))->count(), 
+        //     // 'lawschools_total'      => collect($users)->where('user_catg_id','4')->count(),
+        //     // 'lawschools_registered'      => collect($users)->where('user_catg_id','4')->where('on_database','0')->count(),
+        //     // 'lawschools_import'      => collect($users)->where('user_catg_id','4')->where('on_database','1')->where('status','D')->count(),
+        //     // 'lawschools_import_reg'      => collect($users)->where('user_catg_id','4')->where('on_database','1')->where('status','!==','D')->count(),
+        //     // 'lawschools_subscirption'      => collect($users)->where('user_catg_id','4')->where('user_package_id','!==',null)->where('package_end','>',date('Y-m-d'))->count(),
+        //     // 'lawschools_unsubscirption'      => collect($users)->where('user_catg_id','4')->where('user_package_id',null)->count(),
+        //     // 'lawschools_renewal'      => collect($users)->where('user_catg_id','4')->where('user_package_id','!==', null)->where('package_end','<',date('Y-m-d'))->count(),
+        // ];
     }
     public function connectLogin(){
       return redirect('http://chat.adlaw.in/custom-login?email='.Auth::user()->email.'&password='.Auth::user()->password);
@@ -364,6 +365,15 @@ class AdminController extends Controller
 
     }
     public function user_appointment(){
+        
         return view('admin.dashboard.appointment.index');
     }
+
+
+    public function reports(){
+        $users = User::with(['city','state'])->where('user_catg_id','2')->whereIn('status',['A','C'])->whereNull('parent_id')->orderBy('created_at','DESC')->get();
+        // return $users;
+        return view('admin.dashboard.reports.index',compact('users'));
+    }
+
 }

@@ -179,3 +179,9 @@
     margin-top: 0;
   }
 }
+.slimScrollBar(){
+  background: rgb(247, 247, 247) none repeat scroll 0% 0% !important;
+  width: 9px !important;
+  opacity: 0.487 !important;
+
+}

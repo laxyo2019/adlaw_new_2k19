@@ -147,13 +147,13 @@ if(!function_exists('court_users_ids')){
 }
 
 if(!function_exists('search_content')){
-  function search_content($condition = 'main',$city_name=null,$court_name=null){  
+  function search_content($condition = 'main',$city_name=null,$court_name=null,$catg_code = null){  
   if($condition =='main'){
     $content['title'] = 'Best Lawyers for Consulting | Top 10 Criminal Lawyers | Lawyers Association India';
     $content['description'] = 'Get best lawyers for consulting, whether you are finding criminal lawyers, family lawyers, corporate lawyers for free law advice, legal answer or any Law Association in India.';
     $content['keywords'] = 'lawyers association India, top 100 lawyers in India, top 10 criminal lawyers in India, top 50 lawyers in India, best lawyers for consulting, free Legal advice, legal advice, consult with best lawyer, legal help, legal issues, law questions, law advice, ask a lawyer, legal question, law answers, free law advice, legal answers, law advisers, free legal help';
 
-    $content['content'] = '<h3 class="font-weight-bold text-captialize mb-3">Consult Best Lawyer / Law Firms in India</h3>
+    $content['content'] = '<h1 class="text-captialize mb-3">Consult Best Lawyer / Law Firms in India</h1>
       <p class="p-text">
           Seeing the demand of various Legal problems we allow you to hire the professional experts having good experience in Civil Law, Corporate Law, Start-up Solutions, Criminal Law, Consumer Law, Family Law and much more in all over India.
       <br><br>
@@ -161,19 +161,36 @@ if(!function_exists('search_content')){
 
     }elseif($condition == 'specialization'){
 
+      $catg =  CatgMast::where('catg_code',$catg_code)->first();
+
+      if(!empty($catg)){
+        $catg_name = ucwords(str_replace('Law','',$catg->catg_desc));
+        $description =  $city_name !=null ? str_replace('$city_name', 'in '.$city_name, $catg->description) : str_replace('$city_name','in India', $catg->description);
+      }else{
+        $catg_name = '';
+        $description = '';
+      }
+     
+      $city = $city_name !=null ? $city_name : 'India';
+      $content['title'] = "".$catg_name."Lawyers/Advocate, Attorneys in ".$city." | Top 10 ".$catg_name."Lawyers in ".$city." | ".$catg_name."Legal Advisor - Adlaw";
+      $content['description'] = "Find best ".$catg_name."Lawyers/Advocate, Attorneys in ".$city.". Get Legal consultation by top rated district court ".$catg_name."lawyers for your all type of legal matters.";
+      $content['keywords'] = "".$catg_name."lawyers, ".$catg_name."lawyers in ".$city.", best ".$catg_name."lawyers in ".$city.", top ".$catg_name."lawyers, Indian".$catg_name."advocate, ".$catg_name."advocates in ".$city.", list of ".$catg_name."lawyers in ".$city.", list of ".$catg_name."advocate in ".$city.", district court ".$catg_name."lawyer, district court ".$catg_name."advocate, ".$catg_name."Legal Advisor in ".$city.", high court ".$catg_name."lawyer, high court ".$catg_name."advocate, female ".$catg_name."lawyer in ".$city."";
+
+      $content['content'] = $description ; 
+
 
     }elseif($condition == 'city'){
 
-      $content['title'] = "Lawyers/Advocate in ".$city_name ." | High Court Lawyers | Attorneys, Advocates and Law Firm";
+      $content['title'] = "Lawyers/Advocate, Attorneys in ".$city_name." | Top 10 Lawyers in ".$city_name." |  ".$city_name." High Court Lawyer";
       $content['description'] = "Find best lawyers/ advocates, Attorneys in ".$city_name .". Get Legal consultation by ".$city_name ." top rated high court lawyers for your all type of legal matters";
       $content['keywords'] = "Lawyers in ".$city_name .", Advocate in ".$city_name .", Top 10 Lawyers in ".$city_name .", Top 100 Lawyers in ".$city_name .", Best Lawyers in ".$city_name .", ".$city_name ." lawyers for Consulting, Find best lawyers in ".$city_name .", ".$city_name ." lawyers, district court ".$city_name ." advocate, ".$city_name ." advocate number, ".$city_name ." high court lawyers, free legal advice ".$city_name ."";
 
 
-      $content['content'] = "<h4 class='font-weight-bold text-captialize mb-3'>Consult with Best Lawyers in ".$city_name ."</h4>
+      $content['content'] = "<h1 class='text-captialize mb-3'>Consult with Best Lawyers in ".$city_name ."</h1>
 
       <p class='p-text'>Adlaw helps you to consult with the best lawyers in ".$city_name ." for ".$court_name." matters. Our portal is based upon well read and well connected lawyers, who are there to cater your all legal needs. You can use filters to narrow your search and find the best lawyer or advocate in ".$city_name ." for your legal matter. Our aim is to deliver complete legal solutions to all legal requirements of our clients. We have a highly qualified and responsive team of attorneys involving of young as well as senior legal professionals who have attained specific expertise in their specific area of laws. Get top lawyers in ".$city_name ." for family dispute or divorce matters, property matter, employment or labor court matter, criminal matter, recovery or cheque bounce matters, taxation or corporate matters, or then again an attorney master in some other field of law.<br><br></p>
 
-      <h4 class='font-weight-bold text-captialize mb-3'>How to Hire Advocate in ".$city_name ."</h4>
+      <h2 class='text-captialize mb-3'>How to Hire Advocate in ".$city_name ."</h2>
 
       <p class='p-text'>It's critical to comprehend that a decent attorney doesn't guarantee that you'll win your case. Regardless, having a respectable attorney will give you the best opportunities for an ideal outcome and the comfort of realizing that you had the best representation. The initial stage in enrolling an Advocate is picking one in the practice zone that is related to your legal issue since this will ensure that the legal counselor is knowledgeable about dealing with cases like yours. There are several overall qualities that you should look for while picking an attorney in ".$city_name .". A better than average Advocate will have a sensible charge structure, which will empower you to understand in case you can bear the expense of the attorney's administrations and let you appreciate what you'll be getting for your money. Another significant factor to pass judgment on a decent Advocate is incredible correspondence since it's crucial that the attorney keeps awake with the most recent information about your case.<br><br></p>
 

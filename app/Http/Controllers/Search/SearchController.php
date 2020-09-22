@@ -392,6 +392,8 @@ class SearchController extends Controller
     else{
       $userData = Helpers::lawcompanyDetails()->where('id',$id)->first();
     }
+
+    
     
     // return $reviews;
     return view('profiles.lawfirmsProfile', compact('userData','slots','reviews'));
@@ -465,7 +467,7 @@ class SearchController extends Controller
     
 
      $searchfield = 'lawyer';
-     $specialities = CatgMast::all();
+     $specialities = CatgMast::orderBy('catg_desc','ASC')->get();
      $courts = CourtMast::all();
      $states = State::all();
      $slots = Slots::all();
@@ -484,14 +486,14 @@ class SearchController extends Controller
 
       for($i=0 ; $i<=6;$i++){
        $day[] = $toDate->addDays('+1')->format('D');
-       $date[] = $curr_date->addDays('+1')->format('Y-m-d');
+       $date[] = $curr_date->addDays('+1')->format('d-m-Y');
       }
 
       $days = array_combine($day, $date); //date to days wise indexing 
       // return $days;
 
       if(request()->all() != null){
-        $searchfield = request()->searchfield;
+        $searchfield = request()->searchfield !=null ? request()->searchfield : 'lawyer';
         $name = request()->user_name;
         $gender = request()->gender !='all' ? request()->gender : null;
         $court_code = request()->court_id ;
@@ -510,15 +512,17 @@ class SearchController extends Controller
             $city_code = !empty($city) ? $city->city_code : '0';
             $state_code = !empty($city) ? $city->state_code : '0';
 
-            $content = search_content('city',$city->city_name,court_name_by_city($city_code));
-
+            $content = search_content('specialization',$city->city_name,'',$catg_code);
+          
             $lawyers =   $lawyers = Helpers::lawyerDetails($court_id=0, $catg_code)->whereIn('id',spec_users_ids($catg_code))->where('users.city_code',$city_code);
 
           }else{
             $catg_code = catg_by_name($id);                    
             if($catg_code !=null){  
-
+              $content = search_content('specialization','','',$catg_code);
               $lawyers = Helpers::lawyerDetails($court_id=0, $catg_code)->whereIn('id',spec_users_ids($catg_code)); 
+
+              
             // return "test";
             }else{
                $city = city_by_name($id);
@@ -564,16 +568,11 @@ class SearchController extends Controller
         }
     } 
     
-    $lawyers =  $lawyers->orderBy('verified_account','DESC')->paginate(10);
+    $lawyers =  $lawyers->orderBy('verified_account','DESC')->orderBy('status','ASC')->paginate(10);
  // return $lawyers;
       return  view('search.index',
         compact('searchfield','specialities','courts','states','lawyers','days','slots','name','catg_code','city_code','state_code','court_code','gender','content')
       );
-
-
-
-
-
 
   }
 }

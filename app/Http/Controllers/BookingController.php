@@ -67,48 +67,75 @@ class BookingController extends Controller
 
     public function index(){
 
-    	$unbookings =  Booking::
-    						select('bookings.*','users.name','users.mobile','users.city_code','users.state_code','users.country_code','state_mast.state_name','city_mast.city_name')
-    						->join('users','users.id','=','bookings.client_id')
-    						->join('state_mast','state_mast.state_code','users.state_code')
-    						->join('city_mast','city_mast.city_code','users.city_code')
-    						->where('user_id',Auth::user()->id)
-    						->where('client_status',1)
-    						->where('user_status',0)
-    						->get();
+    	// $unbookings =  Booking::
+    	// 					select('bookings.*','users.name','users.mobile','users.city_code','users.state_code','users.country_code','state_mast.state_name','city_mast.city_name')
+    	// 					->join('users','users.id','=','bookings.client_id')
+    	// 					->join('state_mast','state_mast.state_code','users.state_code')
+    	// 					->join('city_mast','city_mast.city_code','users.city_code')
+    	// 					->where('user_id',Auth::user()->id)
+    	// 					->where('client_status',1)
+    	// 					->where('user_status',0)
+    	// 					->get();
 
-    	$booked = Booking::
-    						select('bookings.*','users.name','users.mobile','users.city_code','users.state_code','users.country_code','state_mast.state_name','city_mast.city_name')
-    						->join('users','users.id','=','bookings.client_id')
-    						->join('state_mast','state_mast.state_code','users.state_code')
-    						->join('city_mast','city_mast.city_code','users.city_code')
-    						->where('user_id',Auth::user()->id)
-    						->where('client_status',1)
-    						->where('user_status',1)
-    						->get();
-    	$cancelled = Booking::
-    						select('bookings.*','users.name','users.mobile','users.city_code','users.state_code','users.country_code','state_mast.state_name','city_mast.city_name')
-    						->join('users','users.id','=','bookings.client_id')
-    						->join('state_mast','state_mast.state_code','users.state_code')
-    						->join('city_mast','city_mast.city_code','users.city_code')
-    						->where('user_id',Auth::user()->id)
-    						->where('client_status',0)
-    						->where('user_status',0)
-    						->get();
+      $unbookings =  Booking::with('users.city','users.state')->where('user_id',Auth::user()->id)
+                ->where('client_status',1)
+                ->where('user_status',0)
+                // ->whereDate('b_date',date('Y-m-d'))
+                ->get();
+                
+      $skip_unbookings =  Booking::with('users.city','users.state')->where('user_id',Auth::user()->id)
+                ->where('client_status',1)
+                ->where('user_status',0)
+                ->whereDate('b_date','<>',date('Y-m-d'))
+                ->get();
+                // return $unbookings;
 
-      $cancelled = Booking::
-                select('bookings.*','users.name','users.mobile','users.city_code','users.state_code','users.country_code','state_mast.state_name','city_mast.city_name')
-                ->join('users','users.id','=','bookings.client_id')
-                ->join('state_mast','state_mast.state_code','users.state_code')
-                ->join('city_mast','city_mast.city_code','users.city_code')
-                ->where('user_id',Auth::user()->id)
+      $booked =  Booking::with('users.city','users.state')->where('user_id',Auth::user()->id)
+                ->where('client_status',1)
+                ->where('user_status',1)
+                ->get(); 
+
+      $cancelled =  Booking::with('users.city','users.state')->where('user_id',Auth::user()->id)
                 ->where('client_status',0)
                 ->where('user_status',0)
                 ->get();
-    	 // return $unbookings;
+
       $apply_bookings = Booking::select('bookings.*','users.name','slots.slot')->join('users','users.id','bookings.user_id')->join('slots','slots.id','bookings.plan_id')->where('client_id',Auth::user()->id)->get();
+           // return $apply_bookings;
+    	// $booked = Booking::
+    	// 					select('bookings.*','users.name','users.mobile','users.city_code','users.state_code','users.country_code','state_mast.state_name','city_mast.city_name')
+    	// 					->join('users','users.id','=','bookings.client_id')
+    	// 					->join('state_mast','state_mast.state_code','users.state_code')
+    	// 					->join('city_mast','city_mast.city_code','users.city_code')
+    	// 					->where('user_id',Auth::user()->id)
+    	// 					->where('client_status',1)
+    	// 					->where('user_status',1)
+    	// 					->get();
+    	// $cancelled = Booking::
+    	// 					select('bookings.*','users.name','users.mobile','users.city_code','users.state_code','users.country_code','state_mast.state_name','city_mast.city_name')
+    	// 					->join('users','users.id','=','bookings.client_id')
+    	// 					->join('state_mast','state_mast.state_code','users.state_code')
+    	// 					->join('city_mast','city_mast.city_code','users.city_code')
+    	// 					->where('user_id',Auth::user()->id)
+    	// 					->where('client_status',0)
+    	// 					->where('user_status',0)
+    	// 					->get();
+
+     //  $cancelled = Booking::
+     //            select('bookings.*','users.name','users.mobile','users.city_code','users.state_code','users.country_code','state_mast.state_name','city_mast.city_name')
+     //            ->join('users','users.id','=','bookings.client_id')
+     //            ->join('state_mast','state_mast.state_code','users.state_code')
+     //            ->join('city_mast','city_mast.city_code','users.city_code')
+     //            ->where('user_id',Auth::user()->id)
+     //            ->where('client_status',0)
+     //            ->where('user_status',0)
+     //            ->get();
+
+
+    	 // return $unbookings;
+    
     	$slots = Slots::all();
-    	return view('booking.show',compact('unbookings','slots','booked', 'cancelled','apply_bookings'));
+    	return view('booking.show',compact('unbookings','slots','booked', 'cancelled','apply_bookings','skip_unbookings'));
     } 
     public function bookingUpdate($id){
 

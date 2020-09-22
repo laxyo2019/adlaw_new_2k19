@@ -46,9 +46,9 @@
 							@foreach($unbookings as $booking)
 							<tr>
 								<td>{{++$count}}</td>			
-								<td>{{$booking->name}}</td>	
-								<td>{{$booking->city_name .', '. $booking->state_name}}</td>
-								<td>{{$booking->mobile}}</td>		
+								<td>{{$booking->users->name}}</td>	
+								<td>{{$booking->users->city_name .', '. $booking->users->state_name}}</td>
+								<td>{{$booking->users->mobile}}</td>		
 								<td>@foreach($slots as $slot)
 								{{$booking->plan_id == $slot->id ? date('h:i A', strtotime($slot->slot)) : ''}}
 								@endforeach	
@@ -84,9 +84,9 @@
 							@foreach($booked as $book)
 							<tr>
 								<td>{{++$count}}</td>			
-								<td>{{$book->name}}</td>	
-								<td>{{$book->city_name .', '. $book->state_name}}</td>
-								<td>{{$book->mobile}}</td>		
+								<td>{{$booking->users->name}}</td>	
+								<td>{{$booking->users->city_name .', '. $booking->users->state_name}}</td>
+								<td>{{$booking->users->mobile}}</td>		
 								<td>@foreach($slots as $slot)
 								{{$book->plan_id == $slot->id ? date('h:i A', strtotime($slot->slot)) : ''}}
 								@endforeach	
@@ -116,9 +116,9 @@
 							@foreach($cancelled as $book)
 							<tr>
 								<td>{{++$count}}</td>			
-								<td>{{$book->name}}</td>	
-								<td>{{$book->city_name .', '. $book->state_name}}</td>
-								<td>{{$book->mobile}}</td>		
+								<td>{{$booking->users->name}}</td>	
+								<td>{{$booking->users->city_name .', '. $booking->users->state_name}}</td>
+								<td>{{$booking->users->mobile}}</td>		
 								<td>@foreach($slots as $slot)
 								{{$book->plan_id == $slot->id ? date('h:i A', strtotime($slot->slot)) : ''}}
 								@endforeach	
@@ -164,7 +164,8 @@
 								@endforeach
 							</tbody>
 						</table>
-					</div>				
+					</div>
+									
 				</div>			
 			</div>
 			@include('models.booking_cancel')

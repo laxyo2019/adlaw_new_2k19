@@ -4,6 +4,11 @@
 @section('keywords',$content['keywords'])
 @section('content')
 @include('layouts.hero_section')
+<style type="text/css">
+	.text-captialize{
+		font-family: inherit;
+	}
+</style>
 <div class="container container-div">
     <div class="row ">
     	<div class="col-sm-12 col-md-12 col-xl-12 text-center mb-2 h2-text" >
@@ -11,30 +16,23 @@
          <p class="lead mb-0">Easily Search Lawyer and Law Firms!</p>       
         </div>
         <div class="col-md-12 col-sm-12 col-xl-12"  id="content_dynamic">
-        	
-        		<span class="halfText">
-        			@php 
-	        			echo substr($content['content'],0, strpos($content['content'],'</p>'));
-	        		@endphp
-	        	</span>
+			<span class="halfText">
+				@php 
+					echo substr($content['content'],0, strpos($content['content'],'</p>'));
+				@endphp
+			</span>
 
-	        	  </p>
-	        	  <span class="full-text" style="display: none">
-        			@php 
-	        			echo substr($content['content'],strpos($content['content'],'</p>'),strlen($content['content']));
-	        		@endphp
-	        	</span>
-	        	</p>
-	           
-	            <a href="javascript:void(0)" class="readmore"><b> >> Read More</b></a>
-	            <a href="javascript:void(0)" class="readless" style="display: none"><b> << Read Less</b></a>
-               	
-        	
-		{{-- 	<p class="p-text">
-				The following details provided by us have been gathered and prepared for Users' convenience, and remarkably for informative purposes; they are in no way legal advice. More precisely, nothing on the adlaw website should be interpreted as being a legal opinion, a recommendation on how to act, or an answer that applies directly to a specific circumstance. Adlaw is no way, directly or indirectly responsible for the advice and assistance provided by the Lawyers. 
+			  </p>
+			  <span class="full-text" style="display: none">
+				@php 
+					echo substr($content['content'],strpos($content['content'],'</p>'),strlen($content['content']));
+				@endphp
+			</span>
+			</p>
 
-				Adlaw will not be responsible for any issues/discrepancies created by the Lawyers about gathering their details.
-			</p> --}}
+			<a href="javascript:void(0)" class="readmore"><b> >> Read More</b></a>
+			<a href="javascript:void(0)" class="readless" style="display: none"><b> << Read Less</b></a>  
+
 
         </div>
 		<div class="col-sm-12 col-md-12 col-xl-12 ">

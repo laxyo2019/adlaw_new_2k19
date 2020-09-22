@@ -2,7 +2,7 @@
 
 @extends('partials.main')
 @section('content')
-<style>
+{{-- <style>
 .loader {
   border: 6px solid #f3f3f3;
   border-radius: 50%;
@@ -23,7 +23,7 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-</style>
+</style> --}}
 
 	<section class="content">
 		<div class="row">
@@ -72,7 +72,7 @@
 				<div class="small-box bg-green ">
 					<div class="inner">
 						<h3 class="lawschools_total"><div class="loader"></div></h3>
-						<h4>Total Law Sfilechools</h4>
+						<h4>Total Law Schools</h4>
 						<span>Registered : <span class="lawschools_registered">0</span> | Import: <span class="lawschools_import">0</span> | Import Registered : <span class="lawschools_import_reg">0</span> | Subcription :  <span class="lawschools_subscirption">0</span>  | Unsubcription : <span class="lawschools_unsubscirption">0</span> | Renewal : <span class="lawschools_renewal">0</span> </span>
 					</div>
 					<div class="icon">
@@ -176,17 +176,17 @@
 	</section>
 <script >
 	$(document).ready(function(){
-		$.ajax({
-			type:'get',
-			url : "{{route('admin.user_data_fetch')}}",
-			success:function(res){
+		// $.ajax({
+		// 	type:'get',
+		// 	url : "{{route('admin.user_data_fetch')}}",
+		// 	success:function(res){
 		// 		$('.user_total').empty().html(res.user_total);
 		// 		$('.user_subscription').empty().html(res.user_subscription);
 		// 		$('.user_unsubscription').empty().html(res.user_unsubscription);
 		// 		$('.user_delete').empty().html(res.user_delete);
 		// 		$('.user_renewal').empty().html(res.user_renewal);
 				
-				$('.lawyer_total').empty().html(res.lawyer_total);
+				// $('.lawyer_total').empty().html(res.lawyer_total);
 				// $('.lawyer_registered').empty().html(res.lawyer_registered);
 				// $('.lawyer_import').empty().html(res.lawyer_import);
 				// $('.lawyer_import_reg').empty().html(res.lawyer_import_reg);
@@ -210,8 +210,8 @@
 		// 		$('.lawschools_unsubscirption').empty().html(res.lawschools_unsubscirption);
 		// 		$('.lawschools_renewal').empty().html(res.lawschools_renewal);	
 
-			}
-		})
+		// 	}
+		// })
 	})
 </script>
 @endsection

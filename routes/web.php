@@ -130,7 +130,7 @@ Route::group(['prefix' => 'features/guest'] ,function(){
 	Route::get('/','Search\SearchController@lawfirms')->name('guest');
 	Route::get('/search','Search\SearchController@lawfirmsSearch')->name('lawfirms.search');
 	Route::post('/review','Search\SearchController@writeReview')->name('lawfirms.writeReview');
-	Route::get('/profile/{id}', 'Search\SearchController@lawfirmsprofileShow')->name('lawfirmsprofile.show');	
+	
 	Route::view('/profile-management','pages.features.subpages.guest.profile_management')->name('guest.profile_management');
 	Route::view('/search-lawyer','pages.features.subpages.guest.search_lawyer')->name('guest.search_lawyer');
 	Route::view('/calendar','pages.features.subpages.guest.calendar')->name('guest.calendar');
@@ -139,13 +139,15 @@ Route::group(['prefix' => 'features/guest'] ,function(){
 
 // Route::resource('/admin/users', 'Admin\UsersController');
 // Route::get('/admin/send-credentials/{id}','UsersController@sendCredentials');
-
+	Route::get('search/profile/{id}', 'Search\SearchController@lawfirmsprofileShow')->name('lawfirmsprofile.show');	
 	Route::get('/search/{id?}/{id1?}','Search\SearchController@search')->name('search');
 
 /*End Pages View */
 
 /* ---------------------Admin--------------------------------- */
 Route::group(['middleware' => ['role:admin']], function() {
+	Route::get('/reports/users', 'Admin\AdminController@reports')->name('reports.index');
+
 
 	Route::get('/admin','Admin\AdminController@index')->name('admin.index');
 	Route::get('/user_data_fetch','Admin\AdminController@user_data_fetch')->name('admin.user_data_fetch');

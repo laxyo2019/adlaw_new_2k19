@@ -12,6 +12,7 @@ use Mail;
 use DB;
 use Carbon\Carbon;
 use App\Models\UserPackage;
+use App\Models\Package;
 use App\Notifications\SubscriptionReminder;
 use App\Mail\SubscriptionReminderMail;
 class CRMController extends Controller
@@ -29,8 +30,16 @@ class CRMController extends Controller
 	    $user_package = UserPackage::with('package')->where('user_id',Auth::user()->id)->where('status','1')->first();
 	    $oldpackages = UserPackage::with('package')->where('user_id',Auth::user()->id)->where('status','0')->first();
 
+	    $package_premium = '';
+	    if(!empty($user_package)){
+	    	if($user_package->package_id == '4'){
+		    	$package_premium = Package::find('1');
+		    }
 
-    	return view('CRM.index',compact('modules','moduleShow','user_package','beforeDate','oldpackages','packageModules'));
+	    }
+	    
+	
+    	return view('CRM.index',compact('modules','moduleShow','user_package','beforeDate','oldpackages','packageModules','package_premium'));
     }
 
     public function old_subscription_package(){

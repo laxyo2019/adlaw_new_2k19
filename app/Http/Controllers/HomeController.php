@@ -184,24 +184,27 @@ class HomeController extends Search\SearchController
 
   public function message_sent_store(Request $request){
 
-    $users =  User::where('user_catg_id','2')->where('state_code','21')->whereNotNull('mobile')->where('message_sent','1')->get();
+     $users =  User::where('user_catg_id','2')->where('state_code','21')->whereNotNull('mobile')->where('message_sent','1')->get();
 
-    // // return $users;
-    //   foreach ($users as $key => $value) {
-    //     $sendData = [
-    //         'message' => $request->message,
-    //         'mobile' => $value->mobile 
-    //     ]; 
-
-    //     SendCode1::sendCode($sendData);  
-    //     User::find($value->id)->update(['message_sent' => '1']);
-          
-    //   }
-       $sendData = [
-            'message' => $request->message,
-            'mobile' => '8815218315' 
+// return $users;
+    // // // return $users;
+      foreach ($users as $key => $value) {
+        $sendData = [
+            'message' =>'ADLAW, bridging gap to connect the clients in legal profession for Law professional by featured CRM and huge Judgments data (3 Million in SC and HC) and other modules. Avail promotional offer of profile worth Rs. 4000/- is free for first 200 numbers. Click https://adlaw.in/register or Call 91-8815218307/08/09',
+            'mobile' => $value->mobile 
         ]; 
-       SendCode1::sendCode($sendData);     
+
+        SendCode1::sendCode($sendData);  
+        User::find($value->id)->update(['message_sent' => '1']);
+          
+      }
+    // return $request->message;
+      $sendData = [
+          'message' => 'ADLAW, bridging gap to connect the clients in legal profession for Law professional by featured CRM and huge Judgments data (3 Million in SC and HC) and other modules. Avail promotional offer of profile worth Rs. 4000/- is free for first 200 numbers. Click https://adlaw.in/register or Call 91-8815218307/08/09',
+          'mobile' => '7828773421' 
+      ]; 
+       
+        SendCode1::sendCode($sendData);     
 
   // die;
 

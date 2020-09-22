@@ -10,8 +10,8 @@
 
 <style type="text/css">
 .profile-img{
-  width:100%;
-  height:100%;
+  width:80%;
+  height:70%;
   border: 2px solid;
   padding: 7px;
   border-radius: 6%;
@@ -19,6 +19,7 @@
 
 #sidebar ul li a{
   color:#fff;
+  font-size: 12px !important; 
 
 }
 .animated {
@@ -32,6 +33,15 @@ p.stars  i
    
     color: chocolate;
 }
+ul.components li a span{
+    padding: 10px;
+    font-size: 14px !important;
+    color:black;
+    display: block;
+}
+.value{
+  font-size: 14px !important;
+}
 </style>
 
 @include('layouts.hero_section')
@@ -40,7 +50,7 @@ p.stars  i
         <div class="col-sm-12 col-md-12 col-xl-12 text-center h2-text">
             <h2 class=" font-weight-bold text-center text-white">
               @if($userData->user_catg_id == '2')
-                LAWAYER  
+                LAWYER  
               @else
                 LAW FIRM 
               @endif PROFILE
@@ -76,7 +86,7 @@ p.stars  i
        <hr>
        @if($userData->user_catg_id == '2')
         <li class="active " id="educa">
-          <a href="" data-toggle="collapse" aria-expanded="false" id="edu" style="text-decoration: none">
+          <a href="" data-toggle="collapse" aria-expanded="false" id="edu" style="text-decoration: none;">
             <span>
                 <i class="fa fa-book" aria-hidden="true"></i> &nbsp;Education<i class="fa fa-plus float-right" aria-hidden="true" id="eplus"></i></span>
            </a>
@@ -135,7 +145,7 @@ p.stars  i
             </div>
 
             <div class="col-sm-12 col-md-8 col-xs-12">
-                <h2 class="font-weight-bold" style="margin-top: 12px !important ">{{$userData->name}} </h2>
+                <h4 class="font-weight-bold" style="margin-top: 12px !important ">{{$userData->name}} </h4>
                 {{--   <span class="chat_icon text-primary " style="font-size:18px;float:right;">
                     @if(Auth::user())
 
@@ -237,11 +247,16 @@ p.stars  i
                     <span class="icon-holder"><i class="fa fa-balance-scale" aria-hidden="true"></i></span>
                     <span class="item-label">Practice areas:</span>
                     
+                    @php $spec_string = '' ; @endphp
                     @foreach($userData->specialities as $spec)
 
-                    <span class="value">{{$spec->specialization_catgs->catg_desc.','}}
-                     </span>
+                        
+                          @php  $spec_string .= $spec->specialization_catgs->catg_desc.', ' ; @endphp
+
                     @endforeach
+
+                    <span class="value">{{substr($spec_string,0,strlen($spec_string)-2)}}
+                     </span>
                   </div>
                   @endif
               </div>
@@ -251,6 +266,8 @@ p.stars  i
 
           <div class="col-md-12 text-justify mt-2" style=" line-height: 30px;">
             <hr>
+            
+
             <?php echo $userData->detl_profile ?> 
 
           </div>
@@ -267,16 +284,10 @@ p.stars  i
           
               <div class="col-md-12">
                   <div class="row">
-                    <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6">
-                       <h3>Top Reviews</h3>
-                    </div>
-                   {{--  <div class="col-sm-6 col-md-6 col-xs-6 col-lg-6 text-right">
-                       <a class="btn text-primary border-primary font-weight-bold text-white">Write A Reviews</a> 
-                    </div> --}}
-                   </div>
-                    <hr>
-              
+        
                     <div class="col-md-11 m-auto " id="writeReviewBox" >
+                    <hr>
+                      <h3>Top Reviews</h3>
                       <form >
                           @csrf
                       <div class="row form-group">

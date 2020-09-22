@@ -10,7 +10,7 @@
       <div class="carousel-item active" style="background-image: url('images/banner3.png') ;">
        
         <div class="carousel-caption d-none d-md-block">
-          <form  action="{{route('search')}}" method="get">
+          <form  action="{{route('search')}}" method="get" autocomplete="off">
             @csrf
 
             <input type="text" class="p-2" name="user_name" style="width: 80%;border-radius: 10px;" placeholder="Search a lawyer">
@@ -25,7 +25,7 @@
       <div class="carousel-item" style="background-image: url('images/banner8.jpg'); ">
 
         <div class="carousel-caption d-none d-md-block">
-          <form  action="{{route('search')}}" method="get">
+          <form  action="{{route('search')}}" method="get" autocomplete="off">
             @csrf
 
             <input type="text" class="p-2" name="user_name" style="width: 80%;border-radius: 10px;" placeholder="Search a lawyer">
@@ -39,7 +39,7 @@
       <!-- Slide Three - Set the background image for this slide in the line below -->
       <div class="carousel-item" style="background-image: url('images/1_law3.jpg')">
         <div class="carousel-caption d-none d-md-block">
-          <form  action="{{route('search')}}" method="get">
+          <form  action="{{route('search')}}" method="get" autocomplete="off">
             @csrf
 
             <input type="text" class="p-2" name="user_name" style="width: 80%;border-radius: 10px;" placeholder="Search a lawyer">
@@ -65,9 +65,9 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    $('input[name="search"]').on('keyup',function(e){
+    $('input[name="user_name"]').on('keyup',function(e){
       e.preventDefault();
-      $('input[name="search"]').val($(this).val());
+      $('input[name="user_name"]').val($(this).val());
     });
 
   })
