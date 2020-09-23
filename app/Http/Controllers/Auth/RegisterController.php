@@ -110,6 +110,7 @@ class RegisterController extends Controller
             $user->attachRole(request()->user_category);
             $user->otp = SendCode::sendCode($user->mobile);
             $user->remember_token = str_random(40);
+            $user->registration_date = date('Y-m-d H:i:s');
             $user->save();
             $package = Package::find('4');
             if($user->user_catg_id == '2' || $user->user_catg_id == '3'){

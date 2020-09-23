@@ -371,7 +371,7 @@ class AdminController extends Controller
 
 
     public function reports(){
-        $users = User::with(['city','state'])->where('user_catg_id','2')->whereIn('status',['A','C'])->whereNull('parent_id')->orderBy('created_at','DESC')->get();
+        $users = User::with(['city','state'])->where('user_catg_id','2')->whereIn('status',['A','C'])->whereNull('parent_id')->orderBy('registration_date','DESC')->get();
         // return $users;
         return view('admin.dashboard.reports.index',compact('users'));
     }

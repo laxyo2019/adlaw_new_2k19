@@ -43,25 +43,27 @@
 						</thead>
 						<tbody>
 							@php $count= 0; @endphp
-							@foreach($unbookings as $booking)
-							<tr>
-								<td>{{++$count}}</td>			
-								<td>{{$booking->users->name}}</td>	
-								<td>{{$booking->users->city_name .', '. $booking->users->state_name}}</td>
-								<td>{{$booking->users->mobile}}</td>		
-								<td>@foreach($slots as $slot)
-								{{$booking->plan_id == $slot->id ? date('h:i A', strtotime($slot->slot)) : ''}}
-								@endforeach	
-								</td>	
-								<td>{{date('d-m-Y', strtotime($booking->b_date))}}</td>			
-								<td>
-									<a href="{{route('bookingUpdate',['id'=>$booking->id])}}" class="btn btn-sm btn-success" id="Accept">Accept</a>
-				
-									<button class="btn btn-sm btn-danger" id="cancelBtn" data-id ="{{$booking->id}}"> Cancelled</button>
-								
-								</td>		
-							</tr>
-							@endforeach
+							
+								@foreach($unbookings as $booking)
+								<tr>
+									<td>{{++$count}}</td>			
+									<td>{{$booking->users->name}}</td>	
+									<td>{{$booking->users->city_name .', '. $booking->users->state_name}}</td>
+									<td>{{$booking->users->mobile}}</td>		
+									<td>@foreach($slots as $slot)
+									{{$booking->plan_id == $slot->id ? date('h:i A', strtotime($slot->slot)) : ''}}
+									@endforeach	
+									</td>	
+									<td>{{date('d-m-Y', strtotime($booking->b_date))}}</td>			
+									<td>
+										<a href="{{route('bookingUpdate',['id'=>$booking->id])}}" class="btn btn-sm btn-success" id="Accept">Accept</a>
+					
+										<button class="btn btn-sm btn-danger" id="cancelBtn" data-id ="{{$booking->id}}"> Cancelled</button>
+									
+									</td>		
+								</tr>
+								@endforeach
+							
 						</tbody>
 						</table>
 					</div>
@@ -81,12 +83,13 @@
 						</thead>
 						<tbody>
 							@php $count= 0; @endphp
+
 							@foreach($booked as $book)
 							<tr>
 								<td>{{++$count}}</td>			
-								<td>{{$booking->users->name}}</td>	
-								<td>{{$booking->users->city_name .', '. $booking->users->state_name}}</td>
-								<td>{{$booking->users->mobile}}</td>		
+								<td>{{$book->users->name}}</td>	
+								<td>{{$book->users->city_name .', '. $book->users->state_name}}</td>
+								<td>{{$book->users->mobile}}</td>		
 								<td>@foreach($slots as $slot)
 								{{$book->plan_id == $slot->id ? date('h:i A', strtotime($slot->slot)) : ''}}
 								@endforeach	
@@ -116,9 +119,9 @@
 							@foreach($cancelled as $book)
 							<tr>
 								<td>{{++$count}}</td>			
-								<td>{{$booking->users->name}}</td>	
-								<td>{{$booking->users->city_name .', '. $booking->users->state_name}}</td>
-								<td>{{$booking->users->mobile}}</td>		
+								<td>{{$book->users->name}}</td>	
+								<td>{{$book->users->city_name .', '. $book->users->state_name}}</td>
+								<td>{{$book->users->mobile}}</td>		
 								<td>@foreach($slots as $slot)
 								{{$book->plan_id == $slot->id ? date('h:i A', strtotime($slot->slot)) : ''}}
 								@endforeach	

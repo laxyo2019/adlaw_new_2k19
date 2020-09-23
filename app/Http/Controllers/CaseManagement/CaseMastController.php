@@ -31,7 +31,7 @@ class CaseMastController extends Controller
 		$this->middleware('auth');
 	}
 	public function index(){
-		$case_status = CaseStatusMast::all();	
+		$case_status = CaseStatusMast::orderBy('line','ASC')->get();	
 
 		return view('case_management.case.index',compact('case_status'));
 	}
@@ -47,7 +47,7 @@ class CaseMastController extends Controller
 		$deleted_clients = Helpers::deletedClients();
 		$clients = Customer::where('user_id',Auth::user()->id)->whereNotIn('cust_id',$deleted_clients)->where('status_id','A')->get();  
 
-		$case_status = CaseStatusMast::all();
+		$case_status = CaseStatusMast::orderBy('line','ASC')->get();
 		$teams = Team::where('user_id', Auth::user()->id)->get();
 		return view('case_management.case.create', compact('cust_id','case_types','courts','page_name','clients','categories','states','case_status','teams'));
 	}
@@ -125,7 +125,7 @@ class CaseMastController extends Controller
 		$deleted_clients = Helpers::deletedClients();
 		$clients = Customer::where('user_id',Auth::user()->id)->whereNotIn('cust_id',$deleted_clients)->where('status_id','A')->get();  
 
-		$case_status = CaseStatusMast::all();
+		$case_status = CaseStatusMast::orderBy('line','ASC')->get();
 
 		$case = CaseMast::find($case_id);
 		$teams = Team::where('user_id', Auth::user()->id)->get();

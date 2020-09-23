@@ -2,11 +2,13 @@
    <thead>
        <tr>
           <th>SNo.</th>
-  				<th>Case Title</th>  			
+          {{-- <th>Case Type</th> --}}
+          <th>Case No. / CNR No.</th>
+  				<th>Case Title (Cause Title)</th>  			
   				<th>Client Name</th>
           <th>Court Name</th>
-          <th>Member of case</th>
-          <th>Case Registration Date</th>
+          <th>Assign to case</th>
+          <th>Case Filing Date</th>
           @if($case_status != 'cr')<th>Case Over Date</th>@endif
           <th>Action</th>
       
@@ -20,6 +22,8 @@
 
      <tr>   
   			<td>{{++$count}}</td>
+        {{-- <td>{{$case->case->casetype->name}}</td> --}}
+        <td>{{$case->case->c_d_number !=null ? $case->case->c_d_number : $case->case->cnr_number}}</td>
         <td>{{$case->case->case_title}}</td>
         <td>{{$case->case->client !=null ? $case->case->client->cust_name : ''}}</td>
   			<td>{{$case->case->court->court_type_desc}}</td>

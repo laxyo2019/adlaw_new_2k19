@@ -135,6 +135,9 @@ class BookingController extends Controller
     	 // return $unbookings;
     
     	$slots = Slots::all();
+
+      // return $unbookings;
+
     	return view('booking.show',compact('unbookings','slots','booked', 'cancelled','apply_bookings','skip_unbookings'));
     } 
     public function bookingUpdate($id){

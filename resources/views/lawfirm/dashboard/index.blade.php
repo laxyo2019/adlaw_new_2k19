@@ -9,7 +9,7 @@
             <div class="inner">
               <h3>{{count($cases)}}</h3>
               <h4>Cases</h4>
-              <span>Running: {{count($running_cases)}} | Closed : {{count($closed_cases)}} | Transfed/NOC : {{count($transferred_cases)}} | Direction Matter : {{count($direction_cases)}}  | Order Reserved : {{count($order_cases)}}</span>
+              <span>Pending: {{count($running_cases)}} | Disposed : {{count($closed_cases)}} | Transfed/NOC : {{count($transferred_cases)}} | Direction Matter : {{count($direction_cases)}}  | Order Reserved : {{count($order_cases)}}</span>
             </div>
             <div class="icon">
               <i class="fa fa-briefcase"></i>

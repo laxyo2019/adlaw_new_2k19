@@ -9,6 +9,7 @@
 			<th>State</th>
 			<th>Status</th>
 			<th>Registration Date</th>
+			<th>Directory User</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -22,7 +23,8 @@
 			<td>{{$user->city != null  ? $user->city->city_name : ''}}</td>
 			<td>{{$user->state != null  ? $user->state->state_name : ''}}</td>
 			<td>{{$user->status}}</td>
-			<td>{{date('d-m-Y',strtotime($user->created_at))}}</td>
+			<td>{{date('d-m-Y',strtotime($user->registration_date))}}</td>
+			<td>{{$user->on_database == '1' ? 'Yes' : 'No'}}</td>
 		</tr>
 		@endforeach
 	</tbody>

@@ -351,8 +351,8 @@ $(".filteBtn").on('click',function(e){
 	var searchfield = $("input[name='searchfield']:checked").val();
 	var court_id = $('#court_id').val();
 	var user_name = $("input[name='user_name']").val();
-	console.log(specialist);
-	console.log(city);
+	// console.log(specialist);
+	// console.log(city);
 // alert(searchfield);
 	var url1 = '';
 	if(specialist !='0'){
@@ -368,8 +368,6 @@ $(".filteBtn").on('click',function(e){
 		url1 = "{{url('search')}}";
 	}
 	window.location.href = url1 + '?' + 'gender='+gender+'&searchfield='+searchfield+'&court_id='+court_id+'&user_name='+user_name;
-
-
 	
 });
 
@@ -382,31 +380,49 @@ $(document).on('click', '.pagination a',function(event)
     var myurl = $(this).attr('href');
     var page=$(this).attr('href').split('page=')[1];
 
-	var specialist =  $('#specialist_lawyer').val();
+	var specialist =  $('#specialist_lawyer option:selected').attr('data-id');
 	var state_code = $('#state').val();
-	var city_code = $('#city').val();
+	var city = $('#city option:selected').attr('data-id');
+	// var city_code = $('#city option:selected').attr('data-id');
 	var gender = $("input[name='gender']:checked").val();
 	var searchfield = $("input[name='searchfield']:checked").val();
 	var court_id = $('#court_id').val();
 	var user_name = $("input[name='user_name']").val();
-    getData(page,specialist,state_code,city_code,gender,searchfield,court_id,user_name);
+	var url = window.location.href;
+
+	window.location.href = url + '?' + 'gender='+gender+'&searchfield='+searchfield+'&court_id='+court_id+'&user_name='+user_name+'&page='+page;	
 });
 
 
-function getData(page,specialist,state_code,city_code,gender,searchfield,court_id,user_name){
+// function getData(page,specialist,state_code,city,gender,searchfield,court_id,user_name){
 
-    $.ajax({
-        url:"{{route('lawfirms.search')}}?speciality="+specialist+'&state_code='+state_code+'&city_code='+city_code+'&gender='+gender+'&searchfield='+searchfield+'&page='+page+'&court_id='+court_id+'&user_name='+user_name,
-        type: "get",
-        datatype: "html"
-    }).done(function(data){
+// 	var url1 = '';
+// 	if(specialist !='0'){
+// 		if(city !='0'){
+// 			url1 = "{{url('search')}}/"+slug_name(specialist)+'/'+slug_name(city); 
+// 		}else{
+// 			url1 = "{{url('search')}}/"+slug_name(specialist); 
+// 		}
+// 	}else if(city !='0'){
+// 		url1 = "{{url('search')}}/"+slug_name(city); 
+
+// 	}else{
+// 		url1 = "{{url('search')}}";
+// 	}
+
+
+//     // $.ajax({
+//     //     url:url1 + '?' + 'gender='+gender+'&searchfield='+searchfield+'&court_id='+court_id+'&user_name='+user_name,
+//     //     type: "get",
+//     //     datatype: "html"
+//     // }).done(function(data){
     
-        $("#tablediv").empty().html(data);
-        location.hash = page;
-    }).fail(function(jqXHR, ajaxOptions, thrownError){
-          alert('No response from server');
-    });
-}
+//     //     $("#tablediv").empty().html(data);
+//     //     location.hash = page;
+//     // }).fail(function(jqXHR, ajaxOptions, thrownError){
+//     //       alert('No response from server');
+//     // });
+// }
 
 $(document).on('change','#specialist_lawyer',function(e){
 	e.preventDefault();

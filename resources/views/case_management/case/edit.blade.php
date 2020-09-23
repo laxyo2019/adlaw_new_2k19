@@ -142,7 +142,7 @@
 					<div class="row form-group">
 
 						<div class="col-md-6" style="margin-top:10px;">
-							<label for="case_reg_date">Case Registration Date <span class="text-danger">*</span></label>
+							<label for="case_reg_date">Case Filing Date <span class="text-danger">*</span></label>
 							<input type="text" value="{{old('case_reg_date') ?? $case->case_reg_date}}" class="form-control " name="case_reg_date" required autocomplete="case_reg_date" autofocus  id="regdatepicker" placeholder="Enter case registration date "  data-date-format="yyyy-mm-dd">
 							@error('case_reg_date')
 								<span class="invalid-feedback text-danger" role="alert">

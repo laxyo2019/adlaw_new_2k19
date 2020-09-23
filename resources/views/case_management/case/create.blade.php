@@ -111,7 +111,7 @@
 					</div>
 					<div class="row from-group" style="" >
 						<div class="col-md-6" style="margin-top: 10px; display: none; " id="case_type_div">
-							<label for="case_type_id">Case Type <span class="text-danger">*</span></label>
+							<label for="case_type_id">Case Type<span class="text-danger">*</span></label>
 							<select class="form-control" name="case_type_id">
 								<option value="0">Select Case Type</option>
 								@foreach($case_types as $case_type)
@@ -141,7 +141,7 @@
 					<div class="row form-group">
 
 						<div class="col-md-6" style="margin-top:10px;">
-							<label for="case_reg_date">Case Registration Date <span class="text-danger">*</span></label>
+							<label for="case_reg_date">Case Filing Date <span class="text-danger">*</span></label>
 							<input type="text" value="{{old('case_reg_date')}}" class="form-control " name="case_reg_date" required autocomplete="case_reg_date" autofocus  id="regdatepicker" placeholder="Enter case registration date "  data-date-format="yyyy-mm-dd">
 							@error('case_reg_date')
 								<span class="invalid-feedback text-danger" role="alert">
